@@ -1,0 +1,9 @@
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="{% url typed_fees %}">Fees</a></li>
+    <li><a href="{% url solicitors_fees %}">Solicitors Fees</a></li>
+    <li><a href="{% url pricing.views.fee_calculator_new %}">Fee Calculators</a></li>
+    <li><a href="{% url pricing.views.method_statement_templates %}">Method Statements</a></li>
+    <li><a href="{% url pricing.views.chamber_contacts %}">Contact Details</a></li>
+    <li><a href="{% url pricing.views.appointments %}">Appointments</a></li>
+</ul>

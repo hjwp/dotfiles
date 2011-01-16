@@ -1,0 +1,296 @@
+/*!
+ * jQuery autofilter updater
+ * finds any forms,  posts their contents to the ajax url found in the doc,
+ * the updates each option select dropdown based on the returned choices
+ * works on fees tables lookup form
+ * and fee calculator/comparator formsets
+ * NB - some functions may be overridden by other .js files
+ */
+
+
+//ajax variables
+var codeReq = null; // AJAX lookup instance for translation data
+var transData = null;// translation data, returned by the AJAX lookup
+
+//more variables for processing the doc
+var req = '';			// variable to hold the most recent GET request string for the table data AJAX lookup instance(s)
+var curReq = null;		// variable to hold table data AJAX lookup instance
+var curDDReq = null;	// variable to hold table dropdown data AJAX lookup instance
+
+var rowClasses = new Array('row1', 'row2'); // css classes to iterate through when outputting table rows (for alternating colours)
+
+var curForm; //stores the form currently being worked on
+var curSelectObj; //select object currently being worked on
+var curPrefix =''; //prefix on form fields for form-sets
+
+//var EMPTY_CHOICE = '...(All)';
+
+
+//=====================BIND FUNCTIONS ON DOCUMENT READY====================
+$(document).ready(function() {
+	onDocumentReady();
+});
+
+function onDocumentReady(){
+		//if (!isIE6()) {
+	
+		getTransData(); //populates var transData with translations for table data
+		
+		// For each lookup form, bind a click event for all select options
+		$('form.lookup_form').each(function(){
+			curForm = this;
+			req = $(curForm).serialize(); //store for later, to see if anything's changed before firing off any ajax calls
+			$(this).find('select[name]').each(function(){
+				this.onchange = function(){
+					selectOnClickFunction(this); //slightly convoluted, but needed to get around bug in jquery
+				};
+				
+				/*change(function(){
+				selectOnClickFunction(this);*/
+			});
+		});
+		
+		reloadPageFromHash(); //processes any hash data in URL
+	//}
+}
+
+function isIE6(){
+	if (jQuery.browser.msie && parseInt(jQuery.browser.version)==6){
+		return true;
+	}
+	return false;
+}
+
+/*
+ * function checks the variables for the paths to ajax views have been passed thru
+ */
+function checkPaths(){
+	return (ajax_dropdowns_path && ajax_translations_path) ;
+}
+
+// Define function to gather translation data for table cell content
+// (converts returned pk value data in to meaningful description, eg framework panel #1 = "Admin")
+// poopulates the transData global variable
+function getTransData() {
+	if (!checkPaths()){
+		return false;
+	}
+	// Abort any current AJAX instance to prevent complications
+    if (codeReq) {
+        codeReq.abort();
+    }
+    
+    // new AJAX instance to gather translation data
+    codeReq = $.ajax({
+        type: 'GET',                                            // HTTP response type (GET/POST)
+        url: ajax_translations_path, //'/json/fees_field_translations/',                  // URL to call for translation data
+        dataType: 'json',                                       // The expected data type to be returned (jQ parses the data accordingly upon a successful response)
+        success: function(data, textStatus, XMLHttpRequest) {   // If the AJAX instance has successfully completed
+            transData = data;                                   // Place the returned translation data in to the variable set on line 23
+        },
+        complete: function(XMLHttpRequest, textStatus) {        // If the AJAX instance has completed (regardless of error or success)
+            codeReq = null;                                     // Remove current AJAX instance from variable set on line 20
+        }                                                       // (so that the function doesn't attempt an abort next time)
+    });
+	
+    return true; 	// return value (currently redundant)
+}
+
+// function translates a pk value for a field to a meaningful string
+// [Takes the pk value and field ('chamber' etc)]
+// using the transData global...
+function translatePKtoDescription(code, field) {
+    // If translation data exists, as does the field ('chamber' etc), as does the pk
+    if (transData !== undefined && transData[field] !== undefined) {
+        if (transData[field][code] !== undefined) {
+            return transData[field][code];
+        } 
+    }
+    // eles return the original pk provided
+    return code; //TODO: could this be better?
+}
+
+
+
+/*
+ * function updates the url hash (after #)
+ * with the current GET data
+ */
+function updateURLwithGETdata(form_objects){
+	if ( $(form_objects).find('select,input').length >0 ){
+		var serial_data = $(form_objects).serialize();
+		window.location.hash = serial_data; 
+	}
+	return true;
+}
+
+function reloadPageFromHash(){
+	req = window.location.hash.substring(1);
+	if (req!='') {
+		callAjaxGetDropdowns(req);
+	}
+}
+/*
+ * onClick function to bind to all objects defined during document.ready above
+ * NB - this function may be overriden in other .js files
+ * calls ajax Dropdonw getter function
+ * 
+ */
+function selectOnClickFunction(select_obj){
+	curSelectObj = select_obj;
+	curForm = $(select_obj).parents('form');
+	curPrefix = getFormPrefix(select_obj);
+	var serialized = $(curForm).find('select[name*='+curPrefix+'], input.hiddenFeeTypeInput').serialize();
+	// If the forms' GET request string is different to that of the previous GET request string,
+	// and the clicked items' parent object has a 'name' attribute which is valid,
+	// and the lookup URLS for the form and dropdown exist
+	if (serialized !== req && checkPaths() && $(select_obj).attr('name') && $(select_obj).attr('name').length > 0  ){
+	    req = serialized;
+		updateURLwithGETdata(curForm);
+		callAjaxGetDropdowns(req);
+	}
+	return false;
+}
+
+
+function callAjaxGetDropdowns(search_data){
+    // Remove / abort any current AJAX instance
+    curReq = null;
+    if (curDDReq) {
+        curDDReq.abort();
+    }
+	//cleanUpForm(curForm);  //re-enable all form elements, will be disabled later.
+	//req = $(curForm).find('select[name*='+curPrefix+']').serialize();  //only send GET for current subform
+    // Create a new AJAX instance to lookup dropdown data
+    curDDReq = $.ajax({
+        type: 'GET', // HTTP response type (GET/POST)
+        url: ajax_dropdowns_path, // The URL to which to send the request
+        data: search_data, // The GET request data
+        dataType: 'json', // The expected format of the response (will be parsed by jQuery accordingly)
+        
+		beforeSend: function(XMLHttpRequest){ 
+			// disable the whole form, to prevent double-filtering
+			$(curForm).find('select[name]').attr('disabled', 'disabled');
+		},
+		
+        success: function(data, textStatus, XMLHttpRequest){ // Upon successful response
+            updateDropdowns(data);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown){ // Upon error with the AJAX response (albeit with the data or the HTTP transaction)
+            //alert('Error retrieving filter selections');
+			cleanUpForm(curForm);
+        },
+        complete: function(XMLHttpRequest, textStatus){ // Triggered when complete, error or no error
+            // Remove the current list box data request instance, so that it can be called again
+            curDDReq = null;
+			cleanUpForm(curForm);
+        }
+    });
+}
+
+
+
+/*
+ * function updates the dropdown choices on the page
+ * based on data from the ajax call.
+ */
+function updateDropdowns(data){
+	// For each list box field data found in the returned data
+	// find the matching form field (with prefix for formsets)
+	// and updated it based on the ajax values
+	for (dropdownfield in data) {
+		var dropdownPrefixedName = curPrefix + dropdownfield
+		var currentSelectBox = $(curForm).find('select[name='+dropdownPrefixedName+']');
+		if (currentSelectBox.length>0){ //if we can find a matching box
+			currenSelectBox = currentSelectBox[0];
+			
+			var currentSelection = $(currentSelectBox).find('option:selected');
+			$(currentSelectBox).empty();//remove all options from the matching field
+
+			//addOption(currentSelectBox,'',EMPTY_CHOICE,currentSelection); //add empty option
+	
+			//add add back all the options from the ajax results
+			for (index in data[dropdownfield]) {
+				var pk = data[dropdownfield][index];
+				var text = translatePKtoDescription(pk, dropdownfield);
+				addOption(currentSelectBox,pk,text,currentSelection);
+			}
+			if (data[dropdownfield].length==1){
+				//case - only 1 choice is possible, so auto-select it.
+				//only if it's not the same as the last one clicked 
+				//otherwise we get into trap where one param forces the other to a single val
+				//and vice-versa 
+				if (curSelectObj.name != dropdownPrefixedName) {
+					$(currentSelectBox).find(' :last').attr('selected', true);
+				}
+			}
+		}
+	}
+}
+
+/*
+ * function gets the prefix for a given object
+ * used in formets.  
+ * returns global curPrefix in case of failure 
+ */
+function getFormPrefix(obj){
+	//can we find its name?
+	try{
+		var curName = $(obj).attr('name');
+	}catch (e){
+		return curPrefix;
+	}
+	//user regular expression to catch the 'form-2' from eg form-2-chamber
+	var rx = /^(.+-.+-).+$/;
+	if (rx.test(curName)){
+		return curName.match(rx)[1];//shouldnt be returning an array since i havent used the g flag but well...
+	}else{
+		return curPrefix;
+	}
+}
+
+/*
+ * add an option to a select box
+ * takes a pk for value, text for option
+ * also resets the current selection
+ */		
+function addOption(to_box, pk, text, currentSelection){
+
+	var newOption = document.createElement('option');
+	newOption.setAttribute('value', pk);
+	
+	for (var i=0; i<currentSelection.length; i++){
+		sel_pk = $(currentSelection[i]).attr('value');
+		if ( sel_pk == pk) {
+			newOption.setAttribute('selected','selected');
+		}
+	}
+	
+	var optionText = document.createTextNode(text);
+	newOption.appendChild(optionText);
+	try{
+		to_box.appendChild(newOption);	
+	}catch(e){
+		to_box[0].appendChild(newOption); //not quite sure why we need this
+	}
+	
+	//set onclick function
+	$(newOption).unbind();
+	$(newOption).onchange = function(){
+		selectOnClickFunction(this); //slightly convoluted, but needed to get around bug in jquery
+	};
+}
+
+/*
+ * re-enable all select and option elements
+ */
+function cleanUpForm(form){
+	if(typeof(form)=='undefined'){
+		form = $('form.lookup_form:first');
+	};
+	// For each list box with a name value (limitation, in case other list boxes exists elsewhere in the form)
+    $(form).find('select[name]').removeAttr('disabled'); // Enable the list box box
+	$(form).find('select[name] option').removeAttr('disabled');
+}
+
+

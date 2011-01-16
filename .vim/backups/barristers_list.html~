@@ -1,0 +1,34 @@
+{% if barristers %}
+<h3>Barristers:</h3>
+    <table width="75%" border="1" summary="Existing barristers">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Year of call</th>
+                <th>Seniority</th>
+                <th>Panels</th>
+                <th>Modify</th>
+            </tr>
+        </thead>
+        <tbody>
+        {%for barrister in barristers %}
+            <tr class="{%cycle 'row1' 'row2' %}">
+                <td>
+                {{barrister.full_name}}
+                <a href="{% url chamber_barrister_modify chamber.id barrister.id %}">(modify)</a>
+                </td>
+                <td>{{barrister.year_of_call}}</td>
+                <td>{{barrister.seniority}}</td>
+                <td>{{barrister.panels_as_br_list|safe}}</td>
+                <td>
+                    <form action="{% url chamber_barrister_delete chamber.id barrister.id %}" method="POST">
+                        <input type="submit" name="delete" value="Delete" />
+                    </form>
+                </td>
+            </tr>
+        {%endfor%}
+        </tbody>
+      </table>
+{%else%}
+    <p>No barristers entered yet</p>
+{% endif %}

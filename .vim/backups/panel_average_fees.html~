@@ -1,0 +1,41 @@
+{% extends "pricing/base_parameters.html" %}
+{% load getattribute %}
+{% load currency %}
+
+
+{% block content %}
+<h2>{{panel}}: Average {{fee_type}}</h2>
+
+<table class="parameter_table" summary="average fees for chambers in this panel">
+    <thead>
+        <tr>
+            <th>Chamber</th>
+            <th>Average fee (all)</th>
+            {% for seniority in seniorities %}
+                <th>{{seniority}}</th>
+            {% endfor %}
+            {% if scores %}
+                <th>Fees Score</th>
+                <th>Method Statement Score</th>
+                <th>Combined Score</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for chamber in sorted_chambers %}
+            <tr>
+                <td>{{chamber}}</td>
+                <td>{{averages|getattribute:chamber|getattribute:'all'|currency}}</td>
+            </td>
+            {% for seniority in seniorities %}
+                <td>{{averages|getattribute:chamber|getattribute:seniority|currency}}</td>
+            {% endfor %}
+            {% if scores %}
+                <td>{{scores|getattribute:chamber|getattribute:'fees'|floatformat:1}}</td>
+                <td>{{scores|getattribute:chamber|getattribute:'method statement'|floatformat:1}}</td>
+                <td>{{scores|getattribute:chamber|getattribute:'combined'|floatformat:1}}</td>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,246 @@
+from django.core.management import setup_environ
+import settings_swwc as settings
+import traceback
+setup_environ(settings)
+
+from pricing.models import (
+    Chamber, Court, Fee, FeeStructure, FeeStructureAssignment, FeeType, Panel,
+    ProfessionalType, Seniority, StructuredFee, WorkType
+)
+import os
+from xlrd import open_workbook, biffh
+
+
+def main(source_folder):
+    solicitors_folder = os.path.join(source_folder, 'solicitors')
+    barristers_folder = os.path.join(source_folder, 'barristers')
+    solictors_files = os.listdir(solicitors_folder)
+    barristers_files = os.listdir(barristers_folder)
+
+    chamber_errors=''
+    for filename in barristers_files:
+        if filename.lower()[-3:]=='xls':
+            print 'processing ' + filename
+            workbook = open_workbook(os.path.join(barristers_folder, filename))
+            chamber = setup_chamber(workbook)
+            try:
+                get_barristers_fees(workbook, chamber)
+            except Exception:
+                print 'chamber error for ' , filename
+                chamber_errors += '\n\n' + filename + '\n'
+                chamber_errors += traceback.format_exc()
+
+
+    firm_errors={}
+    for filename in solictors_files:
+        if filename.lower()[-3:]=='xls' and not 'ms_templates_flattening' in filename:
+            print 'processing ' + filename
+            workbook = open_workbook(os.path.join(solicitors_folder, filename))
+            firm = setup_firm(workbook)
+            try:
+                get_solicitors_hourly_fees(workbook, firm)
+            except Exception, e:
+                print 'firm error for ' , filename
+                firm_errors[filename] = e
+
+    print 'chambers with errors:', chamber_errors
+    print 'firms with errors:', firm_errors
+
+
+def clear_all():
+    Chamber.objects.all().delete()
+    #WorkType.objects.all().delete()
+    #Panel.objects.all().delete()
+    #ProfessionalType.objects.all().delete()
+    #FeeType.objects.all().delete()
+    #Seniority.objects.all().delete()
+    StructuredFee.objects.all().delete()
+    FeeStructure.objects.all().delete()
+    FeeStructureAssignment.objects.all().delete()
+    Fee.objects.all().delete()
+
+
+
+
+def setup_firm(workbook):
+    solicitors = ProfessionalType.objects.get(name__icontains='Solicitor')
+    firm = Chamber()
+    firm.name = workbook.sheet_by_name('summary').cell(1,2).value
+    firm.professional_type = solicitors
+    firm.save()
+    print firm.name
+    return firm
+
+
+def setup_chamber(workbook):
+    barristers = ProfessionalType.objects.get(name__icontains='Barrister')
+    chamber = Chamber()
+    chamber.name = workbook.sheet_by_name('contact_info').cell(1,0).value
+    chamber.professional_type = barristers
+    chamber.save()
+    print chamber.name
+    return chamber
+
+
+def get_solicitors_hourly_fees(workbook, firm):
+    solicitors = ProfessionalType.objects.get(name__icontains='Solicitor')
+    rates_sheet = workbook.sheet_by_name('hourly_fees')
+    na_level = Court.objects.get(name='N/A', professional_type=solicitors)
+
+    input_assignments = {}
+    for row in range(4,16):
+        panel_name = rates_sheet.cell(row, 1).value
+        fee_table =  rates_sheet.cell(row, 4).value
+        input_assignments[panel_name] = fee_table
+
+    table_names = [
+        'Main fee table',
+        'Alternative fee table 1',
+        'Alternative fee table 2',
+        'Not applying for this panel'
+        ]
+    assert set(input_assignments.values()).issubset(set(table_names))
+
+    assignments = []
+    for panel_name, table_name in input_assignments.iteritems():
+        if table_name == table_names[0]:
+            fee_structure = FeeStructure(name=table_name, chamber=firm)
+            fee_structure.save()
+            get_solicitors_hourly_fees_for(fee_structure, rates_sheet, range(19,22))
+        elif table_name == table_names[1]:
+            fee_structure = FeeStructure(name=table_name, chamber=firm)
+            fee_structure.save()
+            get_solicitors_hourly_fees_for(fee_structure, rates_sheet, range(25,28))
+        elif table_name == table_names[2]:
+            fee_structure = FeeStructure(name=table_name, chamber=firm)
+            fee_structure.save()
+            get_solicitors_hourly_fees_for(fee_structure, rates_sheet, range(31,34))
+
+        if not table_name == table_names[3]:
+            panel = Panel.objects.get(name=panel_name, professional_type=solicitors)
+            assignment = FeeStructureAssignment(
+                fee_structure=fee_structure,
+                panel=panel,
+                level_of_court = na_level
+            )
+            assignment.save()
+            assignments.append(assignment)
+
+        for assignment in assignments:
+            assignment.convert_to_fees()
+    print '%s fees imported' % Fee.objects.filter(chamber=firm).count()
+
+
+
+def get_solicitors_hourly_fees_for(fee_structure, worksheet, rows):
+    solicitors = ProfessionalType.objects.get(name__icontains='Solicitor')
+    hourly_fees = FeeType.objects.get(name__icontains='Hourly', professional_type=solicitors)
+    #seniorities = Seniority.objects.filter(professional_type=solicitors)
+    #worktypes = WorkType.objects.filter(professional_type=solicitors)
+    for col in range(4,9):
+        worktype_name = worksheet.cell(18,col).value
+        worktype = WorkType.objects.get(name__icontains=worktype_name)
+        for row in rows:
+            seniority_name = worksheet.cell(row,3).value
+            seniority = Seniority.objects.get(name=seniority_name)
+            try:
+                fee = float(worksheet.cell(row,col).value)
+            except:
+                fee = None
+            structuredfee = StructuredFee(
+                    fee_structure=fee_structure,
+                    fee_type=hourly_fees,
+                    type_of_work=worktype,
+                    seniority=seniority
+            )
+            structuredfee.fee = fee
+            structuredfee.save()
+
+
+
+def get_barristers_fees(workbook, chamber):
+    barristers = ProfessionalType.objects.get(name__icontains='Barrister')
+    summary_sheet = workbook.sheet_by_name('summary')
+    for panel in Panel.objects.filter(professional_type=barristers):
+        panel_sheet = None
+        for row in range(5, 21):
+            panel_name = summary_sheet.cell(row,1).value
+            sheet_name = summary_sheet.cell(row,2).value
+            if panel_name == panel.name:
+                try:
+                    panel_sheet = workbook.sheet_by_name(sheet_name)
+                    get_barristers_fees_from(panel, panel_sheet, chamber)
+                except biffh.XLRDError:
+                    'file was missing sheet', sheet_name
+
+
+def get_barristers_fees_from(panel, panel_sheet, chamber):
+    print panel
+    barristers = ProfessionalType.objects.get(name__icontains='Barrister')
+    num_courts = panel.court_set.all().count()
+    num_seniorities = Seniority.objects.filter(professional_type=barristers).count()
+
+    def get_barristers_fees_for_fee_type(fee_type):
+        num_worktypes = WorkType.objects.filter(fee_type=fee_type).count()
+
+        for col in range(start_col, start_col+num_worktypes):
+            worktype_name = panel_sheet.cell(start_row-1,col).value
+            worktype = get_worktype_from_name(worktype_name)
+            for row in range(start_row, start_row + (num_seniorities * num_courts)):
+                if (row-start_row) % num_seniorities == 0:
+                    court_name = panel_sheet.cell(row,2).value
+                    court = get_court_from_name(court_name)
+                seniority_name = panel_sheet.cell(row,3).value
+                seniority = Seniority.objects.get(name=seniority_name)
+                fee = Fee(
+                        professional_type=barristers,
+                        framework_panel=panel,
+                        chamber=chamber,
+                        fee_type=fee_type,
+                        seniority=seniority,
+                        level_of_court=court,
+                        type_of_work=worktype
+                )
+                fee_val = panel_sheet.cell(row,col).value
+                try:
+                    fee.fee = float(fee_val)
+                    fee.save()
+                except ValueError:
+                    if fee_val.upper() in ['N/A', 'NA', 'N.A','N /A', 'BY AGREEMENT', 'X'] or not fee_val:
+                        pass
+                    else:
+                        raise ValueError(
+                                'error for chamber %s panel %s row %s col %s' % (
+                                    chamber, panel, row, col,))
+        return row
+
+    fee_type = FeeType.objects.get(name__icontains='Fixed', professional_type=barristers)
+    start_col = 4
+    start_row = 5
+    last_fixed_fees_row = get_barristers_fees_for_fee_type(fee_type)
+
+    start_row = last_fixed_fees_row + 4
+    fee_type = FeeType.objects.get(name__icontains='Hourly', professional_type=barristers)
+    get_barristers_fees_for_fee_type(fee_type)
+
+
+
+def get_worktype_from_name(worktype_name):
+    if 'conferences' in worktype_name.lower():
+        return WorkType.objects.get(name__icontains='conferences')
+    if 'no fixed fees' in worktype_name.lower():
+        return WorkType.objects.get(name__icontains='conferences')
+    return WorkType.objects.get(name=worktype_name)
+
+
+def get_court_from_name(court_name):
+    barristers = ProfessionalType.objects.get(name__icontains='Barrister')
+    if 'county' in court_name.lower():
+        return Court.objects.get(name__icontains='county')
+    if 'high court' in court_name.lower():
+        return Court.objects.get(name__icontains='high court')
+    if 'education appeal panels' in court_name.lower():
+        return Court.objects.get(name__icontains='education appeal panels')
+    return Court.objects.get(name=court_name, professional_type=barristers)
+
+

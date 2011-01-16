@@ -1,0 +1,290 @@
+'''
+Created on 29 Jan 2010
+@author: Harry
+contains all the forms for the app
+as well as the 'FilterTable' object which encapsulates functionality for dropdown-autofilter tables
+'''
+from copy import deepcopy
+
+from django.core.exceptions import FieldError
+from django.db.models.query_utils import Q
+from django.forms.fields import ChoiceField, MultipleChoiceField, TypedChoiceField
+from django.forms.widgets import SelectMultiple,  Select
+
+from pricing.functions import (
+        fieldOf, is_iterable, makeQQuery, modelOf,
+        uniq, verbose_name_of
+)
+
+#=========================== CONSTANTS ===================================
+VALID_CHOICES = "Valid Choices"
+INVALID_CHOICES = "Invalid Choices"
+RESET_OPTION = "...(All)"
+
+
+#=========================== FIELDS =====================
+
+class MySingleChoiceField(ChoiceField):
+    """special form field class,
+    produces choice field from a model/queryset.
+    has methods to update choices."""
+
+    def __init__(self, for_field_name, model_manager,
+                     required=False,widget=None, *args, **kwargs):#
+        """
+        initialise field using manager passed in.
+        attempt to retrieve (pk_field,descript_field) tuples from manager
+        """
+        #store manager + fields for later use.
+        self.for_field_name = for_field_name
+        try:
+            self.verbose_name = modelOf(for_field_name).VERBOSE_NAME
+        except:
+            self.verbose_name = self.for_field_name
+
+        self.joining_model_manager = model_manager
+        #setup choices and widget, then pass to super constructor
+        choices = self._get_choices()
+        #widget = MyDisableyChoiceWidget(attrs={'size':4, 'class':'multiDropDownField'})
+        widget = Select(attrs={'size':'1', 'class':'singleDropDownField'})
+        ChoiceField.__init__(self,choices, required, widget, *args, **kwargs)
+
+    def _get_choices(self, q_query=Q()):
+        """private method returns all choices for a q-query (defaults to blank)"""
+        #first run a query to get the list of raw values that are valid
+        try: # simply use manager
+            valid_values = self.joining_model_manager.filter(q_query).values_list(self.for_field_name,flat=True)
+        except (FieldError, AttributeError):
+            raise ValueError('incorrect field name passed: %s '%self.for_field_name)
+
+        #if our column has set choices, eg is_qc, then build a translator
+        #to get the verbose option
+        #using the formfield() method of the models field
+        verbose_translator = {}
+        try:
+            actual_field = fieldOf(self.model_manager.model, self.for_field_name)
+            if type(actual_field.formfield())==TypedChoiceField:
+                verbose_translator = dict(actual_field.formfield().choices[1:])
+        except:
+            pass
+
+        #now create list of 2-tuples
+        #and remove duplicates
+        valid_choices = [(v,verbose_translator.get(v,v)) for v in uniq(valid_values)] 
+
+        valid_choices.insert(0, ('', RESET_OPTION)) #add blank first choice
+        return valid_choices   #categorised_choices
+
+
+    def update_choices(self,current_choices_dict):
+        """update the fields's dropdown choices based on current choices,
+        ignoring choices made on itself
+        """
+        #remove self from choices if appropriate
+        fixed_choices_dict = deepcopy(current_choices_dict)
+        if self.for_field_name in current_choices_dict.keys():
+            del fixed_choices_dict[self.for_field_name]
+        try:
+            q_query = makeQQuery(fixed_choices_dict)
+            new_choices = self._get_choices(q_query)
+        except:
+            raise ValueError('incorrect choices or model name')
+        if new_choices:
+            self.choices = new_choices
+        else:
+            pass #TODO: case for invalid choices?
+
+    def apply_filter(self, queryset, choices):
+        """function applies a set of choices to a queryset.
+        checks for multiple valued choices
+        returns updated queryset
+        """
+        if is_iterable(choices):
+            #if multiple items in choices, build up Q query with OR clauses, then filter
+            qquery = Q()
+            for choice in choices:
+                if is_iterable(choice): raise ValueError('nested list passed in: %s',str(choices))
+                elif choice: qquery = qquery | Q(**{self.for_field_name:choice})
+            if qquery: queryset = queryset.filter(qquery)
+
+        elif choices: #else, if non-blank
+            queryset = queryset.filter(**{self.for_field_name:choices})
+
+        return queryset
+
+
+class MyMultipleChoiceField(MultipleChoiceField,MySingleChoiceField):
+    """override single choice field init to allow multiple choices.
+    change widget and parent class
+    """
+
+    def __init__(self, for_field_name, model_manager,
+                     required=False, widget=None,
+                     *args, **kwargs):
+        """
+        initialise field using manager passed in.
+        attempt to retrieve (pk_field,descript_field) tuples from manager
+        """
+        #store manager + fields for later use.
+        self.for_field_name = for_field_name
+        try:
+            self.verbose_name = modelOf(for_field_name).VERBOSE_NAME
+        except:
+            self.verbose_name = self.for_field_name
+
+        self.joining_model_manager = model_manager
+        #setup choices and widget, then pass to super constructor
+        choices = self._get_choices()
+        #widget = MyDisableyChoiceWidget(attrs={'size':4, 'class':'multiDropDownField'})
+        widget = SelectMultiple(attrs={'size':4, 'class':'multiDropDownField'})
+        MultipleChoiceField.__init__(self,choices, required, widget, *args, **kwargs)
+
+
+class MyForeignKeySingleChoiceField(ChoiceField):
+    """special form field class, with special init parameters (manager+field names)
+    automatically populates its 'default' choices
+    and special method for update choices"""
+
+    def __init__(self, for_field_name, to_model, joining_model_manager,
+                 pk_field='id', description_field='name',
+                 required=False, widget=None, *args, **kwargs):
+        """
+        initialise field using model + manager passed in.
+        attempt to retrieve (pk_field,descript_field) tuples from to_model
+        joining_manager is used to restrict choices if necessary
+        """
+        #store manager + fields for later use.
+        self.for_field_name = for_field_name
+        self.to_model = to_model
+        self.verbose_name = verbose_name_of(fieldOf(joining_model_manager.model, for_field_name))
+        self.joining_model_manager = joining_model_manager
+        self.pk_field = pk_field
+        self.description_field = description_field
+        #setup choices and widget, then pass to super constructor
+        choices = self._get_choices()
+        #widget = MyDisableyChoiceWidget(attrs={'size':4, 'class':'multiDropDownField'})
+        widget = Select(attrs={'size':'1', 'class':'singleDropDownField'})
+        ChoiceField.__init__(self,choices, required, widget, *args, **kwargs)
+
+
+    def _get_valid_ids_from_join(self, choices_dict):
+        home_query = makeQQuery(choices_dict)
+        try:
+            valid_ids_from_join = set(self.joining_model_manager.filter(home_query).values_list(self.for_field_name,flat=True))
+        except (FieldError, ValueError):
+            #django bug - values_list for a manytomanyfield fails.
+            try:
+                valid_ids_from_join = set()
+                #cycle thru objects in query, and for each object, cycle thru many-to-many related fields
+                for obj in self.joining_model_manager.filter(home_query):
+                    for item in getattr(obj,self.for_field_name).all():
+                        valid_ids_from_join.add(int(item.id))
+
+            except FieldError: #genuine problem:
+                raise ValueError('problem in choices %s for model %s'%( str(home_query) , str(self.joining_model_manager.model) ) )
+        return valid_ids_from_join
+
+
+    def _get_choices(self, choices_dict={}):
+        """
+        private method returns all field choices for a given set of form choices
+        defaults to all valid choices.
+        """
+        valid_ids_from_join = self._get_valid_ids_from_join(choices_dict)
+        try: # simply use manager
+            #get all id,desc tuples from to-model
+            all_to_model_tuples = self.to_model.objects.all().values_list(self.pk_field, self.description_field)
+            all_to_model_tuples = [(int(pk), desc) for pk, desc in all_to_model_tuples]
+        except FieldError:
+            raise ValueError('incorrect field name passed, either %s or %s for model %s\n choices were %s'%\
+                             (self.pk_field,self.description_field,str(self.joining_model_manager.model),str(home_query))
+                             )
+        #filter as appropriate
+        match_tuple = lambda tuple : tuple[0] in valid_ids_from_join
+        valid_choices = filter(match_tuple, all_to_model_tuples)
+
+        valid_choices.insert(0, ('', RESET_OPTION)) #add blank first choice
+        return valid_choices   #categorised_choices
+
+
+    def update_choices(self,current_choices_dict):
+        """update the fields's dropdown choices based on current choices,
+        ignoring choices made on itself
+        """
+        #remove self from choices if appropriate
+        fixed_choices_dict = deepcopy(current_choices_dict)
+        if self.for_field_name in fixed_choices_dict.keys():
+            del fixed_choices_dict[self.for_field_name]
+
+        new_choices = self._get_choices(fixed_choices_dict)
+        if new_choices:
+            self.choices = new_choices
+        else:
+            pass #TODO: case for invalid choices?
+
+
+    def apply_filter(self, queryset, choices):
+        """function applies a set of choices to a queryset.
+        checks for multiple valued choices
+        and checks whether queryset is on same model as self, or another"""
+        if is_iterable(choices):
+            #if multiple items in choices, build up Q query with OR clauses, then filter
+            qquery = Q()
+            for choice in choices:
+                if choice:
+                    if self.joining_model_manager.model == queryset.model:
+                        #if querying on joining model
+                        qquery = qquery | Q(**{self.for_field_name:choice})
+                    else:
+                        #else we're on model field is fk for
+                        qquery = qquery | Q(**{self.pk_field:choice})
+            if qquery: queryset = queryset.filter(qquery)
+
+        elif choices: #if non-blank
+            if self.joining_model_manager.model == queryset.model:
+                queryset = queryset.filter(**{self.for_field_name:choices})
+            else:
+                queryset = queryset.filter(**{self.pk_field:choices})
+        return queryset
+
+
+
+class MyForeignKeyMultiChoiceField(MultipleChoiceField, MyForeignKeySingleChoiceField):
+    """special form field class, with special init parameters (manager+field names)
+    automatically populates its 'default' choices
+    and special method for update choices"""
+    def __init__(self, for_field_name, to_model, joining_model_manager,
+                 pk_field='id', description_field='name',
+                 required=False, widget=None, *args, **kwargs):
+        """
+        initialise field using manager passed in.
+        attempt to retrieve (pk_field,descript_field) tuples from manager
+        """
+        #store manager + fields for later use.
+        self.for_field_name = for_field_name
+        self.to_model = to_model
+        self.joining_model_manager = joining_model_manager
+        self.pk_field = pk_field
+        self.description_field = description_field
+        #setup choices and widget, then pass to super constructor
+        choices = self._get_choices()
+        #widget = MyDisableyChoiceWidget(attrs={'size':4, 'class':'multiDropDownField'})
+        widget = SelectMultiple(attrs={'size':4, 'class':'multiDropDownField'})
+        MultipleChoiceField.__init__(self,choices, required, widget, *args, **kwargs)
+
+
+class FeeStructureChoiceField(ChoiceField):
+    def __init__(self, fee_structures, panel, court, **kwargs):
+        self.panel = panel
+        self.court = court
+        if court:
+            choices = [('', '--Not applying for this court')]
+        else:
+            choices = [('', '--Not applying for this panel')]
+            choices += [('M', '-Multiple fee structures')]
+        for fs in fee_structures:
+            choices += [(fs.id, fs.name)]
+        kwargs.update(dict(required=False, choices=choices))
+        ChoiceField.__init__(self, **kwargs)
+
+

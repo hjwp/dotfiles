@@ -1,0 +1,71 @@
+{% extends "pricing/base_calculators.html" %}
+{% load currency %}
+
+{% block content %}
+  
+ <h2>Method Statements for {{template.framework_panel}} </h2>
+ <h3>Description</h3>
+ <span class="msDescription">{{template.description|linebreaks}}</span>
+  
+<h3>Firms responses</h3>
+  <table width="75%" border="1" summary="table showing method statements for this panel">
+  	<thead>
+    <tr>
+    	<th>Firm</th>
+		<th>Overall Total</th>
+		{% for stage in template_stages%}
+			<th>{{stage.number}}. {{stage.name}}</th>
+		{% endfor %}
+	</tr>
+	</thead>
+	<tbody>
+	{% for ms in method_statements%}
+	<tr class="{% cycle 'row1' 'row2' %}">
+		<th>{{ms.fee_calculation.chamber}}</th>
+		<td><a title="click for detail" 
+				href="{% url pricing.views.method_statement_view ms.id %}">
+					{{ms.quoted_total|currency}}</a></td>
+		
+		{% for mss in method_statement_stages %}
+		{% ifequal mss.parent ms %}
+			<td>{{mss.quoted_subtotal|currency}}</td>
+		{% endifequal %}
+		{% endfor %}
+	  </tr>
+    {% endfor %}
+	</tbody>
+  </table>
+  
+{% comment %}  OLD HORIZONTAL LAYOUT
+ <h3>Chambers responses horiz.</h3>
+  <table width="75%" border="1" summary="table showing method statements for this panel">
+    <tr>
+    	<th>Stage</th>
+		{% for ms in method_statements%}
+			<th>{{ms.fee_calculation.chamber}}</th>
+		{% endfor %}
+	</tr>
+	<tr class="{% cycle 'row1' 'row2' %}">
+		<th>OVERALL TOTALS</th>
+		{% for ms in method_statements%}
+			<td><a title="click for detail" 
+				href="{% url pricing.views.method_statement_view ms.id %}">
+					{{ms.quoted_total|floatformat:2}}</a></td>
+		{% endfor %}
+	</tr>
+	
+  	{% for stage in template_stages %}
+	  <tr class="{% cycle 'row1' 'row2' %}">
+		<td>{{stage.number}}. {{stage.name}}</td>
+		
+		{% for mss in method_statement_stages %}
+		{% ifequal mss.stage stage %}
+			<td>{{mss.quoted_subtotal}}</td>
+		{% endifequal %}
+		{% endfor %}
+	  </tr>
+    {% endfor %}
+  </table>
+{% endcomment %}  
+
+{% endblock content %}

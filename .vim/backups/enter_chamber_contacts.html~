@@ -1,0 +1,18 @@
+{% extends "pricing/base.html" %}
+
+{% block content %}
+
+<h2>Enter Chamber Contacts for {{chamber}}</h2>
+ <p>Please enter chamber contacts for your firm</p>
+    <form action="" method="POST" >
+      <table width="75%" border="1" summary="fixed fees">
+        <thead>
+        </thead>
+        <tbody>
+          {{form.as_table}}
+         </tbody>
+      </table>
+      <input type="submit"/>
+     </form>
+ 
+{% endblock content %}

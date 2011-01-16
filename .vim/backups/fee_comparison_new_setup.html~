@@ -1,0 +1,82 @@
+{% extends "pricing/base_calculators.html" %}
+{% load getattribute %}
+
+{% block content %}
+<form action="{% url pricing.views.fee_comparison_new %}" method="post" class="lookup_form">
+  
+  {% if lines_formset %}
+  <h2>Fee Comparison Details Setup</h2>
+    <div class="hidden">{{ lines_formset.management_form }}</div>
+
+    <table width="90%" border="1" summary="fee calculator table with rows of dropwdowns to lookup a fee">
+      {% for form in lines_formset.forms %}
+	  
+	  {% if forloop.first %}
+	  	<thead>
+          <tr>
+	    	{% for fieldname, field in form.fields.items %}
+	      		<th>
+		  			<span class="afield" style="display: none;">{{fieldname}}</span>
+		  			{{field.verbose_name}}
+	      		</th>
+	    	{% endfor %}
+	  	<th>Go</th>
+	  	<th>Number of matching firms</th>
+	  </tr>
+	  </thead>
+	  <tbody>
+	  {% endif %}
+        
+	   <tr class="{% cycle 'row1' 'row2' %}">
+	      {% for field in form.visible_fields %}
+	        <td class="feecalc">{{field}}{{field.errors}}</td>
+	      {% endfor %}
+	    	<td><input type="submit" name="submit-line-{{form.prefix}}" value="Go" /></td>
+	    	<td>{{form.num_chambers}}</td>
+	    </tr>
+	  {% endfor %}
+	  </tbody>
+    </table>
+   	{% endif %}
+	
+	
+    <h2>Matching Results</h2>
+    
+    <table width="50%" border="1" summary="table of matching chambers with their total fees">
+    	<thead>
+	      <tr>
+			<th>Chamber</th>
+			<th>Total Fee</th>
+	      </tr>
+		</thead>
+		<tbody>
+      {% if lines_formset.total_fees %}
+	      {% for tf in lines_formset.total_fees %}
+			<tr class="{% cycle 'row1' 'row2' %}">
+				<td>{{tf.chamber.name}}</td>
+				<td>{{tf.total|currency}}</td>
+			</tr>
+	      {% endfor %}
+	  {% else %}
+	  	<tr><td colspan="2">No matching chambers/firms (you may need to click Go)</td></tr>
+      {% endif %}
+	  </tbody>
+    </table>
+	{% if lines_formset.total_fees %}
+		<p>To see a detailed breakdown of the fees for each chamber/firm, 
+		save the fee comparison using  the form below.</p>
+    {% endif %}	
+	
+  <h2>Save Fee Comparison</h2>
+  <table width="75%" border="1" summary="table for fee comparison main details">
+  	<thead><tr><th colspan="2">Fee Comparison details</th></tr>
+  	</thead>
+  	<tbody>
+    {{parent_form.as_table}}
+	</tbody>
+    <tr class="row1"><td colspan="2"><input type="submit" name="save-fc" value="Save" /></td></tr>
+	
+  </table>
+</form>
+
+{% endblock content %}

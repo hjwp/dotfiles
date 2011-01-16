@@ -1,0 +1,7 @@
+{% extends "pricing/base.html" %}
+
+{% block content %}
+<h1>404: Page not found</h1>
+<p>Cannot find the page you are looking for.  Could you have typed in the address wrong?</p>
+<p>If you believe you have found a bug, please report it to <a href="mailto:it@firstlaw.co.uk">it@firstlaw.co.uk</a></p>
+

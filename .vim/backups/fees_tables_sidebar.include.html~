@@ -1,0 +1,7 @@
+<ul>
+    <li><a href="{% url all_fees %}">All Fees</a></li>
+    <li><a href="{% url barristers_fees %}">Barristers Fees</a></li>
+    <li><a href="{% url solicitors_fees %}">Solicitors Fees</a></li>
+    <li><a href="{% url barristers_fixed_fees %}">Barristers Fixed Fees</a></li>
+    <li><a href="{% url barristers_hourly_fees %}">Barristers Hourly Fees</a></li>
+</ul>

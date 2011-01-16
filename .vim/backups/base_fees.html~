@@ -1,0 +1,14 @@
+{% extends "pricing/base.html" %}
+{% load getattribute %}
+{% load currency %}
+{% block htmlhead %}{{ block.super }}
+<script type="text/javascript" src="/site_media/js/jquery.js"></script>
+<script type="text/javascript" src="/site_media/js/autofilter_update.js"></script>
+{% comment %} 
+<script type="text/javascript" src="/site_media/js/feetable_lookup.js"></script> 
+{% endcomment %}
+{% endblock %}
+
+{% block sidebar %}{{ block.super }}
+    {% include 'pricing/fees_tables_sidebar.include.html' %}
+{% endblock %}

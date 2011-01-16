@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+{% load getattribute %}
+{% load currency %}
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="/site_media/styles.css" />
+    <title>{% block title %}Firstlaw Legal Pricing Database{% endblock %}</title>
+	<script type="text/javascript" >
+		var ajax_dropdowns_path = "{{filter_table.json_dropdowns_url}}"
+		var ajax_translations_path = "{{filter_table.json_translations_url}}"
+	</script>
+    {% block htmlhead %}{% endblock %}
+</head>
+
+<body>
+	
+    <div id="menu">
+    {% block menu %}
+		{% if user.is_authenticated %}
+            {% for group in user.groups.all %}
+                {% if group.name == 'Legal' %}
+                    {% include 'pricing/menu_legal.include.html' %}
+                {% endif %}
+                {% if group.name == 'Client' %}
+                    {% include 'pricing/menu_client.include.html' %}
+                {% endif %}
+            {% endfor %}
+            {% if user.is_staff %}
+                {% include 'pricing/menu_client.include.html' %}
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+    </div>
+	
+	<div id="login">
+    {% block login %}
+		{% if user.is_authenticated %}
+			<span>User: {{ user.username }}.</span>
+			<span> | <a href="{% url pricing.views.log_out %}">Log out</a></span><br />
+            {% if user.is_staff %}
+              <span> | </span>
+              <span><a href="/admin/">Admin</a></span>
+            {% endif %}
+        {% else %}
+			<span><a href="{% url django.contrib.auth.views.login %}">Log in</a></span>
+        {% endif %}
+	{% endblock %}
+	</div>
+	
+    <div id="sidebar">
+        {% block sidebar %}{% endblock %}
+    </div>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

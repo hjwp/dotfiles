@@ -1,0 +1,16 @@
+{% extends "pricing/base_parameters.html" %}
+{% block content %}
+<h2>Types of work</h2>
+{% for professional_type in professional_types %}
+    <h3>{{professional_type}}</h3>
+
+    <ul>
+    {% for twork in worktypes %}
+        {% if twork.professional_type == professional_type %}
+            <li><a href="{% url pricing.views.worktype_definition twork.id %}">{{twork}}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+
+{% endfor %}
+{% endblock content %}

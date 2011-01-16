@@ -1,0 +1,8 @@
+from pricing.test_utils import MyTestCase
+
+class TestDropDownsView(MyTestCase):
+    def test_fees_dropdowns_no_manager(self):
+        self.fail('todo')
+
+
+

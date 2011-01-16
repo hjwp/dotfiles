@@ -1,0 +1,1120 @@
+'''
+Created on 29 Jan 2010
+@author: Harry
+contains all the forms for the app
+as well as the 'FilterTable' object which encapsulates functionality for dropdown-autofilter tables
+'''
+
+from copy import deepcopy
+from datetime import date
+from operator import itemgetter
+from string import capwords
+import re
+import sys
+
+from django import forms
+from django.core.exceptions import FieldError, ValidationError
+from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from django.core.urlresolvers import reverse
+from django.db.models import ForeignKey, ManyToManyField
+from django.forms.formsets import formset_factory
+from django.forms.models import ModelForm
+from django.forms.util import ErrorList
+from django.utils.encoding import smart_unicode
+from django.utils.safestring import mark_safe
+
+from pricing.models import (
+        CustomisableManager,
+        Barrister, Chamber, Chamber_Contacts, Fee,
+        FeeStructure, FeeStructureAssignment, FeeType, Panel,
+        SavedFeeCalculation, SavedFeeCalculatorLine,
+        SavedFeeComparison, SavedFeeComparisonLine,
+        Seniority, StructuredFee, WorkType,
+)
+from pricing.functions import (
+        de_unicode_dict,
+        fieldNamesOf, fieldOf, is_iterable, managerNameOf, makeQQuery, modelOf,
+        strip_dict_blanks, verbose_name_of, verbose_name_plural_of
+)
+from pricing.fields import (
+        FeeStructureChoiceField,
+        MyForeignKeyMultiChoiceField, MyForeignKeySingleChoiceField,
+        MyMultipleChoiceField,
+)
+
+
+#=========================== FORMS ===================================
+class DropdownsForm(forms.Form):
+    pass
+
+
+
+class MyModelForm(forms.Form):
+    """
+    abstract form, to be subclassed for each model
+    init method allows passing in dictionary of field objects...
+    """
+    def __init__(self,model,model_manager=None,base_fields_dict={},data={},*args,**kwargs):
+        if not hasattr(model,'_meta'):
+            raise ValueError('%s not a model'%str(model))
+        self.model = model
+        if model_manager==None: self.model_manager = model.objects
+        else: self.model_manager = model_manager
+        self.for_model_name = model._meta.object_name.lower()
+
+        #add base fields if passed in, or else create them from model
+        if base_fields_dict: self.base_fields = base_fields_dict
+        #elif not self.base_fields : #TODO: django bug(?), self.base_fields sometimes populated when it shouldn't be...
+        elif not hasattr(self, 'fields'):
+            for fieldname in fieldNamesOf(model):
+                actual_field = fieldOf(model, fieldname)
+                if isinstance(actual_field, ForeignKey) or isinstance(actual_field, ManyToManyField):
+                    self.base_fields[fieldname]=MyForeignKeyMultiChoiceField(fieldname, modelOf(fieldname), self.model_manager)
+                elif not fieldname=='fee':
+                    self.base_fields[fieldname]=MyMultipleChoiceField(fieldname, self.model_manager)
+
+        # fix data -remove blanks and fix any form prefixes left in by JSON calls
+        # unless we have a prefix kwarg, which would mean form is being generated 
+        # as part of a formset
+        if not kwargs.has_key('prefix'):
+            self.fields = deepcopy(self.base_fields) #need this cos _strip... depends on self.fields.keys
+            data = self._strip_prefixes_blanks_and_invalid(data)
+
+        forms.Form.__init__(self,data=data,*args,**kwargs)
+
+
+    def get_queryset(self):
+        """get the querylist of objects matching the form's cleaned data"""
+        queryset = self.model_manager.all()
+        if not self.is_valid():
+            sys.stderr.write('debug - invalid form, choices were %s'%str(self.changed_data)) #TODO:
+            return queryset
+        else:
+            for fieldname,field in self.fields.items():
+                choices = self.cleaned_data[fieldname]
+                if choices:
+                    if hasattr(field, 'apply_filter'):
+                        queryset = field.apply_filter(queryset,choices)
+                    else :
+                        queryset = queryset.filter(makeQQuery({fieldname: choices}))
+            return queryset
+
+
+    def _strip_prefixes_blanks_and_invalid(self,orig_dict):
+        """
+        removes any form-X prefixes from a dict,
+        and strips out any non-fee param keys
+        """
+        #allowed_keys = fieldNamesOf(model)
+        nudict = strip_dict_blanks(orig_dict)
+        for key in nudict.keys():
+            for valid_key in self.fields.keys():
+                if key.endswith(valid_key):  #if allowed key is a substring of actual key
+                    nudict[valid_key]=nudict[key]
+            if key not in self.fields.keys(): del nudict[key] #delete invalid/prefixed version
+        return nudict
+
+
+    def _get_valid_query_params(self, choices_dict):
+        """
+        removes blanks and any keys not in self.fields
+        as well as any keys not in self.model.fields (eg 'quantity')
+        """
+        nudict = strip_dict_blanks(choices_dict)
+        model_fields = fieldNamesOf(self.model)
+        for key in nudict.keys():
+            if key not in self.fields.keys() or key not in model_fields :# eg key=='quantity' 
+                del nudict[key]
+        return nudict
+
+
+    def clean(self):
+        """custom clean function, checks that field choices are mutually compatible"""
+        cleaned_data = dict(self.cleaned_data)
+        stripped_data = self._get_valid_query_params(self.cleaned_data)
+        if len(stripped_data)>1:
+            for fieldname in stripped_data.keys():
+                my_choices = stripped_data[fieldname]
+
+                #make dictionary of the other field choices
+                other_choices_dict = deepcopy(stripped_data)
+                if fieldname in other_choices_dict: del other_choices_dict[fieldname]
+
+                for other_field, other_choices in other_choices_dict.items():
+                    combined_choices= {}
+                    combined_choices[fieldname] = my_choices
+                    combined_choices[other_field] = other_choices
+                    #run query against these choices
+                    check_fees = self.model_manager.filter(makeQQuery(combined_choices))[:1] # am hoping the slice will improve perf.
+                    #if no results, add error
+                    if len(check_fees)==0:
+                        msg = u"choice on this field incompatible with %s choice"%smart_unicode(other_field)
+
+                        if self._errors.has_key(fieldname):self._errors[fieldname].append([msg])
+                        else: self._errors[fieldname]=ErrorList([msg])
+
+                        if cleaned_data.has_key(fieldname): del cleaned_data[fieldname] #no problem deleting this cos we use stripped_data above
+
+        # Always return the full collection of cleaned data.
+        return cleaned_data
+
+
+    def updateAllDropdowns(self, choices_dict=None):
+        """ function updates the fields on a form based on a queryset
+        foreign key fields use field method
+        ' blank choices get reset to all fields.
+        """
+        if not choices_dict:
+            self.clean()
+            if self.is_valid(): choices_dict = self.cleaned_data
+            else: raise ValueError('form has errors')
+        choices_dict = de_unicode_dict(self._get_valid_query_params(choices_dict))
+        #get dropdowns, resetting blanks
+        for _, field in self.fields.items():
+            if hasattr(field,'update_choices'):
+                field.update_choices(choices_dict)
+
+
+    def get_dropdownfields_for_ajax(self):
+        """
+        return a dictionary of fieldnames + valid choices
+        ready for serialisation to JSON (or other)
+        choices are id's in case of foreign keys dropdowns
+        values for other dropdowns
+        """
+        output = {}
+        self.updateAllDropdowns()
+        for fieldname,field in self.fields.items():
+            if hasattr(field,'choices'):
+                first_items = [item[0] for item in field.choices]
+                output[unicode(fieldname)]= [unicode(i) for i in first_items]
+        return output
+
+
+    def get_field_translations_for_ajax(self):
+        """
+        return a dictionary of field names and translation tuples
+        (eg ids and verbose names)
+        ready for serialisation to JSON (or other)
+        gets 'id' and 'name' for foreign keys,
+        values and verbose values for ChoiceFields,
+        and just value/value for other fields
+         - essentially just uses the Field object's choices attribute,
+         initialised to default
+        """
+        output = {}
+        #self.updateAllDropdowns()
+        for fieldname,field in self.fields.items():
+            if hasattr(field,'choices'):
+                output[unicode(fieldname)] = dict(field.choices)
+        return output
+
+
+
+class FeesForm(MyModelForm):
+    """
+    form for use in formsets, for invoice checker and fee comparison.
+    uses single-choice fields.
+    """
+    def __init__(self, model_manager=Fee.typed_manager(0), *args, **kwargs):
+        self.fee = None #used in formset to match a single fee to the form
+        self.for_model_name='fee'
+        self.model_manager = model_manager
+
+        self.base_fields['professional_type']=MyForeignKeySingleChoiceField('professional_type', modelOf('professional_type'), model_manager)
+        self.base_fields['fee_type']=MyForeignKeySingleChoiceField('fee_type', modelOf('fee_type'), model_manager)
+        self.base_fields['chamber']=MyForeignKeySingleChoiceField('chamber', modelOf('chamber'), model_manager)
+        self.base_fields['framework_panel']=MyForeignKeySingleChoiceField('framework_panel', modelOf('framework_panel'), model_manager)
+        self.base_fields['level_of_court']=MyForeignKeySingleChoiceField('level_of_court', modelOf('level_of_court'), model_manager)
+        self.base_fields['type_of_work']=MyForeignKeySingleChoiceField('type_of_work', modelOf('type_of_work'), model_manager)
+        self.base_fields['seniority']=MyForeignKeySingleChoiceField('seniority', modelOf('seniority'), model_manager)
+
+        MyModelForm.__init__(self,model=self.model_manager.model, model_manager=self.model_manager, \
+                             base_fields_dict=self.base_fields, *args,**kwargs)
+
+
+    def table_headers(self):
+        """gets a tuple of field names and verbose names to populate a table headers"""
+        fieldnames = []
+        fields_verbose = []
+
+        #first, process fields from fee parameters model
+        #add any of these that are in the forms fields
+        #for f in FeeParameters._meta.fields:
+        #    if f.name in self.fields.keys() : 
+        #        fieldnames.append(f.name)
+        #        fields_verbose.append(f.verbose_name)
+
+        #then add any other fields that may have been added (eg quantity)
+        for fname in self.fields.keys():
+            fieldnames.append(fname)
+            try:
+                verb = verbose_name_of(fieldOf(Fee, fname))
+            except:
+                verb = fname
+            fields_verbose.append(capwords(verb))
+
+        return zip(fieldnames,fields_verbose)
+
+
+    def is_completed(self):
+        """ function determines whether all fields have been filled in"""
+        if not self.is_bound: return False
+        if not self.is_valid(): return False
+        for f in self.fields.keys():
+            if not self.cleaned_data.get(f,''):return False
+        #else
+        return True
+
+
+    def find_single_fee(self):
+        """
+        function checks form and finds a matching fee if possible.
+        self.fee and self.total are populated
+        returns True if a single matching fee is found (even if quantity is blank)
+        and False otherwise.
+        """
+        self.fee = None
+        if self.is_valid() and self.cleaned_data and self.is_completed():
+            query_params = self._get_valid_query_params(self.cleaned_data)
+            query = Fee.objects.filter(makeQQuery(query_params, ''))[:2] #slice improves perf?
+            if len(query)==1 :
+                self.fee = query[0]
+                try:
+                    if 'quantity' in self.cleaned_data.keys():
+                        self.total = float(self.fee.fee) * float(self.cleaned_data['quantity'])
+                    else:
+                        self.total = 'N/A'
+                    return True
+                except: #fee was n/a
+                    self.total = 'N/A'
+                    return False
+            else: return False
+        else: return False
+
+
+    def find_all_matching_fees(self):
+        """
+        used in fee comparison, where form can match multiple fees + chambers
+        populates self.query_params, self.all_fees, self.quantity
+        returns False unless form is valid + completed"""
+        if self.is_valid() and self.cleaned_data and self.is_completed():
+            self.query_params = self._get_valid_query_params(self.cleaned_data)
+            self.all_chambers = Chamber.objects.filter(makeQQuery(self.query_params,'fee'))
+            self.num_chambers = self.all_chambers.count()
+            self.all_fees = Fee.objects.filter(makeQQuery(self.query_params))
+            self.quantity = float(self.cleaned_data['quantity'])
+            return True
+        else:
+            return False
+
+
+    def build_fee_comparison_line(self,fee_comparison):
+        """
+        builds a SavedFeeComparisonLine for a given fee comp
+        using self.cleaned_data
+        """
+        if not fee_comparison:
+            return ValueError('need parent fee comparison')
+        if not self.is_valid() and self.cleaned_data and self.is_completed():
+            return ValueError('form was not completed')
+        line =  SavedFeeComparisonLine()
+        line.parent = fee_comparison
+        #add parameters for each field in the form
+        for field, value in self.cleaned_data.items():
+            try:
+                setattr(line, field, value)
+            except ValueError:
+                setattr(line, field+'_id', int(value))
+        #now fill in the valid chambers and fees for each line
+        line.save() #preliminary save to allow m2m chambers relationship
+        line.chambers = self.all_chambers
+        line.save()
+        return line
+
+
+
+class FilterTable():
+    """
+    this will be a special class to encapsulate all the logic
+    to do with creating a dropdown autofilters table.
+    includes a form, form processing, queryset updating,
+    table headers for the template, etc
+    """
+    AJAX_DROPDOWNS_VIEW = "pricing.views.json_dropdownfields"
+    AJAX_TRANSLATIONS_VIEW = "pricing.views.json_field_translations"
+
+    def __init__(self,
+            model, model_manager=None,
+            exclude_irrelevant_fields=False,
+            form_field_names=[], form_exclude_field_names=[],
+            display_field_names=[], display_exclude_field_names=[],
+    ):
+        #check validity
+        if (form_field_names and form_exclude_field_names) or (display_field_names and display_exclude_field_names):
+            raise ValueError('cannot specify both include and exclude fields')
+        for f in form_field_names+form_exclude_field_names+display_field_names+display_exclude_field_names:
+            if f not in fieldNamesOf(model):
+                raise ValueError('field %s not a field of model %s'%(f,str(model)))
+
+        self.model = model  #already checked it was a model in fieldNamesOf
+        self.model_manager = model_manager or model.objects
+        manager_name = managerNameOf(self.model_manager)
+
+        #now get json dropdowns url from reverse url lookup
+        if manager_name:
+            self.json_dropdowns_url = reverse(self.AJAX_DROPDOWNS_VIEW,args=[manager_name])
+            self.json_translations_url = reverse(self.AJAX_TRANSLATIONS_VIEW,args=[manager_name])
+        else:
+            self.json_dropdowns_url = reverse(self.AJAX_DROPDOWNS_VIEW)
+            self.json_translations_url = reverse(self.AJAX_TRANSLATIONS_VIEW)
+
+        all_fields = fieldNamesOf(model)
+        self.form_field_names=form_field_names or filter(
+            lambda x: x not in form_exclude_field_names or x in form_field_names,
+            all_fields
+        )
+        self.display_field_names = display_field_names or filter(
+            lambda x: x not in display_exclude_field_names,
+            all_fields
+        )
+
+        if exclude_irrelevant_fields:
+            def more_than_1(param): #mini-function checks if count select distinct >1
+                # = lambda param:len(uniq( self.joining_model_manager.all().values_list(param,flat=True) ))<2
+                if param=='chamber' or param=='fee': return True
+                try: values = self.model_manager.all().values_list(param,flat=True).distinct()
+                except FieldError: return True #django bug, cannot run values_list on manytomany fields
+                return len(set(values))>1
+
+            self.form_field_names = filter(more_than_1,self.form_field_names)
+            self.display_field_names = filter(more_than_1,self.display_field_names)
+
+        self._create_form()
+
+    def _create_form(self):
+        """
+        logic - for each field in form_field_names:
+        if foreign key - create myforeignkey field
+        else, produce list of choices as strings
+        """
+        if not self.form_field_names: raise ValueError('tried to create form with no field names')
+        base_fields_dict={}
+        for fieldname in self.form_field_names:
+            actual_field = fieldOf(self.model, fieldname)
+            if isinstance(actual_field,ForeignKey) or isinstance(actual_field,ManyToManyField): #should be true for foreign keys or myforeignkeys
+                #TODO: add logic to allow single-choice?
+                #TODO: add logic to permit choice of pk/descript field??
+                base_fields_dict[fieldname]=MyForeignKeyMultiChoiceField(fieldname, modelOf(fieldname), self.model_manager)
+            else:
+                base_fields_dict[fieldname]=MyMultipleChoiceField(fieldname, self.model_manager)
+
+        self.form = MyModelForm(self.model,self.model_manager,base_fields_dict)
+
+    def table_field_names(self):
+        return self.display_field_names
+
+    def table_headers_verbose(self):
+        """return the verbose table field names"""
+        return [verbose_name_of(fieldOf(self.model,f)) for f in self.display_field_names]
+
+    def table_field_names_verbose_plural(self):
+        """return the verbose table field names, plural"""
+        return [verbose_name_plural_of(fieldOf(self.model,f)) for f in self.display_field_names]
+
+    def form_field_names_verbose(self):
+        """return the verbose table field names, plural"""
+        return [verbose_name_of(fieldOf(self.model,f)) for f in self.form_field_names]
+
+    def table_headers(self):
+        """return the table headers, as (field_name, verbose field name) tuples"""
+        return zip( self.table_field_names(), self.table_headers_verbose() )
+
+    def header_row_html(self):
+        """for template, return header row with verbose names"""
+        html = '<tr>'
+        for f,v in self.table_headers():
+            html+='<th>'
+            html+='<span style="display: none;" class="afield">%s</span>'%f
+            html+='<a class ="sort_link" href="%s&amp;sort=%s">%s</a>'%(self.requested_url,f,v)
+            html+='</th>'
+        html+='</tr>'
+        return mark_safe(html)
+
+    def form_row_html(self):
+        """for template, return form row, interspersed with blanks for columns without a filter"""
+        html = '<tr>'
+        for f,_ in self.table_headers():
+            if f in self.form_field_names:
+                html+='<th>'
+                #TODO: add errors
+                if self.form.is_bound: value = self.form.cleaned_data[f]
+                else: value = [] #TODO: deal with single-choice??
+                html+=self.form.fields[f].widget.render(name=f,value=value)
+                html+='<input type="submit" value="Go" />'
+                html+='</th>'
+            else:
+                html+='<th></th>'
+        html+='</tr>'
+        return mark_safe(html)
+
+    def header_rows_html(self):
+        """for template, return both table headers and dropdowns beneath them"""
+        html = self.header_row_html() + '\n' + self.form_row_html() + '\n'
+        return mark_safe(html)
+
+
+    #----------html request processing functions----------
+    def _paginate(self, pagination_threshold=100, request=None):
+        """functiona applies pagination to a queryset. needs a request object to extract GET['page']"""
+        #now apply pagination
+        paginator = Paginator(self.results, pagination_threshold)
+        # Make sure page request is an int. If not, deliver first page.
+        page_requested = request.GET.get('page', '1')
+        try:
+            if is_iterable(page_requested): page = int(page_requested[-1]) #get last item in list
+            else: page = int(page_requested)
+        except (ValueError, IndexError):
+            page = 1
+        # If page request (9999) is out of range, deliver last page of results.
+        try:
+            queryset = paginator.page(page)
+        except (EmptyPage, InvalidPage):
+            queryset = paginator.page(paginator.num_pages)
+        #assign back to self.results
+        self.results = queryset
+
+    def _add_qm_if_needed(self,url):
+        """adds a question mark to the end of a url string if it doesn't contain one"""
+        if url.find('?') == -1 : url += '?'
+        return url
+
+    def _process_sort_request(self,request):
+        """process a sort request from GET data."""
+        sortrequest = request.GET.get('sort',False)
+        if sortrequest and sortrequest in self.display_field_names:
+            if is_iterable(sortrequest): #if there's multiple sort choices
+                self.results = self.results.order_by(tuple(sortrequest) )
+            else:
+                self.results = self.results.order_by(sortrequest)
+            #TODO: flip sort orders of last sorted...
+
+
+    def get_bound_form(self, request):
+        """return a form bound to an html request's params"""
+        data = request.method == 'POST' and request.POST or request.GET #and/or trick
+        self.form.__init__(model=self.model,model_manager=self.model_manager,data=data)
+        return self.form
+
+
+    def process_html_request(self,request,pagination_threshold=100):
+        """
+        process a GET or POST request.
+        updates the form (sets valid or invalid), updates the form's dropdown choices
+        gets the resulting queryset,
+        returns a dictionary to pass to template (?)
+        """
+        #prepare the url string to template for use in hrefs
+        self.requested_url = self._add_qm_if_needed(request.get_full_path())
+        self.form = self.get_bound_form(request)
+        self.results = self.form.get_queryset()
+
+        if self.form.is_valid(): self.form.updateAllDropdowns()
+
+        # add a sort order if it's been submitted
+        # (note sort key not in form, so won't validate)
+        if request.method == 'GET': self._process_sort_request(request)
+
+        if self.model_manager != self.model.objects:
+            self.feetype_descript = self.model_manager.verbose_name
+
+        #paginate results
+        self._paginate(pagination_threshold, request)
+
+
+
+class EnterChamberContactsForm(ModelForm):
+    class Meta:
+        model = Chamber_Contacts
+        #fields = ('','')
+        exclude = ('chamber', 'name', 'type', 'organisation_type', 'user' )
+
+    def save(self, chamber):
+        try:
+            existing_contacts = Chamber_Contacts.objects.get(chamber=chamber)
+        except Chamber_Contacts.DoesNotExist:
+            existing_contacts = None
+        new = ModelForm.save(self, commit=False)
+        new.chamber = chamber
+        if existing_contacts:
+            new.id = existing_contacts.id
+        new.save()
+        return new
+
+
+
+class BarristerForm(ModelForm):
+    year_of_call = forms.IntegerField(
+            max_value=date.today().year+3,
+            min_value=1900)
+
+    class Meta:
+        model = Barrister
+        fields = ('first_name',
+                  'last_name',
+                  'year_of_call',
+                  'is_qc',
+                  'panels')
+
+
+    def save(self, chamber):
+        panels = self.cleaned_data['panels']
+        new = ModelForm.save(self, commit=False)
+        new.chamber = chamber
+        new.save()
+        new.set_panels(panels)
+        new.save()
+
+
+
+class FeeField(forms.FloatField):
+    def __init__(self, seniority, type_of_work, fee_type, *args, **kwargs):
+        self.seniority = seniority
+        self.type_of_work = type_of_work
+        self.fee_type = fee_type
+        kwargs.update(dict(initial='0.00', min_value=0, max_value=100000,
+                        widget = forms.TextInput(attrs={'class':'price'})
+                        ))
+        forms.FloatField.__init__(self, *args, **kwargs)
+
+
+    def clean(self, value):
+        try:
+            value = forms.FloatField.clean(self, value)
+        except ValidationError, e:
+            if value.upper() == 'N/A':
+                value = None
+            elif not value:
+                raise ValidationError('Blank values not allowed. Enter 0 or "N/A"')
+            elif 'Enter a number' in str(e):
+                raise ValidationError('Only decimal numbers or "N/A" are allowed in this field')
+            else:
+                raise
+        return value
+
+
+
+class FeeStructureForm(forms.Form):
+    name = forms.fields.CharField(initial='Main fee table')
+
+    def __init__(self, chamber, *args, **kwargs):
+        self.chamber = chamber
+        self.fee_types = FeeType.objects.all()
+        self.seniorities = Seniority.objects.filter(
+                professional_type=chamber.professional_type)
+        self.worktypes = WorkType.objects.filter(
+                professional_type=chamber.professional_type)
+        #add a fee fields for each fee param combination
+        for fee_type, seniority, type_of_work in self.parameters():
+            field_name = self.field_name_for(fee_type, seniority, type_of_work)
+            self.base_fields[field_name] = FeeField(
+                seniority, type_of_work, fee_type,
+            )
+        self.instance = kwargs.pop('instance', None)
+        if self.instance:
+            kwargs['initial'] = self.get_data_from_instance(self.instance)
+
+        forms.Form.__init__(self, *args, **kwargs)
+
+
+    def parameters(self):
+        for fee_type in FeeType.objects.all():
+            for seniority in Seniority.objects.all():
+                for type_of_work in WorkType.objects.filter(fee_type=fee_type):
+                    yield fee_type, seniority, type_of_work
+
+
+    def field_name_for(self, fee_type, seniority, type_of_work):
+        return 'feetype-%d_seniority-%d_type_of_work-%d_fee' % (
+                    fee_type.id, seniority.id, type_of_work.id)
+
+
+    def get_data_from_instance(self, instance):
+        data = {}
+        data['name'] = instance.name
+        for fee_type, seniority, type_of_work in self.parameters():
+            field_name = self.field_name_for(fee_type, seniority, type_of_work)
+            fee = StructuredFee.objects.get(
+                    fee_structure=instance,
+                    fee_type=fee_type, seniority=seniority, type_of_work=type_of_work
+            )
+            if fee.fee:
+                data[field_name] = smart_unicode(fee.fee)
+            else:
+                data[field_name] = 'N/A'
+
+        return data
+
+
+    def save(self):
+        if not self.is_valid():
+            return None
+        if self.instance:
+            fee_structure = self.instance
+        else:
+            fee_structure = FeeStructure()
+            fee_structure.chamber = self.chamber
+        fee_structure.name = self.cleaned_data['name']
+        fee_structure.save()
+        for fieldname, value in self.cleaned_data.items():
+            if 'feetype' in fieldname:
+                sf, created = StructuredFee.objects.get_or_create(
+                    fee_structure=fee_structure,
+                    fee_type=self.fields[fieldname].fee_type,
+                    seniority=self.fields[fieldname].seniority,
+                    type_of_work=self.fields[fieldname].type_of_work,
+                )
+                sf.fee = value
+                sf.save()
+        fee_structure.save()
+        return fee_structure
+
+
+
+
+
+class FeeStructureAssignmentForm(forms.Form):
+    panel_finder = re.compile('panel-(\d+)_assignment')
+    court_finder = re.compile('panel-(\d+)_court-(\d+)_assignment')
+
+    def __init__(self, chamber, *args, **kwargs):
+        self.chamber = chamber
+        fee_structures = FeeStructure.objects.filter(chamber=chamber)
+        self.panels = Panel.objects.all()
+        #add fields for each fee param combination
+        for panel in self.panels:
+            field_name = self.get_field_name(panel)
+            self.base_fields[field_name] = FeeStructureChoiceField(
+                    fee_structures, panel, None)
+
+            for court in panel.court_set.all():
+                field_name = self.get_field_name(panel, court)
+                self.base_fields[field_name] = FeeStructureChoiceField(
+                        fee_structures, panel, court)
+
+        kwargs['initial'] = self.get_initial_data(fee_structures)
+
+        forms.Form.__init__(self, *args, **kwargs)
+
+
+    def get_initial_data(self, fee_structures):
+        initial = {}
+        assignments = FeeStructureAssignment.objects.filter(fee_structure__in=fee_structures)
+        for assignment in assignments:
+            field = self.get_field_name(assignment.panel, assignment.level_of_court)
+            initial[field] = assignment.fee_structure.id
+        #set 'multiples'
+        for panel in Panel.objects.all():
+            field = self.get_field_name(panel)
+            if field not in initial and assignments.filter(panel=panel):
+                initial[field] = 'M'
+        return initial
+
+
+
+    def get_field_name(self, panel, court=None):
+        if court:
+            return 'panel-%d_court-%d_assignment' % (panel.id, court.id)
+        else:
+            return 'panel-%d_assignment' % (panel.id, )
+
+    def get_court_for_field_name(self, fieldname):
+        if not 'court' in fieldname:
+            return None
+        matches = self.court_finder.match(fieldname)
+        return Court.objects.get(pk=int(matches.groups()[1]))
+
+
+    def get_panel_for_field_name(self, fieldname):
+        if 'court' in fieldname:
+            matches = self.court_finder.match(fieldname)
+            return Panel.objects.get(pk=int(matches.groups()[0]))
+        matches = self.panel_finder.match(fieldname)
+        return Panel.objects.get(pk=int(matches.groups()[0]))
+
+
+    def add_error(self, field_name, message):
+        if field_name in self.errors:
+            if message not in self.errors[field_name]:
+                self.errors[field_name] += [message]
+        else:
+            self.errors[field_name] = ErrorList([message])
+
+
+    def _post_clean(self):
+        for panel in self.panels:
+            panel_field_name = self.get_field_name(panel)
+            panel_input = self.data[panel_field_name]
+
+            court_choices = set()
+            for court in panel.court_set.all():
+                court_field_name = self.get_field_name(panel, court)
+                court_input = self.data[court_field_name]
+                court_choices.add(court_input)
+                if court_input != panel_input and panel_input != 'M':
+                    self.add_error(panel_field_name, 'Court choices inconsistent')
+            if panel_input == 'M' and len(court_choices) == 1:
+                    self.add_error(panel_field_name, 'All court choices were the same')
+
+        return self.cleaned_data
+
+
+    def save(self):
+        if not self.is_valid():
+            raise ValueError('Form was invalid - errors %s' %(self.errors, ))
+        FeeStructureAssignment.objects.filter(fee_structure__chamber=self.chamber).delete()
+        for field, value in self.cleaned_data.items():
+            assignment = FeeStructureAssignment()
+            if value and value != 'M':
+                assignment.fee_structure = FeeStructure.objects.get(pk=int(value))
+                assignment.panel = self.get_panel_for_field_name(field)
+                assignment.level_of_court = self.get_court_for_field_name(field)
+                assignment.save()
+
+
+
+def ContactsTable(chamber=None):
+    """actually a function that returns a filter table of appropriate settings"""
+    form_field_names = ['type','chamber','city']
+    display_field_names = form_field_names+['address','postcode','tender_contact_email','website','telephone']
+    manager = Chamber_Contacts.objects
+    if chamber:
+        manager = CustomisableManager('Chamber Contacts', Chamber_Contacts,
+                dict(chamber=chamber)
+        )
+    return FilterTable(model=Chamber_Contacts, model_manager=manager,
+            form_field_names=form_field_names,
+            display_field_names=display_field_names
+    )
+
+
+def BarristersTable(chamber=None):
+    """actually a function that returns a filter table of appropriate settings"""
+    display_field_names = form_field_names = ['chamber','full_name','is_qc','year_of_call','seniority','panels']
+    manager = Barrister.objects
+    if chamber:
+        manager = CustomisableManager('Barristers', Barrister, dict(chamber=chamber))
+    return FilterTable(model=Barrister, model_manager=manager,
+            form_field_names=form_field_names,
+            display_field_names=display_field_names
+    )
+
+
+
+#=================FORMSETS=======================
+class FeeComparisonParentForm(ModelForm):
+    #form form parent of fee comparison
+    class Meta:
+        model = SavedFeeComparison
+        exclude = ('chambers','fee_calculations')
+
+"""class FeeComparisonChooser(forms.Form):
+    #form form parent of fee comparison
+    id = MyForeignKeySingleChoiceField('id', SavedFeeComparison.objects.all(), required=True )
+    """
+"""    class Meta:
+        model = SavedFeeComparison
+        fields = ('name',)
+    """
+
+class FeeCalculatorParentForm(ModelForm):
+    class Meta:
+        model = SavedFeeCalculation
+
+class FeeCalculatorLineForm(ModelForm):
+    class Meta:
+        model = SavedFeeCalculatorLine
+
+# create bases
+FeesCalculatorFormSetBase = formset_factory(
+    FeesForm,
+    extra=5,
+)
+
+# now classes with additional fields as required
+class FeeCalculatorFormSet(FeesCalculatorFormSetBase):
+    total = 0
+
+    def __init__(self, chamber=None, *args, **kwargs):
+        self.chamber = chamber
+        FeesCalculatorFormSetBase.__init__(self, *args, **kwargs)
+
+
+    def add_fields(self, form, index):
+        super(FeesCalculatorFormSetBase, self).add_fields(form, index)
+        form.fields['quantity'] = forms.IntegerField(
+                required=False, initial=1,
+                widget=forms.TextInput(attrs={'size':'4'})
+        )
+        #apply chamber filter if necessary
+        for fieldname, field in form.fields.items():
+            if self.chamber and hasattr(field, 'joining_model_manager'):
+                field.joining_model_manager.add_filter(dict(chamber=self.chamber))
+                field.update_choices({})
+            if type(field)==MyForeignKeyMultiChoiceField:
+                #reset all widgets to be single-choice
+                assert False, 'this code path never taken?'
+                manager = field.joining_model_manager
+                form.fields[fieldname] = MyForeignKeySingleChoiceField(
+                        field.for_field_name, field.to_model, manager,
+                        field.pk_field, field.description_field)
+
+
+    def updateDropDowns(self):
+        """updates all dropdowns on all valid, changed forms"""
+        for f in self.forms:
+            if f.is_valid() and f.has_changed():
+                f.updateAllDropdowns(f.cleaned_data)
+
+
+    def processFormSet(self):
+        """try and match a fee for each form"""
+        self.total = 0
+        for form in self.forms:
+            if form.find_single_fee() :
+                try:
+                    self.total += form.total
+                except: #no total, eg cos no fee...
+                    pass
+
+
+
+class FeeComparisonFormSet(FeeCalculatorFormSet):
+    aggregate_query = {}  #holds overall query for whole formset, keys = fee params eg seniority
+    total_fees = {}  #dictionary of total fees for each chamber
+    valid_chambers = [] #list of matching chamber objects
+
+
+    def add_fields(self, form, index):
+        super(FeeComparisonFormSet, self).add_fields(form, index)
+        del form.fields['chamber']
+        #del form.base_fields['chamber']
+
+
+    def _build_aggregate_query(self):
+        """
+        build up an aggregate query dictionary from all valid, completed forms
+        stored in self.aggregate_query
+        """
+        self.aggregate_query = {}
+        for f in self.forms:
+            # find all matching fees for each form
+            # and build the aggregate query (self.aggregate_query)
+            if f.find_all_matching_fees():
+                for key, vals in f.query_params.items():
+                    if not self.aggregate_query.has_key(key): #create dict entry if doesnt already exist
+                        self.aggregate_query[key]= vals
+                    else:
+                        #else, append vals to dict entry for this key
+                        #if they're not already there.
+                        self.aggregate_query[key] = list(set(list(self.aggregate_query[key])+list(vals)))
+                        #if is_iterable(self.aggregate_query[key]):
+                        #    if vals not in self.aggregate_query[key]: self.aggregate_query[key].append(vals)
+                        #else: 
+                        #    if not vals == self.aggregate_query[key]: self.aggregate_query[key] = [self.aggregate_query[key]]+[vals]
+
+
+    def processFormSet(self):
+        """processes all valid, completed forms
+        to find matching chambers & fees.
+        populates self.total_fees
+        """
+        self.total_fees = [] #will be a list of dictionaries containign chamber name and total.
+        self.valid_chambers = set()
+        for f in self.forms:
+            if f.find_all_matching_fees():
+                if not self.valid_chambers: self.valid_chambers = set(f.all_chambers)
+                else: self.valid_chambers = self.valid_chambers.intersection(f.all_chambers)
+        #now build up dict of total fees for each chamber
+
+        for chamber in self.valid_chambers:
+            chamber_total = {}
+            chamber_total['chamber'] = chamber
+            chamber_total['total'] = 0
+
+            #calculate total fee for each chamber by summing that chambers fees*quantity in each form
+            for line in self.forms:
+                if line.is_completed():
+                    try:
+                        subtotal_fee = line.all_fees.get(chamber__id=chamber.id).fee
+                        chamber_total['total'] += line.quantity * float(subtotal_fee)
+                    except TypeError: #fee was n/a
+                        chamber_total['total'] = 'chamber listed fee as N/A'
+                        break #need break otherwise may try to add a number to a string in next iter
+                    #except (MultipleObjectsReturned, ObjectDoesNotExist):  #chamber couldn't match one of the lines.
+                    #    chamber_total['total'] = 'partial match only'
+                    #    break #need break otherwise may try to add a number to a string in next iter
+            
+            self.total_fees.append(chamber_total)
+            self.total_fees.sort(key=itemgetter('total'))  #sort the N/As to the end
+
+    def save(self,fee_comparison):
+        """method to save the formset to the database
+        processes valid forms, and creates fee comparison parent & lines
+        and individual fee calculation parent & lines for each valid chamber
+        """
+        # if there is at least one valid, completed form
+        if not fee_comparison:
+            return ValueError('no fee comparison passed to feecomp formset save method' )
+        if [form for form in self.forms if form.is_completed() and form.cleaned_data ] :
+            # setup parent fee comparison object
+            self.processFormSet()  # populates self.valid_chambers
+            
+            #parent_form.save() #preliminary save
+            #delete fee comparison's existing fee calculations, if any
+            if fee_comparison.lines:
+                fee_comparison.lines.delete()
+            lines = {}  #fee comparison lines, 1 per subform
+            #valid_chambers = set(Chamber.objects.all()) #only chambers that work for all lines
+            all_fee_calc_lines = []  #all possible matching fee calculations
+            
+            #iterate thru forms and create fee comparison lines
+            for form in self.forms:
+                if form.find_all_matching_fees():
+                    lines[form.prefix] = form.build_fee_comparison_line(fee_comparison)
+                    #generate all matching fee calculator lines, 
+                    #to be assigned parents and saved later
+                    for f in form.all_fees:
+                        fl = SavedFeeCalculatorLine()  #won't be saved until it's confirmed later...
+                        fl.fee = f
+                        fl.quantity = lines[form.prefix].quantity
+                        all_fee_calc_lines.append(fl)
+
+                    #and keep track of the intersection of chambers & line_fees valid for all
+                    #valid_chambers = valid_chambers.intersection(set( lines[form.prefix].chambers.all() )) 
+
+            #build fee calculation parents - 1 per chamber...
+            for c in self.valid_chambers:
+                fee_calc = SavedFeeCalculation()
+                fee_calc.fee_comparison = fee_comparison
+                fee_calc.name = 'auto-generated'
+                fee_calc.visible = False
+                fee_calc.author = fee_comparison.author
+                fee_calc.chamber = c
+                fee_calc.save() #preliminary save
+                fee_calc.name = fee_calc.name+"_ID"+str(fee_calc.id)
+
+                #save fee calculation lines matching this chamber,
+                #and add to overall fee calc total
+                fee_calc.overall_total = 0
+                for fcl in all_fee_calc_lines:
+                    if fcl.fee.chamber == c:
+                        fcl.parent = fee_calc
+                        fcl.save()
+                        fee_calc.overall_total += fcl.line_total
+                fee_calc.save() #final save
+
+            #save and finish
+            fee_comparison.chambers = self.valid_chambers
+            fee_comparison.save()
+            return fee_comparison
+
+        else: raise ValueError('no valid, completed forms found')    
+
+def create_blank_fee_comparison(user):
+    fc = SavedFeeComparison()
+    fc.name = 'auto-generated'
+    fc.author = user
+    fc.save()
+    fc.name = fc.name + str(fc.id)
+    fc.save()
+    return fc
+
+'''        
+#===============================================================================
+# COMMISSIONING
+#===============================================================================
+
+
+class WorkCommissionForm(ModelForm):
+    """
+    enter basic info about the commission
+    required before sinding a request for estimate(s)
+    """
+
+    class Meta:
+        model = WorkCommission
+        fields = ('la', 'contact', 'instruction', 'attachment', 'close_date')
+    
+# useful functions for commissioning...
+def create_blank_workcommission(request):
+    """
+    create + return a blank commission
+    """
+    comm = WorkCommission()
+    comm.contact = request.user
+    try: comm.la = request.user.get_profile().organisation
+    except ObjectDoesNotExist: comm.la = Organisation.objects.all()[0] #TODO: error handle!
+    comm.close_date = datetime.today() + timedelta(days=30)
+    comm.la_ref = 'TBC' + str(datetime.now())
+    comm.instruction = 'instruction details tbc'
+    comm.save()
+    return comm
+
+def create_or_amend_workcommission(request, comm=None):
+    """
+    amend an existing commission's details (eg name, ref, description),
+    or if comm is not provide, create a new one
+    """
+    requestForm = WorkCommissionForm(request.POST, instance=comm)
+    if requestForm.is_valid():
+        comm.creator = request.user
+        comm.save()
+    return comm
+
+
+def add_estimates_for_chambers(comm_id, request_POST_dict, key_prefix):
+        """ 
+        process POST request to extract FK's to chambers
+        create new 'estimate' objects for each at status=pending
+        associate them to the commission.
+        ignores any invalid fk's.
+        """ 
+        try:
+            comm = WorkCommission.objects.get(pk=comm_id)
+        except WorkCommission.DoesNotExist:
+            raise ValueError('no work commission with id %s'%str(comm.id))
+        for key, val in request_POST_dict.items():
+            regex_match = re.match('^'+key_prefix+'(\d+)$',key)
+            if regex_match and val: 
+                pk = regex_match.group(1)
+                try: legal = Chamber.objects.get(pk=pk)
+                except: continue #invalid pk
+                if len(comm.estimates.filter(legal=legal))==0:
+                    new_est = Estimate()
+                    new_est.commission = comm
+                    new_est.legal = legal
+                    new_est.save()
+        return comm
+    
+def update_commission_estimates(comm_id, request_POST_dict, key_prefix):
+        """
+        process POST request, identify estimates by pk,
+        amend or delete as appropriate (currently just delete)
+        ignores any invalid fk's.
+        """
+        try:
+            comm = WorkCommission.objects.get(pk=comm_id)
+        except WorkCommission.DoesNotExist:
+            raise ValueError('no work commission with id %s'%str(comm.id))
+        
+        for key, val in request_POST_dict.items():
+            regex_match = re.match('^'+key_prefix+'(\d+)$',key)
+            if regex_match:
+                pk = regex_match.group(1)
+                try: est = Estimate.objects.get(pk=pk)
+                except : continue #invalid pk
+                if val and est.commission.id == comm.id: # extra check in here to prevent deleting other ests.
+                    est.delete()
+        return comm
+'''

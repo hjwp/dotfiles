@@ -1,0 +1,75 @@
+{% extends "pricing/base_fees.html" %}
+{% load getattribute %}
+{% load currency %}
+
+{% block content %}
+
+{% if filter_table.feetype_descript %}
+	<h2>{{filter_table.feetype_descript}} Table</h2>
+{% else %}
+ 	<h2>All Fees Table</h2>
+{% endif %}
+
+  <form action="" method="get" class="lookup_form">
+    <table width="90%" border="1" summary="table contains listing of fees for different types of work">
+      {% if filter_table.form %}
+      <thead>
+      	{{filter_table.header_rows_html}}
+      </thead>
+      {% endif %}
+      <tbody>
+      	{% if filter_table.results %}
+	        {% for fee in filter_table.results.object_list %}
+			<tr class="{% cycle 'row1' 'row2' %}">
+				{% for field in filter_table.display_field_names %}
+					<td>
+					{# special cases, columns with hyperlinks #}
+					{% if field == 'chamber' %}
+						<a 	href="{% url pricing.views.chamber_view fee.chamber.id %}" 
+							title="click to view chamber and its barristers" >
+					{% endif %}
+					{% if field == 'type_of_work' %}
+						<a 	title="click to view definition of this type of work" 
+							href="{% url pricing.views.worktype_definition fee.type_of_work.id %}">
+					{% endif %}
+					{% if field == 'seniority' %}
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="{% url chamber_for_seniority chamber_id=fee.chamber.id seniority_id=fee.seniority.id %}">
+					{% endif %}
+                    {% if field == 'fee' %}
+						{{fee|getattribute:field|currency}}
+                    {% else %}
+						{{fee|getattribute:field}}
+                    {% endif %}
+                    {% if field == 'chamber' or field == 'type_of_work' or field == 'seniority' %}
+                        </a>
+                    {% endif %}
+					</td>
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		{% else %}
+   			<tr><td>No Fees available.</td></tr>
+		{% endif %}
+      </tbody>
+    </table>
+  </form>
+  
+  <div class="pagination">
+    <span class="step-links">
+      {% if filter_table.results.has_previous %}
+      <a href="{{filter_table.requested_url}}&amp;page={{ filter_table.results.previous_page_number }}">previous</a>
+      {% endif %}
+      
+      <span class="current">
+          Page {{ filter_table.results.number }} of {{ filter_table.results.paginator.num_pages }}.
+      </span>
+      
+      {% if filter_table.results.has_next %}
+      <a href="{{filter_table.requested_url}}&amp;page={{ filter_table.results.next_page_number }}">next</a>
+      {% endif %}
+    </span>
+  </div>
+    
+  
+{% endblock content %}

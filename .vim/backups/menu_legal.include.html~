@@ -1,0 +1,9 @@
+<ul>
+    <li><a href="/">Home</a></li>
+{% for chamber in user.chamber_set.all %}
+    <li><a href="{% url chamber_dashboard chamber.id %}">Dashboard</a></li>
+    <li><a href="{% url chamber_contacts_enter chamber.id %}">Chamber Contacts</a></li>
+    <li><a href="{% url chamber_barristers_enter chamber.id %}">Barristers</a></li>
+    <li><a href="{% url chamber_fee_structures chamber.id %}">Fee Structures</a></li>
+{% endfor %}
+</ul>

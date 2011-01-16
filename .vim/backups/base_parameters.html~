@@ -1,0 +1,11 @@
+{% extends "pricing/base.html" %}
+
+{% block sidebar %}{{ block.super }}
+        <ul>
+        	<li><a href="{% url pricing.views.appointments %}">Chamber/Firm Panel Appointments</a></li>
+			<li><a href="{% url pricing.views.definitions %}">Type of work definitions</a></li>
+            <li><a href="{% url pricing.views.parameter_details %}">All Parameter Correspondences</a></li>
+            <li><a href="{% url pricing.views.average_fees %}">Average fees</a></li>
+            
+        </ul>
+{% endblock %}

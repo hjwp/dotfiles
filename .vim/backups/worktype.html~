@@ -1,0 +1,7 @@
+{% extends "pricing/base_parameters.html" %}
+{% block content %}
+<h2>Type of work: {{worktype}}</h2>
+<h3>Definition:</h3>
+<p><em>{{worktype.definition|default:'(No definition)'|linebreaks}}</em></p>
+</ul>
+{% endblock content %}

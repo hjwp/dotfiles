@@ -1,0 +1,65 @@
+{% extends "pricing/base_calculators.html" %}
+
+{% block content %}
+  
+ <h2>Method Statement</h2>
+  <table width="75%" border="1" summary="main details">
+  	<thead>
+    <tr>
+    	<th>Panel</th>
+		<th>Firm</th>
+		<th>Total Quoted</th>
+	</tr>
+	</thead>
+  	{% if ms %}
+	<tbody>
+	  <tr>
+	  	<td>{{ms.template.framework_panel}}</td>
+		<td>{{ms.fee_calculation.chamber}}</td>
+		<td>{{ms.quoted_total}}</td>
+	  </tr>
+	 </tbody>
+    {% endif %}
+  </table>
+   
+    <h2>Line items</h2>
+    
+    <table width="90%" border="1" summary="detailed line items of method statement">
+    	<thead>
+	      <tr>
+			<th>Stage</th>
+			<th>Seniority</th>
+			<th>Num. Hours</th>
+			<th>Quoted Rate</th>
+			<th>Quoted Fee</th>
+			<th>Disbur- sements</th>
+			<th>Stage Subtotal</th>
+			<th>Comments</th>
+	      </tr>
+		</thead>
+		<tbody>
+		{% for line in lines %}
+			<tr class="{% cycle 'row1' 'row2' %}">
+			{% ifchanged line.stage %}
+				<th rowspan="3">{{line.stage.stage.number}}. {{line.stage.stage.name}}</th>
+			{% endifchanged %}
+			
+		    <td class="msSeniority">{{line.feecalc_line.fee.seniority}}</td>
+		    <td>{{line.feecalc_line.quantity}}</td>
+			
+			<td>{{line.quoted_rate|currency}}</td>
+			<td>{{line.quoted_fee|currency}}</td>
+					
+			<td>{{line.disbursements}}</td>
+			
+			{% ifchanged line.stage %}
+				<th rowspan="3">{{line.stage.quoted_subtotal|currency}}</th>
+			{% endifchanged %}
+			
+		    <td class="msComment">{{line.comments|linebreaks}}</td>
+		  	</tr>
+		{% endfor %}
+		</tbody>
+    </table>
+ 
+{% endblock content %}

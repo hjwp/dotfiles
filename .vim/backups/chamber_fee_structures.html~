@@ -1,0 +1,151 @@
+{% extends "pricing/base.html" %}
+{% load getattribute %}
+
+{% block htmlhead %}{{ block.super }}
+<script type="text/javascript" src="/site_media/js/jquery.js"></script>
+<script type="text/javascript" >
+    $(function() {
+        var allSelectors = $('select[name^="panel"]');
+        allSelectors.change(function () {
+            var name = $(this).attr('name');
+            var selectedVal = $(this).find('option:selected').val();
+
+            courtPos = name.search('_court');
+            if (courtPos === -1){
+                var panelName  = name.replace('_assignment', '');
+                var allCourtSelectors = $('select[name^="'+panelName +'_court"]');
+                allCourtSelectors.val(selectedVal);
+
+            } else {
+                var panelName = name.substr(0, courtPos);
+                var parentSelector = $('select[name="'+panelName+'_assignment"]');
+                var siblingSelectors = $('select[name^="'+panelName+'_court"]');
+
+                var allMatch = true;
+                for (var i=0; i<siblingSelectors.length; i++){
+                    if ($(siblingSelectors[i]).val() !== selectedVal){
+                        allMatch = false;
+                    }
+                }
+                if (allMatch){
+                    parentSelector.val(selectedVal);
+
+                }else if (parentSelector.val() !== selectedVal){
+                    parentSelector.val('M');
+                }
+            }
+        });
+    });
+
+</script>
+{% endblock %}
+
+{% block content %}
+<h2>{{chamber}} Fee Structures</h2>
+
+{% if fee_structures %}
+    <table width="85%" border="1" summary="fee structures">
+        <thead>
+            <tr>
+                <th>Structure Name</th>
+                <th>Average Fees</th>
+                <th>Framework Panels this applies to</th>
+                <th>Delete?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fee_structure in fee_structures %}
+            <tr>
+                <td><strong>{{fee_structure.name}}</strong><span> (</span>
+                    <a href="{% url chamber_fee_structure_edit chamber.id fee_structure.id %}">edit</a>
+                    <span>|</span>
+                    <a href="{% url chamber_fee_structure_copy chamber.id fee_structure.id %}">copy</a>
+                    <span>)</span>
+                </td>
+                <td>
+                {% for fee_type in fee_types %}
+                    {{fee_type}}s: {{fee_structure.average_fee|getattribute:fee_type|floatformat:2}}<br />
+                {% endfor %}
+                </td>
+                <td>{{fee_structure.panels_as_list|safe}}</td>
+                <td>
+                    <form method="POST" action="{% url chamber_fee_structure_delete chamber.id fee_structure.id %}" >
+                        <input type="submit" name="delete" value="Delete" />
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+     </tbody>
+  </table>
+<p>If you wish to setup additional fee structures, 
+<a href="{%url chamber_fee_structure_new chamber.id %}">
+Please click here
+</a>
+</p>
+ 
+
+<h2>Fee Structure assignments</h2>
+<p>Each framework panel and level of court should have a fee structure
+    associated with it, or else be listed as 'Not applying for this panel'</p>
+    <p>You may also choose to apply different fee structures for the different
+    levels of court within a panel. In this case, the choice in the 'panel' column
+    should switch to saying "Multiple fee structures".</p>
+
+<form method="POST" action="">
+<table width="95%" border="1" summary="fee structures">
+    <thead>
+    <tr>
+        <th>Framework Panel</th>
+        <th>Fee Structure</th>
+        <th>Level of Court</th>
+        <th>Fee Structure</th>
+    </tr>
+    </thead>
+    <tbody>
+{% for panel in panels %}
+<tr class="{%cycle 'row1' 'row2' %}">
+      <th rowspan="{{panel.court_set.all|length}}">{{panel}}</th>
+      <td rowspan="{{panel.court_set.all|length}}">{% for field in form %}
+            {% if field.field.panel == panel and field.field.court == None %}
+                {{field.errors}}{{field}}
+            {% endif %}
+            {% endfor %}
+      </td>
+  {% for court in panel.court_set.all %}
+    {% if not forloop.first %}
+    <tr class="{%cycle 'row1' 'row2' %}">
+    {% endif %}
+        <td>{{court}}</td>
+        <td>{% for field in form %}
+            {% if field.field.panel == panel and field.field.court == court %}
+                {{field.errors}}{{field}}
+            {% endif %}
+            {% endfor %}
+        </td>
+    {% if not forloop.first %}
+    </tr>
+    {% endif %}
+    </tr>
+  {% endfor %}
+  </tr>
+{% endfor %}
+</tbody>
+</table>
+<p>Update fee structure assignments<input type="submit" value="Submit" /></p>
+</form>
+
+
+{% else %}
+<p>You have no fee structures yet. 
+<a href="{%url chamber_fee_structure_new chamber.id %}">
+    Please enter at least one fee structure
+</a>.</p>
+<p>You will then have the option of assigning the fee structure to the various 
+   framework panels.</p>
+<p>If you wish to apply different fees to different panels, or different fees
+   to different levels of court, you will need to create multiple fee structures.
+   Once you've created your first fee structure you can return to this page 
+   to create additional ones.</p>
+{% endif %}
+
+{% endblock content %}

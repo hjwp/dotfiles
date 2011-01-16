@@ -1,0 +1,105 @@
+from unittest2 import TestCase as U2TestCase
+
+from django.http import HttpRequest, QueryDict
+from django.db.models.query_utils import Q
+
+from pricing.functions import (
+        make_query_from_request,
+)
+from pricing.models import (
+        ProfessionalType
+)
+
+
+class FunctionTestCase(U2TestCase):
+
+    def setUp(self):
+        self.maxDiff = None
+
+    def assertItemsEqual(self, list_1, list_2):
+        self.assertEquals(len(list_1), len(list_2))
+        self.assertEquals(set(list_1), set(list_2))
+
+
+
+class TestMakeQuery(FunctionTestCase):
+
+    def find_choice_in_query(self, choice_dict, query_node):
+        assert len(choice_dict)==1
+        if choice_dict.items()[0]==query_node:
+            return True
+        elif hasattr(query_node, 'children'):
+            for child_node in query_node.children:
+                if self.find_choice_in_query(choice_dict, child_node):
+                    return True
+
+
+    def test_make_query_from_request_ands_up_choices(self):
+        querydict = QueryDict('field1=choice1&field2=choice2')
+        result = make_query_from_request(querydict)
+        self.assertEquals(result.connector, 'AND')
+        self.assertTrue(
+                (
+                    result.children[0]==('field1','choice1') and
+                    result.children[1]==('field2','choice2')
+                ) or (
+                    result.children[1]==('field1','choice1') and
+                    result.children[0]==('field2','choice2')
+                )
+        )
+
+
+    def test_make_query_from_request_ors_up_list_choices(self):
+        querydict = QueryDict('field1=choice1&field1=choice2')
+        result = make_query_from_request(querydict)
+
+        self.assertEquals(result.connector, 'OR')
+        self.assertEquals(len(result.children), 2)
+        self.assertTrue(
+                (
+                    result.children[0]==('field1','choice1') and
+                    result.children[1]==('field1','choice2')
+                ) or (
+                    result.children[1]==('field1','choice1') and
+                    result.children[0]==('field1','choice2')
+                )
+        )
+
+
+    def test_make_query_from_request_doesnt_forget_anything(self):
+        querydict = QueryDict('field1=choice1a&field1=choice1b&field2=choice2')
+        result = make_query_from_request(querydict)
+        self.assertTrue(self.find_choice_in_query({'field1':'choice1a'}, result))
+        self.assertTrue(self.find_choice_in_query({'field1':'choice1b'}, result))
+        self.assertTrue(self.find_choice_in_query({'field2':'choice2'}, result))
+
+
+    def test_make_query_also_handles_non_querysets(self):
+        normal_dict = {'field1':'choice1', 'field2':['choice2a','choice2b']}
+        result = make_query_from_request(normal_dict)
+        self.assertTrue(self.find_choice_in_query({'field1':'choice1'}, result))
+        self.assertTrue(self.find_choice_in_query({'field2':'choice2a'}, result))
+        self.assertTrue(self.find_choice_in_query({'field2':'choice2b'}, result))
+
+
+    def test_make_query_handles_empty(self):
+        querydict = QueryDict('')
+        query = make_query_from_request(querydict)
+        self.assertFalse(query is None)
+        self.assertEqual(type(query) , Q)
+
+
+    def test_sense_check_query_can_be_used_to_filter(self):
+        pt1 = ProfessionalType(name='pt1')
+        pt1.save()
+        pt2 = ProfessionalType(name='pt2')
+        pt2.save()
+        pt3 = ProfessionalType(name='pt3')
+        pt3.save()
+
+        querydict = QueryDict('name=pt1&name=pt2')
+        query = make_query_from_request(querydict)
+        pts = ProfessionalType.objects.filter(query)
+        self.assertItemsEqual(pts, [pt1,pt2])
+
+

@@ -1,0 +1,10553 @@
+<body>
+	
+    <div id="menu">
+    
+		
+            
+                
+                
+                    <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/all_fees/">Fees</a></li>
+    <li><a href="/invoice_calculator/">Fee Calculators</a></li>
+    <li><a href="/chamber_contacts/">Contact Details</a></li>
+    <li><a href="/appointments/">Appointments</a></li>
+</ul>
+
+                
+            
+            
+        
+    
+    </div>
+	
+	<div id="login">
+    
+		
+			<span>User: test_client_user.</span>
+			<span> | <a href="/logout/">Log out</a></span><br />
+            
+        
+	
+	</div>
+	
+    <div id="sidebar">
+        
+    <ul>
+    <li><a href="/all_fees/">All Fees</a></li>
+    <li><a href="/fixed_fees/">Fixed Fees</a></li>
+    <li><a href="/hourly_fees/">Hourly Fees</a></li>
+</ul>
+
+
+    </div>
+
+    <div id="content">
+        
+
+
+	<h2>Fixed Fees Table</h2>
+
+
+  <form action="" method="get" class="lookup_form">
+    <table width="90%" border="1" summary="table contains listing of fees for different types of work">
+      
+      <thead>
+      	<tr><th><span style="display: none;" class="afield">chamber</span><a class ="sort_link" href="/all_fees/?&amp;sort=chamber">Chamber/firm</a></th><th><span style="display: none;" class="afield">fee_type</span><a class ="sort_link" href="/all_fees/?&amp;sort=fee_type">Fee type</a></th><th><span style="display: none;" class="afield">framework_panel</span><a class ="sort_link" href="/all_fees/?&amp;sort=framework_panel">Framework panel</a></th><th><span style="display: none;" class="afield">level_of_court</span><a class ="sort_link" href="/all_fees/?&amp;sort=level_of_court">Level of court</a></th><th><span style="display: none;" class="afield">type_of_work</span><a class ="sort_link" href="/all_fees/?&amp;sort=type_of_work">Type of work</a></th><th><span style="display: none;" class="afield">seniority</span><a class ="sort_link" href="/all_fees/?&amp;sort=seniority">Seniority</a></th><th><span style="display: none;" class="afield">fee</span><a class ="sort_link" href="/all_fees/?&amp;sort=fee">Fee 2008</a></th></tr>
+<tr><th><select multiple="multiple" class="multiDropDownField" name="chamber" size="4">
+<option value="">...(All)</option>
+<option value="1">11 Kings Bench Walk</option>
+<option value="8">Arden Chambers</option>
+<option value="13">Field Court Chambers</option>
+</select><input type="submit" value="Go" /></th><th><select multiple="multiple" class="multiDropDownField" name="fee_type" size="4">
+<option value="">...(All)</option>
+<option value="1">Barristers Fixed</option>
+<option value="2">Barristers Hourly</option>
+</select><input type="submit" value="Go" /></th><th><select multiple="multiple" class="multiDropDownField" name="framework_panel" size="4">
+<option value="">...(All)</option>
+<option value="1">Administrative</option>
+<option value="3">Civil Litigation</option>
+<option value="6">Community Care</option>
+<option value="7">Corporate Governance</option>
+<option value="10">Education</option>
+<option value="11">Employment</option>
+<option value="15">Housing</option>
+<option value="16">Licensing</option>
+<option value="18">Mental Health</option>
+<option value="20">Planning &amp; Environment</option>
+<option value="22">Police</option>
+<option value="24">Procurement</option>
+<option value="25">Property</option>
+</select><input type="submit" value="Go" /></th><th><select multiple="multiple" class="multiDropDownField" name="level_of_court" size="4">
+<option value="">...(All)</option>
+<option value="1">Advice to Education Appeal Panels (Admission and Exclusion)</option>
+<option value="2">Appeals to Magistrates Court</option>
+<option value="3">County Court</option>
+<option value="4">County Court / Principal Registry</option>
+<option value="5">Crown Court</option>
+<option value="6">Employment Appeals Tribunal</option>
+<option value="7">Employment Tribunal</option>
+<option value="9">High Court</option>
+<option value="10">High Court (Judicial Review &amp; Appeals from the SEN Tribunal)</option>
+<option value="11">High Court (Judicial Review &amp; Statutory Appeals)</option>
+<option value="12">High Court (Judicial Review)</option>
+<option value="13">Magistrates Court</option>
+<option value="14">Mental Health Tribunal</option>
+<option value="15">N/A</option>
+<option value="16">Public Inquiry</option>
+<option value="17">SEN Tribunal</option>
+<option value="18">Upper Tribunal</option>
+</select><input type="submit" value="Go" /></th><th><select multiple="multiple" class="multiDropDownField" name="type_of_work" size="4">
+<option value="">...(All)</option>
+<option value="2">1. Directions and Conferences</option>
+<option value="7">1. No fixed fees - only hourly rates</option>
+<option value="8">2. Brief fee for half day hearing</option>
+<option value="9">3. Brief fee for full day hearing</option>
+<option value="10">4. Refresher fee for full day hearing</option>
+<option value="11">5. Brief fee for 3-4 day hearing</option>
+<option value="12">6. Refresher fee for 3-4 day hearing</option>
+<option value="13">7. Brief fee for 5-6 day hearing</option>
+<option value="14">8. Refresher fee for 5-6 day hearing</option>
+<option value="15">9. Daily uplift for longer cases</option>
+<option value="16">1. Advocacy</option>
+<option value="18">3. Reading / Preparation</option>
+<option value="19">4. Drafting / Advice</option>
+<option value="20">5. Travel</option>
+</select><input type="submit" value="Go" /></th><th><select multiple="multiple" class="multiDropDownField" name="seniority" size="4">
+<option value="">...(All)</option>
+<option value="1">0-1 year call</option>
+<option value="2">1-5 years call</option>
+<option value="4">6-10 years call</option>
+<option value="3">11+ years call</option>
+<option value="6">Queen&#39;s Counsel</option>
+</select><input type="submit" value="Go" /></th><th></th></tr>
+
+      </thead>
+      
+      <tbody>
+      	
+	        
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/8/">
+					
+					
+					
+						2. Brief fee for half day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						285.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/9/">
+					
+					
+					
+						3. Brief fee for full day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						2000.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/11/">
+					
+					
+					
+						5. Brief fee for 3-4 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						2100.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/12/">
+					
+					
+					
+						6. Refresher fee for 3-4 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						5250.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/14/">
+					
+					
+					
+						8. Refresher fee for 5-6 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						2500.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/2/">
+					
+					
+					
+						1. Directions and Conferences
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						155.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/18/">
+					
+					
+					
+						3. Reading / Preparation
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						85.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/19/">
+					
+					
+					
+						4. Drafting / Advice
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						400.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/8/">
+					
+					
+					
+						2. Brief fee for half day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						1250.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/10/">
+					
+					
+					
+						4. Refresher fee for full day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						575.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/11/">
+					
+					
+					
+						5. Brief fee for 3-4 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						18200.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/13/">
+					
+					
+					
+						7. Brief fee for 5-6 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						10500.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/15/">
+					
+					
+					
+						9. Daily uplift for longer cases
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						360.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/2/">
+					
+					
+					
+						1. Directions and Conferences
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						185.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/16/">
+					
+					
+					
+						1. Advocacy
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						100.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/18/">
+					
+					
+					
+						3. Reading / Preparation
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						400.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/20/">
+					
+					
+					
+						5. Travel
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						130.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/9/">
+					
+					
+					
+						3. Brief fee for full day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						980.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/10/">
+					
+					
+					
+						4. Refresher fee for full day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						5250.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/12/">
+					
+					
+					
+						6. Refresher fee for 3-4 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						2500.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/14/">
+					
+					
+					
+						8. Refresher fee for 5-6 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						285.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/15/">
+					
+					
+					
+						9. Daily uplift for longer cases
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						1480.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/2/">
+					
+					
+					
+						1. Directions and Conferences
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						935.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/2/">
+					
+					
+					
+						1. Directions and Conferences
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						85.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/16/">
+					
+					
+					
+						1. Advocacy
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						450.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/19/">
+					
+					
+					
+						4. Drafting / Advice
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						260.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/8/">
+					
+					
+					
+						2. Brief fee for half day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						575.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/9/">
+					
+					
+					
+						3. Brief fee for full day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						10400.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/11/">
+					
+					
+					
+						5. Brief fee for 3-4 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						8350.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/13/">
+					
+					
+					
+						7. Brief fee for 5-6 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						1550.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/14/">
+					
+					
+					
+						8. Refresher fee for 5-6 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						1250.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/2/">
+					
+					
+					
+						1. Directions and Conferences
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						400.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/18/">
+					
+					
+					
+						3. Reading / Preparation
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						260.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/20/">
+					
+					
+					
+						5. Travel
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						17.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/8/">
+					
+					
+					
+						2. Brief fee for half day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						5250.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/10/">
+					
+					
+					
+						4. Refresher fee for full day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						2500.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/12/">
+					
+					
+					
+						6. Refresher fee for 3-4 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						285.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/13/">
+					
+					
+					
+						7. Brief fee for 5-6 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						7800.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/15/">
+					
+					
+					
+						9. Daily uplift for longer cases
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						800.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/2/">
+					
+					
+					
+						1. Directions and Conferences
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						390.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/16/">
+					
+					
+					
+						1. Advocacy
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						280.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/19/">
+					
+					
+					
+						4. Drafting / Advice
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						35.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/20/">
+					
+					
+					
+						5. Travel
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						75.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/9/">
+					
+					
+					
+						3. Brief fee for full day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						4150.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/11/">
+					
+					
+					
+						5. Brief fee for 3-4 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						1150.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/12/">
+					
+					
+					
+						6. Refresher fee for 3-4 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						1250.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/14/">
+					
+					
+					
+						8. Refresher fee for 5-6 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						575.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/15/">
+					
+					
+					
+						9. Daily uplift for longer cases
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						3600.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/2/">
+					
+					
+					
+						1. Directions and Conferences
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						4000.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/2/">
+					
+					
+					
+						1. Directions and Conferences
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						260.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/18/">
+					
+					
+					
+						3. Reading / Preparation
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						35.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/19/">
+					
+					
+					
+						4. Drafting / Advice
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						155.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/8/">
+					
+					
+					
+						2. Brief fee for half day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						2500.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/10/">
+					
+					
+					
+						4. Refresher fee for full day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						285.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/11/">
+					
+					
+					
+						5. Brief fee for 3-4 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						4650.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/13/">
+					
+					
+					
+						7. Brief fee for 5-6 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						3650.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/14/">
+					
+					
+					
+						8. Refresher fee for 5-6 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						5250.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/16/">
+					
+					
+					
+						1. Advocacy
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						45.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/18/">
+					
+					
+					
+						3. Reading / Preparation
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						155.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/20/">
+					
+					
+					
+						5. Travel
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						40.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/9/">
+					
+					
+					
+						3. Brief fee for full day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						365.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/10/">
+					
+					
+					
+						4. Refresher fee for full day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						1250.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/12/">
+					
+					
+					
+						6. Refresher fee for 3-4 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						575.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/13/">
+					
+					
+					
+						7. Brief fee for 5-6 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						26000.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/15/">
+					
+					
+					
+						9. Daily uplift for longer cases
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						2240.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/2/">
+					
+					
+					
+						1. Directions and Conferences
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						2080.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/2/">
+					
+					
+					
+						1. Directions and Conferences
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						35.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/16/">
+					
+					
+					
+						1. Advocacy
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						185.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/19/">
+					
+					
+					
+						4. Drafting / Advice
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						85.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/1/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						11 Kings Bench Walk
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/20/">
+					
+					
+					
+						5. Travel
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/1/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						200.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/18/">
+					
+					
+					
+						3. Reading / Preparation
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						90.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/19/">
+					
+					
+					
+						4. Drafting / Advice
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						600.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/2/">
+					
+					
+					
+						1. Directions and Conferences
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						135.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/8/">
+					
+					
+					
+						2. Brief fee for half day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						750.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/10/">
+					
+					
+					
+						4. Refresher fee for full day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						700.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/12/">
+					
+					
+					
+						6. Refresher fee for 3-4 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						700.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/14/">
+					
+					
+					
+						8. Refresher fee for 5-6 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/4/">
+					
+					
+						6-10 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						700.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/16/">
+					
+					
+					
+						1. Advocacy
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						90.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/18/">
+					
+					
+					
+						3. Reading / Preparation
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						600.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/2/">
+					
+					
+					
+						1. Directions and Conferences
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						500.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/9/">
+					
+					
+					
+						3. Brief fee for full day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						1750.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/11/">
+					
+					
+					
+						5. Brief fee for 3-4 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						2750.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/13/">
+					
+					
+					
+						7. Brief fee for 5-6 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						4500.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/15/">
+					
+					
+					
+						9. Daily uplift for longer cases
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						500.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/16/">
+					
+					
+					
+						1. Advocacy
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						600.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/19/">
+					
+					
+					
+						4. Drafting / Advice
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						160.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/2/">
+					
+					
+					
+						1. Directions and Conferences
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						90.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/8/">
+					
+					
+					
+						2. Brief fee for half day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						400.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/10/">
+					
+					
+					
+						4. Refresher fee for full day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						500.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/12/">
+					
+					
+					
+						6. Refresher fee for 3-4 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						500.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/14/">
+					
+					
+					
+						8. Refresher fee for 5-6 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/2/">
+					
+					
+						1-5 years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						500.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/18/">
+					
+					
+					
+						3. Reading / Preparation
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						160.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/2/">
+					
+					
+					
+						1. Directions and Conferences
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/6/">
+					
+					
+						Queen&#39;s Counsel
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						600.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/2/">
+					
+					
+					
+						1. Directions and Conferences
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						150.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/9/">
+					
+					
+					
+						3. Brief fee for full day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						400.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/11/">
+					
+					
+					
+						5. Brief fee for 3-4 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						500.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/13/">
+					
+					
+					
+						7. Brief fee for 5-6 day hearing
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						750.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Fixed
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/15/">
+					
+					
+					
+						9. Daily uplift for longer cases
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						100.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row1">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/16/">
+					
+					
+					
+						1. Advocacy
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/3/">
+					
+					
+						11+ years call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						160.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+			<tr class="row2">
+				
+					<td>
+					
+					
+						<a 	href="/chamber/8/" 
+							title="click to view chamber and its barristers" >
+					
+					
+					
+					
+						Arden Chambers
+						
+					</a>
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Barristers Hourly
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						Administrative
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						High Court
+						
+					
+					
+					
+					</td>
+				
+					<td>
+					
+					
+					
+						<a 	title="click to view definition of this type of work" 
+							href="/worktype/19/">
+					
+					
+					
+						4. Drafting / Advice
+						
+					
+					</a>
+					
+					</td>
+				
+					<td>
+					
+					
+					
+					
+						<a 	title="click to view chamber and its barristers of this seniority" 
+							href="/chamber/8/barristers_for_seniority/1/">
+					
+					
+						0-1 year call
+						
+					
+					
+					</a>
+					</td>
+				
+					<td>
+					
+					
+					
+					
+					
+						50.0
+						
+					
+					
+					
+					</td>
+				
+			</tr>
+			
+		
+      </tbody>
+    </table>
+  </form>
+  
+  <div class="pagination">
+    <span class="step-links">
+      
+      
+      <span class="current">
+          Page 1 of 36.
+      </span>
+      
+      
+      <a href="/all_fees/?&amp;page=2">next</a>
+      
+    </span>
+  </div>
+    
+  
+
+    </div>
+</body>
+</html>

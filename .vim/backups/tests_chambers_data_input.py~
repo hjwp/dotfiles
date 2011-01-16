@@ -1,0 +1,1323 @@
+from test_utils import MyTestCase
+from mock import patch
+from datetime import date
+import random
+try:
+    import json
+except:
+    import simplejson as json
+
+from pricing.models import (
+    Barrister, Chamber, Chamber_Contacts, Court, FeeType,
+    FeeStructure, FeeStructureAssignment, Panel,
+    Seniority, StructuredFee, WorkType, User, Group,
+    Fee,
+)
+from pricing.views import (
+        chamber_contacts_enter, chamber_view, chamber_fee_structures,
+)
+from pricing.forms import (
+    BarristerForm, FeeStructureForm, FeeStructureAssignmentForm
+)
+from pricing.urls import pricing_urlpatterns
+
+from django.conf import settings
+from django.test import Client
+from django.http import HttpRequest, HttpResponseRedirect
+
+FIXTURES_FILES = ['east_data.json']
+
+class ChamberTestCase(MyTestCase):
+    fixtures = FIXTURES_FILES
+
+    def setUp(self):
+
+        self.chamber = Chamber.objects.all()[0]
+        self.other_chamber = Chamber.objects.all()[12]
+
+        self.client = Client()
+        self.chamber.user.set_password('password')
+        self.chamber.user.save()
+        self.other_chamber.user.set_password('password')
+        self.other_chamber.user.save()
+        self.assertTrue(
+            self.client.login(
+                username=self.chamber.user.username,
+                password='password')
+        )
+        self.request = HttpRequest
+        self.request.method = 'GET'
+        self.request.user = self.chamber.user
+
+
+    def login_as_other_user(self):
+        self.assertTrue(
+            self.client.login(
+                username=self.other_chamber.user.username,
+                password='password')
+        )
+
+
+    def assertRedirectsToLogin(self, response, message=None):
+        #self.assertRedirects(response, '/accounts/login/')
+        self.assertEquals(type(response), HttpResponseRedirect,
+                '%s: did not return a redirect'%message)
+        self.assertTrue('login' in response.get('Location', ''),
+                '%s: redirect url didnt contain "login", was %s'%(
+                    message, response.get('Location','')))
+
+
+
+class TestFixturesLoadedOK(ChamberTestCase):
+
+    def testTheresSomeData(self):
+        self.assertEqual(len(Chamber.objects.all()),78)
+        self.assertEqual(len(Panel.objects.all()),16)
+        self.assertEqual(len(Seniority.objects.all()),6)
+        self.assertEqual(len(Court.objects.all()),15)
+        self.assertEqual(len(WorkType.objects.all()),14)
+        self.assertEqual(len(FeeType.objects.all()),2)
+        self.assertEqual(len(Group.objects.all()),2)#client, legal
+        self.assertEqual(len(User.objects.all()),78+2) #incl superuser and test user
+        #check db properly cleaned out before import
+        self.assertEquals(Chamber.objects.all()[0].id, 1)
+
+
+class TestPermissions(ChamberTestCase):
+    def setUp(self):
+        self.anyone = [
+            'home',
+            'log_out',
+            'definitions',
+            'worktype_definition',
+        ]
+        self.logged_in_with_chambers_restricted = [
+            'all_fees',
+            'fixed_fees',
+            'hourly_fees',
+            'barristers_fixed_fees',
+            'barristers_hourly_fees',
+            'barristers_fees',
+            'solicitors_fees',
+
+            'barristers',
+            'chamber_contacts',
+            'chamber_view',
+
+            'fee_calculator_new',
+
+            'json_dropdownfields',
+            'json_dropdownfields_for',
+            'json_field_translations',
+        ]
+        self.legal_only = [
+            'chamber_clients_view_preview',
+            'chamber_contacts_enter',
+            'chamber_barristers_enter',
+            'chamber_barrister_modify',
+            'chamber_barrister_delete',
+            'chamber_dashboard',
+            'chamber_fee_structure_new',
+            'chamber_fee_structure_edit',
+            'chamber_fee_structure_copy',
+            'chamber_fee_structure_delete',
+            'chamber_fee_structures',
+            'chamber_fee_structures_assign',
+            'chamber_submit_fee_data',
+        ]
+        self.client_only = [
+            'parameter_details',
+            'appointments',
+            'ajax_fees',
+            'fee_calculation_view',
+            'json_feecalculator_totals',
+            'fee_comparison_new',
+            'fee_comparisons_list',
+            'fee_comparison_view',
+
+            'method_statements_for_template',
+            'method_statement_templates',
+            'method_statement_view',
+
+            'average_fees',
+            'panel_average_fees',
+        ]
+        self.too_much_hassle_to_test = [
+            'chamber_for_invoice',
+            'chamber_for_seniority',
+        ]
+        self.super_only = ['admin']
+
+
+    def test_all_views_listed(self):
+        all_urls = self.anyone + self.logged_in_with_chambers_restricted \
+                   + self.legal_only + self.client_only \
+                   + self.super_only + self.too_much_hassle_to_test
+        for url in pricing_urlpatterns:
+            if url.name not in all_urls:
+                self.fail('urlpattern %s not recognised. new?' % (url.name, ))
+
+
+    def test_legal_users_cant_see_client_views(self):
+        for urlpattern in pricing_urlpatterns:
+            if urlpattern.name in self.client_only + self.super_only:
+                request = HttpRequest()
+                request.user = Group.objects.get(name='Legal').user_set.all()[0]
+                try:
+                    response = urlpattern._get_callback()(request)
+                except TypeError:
+                    #missing param, try '1'
+                    try:
+                        response = urlpattern._get_callback()(request, 1)
+                    except:
+                        print 'error on view for %s'%(urlpattern,)
+                        raise
+                except:
+                    print 'error on view for %s'%(urlpattern,)
+                    raise
+                self.assertRedirectsToLogin(response,
+                        'view for %s did not redirect to login'%(urlpattern,)
+                )
+
+
+    def test_client_users_cant_see_legal_views(self):
+        testuser = User()
+        testuser.username = 'testclientuser'
+        testuser.save()
+        testuser.groups.add(Group.objects.get(name='Client'))
+
+        for urlpattern in pricing_urlpatterns:
+            if urlpattern.name in self.legal_only + self.super_only:
+                request = HttpRequest()
+                request.user = testuser
+                try:
+                    response = urlpattern._get_callback()(request)
+                except TypeError:
+                    #missing param, try '1'
+                    try:
+                        response = urlpattern._get_callback()(request, 1)
+                    except:
+                        print 'error on view for %s'%(urlpattern,)
+                        raise
+                except:
+                    print 'error on view for %s'%(urlpattern,)
+                    raise
+                self.assertRedirectsToLogin(response,
+                        'view for %s did not redirect to login'%(urlpattern,)
+                )
+
+
+class TestBarristerSave(ChamberTestCase):
+    def setUp(self):
+        self.firstnames = ['Josephine','Jacques','Andrew','Robin','Simon']
+        self.lastnames = ['Alexander','Algazy','Allen','Allen','Allison']
+        self.fullnames = ['Alexander, Josephine','Algazy, Jacques','Allen, Andrew','Allen, Robin (QC)','Allison, Simon']
+        self.isqcs = [0,0,0,1,0]
+        self.yearsofcall =[1994,1980,1995,1974,2006]
+        self.seniorities = [4,5,4,6,2]
+        self.chambers = [Chamber.objects.all()[0]]*5#[35,36,54,36,24]
+
+
+    def testSaveCalculatesSeniorityAndFullName(self):
+        all_params = zip(self.firstnames,
+                  self.lastnames,
+                  self.fullnames,
+                  self.isqcs,
+                  self.yearsofcall,
+                  self.seniorities,
+                  self.chambers)
+
+        for f,l,fu,q,y,s,c in all_params:
+            new = Barrister()
+            new.first_name = f
+            new.last_name = l
+            new.year_of_call = y
+            new.is_qc = q
+            new.chamber = c
+            new.save()
+            self.assertEqual(new.full_name,fu,
+                'error, fullname of %s should be %s was %s'%(new,fu,new.full_name) )
+            self.assertEqual(new.seniority.id,s,
+                    'error, seniority of %s should be %s was %s'%(new,s,new.seniority.id) )
+
+
+class TestEnterChamberContacts(ChamberTestCase):
+    form = {
+            'email_general': 'a@b.com',
+            'address': 'test address',
+            'city': 'test city' ,
+            'postcode': 'nop',
+            'telephone': 'klm',
+            'website': 'www.example.com',
+            'fax':'hij' ,
+            'tender_contact_name': 'def',
+            'tender_contact_ddi_number': 'abc',
+            'tender_contact_email': 'b@b.com'}
+
+    def setUp(self):
+        self.chamber = Chamber.objects.all()[2]
+        self.client = Client()
+        self.chamber.user.set_password('password')
+        self.chamber.user.save()
+        self.client.login(username=self.chamber.user, password='password')
+
+
+    @patch('pricing.views.render_to_response')
+    def test_empty_form(self, mock_render):
+        #cant user test client with mock (?)
+        request = HttpRequest()
+        request.method = 'GET'
+        request.user = self.chamber.user
+        chamber_contacts_enter(request, self.chamber.id)
+
+        args, kwargs = mock_render.call_args
+        self.assertEquals(args[0], 'pricing/chamber_contacts_enter.html')
+        self.assertEquals(args[1]['chamber'],self.chamber)
+        self.assertItemsEqual(
+                args[1]['form'].fields.keys(),
+                self.form.keys()
+        )
+
+
+    def test_form_submission(self):
+        response = self.client.post(
+                '/chamber/%d/contacts/enter/'%self.chamber.id,
+                data=self.form
+        )
+        if not 'appears to be a broken link' in response.content:
+            #skip if offline
+            self.assertRedirects(response,
+                    '/chamber/%s/dashboard/'%(self.chamber.id,)
+            )
+            contacts = Chamber_Contacts.objects.get(chamber=self.chamber)
+            for field, value in self.form.items():
+                if field == 'website':
+                    value = 'http://'+value+'/'
+                self.assertEquals(getattr(contacts,field), value)
+
+
+    @patch('pricing.views.render_to_response')
+    def test_existing_chamber(self, mock_render):
+        chamber = Chamber.objects.all()[0]
+        contacts = Chamber_Contacts()
+        contacts.chamber = chamber
+        for field , value in self.form.items():
+            setattr(contacts, field, value)
+        contacts.save()
+        request = HttpRequest()
+        request.method = 'GET'
+        request.user = chamber.user
+
+        chamber_contacts_enter(request, chamber.id)
+        args, kwargs = mock_render.call_args
+        self.assertEquals(args[0], 'pricing/chamber_contacts_enter.html')
+        self.assertEquals(args[1]['chamber'],chamber)
+        form_initial= args[1]['form'].initial
+        for field, value in self.form.items():
+            self.assertTrue(field in form_initial.keys(),
+                'missing field in form %s'%(field, )
+            )
+            self.assertTrue(value in form_initial.values(),
+                    'missing value for key %s in form: %s'%(field, value )
+            )
+
+    def test_updating_contacts(self):
+        response = self.client.post(
+                '/chamber/%d/contacts/enter/'%self.chamber.id,
+                data=self.form
+        )
+        if not 'appears to be a broken link' in response.content:
+            #skip if offline
+            self.form['city'] = 'moved to a new city'
+            new_response = self.client.post(
+                '/chamber/%d/contacts/enter/'%self.chamber.id,
+                data=self.form
+            )
+            self.assertRedirects(new_response,
+                    '/chamber/%s/dashboard/'%(self.chamber.id,)
+            )
+            self.assertEquals(
+                    Chamber_Contacts.objects.get(chamber=self.chamber).city,
+                    'moved to a new city'
+            )
+
+
+
+class ChamberViewTest(ChamberTestCase):
+    def setUp(self):
+        ChamberTestCase.setUp(self)
+        self.request = HttpRequest()
+        self.request.user = Chamber.objects.all()[0].user
+
+    def test_legal_user_can_only_see_own_chamber(self):
+        chamber = Chamber.objects.all()[1]
+        response = chamber_view(self.request, chamber.id)
+        self.assertRedirectsToLogin(response)
+
+    def test_no_contacts_yet(self):
+        chamber = Chamber.objects.all()[0]
+        response = chamber_view(self.request, chamber.id)
+        self.assertContains(response,
+                'Chamber %s has not input their details yet' % (chamber.name,))
+
+
+
+class EnterBarristersTest(ChamberTestCase):
+    def setUp(self):
+        ChamberTestCase.setUp(self)
+
+        self.fields = {
+            'first_name':'Jimmy',
+            'last_name':'Jones',
+            'year_of_call':1998,
+            'is_qc':0,
+            'panels':[1,2,3],
+        }
+        self.seniorities = {
+            0: '0-1 years call',
+            1: '0-1 years call',
+            2: '1-5 years call',
+            3: '1-5 years call',
+            4: '1-5 years call',
+            5: '1-5 years call',
+            6: '5-10 years call',
+            7: '5-10 years call',
+            8: '5-10 years call',
+            9: '5-10 years call',
+            10: '5-10 years call',
+            11: '11-20 years call',
+            12: '11-20 years call',
+            13: '11-20 years call',
+            14: '11-20 years call',
+            15: '11-20 years call',
+        }
+
+
+    def test_form(self):
+        form = BarristerForm()
+        self.assertItemsEqual(form.fields.keys(), self.fields.keys())
+
+
+    def assert_contains_form(self, response):
+        self.assertContains(response,
+            '<input type="text" '
+            'name="year_of_call" '
+            'id="id_year_of_call" ',
+            count=1
+        )
+        self.assertContains(response,
+            '<input type="text" '
+            'name="year_of_call" '
+            'id="id_year_of_call" ',
+            count=1
+        )
+        for fieldname in ['first_name','last_name']:
+            self.assertContains(response,
+                    '<input id="id_%s" '
+                    'type="text" '
+                    'name="%s" '
+                    'maxlength="200" '%(fieldname, fieldname),
+                    count=1
+            )
+        self.assertContains(response,
+               '<select name="is_qc" id="id_is_qc">'
+        )
+        self.assertContains(response,
+               '<select multiple="multiple" name="panels" id="id_panels">'
+        )
+        self.assertContains(response,
+            '<input type="submit" value="Add" />'
+        )
+
+
+    def test_view_when_empty(self):
+        response = self.client.get(
+                '/chamber/%d/barristers/enter/'%self.chamber.id)
+        self.assertContains(response, str(self.chamber))
+        self.assertContains(response, 'No barristers entered yet')
+        self.assertContains(response, 'Enter New Barrister')
+
+        self.assert_contains_form(response)
+
+    def test_form_submission(self):
+        response = self.client.post(
+                '/chamber/%d/barristers/enter/' % (self.chamber.id),
+                data=self.fields,
+                follow=True)
+
+        self.assertRedirects(response,
+                '/chamber/%d/barristers/enter/' % (self.chamber.id),
+        )
+
+        new_barrister = Barrister.objects.all()[0]
+        for field, value in self.fields.items():
+            if not field == 'panels':
+                self.assertEquals(getattr(new_barrister, field), value)
+            else:
+                self.assertItemsEqual(
+                        [p.id for p in new_barrister.panels.all()],
+                        self.fields['panels']
+                )
+
+        self.assertContains(response, 'Barristers:')
+
+        self.assertContains(response,'<th>Name</th>')
+        self.assertContains(response,'Jones, Jimmy')
+
+        self.assertContains(response,'<th>Year of call</th>')
+        self.assertContains(response,'<td>%s</td>' % (self.fields['year_of_call'],))
+
+        self.assertContains(response,'<th>Seniority</th>')
+        diff = date.today().year - self.fields['year_of_call']
+        self.assertContains(response,self.seniorities[diff])
+
+        self.assertContains(response,'<th>Panels</th>')
+        self.assertContains(response,'<td>%s<br />%s<br />%s</td>' % (
+            Panel.objects.all()[0],
+            Panel.objects.all()[1],
+            Panel.objects.all()[2])
+        )
+
+        self.assertContains(response,
+            '<a href="/chamber/%d/barrister/%d/modify/"' % (
+                self.chamber.id, new_barrister.id, )
+        )
+        self.assertContains(response,
+            '<input type="submit" name="delete" value="Delete" />'
+        )
+        #and another form
+        self.assertContains(response,'Enter New Barrister')
+        self.assert_contains_form(response)
+
+        #now check others cant edit them
+        self.login_as_other_user()
+        response = self.client.post(
+            '/chamber/%d/barrister/%d/modify/' % (self.other_chamber.id, new_barrister.id),
+            data=self.fields,
+            follow=True)
+        self.assertEquals(response.status_code, 404)
+        self.fields['delete'] = 'delete'
+        response = self.client.post(
+            '/chamber/%d/barrister/%d/delete' % (self.other_chamber.id, new_barrister.id),
+            data=self.fields,
+            follow=True)
+        self.assertEquals(response.status_code, 404)
+
+
+    def test_editing_existing_barrister(self):
+        kwargs = {}
+        kwargs.update(self.fields)
+        del kwargs['panels']
+        barrister = Barrister(**kwargs)
+        barrister.chamber = self.chamber
+        barrister.save()
+        panels = Panel.objects.filter(id__in=self.fields['panels'])
+        barrister.set_panels(panels)
+        barrister.save()
+        self.assertItemsEqual(
+                Barrister.objects.get(pk=barrister.id).panels.all(),
+                panels
+        )
+        panels_before_edit = set(Panel.objects.all())
+        new_data = kwargs
+        new_data.update({'panels':[4,5,6]})
+        response = self.client.post(
+            '/chamber/%d/barrister/%d/modify/' % (self.chamber.id, barrister.id),
+            data=new_data,
+            follow=True
+        )
+        check_panels_havent_disappeared = set(Panel.objects.all())
+        self.assertEquals(panels_before_edit, check_panels_havent_disappeared)
+        self.assertRedirects(response,
+            '/chamber/%d/barristers/enter/' % (self.chamber.id,),
+        )
+        new_panels = Panel.objects.filter(id__in=new_data['panels'])
+        self.assertItemsEqual(barrister.panels.all(), new_panels)
+
+
+
+
+
+
+class FeeStructuresTest(ChamberTestCase):
+    def get_params(self):
+        params = []
+        for fee_type in FeeType.objects.all():
+            for seniority in Seniority.objects.all():
+                for type_of_work in WorkType.objects.filter(fee_type=fee_type):
+                    params.append((fee_type, seniority, type_of_work))
+        return params
+
+    def get_fieldnames(self):
+        fieldnames = []
+        for (fee_type, seniority, type_of_work) in self.get_params():
+            fieldnames.append(
+                'feetype-%d_seniority-%d_type_of_work-%d_fee' % (
+                    fee_type.id, seniority.id, type_of_work.id)
+            )
+        return fieldnames
+
+
+    def test_enter_fee_structure_form_empty(self):
+        form = FeeStructureForm(self.chamber)
+        self.assertItemsEqual(form.fee_types, FeeType.objects.all())
+        self.assertItemsEqual(
+                form.worktypes,
+                WorkType.objects.filter(professional_type=self.chamber.professional_type)
+        )
+        self.assertItemsEqual(
+                form.seniorities,
+                Seniority.objects.filter(professional_type=self.chamber.professional_type)
+        )
+        self.assertTrue('name' in form.fields)
+        for (fee_type, seniority, type_of_work) in self.get_params():
+            field_name = 'feetype-%d_seniority-%d_type_of_work-%d_fee' % (
+                    fee_type.id, seniority.id, type_of_work.id)
+            self.assertTrue(field_name in form.fields)
+            self.assertEquals(form.fields[field_name].seniority,
+                    seniority)
+            self.assertEquals(form.fields[field_name].type_of_work,
+                    type_of_work)
+            self.assertEquals(form.fields[field_name].fee_type,
+                    fee_type)
+
+
+    def test_enter_fee_structure_form_validation(self):
+        data = {}
+        for fieldname in self.get_fieldnames():
+            data[fieldname] = str(float(random.randint(0,1000000))/100)
+
+        #except
+        data[self.get_fieldnames()[0]] = '0'
+        data[self.get_fieldnames()[1]] = 'N/A'
+        data[self.get_fieldnames()[2]] = 'n/a'
+        data['name'] = 'test fee struct'
+
+        form = FeeStructureForm(chamber=self.chamber, data=data)
+
+        self.assertEquals(form.is_valid(), True)
+        self.assertEquals(
+                form.cleaned_data[self.get_fieldnames()[3]],
+                float(data[self.get_fieldnames()[3]])
+        )
+        self.assertEquals(
+                form.cleaned_data[self.get_fieldnames()[0]],
+                0
+        )
+        self.assertEquals(
+                form.cleaned_data[self.get_fieldnames()[1]],
+                None
+        )
+        self.assertEquals(
+                form.cleaned_data[self.get_fieldnames()[2]],
+                None
+        )
+
+        #try form save
+        fee_structure = form.save()
+        self.assertEquals(type(fee_structure), FeeStructure)
+        fees = StructuredFee.objects.filter(fee_structure=fee_structure)
+        for (fee_type, seniority, type_of_work) in self.get_params():
+            fee = fees.get(
+                    fee_type=fee_type, seniority=seniority, type_of_work=type_of_work)
+            field_name = 'feetype-%d_seniority-%d_type_of_work-%d_fee' % (
+                    fee_type.id, seniority.id, type_of_work.id)
+            if field_name == self.get_fieldnames()[0]:
+                self.assertEquals(fee.fee, 0)
+            elif field_name == self.get_fieldnames()[1]:
+                self.assertEquals(fee.fee, None)
+            elif field_name == self.get_fieldnames()[2]:
+                self.assertEquals(fee.fee, None)
+            else:
+                self.assertEquals(fee.fee, float(data[field_name]))
+
+
+
+    def assert_contains_form(self, response):
+        self.assertContains(response,
+                '<form action="" method="POST" >')
+        self.assertContains(response,
+                '<input type="text" name="name" '
+        )
+        for field_name in self.get_fieldnames():
+            self.assertContains(response,
+                '<input id="id_%s" '
+                'type="text" class="price" '
+                'value="0.00" name="%s" />'
+                % (field_name, field_name)
+            )
+        self.assertContains(response, '<input type="submit"')
+
+
+    def test_enter_new_fee_structure_view_empty(self):
+        response = self.client.get('/chamber/%d/fee_structure/new/' % (
+                                        self.chamber.id))
+        self.assertContains(response,'Edit Fee Structure')
+        self.assert_contains_form(response)
+
+
+
+    def test_submitting_form(self):
+        data = {}
+        data['name'] = 'testing fee structure submission'
+        for idx, field_name in enumerate(self.get_fieldnames()):
+            data[field_name] = idx
+        response = self.client.post(
+            '/chamber/%d/fee_structure/new/' % (self.chamber.id, ),
+            data=data, follow=True
+        )
+        self.assertRedirects(response,
+            '/chamber/%d/fee_structures/' % (self.chamber.id,)
+        )
+        FeeStructure.objects.get(name='testing fee structure submission')
+        self.assertContains(response, 'testing fee structure submission')
+        fixed_fees =  [float(data[field]) for field in self.get_fieldnames() if 'feetype-1' in field]
+        hourly_fees = [float(data[field]) for field in self.get_fieldnames() if 'feetype-2' in field]
+        avg_ff = sum(fixed_fees)/len(fixed_fees)
+        avg_hf = sum(hourly_fees)/len(hourly_fees)
+        self.assertContains(response,
+                'Fixed Fees: %.2f<br />' % (
+                    avg_ff)
+        )
+        self.assertContains(response,
+                'Hourly Fees: %.2f<br />' % (
+                    avg_hf)
+        )
+
+
+
+    def test_submission_with_text_not_allowed_errors(self):
+        data = {}
+        data['name'] = 'form with errors'
+        for field_name in self.get_fieldnames():
+            data[field_name] = field_name
+        response = self.client.post(
+            '/chamber/%d/fee_structure/new/' % (self.chamber.id, ),
+            data=data, follow=True
+        )
+        self.assertRaises(
+            FeeStructure.DoesNotExist,
+            FeeStructure.objects.get, name='form with errors'
+        )
+        self.assertContains(response,
+            '<li>Only decimal numbers or &quot;N/A&quot; are allowed in this field</li>',
+            count=len(data) - 1
+        )
+
+
+    def test_submission_with_blanks_not_allowed_errors(self):
+        data = {}
+        data['name'] = 'form with errors'
+        for field_name in self.get_fieldnames():
+            data[field_name] = ''
+        response = self.client.post(
+            '/chamber/%d/fee_structure/new/' % (self.chamber.id, ),
+            data=data, follow=True
+        )
+        self.assertRaises(
+            FeeStructure.DoesNotExist,
+            FeeStructure.objects.get, name='form with errors'
+        )
+        self.assertContains(response,
+            '<li>Blank values not allowed. Enter 0 or &quot;N/A&quot;</li>',
+            count=len(data) - 1
+        )
+
+
+    def get_data(self, name, fee_amount=100):
+        data = {}
+        for fieldname in self.get_fieldnames():
+            data[fieldname] = fee_amount
+        data['name'] = name
+        return data
+
+
+    def create_fee_structure(self, name, fee_amount=100):
+        data = self.get_data(name, fee_amount)
+        form = FeeStructureForm(self.chamber, data=data)
+        fee_structure = form.save()
+        return fee_structure
+
+
+    def test_editing_existing_fee_structure(self):
+        fee_structure = self.create_fee_structure('existing fee structure')
+        #set one fee to N/A
+        structured_fee = fee_structure.structuredfee_set.all()[0]
+        structured_fee.fee = None
+        structured_fee.save()
+
+        edit_url = '/chamber/%d/fee_structure/%d/edit/' % (
+            self.chamber.id, fee_structure.id)
+        response = self.client.get('/chamber/%d/fee_structures/' % (self.chamber.id,))
+        self.assertContains(response,
+                '<a href="%s">edit</a>' % (edit_url, )
+        )
+        response = self.client.get(edit_url)
+
+        self.assertContains(response, 'existing fee structure')
+        self.assertContains(response,
+                'value="100.0"',
+                count=len(self.get_fieldnames()) - 1
+        )
+        self.assertContains(response,
+                'value="N/A"',
+                count=1
+        )
+
+
+    def test_delete_existing_fee_structure(self):
+        fee_structure = self.create_fee_structure('fee structure for deletion')
+        delete_url = '/chamber/%d/fee_structure/%d/delete' % (
+            self.chamber.id, fee_structure.id)
+        fee_structures_url = '/chamber/%d/fee_structures/' % (self.chamber.id,)
+        response = self.client.get(fee_structures_url)
+        self.assertContains(response,
+                #'(<a href="%s">delete</a>)' % (delete_url, )
+                '<input type="submit" name="delete" value="Delete" />'
+        )
+        data = {'delete':'Delete'}
+        response = self.client.post(delete_url, data=data)
+        self.assertRedirects(response, fee_structures_url)
+        self.assertRaises(
+                FeeStructure.DoesNotExist,
+                FeeStructure.objects.get,
+                name='fee structure for deletion'
+        )
+
+
+    def test_copy_existing_fee_structure(self):
+        fee_structure = self.create_fee_structure('existing fee structure')
+        url = '/chamber/%d/fee_structure/%d/copy/' % (
+            self.chamber.id, fee_structure.id)
+
+        response = self.client.get('/chamber/%d/fee_structures/' % (self.chamber.id,))
+        self.assertContains(response,
+                '<a href="%s">copy</a>' % (url, )
+        )
+
+        response = self.client.get(url)
+        self.assertContains(response, 'existing fee structure (copy)')
+        self.assertContains(response,
+                'value="100.0"',
+                count=len(self.get_fieldnames())
+        )
+        self.assertTemplateUsed(response, 'pricing/chamber_fee_structure_edit.html')
+        data = self.get_data('copied fee structure', fee_amount=200)
+        response = self.client.post(url, data=data, follow=True)
+        self.assertRedirects(response,
+            '/chamber/%d/fee_structures/' % (self.chamber.id,)
+        )
+        FeeStructure.objects.get(name='copied fee structure')
+        self.assertContains(response, 'copied fee structure')
+
+
+
+
+    def test_cannot_edit_others_fee_structure(self):
+        fee_structure = self.create_fee_structure('my fee structure')
+        another_chamber = Chamber.objects.get(pk=12)
+        fee_structure.chamber = another_chamber
+        fee_structure.save()
+
+        response = self.client.get('/chamber/%d/fee_structure/%d/edit/' % (
+            self.chamber.id, fee_structure.id)
+        )
+        self.assertEquals(response.status_code, 404)
+
+
+
+class FeeStructureAssignmentTest(ChamberTestCase):
+    @patch('pricing.views.render_to_response')
+    def test_fee_structures_view(self, mock_render):
+        chamber_fee_structures(self.request, self.chamber.id)
+        (template, args), kwargs = mock_render.call_args_list[0]
+        self.assertEquals(template, 'pricing/chamber_fee_structures.html')
+        self.assertEquals(args['chamber'], self.chamber)
+        self.assertEquals(list(args['fee_structures']), list(FeeStructure.objects.filter(chamber=self.chamber)))
+        self.assertEquals(list(args['panels']), list(Panel.objects.all()))
+        self.assertEquals(list(args['courts']), list(Court.objects.all()))
+        self.assertTrue('form' in args)
+
+
+    def test_assigning_fee_structure_domains(self):
+        fee_structure_1 = FeeStructure(name='fs1', chamber=self.chamber)
+        fee_structure_1.save()
+        fee_structure_2 = FeeStructure(name='fs2', chamber=self.chamber)
+        fee_structure_2.save()
+
+        form = FeeStructureAssignmentForm(chamber=self.chamber)
+        data = {}
+        for fieldname in form.fields.keys():
+            data[fieldname] = str(fee_structure_1.id)
+
+        #add one mixed assignment
+        panel = Panel.objects.get(pk=3)
+        courts = panel.court_set.all()
+        data['panel-%d_assignment' % (panel.id, )] = 'M'
+        cycle = 1
+        for court in courts:
+            if cycle:
+                data['panel-%d_court-%d_assignment' % (panel.id, court.id)] = \
+                        str(fee_structure_1.id)
+                cycle = 0
+            else:
+                data['panel-%d_court-%d_assignment' % (panel.id, court.id)] = \
+                        str(fee_structure_2.id)
+                cycle = 1
+
+        #and one 'not applying'
+        panel = Panel.objects.get(pk=4)
+        courts = panel.court_set.all()
+        data['panel-%d_assignment' % (panel.id, )] = ''
+        for court in courts:
+            data['panel-%d_court-%d_assignment' % (panel.id, court.id)] = ''
+
+        response = self.client.post('/chamber/%d/fee_structures/' % (self.chamber.id),
+                data=data
+        )
+        self.assertRedirects(response, '/chamber/%d/fee_structures/'% (self.chamber.id))
+
+        set_panels = Panel.objects.all().exclude(pk=4).exclude(pk=3)
+        for panel in set_panels:
+            for court in panel.court_set.all():
+                self.assertEquals(
+                        len(FeeStructureAssignment.objects.filter(
+                            panel=panel,
+                            level_of_court=court,
+                            fee_structure=fee_structure_1)),
+                        1
+                )
+        panel = Panel.objects.get(pk=3)
+        courts = panel.court_set.all()
+        cycle = 1
+        for court in courts:
+            assignment = FeeStructureAssignment.objects.get(
+                    panel=panel, level_of_court=court)
+            if cycle:
+                self.assertEquals(assignment.fee_structure, fee_structure_1)
+                cycle = 0
+            else:
+                self.assertEquals(assignment.fee_structure, fee_structure_2)
+
+
+    def test_assignment_form_error_handling(self):
+        fee_structure_1 = FeeStructure(name='fs1', chamber=self.chamber)
+        fee_structure_1.save()
+        fee_structure_2 = FeeStructure(name='fs2', chamber=self.chamber)
+        fee_structure_2.save()
+
+        form = FeeStructureAssignmentForm(chamber=self.chamber)
+        data = {}
+        for fieldname in form.fields.keys():
+            data[fieldname] = str(fee_structure_1.id)
+        #invalid fee structures
+        panel = Panel.objects.get(pk=1)
+        data['panel-%d_assignment' % (panel.id, )] = '3'
+        courts = panel.court_set.all()
+        for court in courts:
+            data['panel-%d_court-%d_assignment' % (panel.id, court.id)] = '3'
+
+        panel = Panel.objects.get(pk=2)
+        data['panel-%d_assignment' % (panel.id, )] = 'not_a_pk'
+        courts = panel.court_set.all()
+        for court in courts:
+            data['panel-%d_court-%d_assignment' % (panel.id, court.id)] = 'not_a_pk'
+
+        #add inconsistent court assignment
+        panel = Panel.objects.get(pk=3)
+        courts = panel.court_set.all()
+        for court in courts:
+            data['panel-%d_court-%d_assignment' % (panel.id, court.id)] = \
+                        str(fee_structure_2.id)
+
+        #add 'not applying' with courts filled in
+        panel = Panel.objects.get(pk=4)
+        data['panel-%d_assignment' % (panel.id, )] = ''
+        courts = panel.court_set.all()
+        for court in courts:
+            data['panel-%d_court-%d_assignment' % (panel.id, court.id)] = \
+                        str(fee_structure_2.id)
+
+        #add 'mixed' when they're not
+        panel = Panel.objects.get(pk=5)
+        data['panel-%d_assignment' % (panel.id, )] = 'M'
+
+        form = FeeStructureAssignmentForm(chamber=self.chamber, data=data)
+        self.assertFalse(form.is_valid())
+        self.assertEquals(
+                form._errors['panel-1_assignment'],
+                ['Select a valid choice. 3 is not one of the available choices.']
+        )
+        self.assertEquals(
+                form._errors['panel-2_assignment'],
+                ['Select a valid choice. not_a_pk is not one of the available choices.']
+        )
+        self.assertEquals(
+                form._errors['panel-2_assignment'],
+                ['Select a valid choice. not_a_pk is not one of the available choices.']
+        )
+        self.assertEquals(
+                form._errors['panel-3_assignment'],
+                ['Court choices inconsistent']
+        )
+        self.assertEquals(
+                form._errors['panel-3_assignment'],
+                ['Court choices inconsistent']
+        )
+        self.assertEquals(
+                form._errors['panel-4_assignment'],
+                ['Court choices inconsistent']
+        )
+        self.assertEquals(
+                form._errors['panel-5_assignment'],
+                ['All court choices were the same']
+        )
+
+
+    def test_editing_existing_assignment(self):
+        fee_structure_1 = FeeStructure(name='fs1', chamber=self.chamber)
+        fee_structure_1.save()
+        panel1 = Panel.objects.get(pk=1)
+        assignment1 = FeeStructureAssignment()
+        assignment1.fee_structure = fee_structure_1
+        assignment1.panel = panel1
+        assignment1.save()
+        for court in panel1.court_set.all():
+            assignment = FeeStructureAssignment()
+            assignment.fee_structure = fee_structure_1
+            assignment.panel = panel1
+            assignment.level_of_court = court
+            assignment.save()
+
+        fee_structure_2 = FeeStructure(name='fs2', chamber=self.chamber)
+        fee_structure_2.save()
+        panel2 = Panel.objects.get(pk=2)
+        courts = panel2.court_set.all()
+        assignment = FeeStructureAssignment()
+        assignment.fee_structure = fee_structure_2
+        assignment.panel = panel2
+        assignment.save()
+        for court in courts:
+            assignment = FeeStructureAssignment()
+            assignment.fee_structure = fee_structure_2
+            assignment.panel = panel2
+            assignment.level_of_court = court
+            assignment.save()
+
+        form = FeeStructureAssignmentForm(chamber=self.chamber)
+        fieldname = form.get_field_name(panel=panel1)
+        self.assertEquals(form.initial[fieldname], fee_structure_1.id)
+
+        fieldname = form.get_field_name(panel=panel2)
+        self.assertEquals(form.initial[fieldname], fee_structure_2.id)
+        for court in courts:
+            fieldname = form.get_field_name(panel2, court)
+            self.assertEquals(form.initial[fieldname], fee_structure_2.id)
+
+        new_panel = Panel.objects.get(pk=5)
+        updated_data = form.initial
+        updated_data[form.get_field_name(new_panel)] = fee_structure_1.id
+        for court in new_panel.court_set.all():
+            updated_data[form.get_field_name(new_panel, court)] = fee_structure_1.id
+
+        for panel in Panel.objects.all():
+            if panel not in [panel1, panel2, new_panel]:
+                updated_data[form.get_field_name(panel)] = ''
+                for court in panel.court_set.all():
+                    updated_data[form.get_field_name(panel, court)] = ''
+
+        form = FeeStructureAssignmentForm(chamber=self.chamber, data=updated_data)
+        form.save()
+        self.assertEquals(
+            len(FeeStructureAssignment.objects.filter(
+                fee_structure=fee_structure_1, panel=new_panel, level_of_court=None)),
+            1
+        )
+
+
+    def test_convert_to_fees(self):
+        fee_structure = FeeStructure(name='fs1')
+        fee_structure.chamber = self.chamber
+        fee_structure.save()
+
+        assignment = FeeStructureAssignment(fee_structure=fee_structure)
+        assignment.panel = Panel.objects.get(pk=1)
+        assignment.level_of_court = assignment.panel.court_set.all()[0]
+
+        structured_fee1 = StructuredFee(fee_structure=fee_structure)
+        structured_fee1.fee_type = FeeType.objects.get(pk=1)
+        structured_fee1.type_of_work = WorkType.objects.get(pk=1)
+        structured_fee1.seniority = Seniority.objects.get(pk=1)
+        structured_fee1.fee = 10
+        structured_fee1.save()
+
+        structured_fee2 = StructuredFee(fee_structure=fee_structure)
+        structured_fee2.fee_type = FeeType.objects.get(pk=1)
+        structured_fee2.type_of_work = WorkType.objects.get(pk=2)
+        structured_fee2.seniority = Seniority.objects.get(pk=1)
+        structured_fee2.fee = None
+        structured_fee2.save()
+
+        self.assertEquals(Fee.objects.all().count(), 0)
+        assignment.convert_to_fees()
+        self.assertEquals(Fee.objects.all().count(), 1)
+        self.assertEquals(Fee.objects.get(
+            framework_panel=assignment.panel,
+            level_of_court=assignment.level_of_court,
+            fee_type = structured_fee1.fee_type,
+            seniority = structured_fee1.seniority,
+            type_of_work = structured_fee1.type_of_work,
+                            ).fee, 10)
+
+
+
+
+
+
+
+
+
+
+class DashboardTest(ChamberTestCase):
+    def test_dashboard_empty(self):
+        response = self.client.get('/chamber/%d/dashboard/' % (self.chamber.id, ))
+        self.assertContains(response, '<h1>Dashboard: %s</h1>' % (self.chamber.name))
+        self.assertContains(response,
+            'On this page you can see which sections you have entered data for and link to each of those sections.')
+        self.assertContains(response,
+            '<a href="/chamber/%d/contacts/enter/">Contact information</a>' % (
+                self.chamber.id, ))
+        self.assertContains(response,
+            '<a href="/chamber/%d/barristers/enter/">Barristers</a>'% (
+                self.chamber.id, ))
+        self.assertContains(response,
+            '<a href="/chamber/%d/fee_structures/">Fee Structures</a>'% (
+                self.chamber.id, ))
+        self.assertContains(response,
+            'Fee structures have not yet been assigned to framework panels and levels of court'
+        )
+
+
+    def make_barristers(self):
+        b1 = Barrister(first_name = 'Geoff', last_name = 'Smith', year_of_call=1984, is_qc=False)
+        b1.chamber = self.chamber
+        b1.save()
+        b1.set_panels(Panel.objects.all())
+        b1.save()
+        b2 = Barrister(first_name = 'Bartholomew', last_name = 'Smith', year_of_call=2000, is_qc=False)
+        b2.chamber = self.chamber
+        b2.save()
+        b2.set_panels(Panel.objects.filter(id__lt=8))
+        b2.save()
+        b3 = Barrister(first_name = 'Jane', last_name = 'Alburson', year_of_call=1977, is_qc=True)
+        b3.chamber = self.chamber
+        b3.save()
+        b3.set_panels(Panel.objects.filter(id__lt=8))
+        b3.save()
+        barristers = Barrister.objects.filter(chamber=self.chamber)
+        self.assertEquals(len(barristers), 3)
+        return barristers
+
+
+    def add_contacts(self):
+        chamber_contacts = Chamber_Contacts(**TestEnterChamberContacts.form)
+        chamber_contacts.chamber = self.chamber
+        chamber_contacts.save()
+        return Chamber_Contacts.objects.get(chamber=self.chamber)
+
+
+    def create_fee_structures(self, fee1=100, fee2=200):
+        fs1 = FeeStructure(name='fs1', chamber=self.chamber)
+        fs1.save()
+        fs2 = FeeStructure(name='fs2', chamber=self.chamber)
+        fs2.save()
+        for fee_type in FeeType.objects.all():
+            for worktype in WorkType.objects.filter(fee_type=fee_type):
+                for seniority in Seniority.objects.all():
+                    sfee1 = StructuredFee(fee_structure=fs1)
+                    sfee2 = StructuredFee(fee_structure=fs2)
+                    sfee1.type_of_work = worktype
+                    sfee2.type_of_work = worktype
+                    sfee1.fee_type = fee_type
+                    sfee2.fee_type = fee_type
+                    sfee1.seniority = seniority
+                    sfee2.seniority = seniority
+                    sfee1.fee = fee1
+                    sfee2.fee = fee2
+                    sfee1.save()
+                    sfee2.save()
+        fee_structures = FeeStructure.objects.filter(chamber=self.chamber)
+        self.assertEquals(len(fee_structures), 2)
+        return fee_structures
+
+
+    def assign_fee_structures(self):
+        fs1 = FeeStructure.objects.filter(chamber=self.chamber)[0]
+        fs2 = FeeStructure.objects.filter(chamber=self.chamber)[1]
+        for panel in Panel.objects.all():
+            if panel.id < 5:
+                for court in Court.objects.filter(panels=panel):
+                    fsa1_withcourt = FeeStructureAssignment(fee_structure=fs1)
+                    fsa1_withcourt.panel = panel
+                    fsa1_withcourt.level_of_court = court
+                    fsa1_withcourt.save()
+                fsa1 = FeeStructureAssignment(fee_structure=fs1)
+                fsa1.panel = panel
+                fsa1.level_of_court = None
+                fsa1.save()
+            elif panel.id < 10:
+                for court in Court.objects.filter(panels=panel):
+                    fsa2_withcourt = FeeStructureAssignment(fee_structure=fs2)
+                    fsa2_withcourt.panel = panel
+                    fsa2_withcourt.level_of_court = court
+                    fsa2_withcourt.save()
+                fsa2 = FeeStructureAssignment(fee_structure=fs2)
+                fsa2.panel = panel
+                fsa2.level_of_court = None
+                fsa2.save()
+            elif panel.id==10:
+                #partial
+                court = Court.objects.filter(panels=panel)[0]
+                fsa2_withcourt = FeeStructureAssignment(fee_structure=fs2)
+                fsa2_withcourt.panel = panel
+                fsa2_withcourt.level_of_court = court
+                fsa2_withcourt.save()
+                fsa2.save()
+
+    def assert_fees_now_in_database(self):
+        for seniority in Seniority.objects.all():
+            for fee_type in FeeType.objects.all():
+                for panel in Panel.objects.all():
+                    for court in Court.objects.filter(panels=panel):
+                        for type_of_work in WorkType.objects.filter(fee_type=fee_type):
+                            fees = Fee.objects.filter(
+                                    seniority=seniority,
+                                    fee_type=fee_type,
+                                    framework_panel=panel,
+                                    level_of_court=court,
+                                    type_of_work=type_of_work
+                            )
+                            if panel.id < 5:
+                                self.assertEquals(len(fees),1)
+                                self.assertEquals(fees[0].fee, 100)
+                            elif panel.id < 10:
+                                self.assertEquals(len(fees),1)
+                                self.assertEquals(fees[0].fee, 200)
+                            elif panel.id==10:
+                                if court == Court.objects.filter(panels=panel)[0]:
+                                    self.assertEquals(len(fees),1)
+                                    self.assertEquals(fees[0].fee, 200)
+                                else:
+                                    self.assertEquals(len(fees),0)
+                            else:
+                                self.assertEquals(len(fees),0)
+
+
+    def test_populate_and_final_submit_data(self):
+        barristers = self.make_barristers()
+        contacts = self.add_contacts()
+        fee_structures = self.create_fee_structures()
+        self.assign_fee_structures()
+        response = self.client.get('/chamber/%d/dashboard/' % (self.chamber.id, ))
+        self.assertContains(response,
+            'Contacts entered (email %s, postcode %s)' % (contacts.tender_contact_email, contacts.postcode)
+        )
+        self.assertContains(response,
+            'Details for %d barristers entered' %(len(barristers),)
+        )
+        self.assertContains(response,
+            '%d fee structure(s) entered' %(len(fee_structures),)
+        )
+        self.assertContains(response,
+            'Fee structures have been assigned to framework panels and levels of court'
+        )
+        for panel in Panel.objects.all():
+            if panel.id < 10:
+                coverage = 'Full'
+            elif panel.id == 10:
+                coverage = 'Partial'
+            else:
+                coverage = 'Not applying'
+            barristers_count = len(barristers.filter(panels=panel))
+            should_contain_text = '''<td>%s</td>
+            <td>%s</td>
+            <td>%d</td>''' % (
+                    panel.name,
+                    coverage,
+                    barristers_count )
+            self.assertContains(response, should_contain_text)
+        self.assertContains(response,
+                'Click here to submit your entry into the database. '
+                'You will then be able to preview the way consortium members will see your data.'
+        )
+        submit_url = '/chamber/%d/submit_fee_data' % (self.chamber.id,)
+        self.assertContains(response,
+            '<form method="POST" action="%s" >' % (submit_url,)
+        )
+        self.assertContains(response,
+            '<input type="submit" name="submit" value="SUBMIT" />'
+        )
+        response = self.client.post(submit_url, data={'submit':'Submit'}, follow=True)
+        self.assert_fees_now_in_database()
+        resubmit_response = self.client.post(submit_url, data={'submit':'Submit'}, follow=True)
+        self.assertEquals(resubmit_response.status_code, 200)
+
+
+    def test_previewing_client_views(self):
+        self.make_barristers()
+        self.add_contacts()
+        self.create_fee_structures()
+        self.assign_fee_structures()
+        submit_url = '/chamber/%d/submit_fee_data' % (self.chamber.id,)
+        self.client.post(submit_url, data={'submit':'Submit'}, follow=True)
+
+        self.previous_chamber = self.chamber
+        self.login_as_other_user()
+
+        self.chamber = self.other_chamber
+        self.make_barristers()
+        self.add_contacts()
+        self.create_fee_structures(50,150)
+        self.assign_fee_structures()
+
+        submit_url = '/chamber/%d/submit_fee_data' % (self.chamber.id,)
+        response = self.client.post(submit_url, data={'submit':'Submit'}, follow=True)
+
+        self.assertContains(response,
+                '<a href="/all_fees/">Fees table</a>')
+        self.assertContains(response,
+                '<a href="/chamber_contacts/">Chamber contacts</a>')
+        self.assertContains(response,
+                '<a href="/barristers/">Barristers</a>')
+        self.assertContains(response,
+                '<a href="/invoice_calculator/">Invoice checker</a>')
+
+        response = self.client.get('/all_fees/')
+        self.assertEquals(response.status_code, 200)
+        self.assertNotContains(response, self.previous_chamber.name)
+        response = self.client.get('/chamber_contacts/')
+        self.assertEquals(response.status_code, 200)
+        self.assertNotContains(response, self.previous_chamber.name)
+        response = self.client.get('/barristers/')
+        self.assertEquals(response.status_code, 200)
+        self.assertNotContains(response, self.previous_chamber.name)
+        response = self.client.get('/invoice_calculator/')
+        self.assertEquals(response.status_code, 200)
+        self.assertNotContains(response, self.previous_chamber.name)
+
+        #check dropdownfields work
+        response = self.client.get('/json/dropdownfields/')
+        self.assertEquals(response.status_code, 200)
+        response_dict = json.loads(response.content)
+        for str_id in response_dict['chamber']:
+            if str_id:
+                self.assertTrue(self.previous_chamber.id != int(str_id))
+
+
+class WorkflowTest(ChamberTestCase):
+    def test_all(self):
+        response = Client().get('')
+        self.assertContains(response, settings.SITE_NAME)
+        self.assertContains(response, 'Please log in to access the rest of the site')
+        #login as chamber, redirects to dashboard
+

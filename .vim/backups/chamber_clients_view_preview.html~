@@ -1,0 +1,20 @@
+{% extends 'pricing/base.html' %}
+{% block content %}
+
+<h2>Consortium data preview</h2>
+{% if submitted %}
+    <p>The following links allow you to see your data exactly as it will be seen by consortium users
+    (except the consortium users will see your data alongside other chambers')</p>
+    <ul>
+        <li><a href="{% url all_fees %}">Fees table</a></li>
+        <li><a href="{% url chamber_contacts %}">Chamber Contacts</a></li>
+        <li><a href="{% url barristers %}">Barristers</a></li>
+        <li><a href="{% url fee_calculator_new %}">Invoice checker</a></li>
+    </ul>
+{% else %}
+<p>You have not yet finalised your submission.
+Please return to the <a href="{%url chamber_dashboard chamber.id %}">Dashboard</a>
+</p>
+{% endif %}
+
+{% endblock %}

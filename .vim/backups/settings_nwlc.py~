@@ -1,0 +1,12 @@
+# Django settings for firstlaw01 project.
+# NB - modified settings file for NWLC
+# imports normal settings file, then overrides database settings
+
+from settings import *
+DATABASE_NAME = 'firstlaw_nwlc'             # Or path to database file if using sqlite3.
+
+TEMPLATE_DIRS = (
+    TEMPLATE_COMMON_DIR,
+)
+
+SITE_NAME = 'North West Legal Consortium Site'

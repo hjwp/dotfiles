@@ -1,0 +1,66 @@
+{% extends "pricing/base_calculators.html" %}
+{% load currency %}
+
+{% block htmlhead %}{{block.super}}
+{% comment %}
+<script type="text/javascript" src="/site_media/js/feecalculator_totals_lookup.js"></script> 
+{% endcomment %}
+{% endblock htmlhead %}
+
+{% block content %}
+  <h2>Invoice Checker Setup</h2>
+  {% if formset %}  
+  <form action="" method="post" class="lookup_form">
+  	<div class="hidden">{{ formset.management_form }}</div>
+    <table width="90%" border="1" summary="invoice checker table with rows of dropwdowns to lookup a fee">
+      {% for form in formset.forms %}
+
+		{% if forloop.first %}
+		<thead>
+        <tr>
+	    	{% for fieldname, verbose in form.table_headers %}
+	      		<th>
+		  			<span class="afield" style="display: none;">{{fieldname}}</span>
+		  			{{verbose}}
+	      		</th>
+	    	{% endfor %}
+			<th>Update</th>
+			<th>Base Fee</th>
+			<th>Line total</th>
+		</tr>
+		</thead>
+		<tbody>
+	  	{% endif %}
+		
+        <tr class="{% cycle 'row1' 'row2' %}">
+        	{% for table_field, verbose in form.table_headers %}
+          		{% for field in form.visible_fields %}
+					{% ifequal table_field field.name %}  
+            			<td>{{field}}{{field.errors}}</td>
+					{% endifequal %}
+				{% endfor %}
+          	{% endfor %}
+		    <td><input type="submit" value="Go" /></td>
+		    <td class="fcFeeCell">{{form.fee.fee}}</td>
+		    <td class="fcLineTotalCell">{{form.total|currency}}</td>
+        </tr>
+		
+      {% endfor %}
+      <tr class="totalRow">
+		<td colspan="9">Overall Total:</td>
+		<td colspan="1"><strong>{{formset.total|currency}}</strong></td>
+      </tr>
+	  </tbody>
+    </table>
+	<p>
+		See what others would charge: 
+        {% if chamber_user %}
+            <input type="submit" disabled="disabled" name="view_as_fc" value="View as Fee Comparison" />
+            <em>(disabled for Chamber users)</em>
+        {% else %}
+            <input type="submit" name="view_as_fc" value="View as Fee Comparison" />
+        {% endif %}
+	</p>
+  </form>
+  {% endif %}
+{% endblock content %}

@@ -1,0 +1,118 @@
+{% extends 'pricing/base.html' %}
+{% load getattribute %}
+{% block content %}
+
+<h1>Dashboard: {{chamber}}</h1>
+<p>On this page you can see which sections you have entered data for and link to each of those sections.</p>
+
+<table width="75%" border="1" summary="fee structures">
+    <thead>
+        <tr>
+            <th>Information</th>
+            <th>Complete?</th>
+        </tr>
+    </thead>
+    <tbody>
+        <td>
+            <a href="{% url chamber_contacts_enter chamber.id %}">Contact information</a>
+        </td>
+        <td>
+        {% for contact in contacts %}
+        <span class="good">Contacts entered (email {{contact.tender_contact_email}}, postcode {{contact.postcode}})</span>
+        {% empty %}
+        <span class="bad">No contact information entered yet</span>
+        {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="{% url chamber_barristers_enter chamber.id %}">Barristers</a>
+        </td>
+        <td>
+        {% if barristers %}
+        <span class="good">Details for {{barristers|length}} barristers entered</span>
+        {% else %}
+        <span class="bad">No barristers entered yet</span>
+        {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="{% url chamber_fee_structures chamber.id %}">Fee Structures</a>
+        </td>
+        <td>
+        {% if fee_structures %}
+        <span class="good">{{fee_structures|length}} fee structure(s) entered</span>
+        {% else %}
+        <span class="bad">No fee structures entered yet</span>
+        {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="{% url chamber_fee_structures chamber.id %}">Fee Structures assignments</a>
+        </td>
+        <td>
+        {% if assignments %}
+        <span class="good">Fee structures have been assigned to framework panels and levels of court</span>
+        {% else %}
+        <span class="bad">Fee structures have not yet been assigned to framework panels and levels of court</span>
+        {% endif %}
+        </td>
+    </tr>
+    <tr>
+    {% if submitted %}
+        <td>
+            <a href="{% url chamber_clients_view_preview chamber.id %}">Client views preview</a>
+        </td>
+        <td>
+            <span class="good">Preview the way your data will look to client users</span>
+        </td>
+    {% else %}
+        <td>
+            <a href="#id_submission_section">Finalise and submit</a>
+        </td>
+        <td>
+            <span class="bad">You need to finalise and submit your data to finish</span>
+        </td>
+    {% endif %}
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Fee Structure and Barrister assignments by Framework Panel:<h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Panel</th>
+            <th>Fee Structure Coverage</th>
+            <th>Barristers</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for panel in panels %}
+        <tr class="{% cycle 'row1' 'row2' %}">
+            <td>{{panel}}</td>
+            <td>{{panel_assignments|getattribute:panel}}</td>
+            <td>{{panel_barristers|getattribute:panel|length}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if assignments and barristers and contacts %}
+<h3 id="id_submission_section">Submission</h3>
+    <form method="POST" action="{% url chamber_submit_fee_data chamber.id %}" >
+    {% if submitted %}
+        <p>You have already submitted your data. You may re-submit if you have made any changes</p>
+        <input type="submit" name="submit" value="UPDATE" />
+    {% else %}
+        <p>Click here to submit your entry into the database. You will then be able to preview the way consortium members will see your data.</p>
+        <input type="submit" name="submit" value="SUBMIT" />
+    {% endif %}
+    </form>
+{% endif %}
+
+{% endblock %}

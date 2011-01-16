@@ -1,0 +1,57 @@
+{% extends "pricing/base.html" %}
+
+{% block content %}
+{% load getattribute %}
+
+ <h2>Enter new Fee Structure</h2>
+
+<form action="" method="POST" >
+    <p>
+        <em>Fee Structure Name: </em>
+        {% for field in form %}
+        {% if field.name == 'name' %}
+            {{field}}
+        {% endif %}
+        {% endfor %}
+    </p>
+
+{% for fee_type in fee_types %}
+  <h3>{{fee_type}}s</h2>
+  <table border="1" summary="fee structure table">
+  	<thead>
+    <tr>
+    	<th>Seniority</th>
+    	{% for worktype in worktypes%}
+  	    {% if worktype.fee_type = fee_type %}
+            <th>{{worktype}}</th>
+          {%endif%}
+    	{%endfor%}
+	</tr>
+	</thead>
+	<tbody>
+	  {%for seniority in seniorities%}
+	     <tr>
+               <th>{{seniority}}</th>
+                  {% for type_of_work in worktypes %}
+                  {% if type_of_work.fee_type = fee_type %}
+                  <td>
+                      {% for field in form %}
+                        {% if field.field.seniority == seniority and field.field.type_of_work == type_of_work and field.field.fee_type == fee_type %}
+                        {{field.errors}}£ {{field}}
+                        {% endif %}
+                      {% endfor %}
+                  </td>
+                  {%endif%}
+                  {%endfor%}
+	    </tr>
+         {%endfor%}
+	 </tbody>
+  </table>
+{%endfor%}
+ 
+<p>
+  <input type="submit" value="Submit" />
+</p>
+ </form>
+
+{% endblock content %}

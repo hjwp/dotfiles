@@ -1,0 +1,43 @@
+{% extends "pricing/base.html" %}
+
+{% block content %}
+<h2>{{chamber}} Barristers Names</h2>
+
+{% include 'pricing/barristers_list.html' %}
+
+<h3>Enter New Barrister</h3>
+{% if form %}
+    <form action="" method="POST" >
+    <table width="75%" border="1" summary="fixed fees">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Year of Call</th>
+                <th>QC?</th>
+                <th>Panels</th>
+                <th>Add</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <form action="" method="POST" >
+            {% for field in form%}
+                <td>{{field.errors}}{{field}}</td>
+            {%endfor%}
+            <td>
+            {% if modify %}
+                <input type="hidden" name="barrister_id" value="{{barrister_to_modify.id}}" />
+                <input type="hidden" name="update" value="update" />
+                <input type="submit" value="Modify" />
+            {% else %}
+                <input type="submit" value="Add" />
+            {% endif %}
+            </td>
+        </tr>
+     </tbody>
+  </table>
+  </form>
+{%endif%}
+
+{% endblock content %}

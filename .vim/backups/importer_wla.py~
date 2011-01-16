@@ -1,0 +1,14 @@
+'''
+Created on 1 Jan 2010
+
+@author: Harry. based on http://snippets.dzone.com/posts/show/7410
+'''
+import os
+import pricing.importer
+data_folder = os.path.join(
+        os.path.abspath(os.path.curdir),
+        'pricing','source_data','wla')
+pricing.importer.import_for(settings_module_name='settings', 
+                            settings_module_folder='.', 
+                            source_data_folder=data_folder, 
+                            do_method_statments=False)

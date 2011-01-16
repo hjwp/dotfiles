@@ -1,0 +1,23 @@
+{% extends "pricing/base_parameters.html" %}
+{% load getattribute %}
+
+
+{% block content %}
+<h1>Average fees by panel</h1>
+{%for lawyer_type in lawyer_types %}
+    <h2>{{lawyer_type}}</h2>
+    {%for fee_type in fee_types %}
+        {% if fee_type.professional_type == lawyer_type %}
+            <h3>{{fee_type}}</h3>
+            <ul>
+                {%for panel in panels %}
+                    {% if panel.professional_type == lawyer_type %}
+                        <li><a href="{%url panel_average_fees panel fee_type %}">{{panel}}</a></li>
+                    {% endif %}
+                {% endfor %}
+        {% endif %}
+        </ul>
+    {% endfor %}
+{% endfor %}
+
+{% endblock %}
