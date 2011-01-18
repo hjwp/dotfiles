@@ -1,10 +1,12 @@
 syntax: glob
 *.pyc
+.vim\ftplugin\python\pyflakes\pyflakes\*.pyc
 .ctags
 .org.eclipse.epp.usagedata.recording.userId
 .PyCharm10
 .vim-fuf-data
 .vimrc
+_viminfo
 AppData
 Contacts
 Desktop
