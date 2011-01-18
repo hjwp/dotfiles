@@ -1,5 +1,0 @@
-<ul>
-    <li><a href="{% url all_fees %}">All Fees</a></li>
-    <li><a href="{% url fixed_fees %}">Fixed Fees</a></li>
-    <li><a href="{% url hourly_fees %}">Hourly Fees</a></li>
-</ul>
