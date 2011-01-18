@@ -1,7 +1,0 @@
-"id","name","sort_order","min","max"
-1,"0-1 year call",1,0,1
-2,"1-5 years call",2,2,5
-3,"6-10 years call",3,6,10
-4,"11-20 years call",4,11,19
-5,"20+ years call",5,20,100
-6,"Queen's Counsel",6,0,100

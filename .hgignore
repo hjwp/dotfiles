@@ -1,0 +1,25 @@
+syntax: glob
+*.pyc
+.ctags
+.org.eclipse.epp.usagedata.recording.userId
+.PyCharm10
+.vim-fuf-data
+.vimrc
+AppData
+Contacts
+Desktop
+Documents
+Downloads
+Favorites
+hgignore2
+Links
+Music
+Pictures
+Saved Games
+Searches
+Videos
+vimperator
+NTUSER.*
+ntuser.*
+.vim/backups
+.vim\backups
