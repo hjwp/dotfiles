@@ -1,3 +1,8 @@
 [ui]
 username = Harry Percival <hjwp2@cantab.net>
 
+[paths]
+default-push = https://hjwp@bitbucket.org/hjwp/vim
+default-pull = https://hjwp@bitbucket.org/hjwp/vim
+
+
