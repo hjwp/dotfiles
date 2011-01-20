@@ -1,38 +1,40 @@
-syntax: glob
-*.pyc
-.vim\ftplugin\python\pyflakes\pyflakes\*.pyc
-.ctags
+.hgrc.swp
+.idlerc
 .org.eclipse.epp.usagedata.recording.userId
 .PyCharm10
-.vim-fuf-data
-.vimrc
-_viminfo
+.recently-used.xbel
 AppData
+Application Data
+build
 Contacts
+Cookies
+data source=foo22.db
 Desktop
 Documents
-Downloads
 Favorites
-hgignore2
+first_attempts.db3
+foo.db3
+g2mdlhlpx.exe
 Links
+Local Settings
+msvccompiler.bak
 Music
-Pictures
-Saved Games
-Searches
-Videos
-vimperator
+My Documents
+NetHood
 NTUSER.*
 ntuser.*
-.vim/backups
-.vim\backups
-Templates
-Start Menu
-SendTo
-Recent
+ntuser.ini
+Pictures
 PrintHood
-NetHood
-My Documents
-Local Settings
-Cookies
-Application Data
-
+Recent
+Saved Games
+Searches
+SendTo
+sqlite_testdb
+Start Menu
+Templates
+Thumbs.db
+Videos
+workspace
+workspace.lnk
+_viminfo
