@@ -1,83 +1,49 @@
 syntax: glob
 *.pyc
-.vim\ftplugin\python\pyflakes\pyflakes\*.pyc
-.ctags
-.org.eclipse.epp.usagedata.recording.userId
+.DownloadManager
+.ICEauthority
 .PyCharm10
-.vim-fuf-data
-.vimrc
-_viminfo
-AppData
-Contacts
-Desktop
-Documents
-Downloads
-Favorites
-hgignore2
-Links
-Music
-Pictures
-Saved Games
-Searches
-Videos
-vimperator
-NTUSER.*
-ntuser.*
-.vim/backups
-.vim\backups
+.PyCharm10
+.Skype
+.VirtualBox
+.WorkBench
 .adobe
-alien.rip
 .aptanasecure
-asthelper.completions
 .audacity-data
-Audiobooks
 .bash_history
 .bash_logout
 .bashrc
 .bbtether.conf
-bbtether.tgz
 .bogofilter
 .cache
 .camel_certs
-caplin.txt
 .chromium-bsu
 .compiz
 .compiz-gnomecompat
 .config
+.ctags
 .dbus
-Desktop
-DJ K - Killa Records Podcast
 .dmrc
-Documents
 .dosbox
-.DownloadManager
-Downloads
 .dropbox
-Dropbox
 .dropbox-dist
 .dropbox-dist-new
 .dvdcss
 .dvdrip
 .dvdriprc
 .eclipse
-EF0F537E-F098-B213-121B-73246756996B.pdf
 .emacs.d
 .esd_auth
 .evolution
-examples.desktop
 .face
-fee_comparison_view.html~
 .filezilla
 .fontconfig
 .fonts
 .fonts.conf
 .fonts.conf~
-FRConditionsofEntry.pdf
-frogg
 .gconf
 .gconfd
 .gegl-0.0
-get_passwds.py
 .gimp-2.6
 .gitconfig
 .gitk
@@ -85,107 +51,144 @@ get_passwds.py
 .gnome2
 .gnome2_private
 .gnupg
-google-talkplugin_current_amd64.deb
 .gpilotd
 .gpilotd.pid
 .gstreamer-0.10
 .gtk-bookmarks
 .gvfs
-_gvimrc
 .gvimrc
 .hg
-_hgignore
 .hgignore
 .hgrc
-Hospital Records Podcast
 .hplip
-hs_err_pid2235.log
-hs_err_pid2655.log
-hs_err_pid3428.log
-hs_err_pid4535.log
-.ICEauthority
 .icons
-installer2
 .java
-jesus_shaves.pdf
 .kde
-Kniteforce Podcast
 .lesshst
 .libvirt
-list_python_packages.py
-list_python_packages.pyc
 .local
-login.html
-logout.html
 .macromedia
 .mandvdrc
 .mission-control
 .mozilla
 .mplayer
-Music
-My Backpack Notes
-
-.mysqlgui
 .mysql_history
+.mysqlgui
 .nautilus
-new.txt
-Next Generation Records Hardcore Podcast
-noise.dat
-nwlc_broke.zip
-NWLC User Interface Specification 1.0 (with comments and tracking).pdf
 .openoffice.org
-Pictures
+.org.eclipse.epp.usagedata.recording.userId
 .pip
 .pki
-Podcasts
-pricing.zip
 .printer-groups.xml
 .profile
-Public
 .pulse
 .pulse-cookie
 .putty
-.PyCharm10
-PYSMELLTAGS.pymodules
-PYSMELLTAGS.stdlib
 .qt
 .recently-used
 .recently-used.xbel
 .sane
-settings n stuff
-.Skype
 .ssh
 .subversion
 .subversion_IDEA
 .sudo_as_admin_successful
-svn_firstlaw2.zip
-T&Cs-conditionsofsale.pdf
 .teamviewer
-temp
-Templates
 .themes
 .thumbnails
-tmp
 .torcs
-Tricostar Non Disclosure Agreement.pdf
-Ubuntu One
 .uml
 .update-manager-core
 .update-notifier
-Videos
-views (1).py
-views.py
 .vim-fuf-data
+.vim-fuf-data
+.vim/backups
+.vim\backups
+.vim\ftplugin\python\pyflakes\pyflakes\*.pyc
 .viminfo
-.virtinst
+.vimrc
 .virt-manager
-.VirtualBox
+.virtinst
 .wine
 .winetrickscache
-.WorkBench
-workspace
 .wvdial.conf
 .xsession-errors
 .xsession-errors.old
+AppData
+Application Data
+Audiobooks
+Contacts
+Cookies
+DJ K - Killa Records Podcast
+Desktop
+Documents
+Downloads
+Dropbox
+EF0F537E-F098-B213-121B-73246756996B.pdf
+FRConditionsofEntry.pdf
+Favorites
+Hospital Records Podcast
+Kniteforce Podcast
+Links
+Local Settings
+Music
+Music
+My Backpack Notes
+My Documents
+NTUSER.*
+NWLC User Interface Specification 1.0 (with comments and tracking).pdf
+NetHood
+Next Generation Records Hardcore Podcast
+PYSMELLTAGS.pymodules
+PYSMELLTAGS.stdlib
+Pictures
+Podcasts
+PrintHood
+Public
+Recent
+Saved Games
+Searches
+SendTo
+Start Menu
+T&Cs-conditionsofsale.pdf
+Templates
+Tricostar Non Disclosure Agreement.pdf
+Ubuntu One
+Videos
+Videos
+_gvimrc
+_hgignore
+_viminfo
+alien.rip
+asthelper.completions
+bbtether.tgz
+caplin.txt
+examples.desktop
+fee_comparison_view.html~
+frogg
+get_passwds.py
+google-talkplugin_current_amd64.deb
+hgignore2
+hs_err_pid2235.log
+hs_err_pid2655.log
+hs_err_pid3428.log
+hs_err_pid4535.log
+installer2
+jesus_shaves.pdf
+list_python_packages.py
+list_python_packages.pyc
+login.html
+logout.html
+new.txt
+noise.dat
+ntuser.*
+nwlc_broke.zip
+pricing.zip
+settings n stuff
+svn_firstlaw2.zip
+temp
+tmp
+views (1).py
+views.py
+vimperator
+workspace
 zero.trf
-
