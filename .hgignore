@@ -106,6 +106,8 @@ syntax: glob
 .vim/backups
 .vim\backups
 .vim\ftplugin\python\pyflakes\pyflakes\*.pyc
+.vim\.netrwhist
+.vim/.netrwhist
 .viminfo
 .vimrc
 .virt-manager
