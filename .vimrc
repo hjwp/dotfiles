@@ -107,10 +107,24 @@ set expandtab
 " always show status line
 set laststatus=2
 " custom status line
-set statusline=%<%f\ %r%1*%M%*\ %=\ buf\ %n\ %c,%l/%L\ %p%%
+set statusline=
+set statusline+=%<\                           " truncate over-long text here
+set statusline+=%f\                           " filename, relative to cwd
+set statusline+=%1*%M%*\                      " modified flag in usercolor1
+set statusline+=%#StatusLine#\                " restore color
+set statusline+=%R%W\                         " read-only & preview flag
+set statusline+=buf%n\                        " buffer number
+set statusline+=%{strlen(&ft)?&ft:'none'}\    " filetype
+set statusline+=%{strlen(&fenc)?&fenc:&enc}\  " encoding
+set statusline+=%{&ff}\                       " fileformat (line endings)
+set statusline+=%=\                           " right-align
+set statusline+=%b,0x%02B\                    " current char
+set statusline+=%c,%l/                        " column,line/
+set statusline+=%L\                           " lines in file
+set statusline+=%P                            " percent through file
+
 " line numbers
 set number
-
 
 " show search matches as the search pattern is typed
 set incsearch
