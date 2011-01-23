@@ -133,6 +133,8 @@ map <bs> :noh<CR>
 
 " grep for word under cursor
 map <Leader>g :grep -rw '<C-r><C-w>' .<CR>
+" stop pyflakes from polluting the copen quickfix pane
+let g:pyflakes_use_quickfix = 0
 " map F3 to search jump thru grep results from copen
 map <F3> :cnext<CR>
 
