@@ -25,6 +25,22 @@ set scrolloff=3
 " Make searches case-sensitive only if they contain upper-case characters
 set ignorecase
 set smartcase
+" show search matches as the search pattern is typed
+set incsearch
+" search-next wraps back to start of file
+set wrapscan
+" highlight last search matches
+set hlsearch
+" map key to dismiss search highlightedness
+map <bs> :noh<CR>
+
+" grep for word under cursor
+map <Leader>g :grep -rw '<C-r><C-w>' .<CR>
+" stop pyflakes from polluting the copen quickfix pane
+let g:pyflakes_use_quickfix = 0
+" map F3 to search jump thru grep results from copen
+map <F3> :cnext<CR>
+
 
 " map cut & paste to what they bloody should be
 vnoremap <C-c> "+y
@@ -33,6 +49,12 @@ map <C-v> "+gP
 
 " ctrl-s to save
 map <C-s> :w<CR>
+
+" map sudo-write-file to w!! in command line
+cmap w!! %!sudo tee > /dev/null %
+
+"remap jj to escape in insert mode.
+inoremap jj <Esc>
 
 " make tab completion for files/buffers act like bash
 set wildmenu
@@ -54,10 +76,6 @@ set cursorline
 " display number of selected chars, lines, or size of blocks.
 set showcmd
 
-" highlight last search matches
-set hlsearch
-" search-next wraps back to start of file
-set wrapscan
 
 " show matching brackets, etc, for 1/10th of a second
 set showmatch
@@ -93,6 +111,27 @@ else
 
 endif " has("autocmd")
 
+"json...
+au! BufRead,BufNewFile *.json setfiletype json
+au! Syntax json source ~/.vim/syntax/json.vim
+
+
+" window size
+if has("gui_running")
+  " GUI is running or is about to start.
+  " Maximize gvim window.
+  set lines=999 columns=999
+else
+  " This is console Vim.
+  if exists("+lines")
+    set lines=50
+  endif
+  if exists("+columns")
+    set columns=100
+  endif
+endif
+
+
 " sane text files
 set fileformat=unix
 set encoding=utf-8
@@ -126,18 +165,6 @@ set statusline+=%P                            " percent through file
 " line numbers
 set number
 
-" show search matches as the search pattern is typed
-set incsearch
-" map key to dismiss search highlightedness
-map <bs> :noh<CR>
-
-" grep for word under cursor
-map <Leader>g :grep -rw '<C-r><C-w>' .<CR>
-" stop pyflakes from polluting the copen quickfix pane
-let g:pyflakes_use_quickfix = 0
-" map F3 to search jump thru grep results from copen
-map <F3> :cnext<CR>
-
 " when joining lines, don't insert two spaces after punctuation
 set nojoinspaces
 
@@ -160,9 +187,6 @@ set clipboard+=unnamed
 syntax on
 "make sure highlighting works all the way down long files
 autocmd BufEnter * :syntax sync fromstart
-"json...
-au! BufRead,BufNewFile *.json setfiletype json
-au! Syntax json source ~/.vim/syntax/json.vim
 " places to look for tags files:
 set tags=./tags,tags
 " recursively search file's parent dirs for tags file
@@ -179,21 +203,14 @@ map <f11> :!pysmell .<cr>
 inoremap <c-space> <c-n>
 inoremap <c-s-space> <c-p>
 
-"remap jj to escape in insert mode.
-inoremap jj <Esc>
-
-
-
 " files to hide in directory listings
 let g:netrw_list_hide='\.py[oc]$,\.svn/$,\.git/$,\.hg/$'
+
 " I don't like folded regions
 set nofoldenable
-" map sudo-write-file to w!!
-cmap w!! %!sudo tee > /dev/null %
 
 
 " fuzzyfind plugin
-
 let s:extension = '\.bak|\.dll|\.exe|\.o|\.pyc|\.pyo|\.swp|\.swo'
 let s:dirname = 'build|deploy|dist|vms|\.bzr|\.git|\.hg|\.svn|.+\.egg-info'
 
