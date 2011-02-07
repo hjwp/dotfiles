@@ -33,6 +33,7 @@ map <C-v> "+gP
 
 " ctrl-s to save
 map <C-s> :w<CR>
+map! <C-s> <Esc>:w<CR>
 
 " make tab completion for files/buffers act like bash
 set wildmenu
