@@ -49,6 +49,7 @@ map <C-v> "+gP
 
 " ctrl-s to save
 map <C-s> :w<CR>
+map! <C-s> <Esc>:w<CR>
 
 " map sudo-write-file to w!! in command line
 cmap w!! %!sudo tee > /dev/null %
