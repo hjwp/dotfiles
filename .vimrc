@@ -34,6 +34,8 @@ set hlsearch
 " map key to dismiss search highlightedness
 map <bs> :noh<CR>
 
+" set grep to be grep, better have cygwin installed & on the path!
+set grepprg=grep\ -n\ --exclude=*.pyc\ --exclude=tags
 " grep for word under cursor
 map <Leader>g :grep -rw '<C-r><C-w>' .<CR>
 " stop pyflakes from polluting the copen quickfix pane
