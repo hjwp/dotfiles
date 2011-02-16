@@ -43,7 +43,7 @@ function! s:JslConfig()
     endif
     return (! empty(l:configFilespec) && filereadable(l:configFilespec) ? ' -conf "' . l:configFilespec . '"' : '')
 endfunction
-execute 'CompilerSet makeprg=jsl\ -nologo\ -nofilelisting\ -nosummary' .  escape(s:JslConfig(), ' "\') . '\ $*\ -process\ $*\ \"%\"'
+execute 'CompilerSet makeprg=jsl\ --nologo\ --nofilelisting\ --nosummary' .  escape(s:JslConfig(), ' "\') . '\ $*\ $*\ \"%\"'
 unlet s:scriptDir
 
 " sample output: 
