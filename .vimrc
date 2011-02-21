@@ -37,7 +37,7 @@ map <bs> :noh<CR>
 " set grep to be grep, better have cygwin installed & on the path!
 set grepprg=grep\ -n\ --exclude=*.pyc\ --exclude=tags
 " grep for word under cursor
-map <Leader>g :grep -rw '<C-r><C-w>' .<CR>
+noremap <Leader>g :grep -rw '<C-r><C-w>' .<CR>
 " stop pyflakes from polluting the copen quickfix pane
 let g:pyflakes_use_quickfix = 0
 " map F3 to search jump thru grep results from copen
