@@ -135,8 +135,8 @@ else
 endif
 
 
-" sane text files
-set fileformat=unix
+" sane file formats
+set fileformats=unix,dos
 set encoding=utf-8
 
 " sane editing
@@ -146,24 +146,83 @@ set softtabstop=4
 
 " convert all typed tabs to spaces
 set expandtab
-" always show status line
-set laststatus=2
+
+"==============STATUS LINE OF DEATH======================
 " custom status line
 set statusline=
-set statusline+=%<\                           " truncate over-long text here
-set statusline+=%f\                           " filename, relative to cwd
-set statusline+=%1*%M%*\                      " modified flag in usercolor1
-set statusline+=%#StatusLine#\                " restore color
-set statusline+=%R%W\                         " read-only & preview flag
-set statusline+=buf%n\                        " buffer number
-set statusline+=%{strlen(&ft)?&ft:'none'}\    " filetype
-set statusline+=%{strlen(&fenc)?&fenc:&enc}\  " encoding
-set statusline+=%{&ff}\                       " fileformat (line endings)
-set statusline+=%=\                           " right-align
-set statusline+=%b,0x%02B\                    " current char
-set statusline+=%c,%l/                        " column,line/
-set statusline+=%L\                           " lines in file
-set statusline+=%P                            " percent through file
+" filename, relative to cwd
+set statusline+=%f
+" separator
+set statusline+=\ 
+
+" modified flag
+set statusline+=%#wildmenu#
+set statusline+=%m
+set statusline+=%*
+
+"Display a warning if file encoding isnt utf-8
+set statusline+=%#question#
+set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
+set statusline+=%*
+
+"display a warning if fileformat isnt unix
+set statusline+=%#warningmsg#
+set statusline+=%{&ff!='unix'?'['.&ff.']':''}
+set statusline+=%*
+
+"display a warning if &et is wrong, or we have mixed-indenting
+set statusline+=%#warningmsg#
+set statusline+=%{StatuslineTabWarning()}
+set statusline+=%*
+
+" read-only
+set statusline+=%r
+set statusline+=%*
+
+" right-align
+set statusline+=%=
+
+" filetype
+set statusline+=%{strlen(&ft)?&ft:'none'}
+" separator
+set statusline+=\ 
+
+" current char
+set statusline+=%3b,0x%02B
+" separator
+set statusline+=\ 
+
+" column,
+set statusline+=%2c,
+" current line / lines in file
+set statusline+=%l/%L
+" separator
+set statusline+=\ 
+
+" percent through file
+set statusline+=%P
+
+" always show status line
+set laststatus=2
+
+" return '[tabs]' if tab chars in file, or empty string
+function! StatuslineTabWarning()
+    if !exists("b:statusline_tab_warning")
+        let tabs = search('^\t', 'nw') != 0
+
+        if tabs
+            let b:statusline_tab_warning = '[tabs]'
+        else
+            let b:statusline_tab_warning = ''
+        endif
+    endif
+    return b:statusline_tab_warning
+endfunction
+"recalculate the tab warning flag when idle and after writing
+autocmd cursorhold,bufwritepost * unlet! b:statusline_tab_warning
+
+"==============/STATUS LINE OF DEATH======================
+
 
 " line numbers
 set number
