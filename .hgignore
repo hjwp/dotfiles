@@ -15,6 +15,7 @@ syntax: glob
 .bash_logout
 .bashrc
 .bbtether.conf
+.boto
 .bogofilter
 .cache
 .camel_certs
@@ -64,6 +65,7 @@ syntax: glob
 .hplip
 .icons
 .idlerc
+.japplis
 .java
 .kde
 .lesshst

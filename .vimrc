@@ -34,6 +34,9 @@ set hlsearch
 " map key to dismiss search highlightedness
 map <bs> :noh<CR>
 
+" use 'comma' prefix for multi-stroke keyboard mappings
+let mapleader = ","
+
 " set grep to be grep, better have cygwin installed & on the path!
 set grepprg=grep\ -n\ --exclude=*.pyc\ --exclude=tags
 " grep for word under cursor
@@ -58,6 +61,9 @@ cmap w!! %!sudo tee > /dev/null %
 
 "remap jj to escape in insert mode.
 inoremap jj <Esc>
+
+" remap F1 so that it no longer annoyingly pops up the help menu
+inoremap <F1> <Esc>
 
 " make tab completion for files/buffers act like bash
 set wildmenu
@@ -84,8 +90,6 @@ set showcmd
 set showmatch
 set matchtime=1
 
-" use 'comma' prefix for multi-stroke keyboard mappings
-let mapleader = ","
 
 " enables filetype specific plugins
 filetype plugin on
