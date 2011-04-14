@@ -1,11 +1,13 @@
 syntax: glob
-*\*.pyc
 */*.pyc
+*\*.pyc
 _ipython
 .DownloadManager
 .ICEauthority
 .PyCharm10
 .PyCharm10
+.RData
+.Rhistory
 .Skype
 .VirtualBox
 .WorkBench
@@ -92,11 +94,13 @@ _ipython
 .qt
 .recently-used
 .recently-used.xbel
+.rstudio-desktop
 .sane
 .ssh
 .subversion
 .subversion_IDEA
 .sudo_as_admin_successful
+.supertuxkart
 .teamviewer
 .themes
 .thumbnails
@@ -106,11 +110,11 @@ _ipython
 .update-notifier
 .vim-fuf-data
 .vim-fuf-data
+.vim/.netrwhist
 .vim/backups
+.vim\.netrwhist
 .vim\backups
 .vim\ftplugin\python\pyflakes\pyflakes\*.pyc
-.vim\.netrwhist
-.vim/.netrwhist
 .viminfo
 .vimrc
 .virt-manager
@@ -170,6 +174,7 @@ alien.rip
 asthelper.completions
 bbtether.tgz
 caplin.txt
+chronotank*
 data source=foo22.db
 examples.desktop
 fee_comparison_view.html~
@@ -206,4 +211,5 @@ views.py
 vimperator
 workspace
 workspace.lnk
+workspace_ntfs
 zero.trf
