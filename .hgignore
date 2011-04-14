@@ -97,6 +97,7 @@ syntax: glob
 .subversion
 .subversion_IDEA
 .sudo_as_admin_successful
+.supertuxkart
 .teamviewer
 .themes
 .thumbnails
@@ -170,6 +171,7 @@ alien.rip
 asthelper.completions
 bbtether.tgz
 caplin.txt
+chronotank*
 data source=foo22.db
 examples.desktop
 fee_comparison_view.html~
