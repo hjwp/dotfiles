@@ -34,8 +34,10 @@ set hlsearch
 " map key to dismiss search highlightedness
 map <bs> :noh<CR>
 
+
 " use 'comma' prefix for multi-stroke keyboard mappings
 let mapleader = ","
+
 
 " set grep to be grep, better have cygwin installed & on the path!
 set grepprg=grep\ -n\ --exclude=*.pyc\ --exclude=tags
@@ -61,9 +63,6 @@ cmap w!! %!sudo tee > /dev/null %
 
 "remap jj to escape in insert mode.
 inoremap jj <Esc>
-
-" remap F1 so that it no longer annoyingly pops up the help menu
-inoremap <F1> <Esc>
 
 " make tab completion for files/buffers act like bash
 set wildmenu
@@ -139,8 +138,8 @@ else
 endif
 
 
-" sane file formats
-set fileformats=unix,dos
+" sane text files
+set fileformat=unix
 set encoding=utf-8
 
 " sane editing
@@ -150,9 +149,11 @@ set softtabstop=4
 
 " convert all typed tabs to spaces
 set expandtab
+" always show status line
+set laststatus=2
 
-"==============STATUS LINE OF DEATH======================
-" custom status line
+
+" =====STATUS LINE OF DEATH!!=====
 set statusline=
 " filename, relative to cwd
 set statusline+=%f
@@ -170,11 +171,11 @@ set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
 set statusline+=%*
 
 "display a warning if fileformat isnt unix
-set statusline+=%#warningmsg#
+set statusline+=%#directory#
 set statusline+=%{&ff!='unix'?'['.&ff.']':''}
 set statusline+=%*
 
-"display a warning if &et is wrong, or we have mixed-indenting
+"display a warning if files contains tab chars
 set statusline+=%#warningmsg#
 set statusline+=%{StatuslineTabWarning()}
 set statusline+=%*
@@ -200,11 +201,6 @@ set statusline+=\
 set statusline+=%2c,
 " current line / lines in file
 set statusline+=%l/%L
-" separator
-set statusline+=\ 
-
-" percent through file
-set statusline+=%P
 
 " always show status line
 set laststatus=2
@@ -224,8 +220,6 @@ function! StatuslineTabWarning()
 endfunction
 "recalculate the tab warning flag when idle and after writing
 autocmd cursorhold,bufwritepost * unlet! b:statusline_tab_warning
-
-"==============/STATUS LINE OF DEATH======================
 
 
 " line numbers
