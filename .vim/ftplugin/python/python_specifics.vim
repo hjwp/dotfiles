@@ -1,5 +1,5 @@
 " autocompletion
-set omnifunc=pythoncomplete#Complete
+autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 "automatically strip whitespace from line endings on save
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
