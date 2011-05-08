@@ -66,12 +66,14 @@ _ipython
 .hgignore
 .hgrc
 .hplip
+.icedtea
 .icons
 .idlerc
 .japplis
 .java
 .kde
 .lesshst
+.libreoffice
 .libvirt
 .local
 .macromedia
@@ -124,6 +126,8 @@ _ipython
 .wvdial.conf
 .xsession-errors
 .xsession-errors.old
+.Xauthority
+.xscreensaver-getimage.cache
 AppData
 Application Data
 Audiobooks

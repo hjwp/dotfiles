@@ -129,11 +129,11 @@ au! Syntax json source ~/.vim/syntax/json.vim
 if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window.
-  set lines=999 columns=999
+  set lines=40 columns=100
 else
   " This is console Vim.
   if exists("+lines")
-    set lines=50
+    set lines=40
   endif
   if exists("+columns")
     set columns=100
