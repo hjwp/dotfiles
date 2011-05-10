@@ -50,7 +50,7 @@ map <F3> :cnext<CR>
 
 
 " F1 is annoying
-map <F1> <Esc>
+noremap <F1> <Esc>
 
 " map cut & paste to what they bloody should be
 vnoremap <C-c> "+y
