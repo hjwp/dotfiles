@@ -24,6 +24,7 @@ _ipython
 .camel_certs
 .chromium-bsu
 .compiz
+.compiz*
 .compiz-gnomecompat
 .config
 .ctags
