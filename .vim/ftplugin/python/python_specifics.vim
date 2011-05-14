@@ -1,6 +1,10 @@
 " autocompletion
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 
+setlocal shiftwidth=4
+setlocal expandtab
+setlocal tabstop=4
+
 " add tags for python core and django, if available
 set tags+=$HOME/.vim/tags/python.ctags
 set tags+=$HOME/.vim/tags/django.ctags

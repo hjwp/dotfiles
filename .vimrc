@@ -1,4 +1,4 @@
-color desert
+color darkblue
 " must be first, changes behaviour of other settings
 set nocompatible
 
