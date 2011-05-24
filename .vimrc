@@ -1,4 +1,3 @@
-color darkblue
 " must be first, changes behaviour of other settings
 set nocompatible
 
@@ -248,6 +247,9 @@ set clipboard+=unnamed
 
 " tags for syntax highlighting
 syntax on
+
+color darkblue
+
 "make sure highlighting works all the way down long files
 autocmd BufEnter * :syntax sync fromstart
 " places to look for tags files:
@@ -275,7 +277,7 @@ set nofoldenable
 
 " fuzzyfind plugin
 let s:extension = '\.bak|\.dll|\.exe|\.o|\.pyc|\.pyo|\.swp|\.swo'
-let s:dirname = 'build|deploy|dist|vms|\.bzr|\.git|\.hg|\.svn|.+\.egg-info'
+let s:dirname = 'build|deploy|dist|\.bzr|\.git|\.hg|\.svn|.+\.egg-info'
 
 let s:slash = '[/\\]'
 let s:startname = '(^|'.s:slash.')'
@@ -289,3 +291,5 @@ nnoremap <Leader>f :FufFile **/<cr>
 nnoremap <Leader>b :FufBuffer<cr>
 nnoremap <Leader>t :FufTag<cr>
 
+nnoremap <Leader>d :%s/def test/def DONTtest/g<CR>
+nnoremap <Leader>D :%s/def DONTtest/def test/g<CR>
