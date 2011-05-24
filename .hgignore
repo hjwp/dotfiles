@@ -99,6 +99,7 @@ _ipython
 .recently-used.xbel
 .rstudio-desktop
 .sane
+.sqlite_history
 .ssh
 .subversion
 .subversion_IDEA
