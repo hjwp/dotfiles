@@ -39,9 +39,9 @@ let mapleader = ","
 
 
 " set grep to be grep, better have cygwin installed & on the path!
-set grepprg=grep\ -n\ --exclude=*.pyc\ --exclude=tags
+set grepprg=grep\ -n\ --exclude=*.pyc\ --exclude=tags\ --exclude-dir=domains\ --exclude-dir=.git\ --exclude-dir=.svn\ --exclude-dir=.hg
 " grep for word under cursor
-noremap <Leader>g :grep -rw '<C-r><C-w>' .<CR>
+noremap <Leader>g :silent grep -rw '<C-r><C-w>' .<CR>:copen<CR>
 " stop pyflakes from polluting the copen quickfix pane
 let g:pyflakes_use_quickfix = 0
 " map F3 to search jump thru grep results from copen
