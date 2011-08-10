@@ -130,6 +130,7 @@ _ipython
 .xsession-errors.old
 .Xauthority
 .xscreensaver-getimage.cache
+anywhere
 AppData
 Application Data
 Audiobooks
@@ -161,6 +162,7 @@ Pictures
 Podcasts
 PrintHood
 Public
+README.txt
 Recent
 Saved Games
 Searches
