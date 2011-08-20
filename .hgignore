@@ -2,6 +2,14 @@ syntax: glob
 */*.pyc
 *\*.pyc
 .DownloadManager
+.joe_state
+.pythonstartup.py
+README.txt
+firstlaw
+new_file.txt
+raiser.py
+raiser.pyc
+test.py
 .ICEauthority
 .PyCharm10
 .PyCharm10
@@ -120,7 +128,7 @@ syntax: glob
 .vim-fuf-data
 .vim-fuf-data
 .vim/.netrwhist
-.vim/backups
+.vim/backups/*
 .vim\.netrwhist
 .vim\backups
 .vim\ftplugin\python\pyflakes\pyflakes\*.pyc

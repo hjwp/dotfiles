@@ -1,5 +1,6 @@
 [ui]
 username = Harry Percival <hjwp2@cantab.net>
+editor = vim
 
 [paths]
 default = https://hjwp@bitbucket.org/hjwp/vim
