@@ -12,6 +12,7 @@ _ipython
 .VirtualBox
 .WorkBench
 .adobe
+.android
 .aptanasecure
 .audacity-data
 .bash_history
