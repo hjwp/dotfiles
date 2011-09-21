@@ -139,13 +139,16 @@ test.py
 .windmill
 .wine
 .winetrickscache
+.wireshark
 .wvdial.conf
+.xchat2
 .xscreensaver-getimage.cache
 .xsession-errors
 .xsession-errors.old
 AppData
 Application Data
 Audiobooks
+build
 Contacts
 Cookies
 DJ K - Killa Records Podcast

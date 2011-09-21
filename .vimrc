@@ -210,7 +210,7 @@ set laststatus=2
 " return '[tabs]' if tab chars in file, or empty string
 function! StatuslineTabWarning()
     if !exists("b:statusline_tab_warning")
-        let tabs = search('^\t', 'nw') != 0
+        let tabs = search('\t', 'nw') != 0
 
         if tabs
             let b:statusline_tab_warning = '[tabs]'
