@@ -2,14 +2,6 @@ syntax: glob
 */*.pyc
 *\*.pyc
 .DownloadManager
-.joe_state
-.pythonstartup.py
-README.txt
-firstlaw
-new_file.txt
-raiser.py
-raiser.pyc
-test.py
 .ICEauthority
 .PyCharm10
 .PyCharm10
@@ -20,6 +12,7 @@ test.py
 .WorkBench
 .Xauthority
 .adobe
+.bigv
 .android
 .aptanasecure
 .audacity-data
@@ -84,6 +77,7 @@ test.py
 .ipython
 .japplis
 .java
+.joe_state
 .kde
 .lesshst
 .libreoffice
@@ -106,6 +100,7 @@ test.py
 .pulse
 .pulse-cookie
 .putty
+.pythonstartup.py
 .qt
 .recently-used
 .recently-used.xbel
@@ -148,7 +143,6 @@ test.py
 AppData
 Application Data
 Audiobooks
-build
 Contacts
 Cookies
 DJ K - Killa Records Podcast
@@ -177,6 +171,7 @@ Pictures
 Podcasts
 PrintHood
 Public
+README.txt
 Recent
 Saved Games
 Searches
@@ -196,12 +191,14 @@ _viminfo
 alien.rip
 asthelper.completions
 bbtether.tgz
+build
 caplin.txt
 chronotank*
 data source=foo22.db
 examples.desktop
 fee_comparison_view.html~
 first_attempts.db3
+firstlaw
 foo.db3
 frogg
 g2mdlhlpx.exe
@@ -220,14 +217,18 @@ login.html
 logout.html
 msvccompiler.bak
 new.txt
+new_file.txt
 noise.dat
 ntuser.*
 nwlc_broke.zip
 pricing.zip
+raiser.py
+raiser.pyc
 settings n stuff
 sqlite_testdb
 svn_firstlaw2.zip
 temp
+test.py
 tmp
 views (1).py
 views.py

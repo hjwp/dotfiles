@@ -248,8 +248,6 @@ set clipboard+=unnamed
 " tags for syntax highlighting
 syntax on
 
-color darkblue
-
 "make sure highlighting works all the way down long files
 autocmd BufEnter * :syntax sync fromstart
 " places to look for tags files:
@@ -291,22 +289,13 @@ nnoremap <Leader>f :FufFile **/<cr>
 nnoremap <Leader>b :FufBuffer<cr>
 nnoremap <Leader>t :FufTag<cr>
 
-nnoremap <Leader>d :%s/def test/def DONTtest/g<CR>
-nnoremap <Leader>D :%s/def DONTtest/def test/g<CR>
 
 " Change the color scheme from a list of color scheme names.
 " Adapted Version 2010-09-12 from http://vim.wikia.com/wiki/VimTip341
+" simplified by harry
 " Press key:
-"   F8                next scheme
-"   Shift-F8          previous scheme
-"   Alt-F8            random scheme
-" Set the list of color schemes used by the above (default is 'all'):
-"   :SetColors all              (all $VIMRUNTIME/colors/*.vim)
-"   :SetColors my               (names built into script)
-"   :SetColors blue slate ron   (these schemes)
-"   :SetColors                  (display current scheme names)
-" Set the current color scheme based on time of day:
-"   :SetColors now
+"   Shift-F8          random scheme
+
 if v:version < 700 || exists('loaded_setcolors') || &cp
   finish
 endif
@@ -319,13 +308,7 @@ let s:mycolors = map(paths, 'fnamemodify(v:val, ":t:r")')
 " Set next/previous/random (how = 1/-1/0) color from our list of colors.
 " The 'random' index is actually set from the current time in seconds.
 " Global (no 's:') so can easily call from command line.
-function! NextColor(how)
-  call s:NextColor(a:how, 1)
-endfunction
-
-" Helper function for NextColor(), allows echoing of the color name to be
-" disabled.
-function! s:NextColor(how, echo_color)
+function! NextColor()
   if len(s:mycolors) == 0
     call s:SetColors('all')
   endif
@@ -335,17 +318,9 @@ function! s:NextColor(how, echo_color)
     let current = -1
   endif
   let missing = []
-  let how = a:how
   for i in range(len(s:mycolors))
-    if how == 0
-      let current = localtime() % len(s:mycolors)
-      let how = 1  " in case random color does not exist
-    else
-      let current += how
-      if !(0 <= current && current < len(s:mycolors))
-        let current = (how>0 ? 0 : len(s:mycolors)-1)
-      endif
-    endif
+    let current = localtime() % len(s:mycolors)
+    let how = 1  " in case random color does not exist
     try
       execute 'colorscheme '.s:mycolors[current]
       break
@@ -357,12 +332,9 @@ function! s:NextColor(how, echo_color)
   if len(missing) > 0
     echo 'Error: colorscheme not found:' join(missing)
   endif
-  if (a:echo_color)
-    echo g:colors_name
-  endif
+  echo g:colors_name
 endfunction
 
-nnoremap <F8> :call NextColor(1)<CR>
-nnoremap <S-F8> :call NextColor(-1)<CR>
-nnoremap <A-F8> :call NextColor(0)<CR>
+nnoremap <S-F8> :call NextColor()<CR>
+call NextColor()
 
