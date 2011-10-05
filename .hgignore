@@ -236,3 +236,6 @@ workspace
 workspace.lnk
 workspace_ntfs
 zero.trf
+.launchpadlib
+.mono
+.nvidia-settings-rc
