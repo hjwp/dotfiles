@@ -248,8 +248,6 @@ set clipboard+=unnamed
 " tags for syntax highlighting
 syntax on
 
-color darkblue
-
 "make sure highlighting works all the way down long files
 autocmd BufEnter * :syntax sync fromstart
 " places to look for tags files:
@@ -319,13 +317,7 @@ let s:mycolors = map(paths, 'fnamemodify(v:val, ":t:r")')
 " Set next/previous/random (how = 1/-1/0) color from our list of colors.
 " The 'random' index is actually set from the current time in seconds.
 " Global (no 's:') so can easily call from command line.
-function! NextColor(how)
-  call s:NextColor(a:how, 1)
-endfunction
-
-" Helper function for NextColor(), allows echoing of the color name to be
-" disabled.
-function! s:NextColor(how, echo_color)
+function! NextColor(echo_color)
   if len(s:mycolors) == 0
     call s:SetColors('all')
   endif
@@ -335,17 +327,8 @@ function! s:NextColor(how, echo_color)
     let current = -1
   endif
   let missing = []
-  let how = a:how
   for i in range(len(s:mycolors))
-    if how == 0
-      let current = localtime() % len(s:mycolors)
-      let how = 1  " in case random color does not exist
-    else
-      let current += how
-      if !(0 <= current && current < len(s:mycolors))
-        let current = (how>0 ? 0 : len(s:mycolors)-1)
-      endif
-    endif
+    let current = localtime() % len(s:mycolors)
     try
       execute 'colorscheme '.s:mycolors[current]
       break
@@ -362,7 +345,6 @@ function! s:NextColor(how, echo_color)
   endif
 endfunction
 
-nnoremap <F8> :call NextColor(1)<CR>
-nnoremap <S-F8> :call NextColor(-1)<CR>
-nnoremap <A-F8> :call NextColor(0)<CR>
+nnoremap <S-F8> :call NextColor(1)<CR>
+call NextColor(0)
 
