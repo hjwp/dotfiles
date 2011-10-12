@@ -376,11 +376,6 @@ if g:ipy_perform_mappings != 0
 
     "pi custom
     map <silent> <C-Return> :python run_this_file()<CR>
-    map <silent> <C-s> :python run_this_line()<CR>
-    imap <silent> <C-s> <C-O>:python run_this_line()<CR>
-    map <silent> <M-s> :python dedent_run_this_line()<CR>
-    vmap <silent> <C-S> :python run_these_lines()<CR>
-    vmap <silent> <M-s> :python dedent_run_these_lines()<CR>
     map <silent> <C-p> :python set_this_line()<CR>
     map <silent> <M-c> I#<ESC>
     vmap <silent> <M-c> I#<ESC>
