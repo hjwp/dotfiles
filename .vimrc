@@ -292,10 +292,14 @@ nnoremap <Leader>t :FufTag<cr>
 
 " Change the color scheme from a list of color scheme names.
 " Adapted Version 2010-09-12 from http://vim.wikia.com/wiki/VimTip341
-" simplified by harry
-" Press key:
-"   Shift-F8          random scheme
-
+" Press key   shift - F8 random scheme
+" Set the list of color schemes used by the above (default is 'all'):
+"   :SetColors all              (all $VIMRUNTIME/colors/*.vim)
+"   :SetColors my               (names built into script)
+"   :SetColors blue slate ron   (these schemes)
+"   :SetColors                  (display current scheme names)
+" Set the current color scheme based on time of day:
+"   :SetColors now
 if v:version < 700 || exists('loaded_setcolors') || &cp
   finish
 endif
@@ -308,7 +312,7 @@ let s:mycolors = map(paths, 'fnamemodify(v:val, ":t:r")')
 " Set next/previous/random (how = 1/-1/0) color from our list of colors.
 " The 'random' index is actually set from the current time in seconds.
 " Global (no 's:') so can easily call from command line.
-function! NextColor()
+function! NextColor(echo_color)
   if len(s:mycolors) == 0
     call s:SetColors('all')
   endif
@@ -320,7 +324,6 @@ function! NextColor()
   let missing = []
   for i in range(len(s:mycolors))
     let current = localtime() % len(s:mycolors)
-    let how = 1  " in case random color does not exist
     try
       execute 'colorscheme '.s:mycolors[current]
       break
@@ -332,9 +335,11 @@ function! NextColor()
   if len(missing) > 0
     echo 'Error: colorscheme not found:' join(missing)
   endif
-  echo g:colors_name
+  if (a:echo_color)
+    echo g:colors_name
+  endif
 endfunction
 
-nnoremap <S-F8> :call NextColor()<CR>
-call NextColor()
+nnoremap <S-F8> :call NextColor(1)<CR>
+call NextColor(0)
 

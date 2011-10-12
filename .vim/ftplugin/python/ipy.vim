@@ -1,4 +1,4 @@
-" Vim integration with IPython 0.11+
+
 "
 " A two-way integration between Vim and IPython. 
 "
@@ -170,9 +170,11 @@ def update_subchannel_msgs(debug=False):
         db = vim.current.buffer
     else:
         db = []
-    vim.command("pcl")
-    vim.command("silent pedit vim-ipython")
-    vim.command("normal P") #switch to preview window
+    startedin_vimipython = vim.current.buffer.name.endswith('vim-ipython')
+    if not startedin_vimipython:
+        vim.command("pcl")
+        vim.command("silent pedit vim-ipython")
+        vim.command("normal P") #switch to preview window
     # subchannel window quick quit key 'q'
     vim.command('map <buffer> q :q<CR>')
     vim.command("set bufhidden=hide buftype=nofile ft=python")
@@ -188,28 +190,34 @@ def update_subchannel_msgs(debug=False):
     vim.command("syn match Red /^Out\[[0-9]*\]\:/")
     b = vim.current.buffer
     for m in msgs:
-        db.append(str(m).splitlines())
-        if 'msg_type' not in m:
+        #db.append(str(m).splitlines())
+        s = ''
+        if 'msg_type' not in m['header']:
             # debug information
             #echo('skipping a message on sub_channel','WarningMsg')
             #echo(str(m))
             continue
-        if m['msg_type'] == 'status':
+        elif m['header']['msg_type'] == 'status':
             continue
-        if m['msg_type'] == 'stream':
+        elif m['header']['msg_type'] == 'stream':
             s = strip_color_escapes(m['content']['data'])
-        if m['msg_type'] == 'pyout':
+        elif m['header']['msg_type'] == 'pyout':
             s = "Out[%d]: " % m['content']['execution_count']
             s += m['content']['data']['text/plain']
-        if m['msg_type'] == 'pyin':
-            s = "\nIn []: "
+        elif m['header']['msg_type'] == 'pyin':
+            # TODO: the next line allows us to resend a line to ipython if
+            # %doctest_mode is on. In the future, IPython will send the
+            # execution_count on subchannel, so this will need to be updated
+            # once that happens
+            s = "\nIn [00]: "
             s += m['content']['code'].strip()
-        if m['msg_type'] == 'pyerr':
+        elif m['header']['msg_type'] == 'pyerr':
             c = m['content']
             s = "\n".join(map(strip_color_escapes,c['traceback']))
             s += c['ename'] + ":" + c['evalue']
-        if s.find('\n')==-1:
-            # somewhat ugly unicode workaround from http://vim.1045645.n5.nabble.com/Limitations-of-vim-python-interface-with-respect-to-character-encodings-td1223881.html
+        if s.find('\n') == -1:
+            # somewhat ugly unicode workaround from 
+            # http://vim.1045645.n5.nabble.com/Limitations-of-vim-python-interface-with-respect-to-character-encodings-td1223881.html
             if isinstance(s,unicode):
                 s=s.encode(vim_encoding)
             b.append(s)
@@ -219,7 +227,8 @@ def update_subchannel_msgs(debug=False):
             except:
                 b.append([l.encode(vim_encoding) for l in s.splitlines()])
     vim.command('normal G') # go to the end of the file
-    vim.command('silent e #|silent pedit vim-ipython')
+    if not startedin_vimipython:
+        vim.command('normal p') # go back to where you were
     
 def get_child_msg(msg_id):
     # XXX: message handling should be split into its own process in the future
@@ -254,7 +263,6 @@ def with_subchannel(f):
             f()
             if monitor_subchannel:
                 update_subchannel_msgs()
-                vim.command('normal p') # go back to where you were
         except AttributeError: #if km is None
             echo("not connected to IPython", 'Error')
     return f_with_update
@@ -345,34 +353,35 @@ fun! <SID>toggle_send_on_save()
     endif
 endfun
 
-map <silent> <F5> :python run_this_file()<CR>
-map <silent> <S-F5> :python run_this_line()<CR>
-map <silent> <F9> :python run_these_lines()<CR>
-map <silent> <leader>d :py get_doc_buffer()<CR>
-map <silent> <leader>s :py update_subchannel_msgs()<CR>
-map <silent> <S-F9> :python toggle_reselect()<CR>
-"map <silent> <C-F6> :python send('%pdb')<CR>
-"map <silent> <F6> :python set_breakpoint()<CR>
-"map <silent> <s-F6> :python clear_breakpoint()<CR>
-"map <silent> <F7> :python run_this_file_pdb()<CR>
-"map <silent> <s-F7> :python clear_all_breaks()<CR>
-imap <C-F5> <C-O><F5>
-imap <S-F5> <C-O><S-F5>
-imap <silent> <F5> <C-O><F5>
-map <C-F5> :call <SID>toggle_send_on_save()<CR>
+" Allow custom mappings
+if !exists('g:ipy_perform_mappings')
+    let g:ipy_perform_mappings = 1
+endif
+if g:ipy_perform_mappings != 0
+    map <silent> <F5> :python run_this_file()<CR>
+    map <silent> <S-F5> :python run_this_line()<CR>
+    map <silent> <F9> :python run_these_lines()<CR>
+    map <silent> <leader>h :py get_doc_buffer()<CR>
+    map <silent> <leader>s :py update_subchannel_msgs(); echo("vim-ipython shell updated",'Operator')<CR>
+    map <silent> <S-F9> :python toggle_reselect()<CR>
+    "map <silent> <C-F6> :python send('%pdb')<CR>
+    "map <silent> <F6> :python set_breakpoint()<CR>
+    "map <silent> <s-F6> :python clear_breakpoint()<CR>
+    "map <silent> <F7> :python run_this_file_pdb()<CR>
+    "map <silent> <s-F7> :python clear_all_breaks()<CR>
+    imap <C-F5> <C-O><F5>
+    imap <S-F5> <C-O><S-F5>
+    imap <silent> <F5> <C-O><F5>
+    map <C-F5> :call <SID>toggle_send_on_save()<CR>
 
-"pi custom
-map <silent> <C-Return> :python run_this_file()<CR>
-map <silent> <C-s> :python run_this_line()<CR>
-imap <silent> <C-s> <C-O>:python run_this_line()<CR>
-map <silent> <M-s> :python dedent_run_this_line()<CR>
-vmap <silent> <C-S> :python run_these_lines()<CR>
-vmap <silent> <M-s> :python dedent_run_these_lines()<CR>
-map <silent> <C-p> :python set_this_line()<CR>
-map <silent> <M-c> I#<ESC>
-vmap <silent> <M-c> I#<ESC>
-map <silent> <M-C> :s/^\([ \t]*\)#/\1/<CR>
-vmap <silent> <M-C> :s/^\([ \t]*\)#/\1/<CR>
+    "pi custom
+    map <silent> <C-Return> :python run_this_file()<CR>
+    map <silent> <C-p> :python set_this_line()<CR>
+    map <silent> <M-c> I#<ESC>
+    vmap <silent> <M-c> I#<ESC>
+    map <silent> <M-C> :s/^\([ \t]*\)#/\1/<CR>
+    vmap <silent> <M-C> :s/^\([ \t]*\)#/\1/<CR>
+endif
 
 command! -nargs=+ IPython :py km_from_string("<args>")
 command! -nargs=0 IPythonClipboard :py km_from_string(vim.eval('@+'))
