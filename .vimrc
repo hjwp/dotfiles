@@ -289,15 +289,10 @@ nnoremap <Leader>f :FufFile **/<cr>
 nnoremap <Leader>b :FufBuffer<cr>
 nnoremap <Leader>t :FufTag<cr>
 
-nnoremap <Leader>d :%s/def test/def DONTtest/g<CR>
-nnoremap <Leader>D :%s/def DONTtest/def test/g<CR>
 
 " Change the color scheme from a list of color scheme names.
 " Adapted Version 2010-09-12 from http://vim.wikia.com/wiki/VimTip341
-" Press key:
-"   F8                next scheme
-"   Shift-F8          previous scheme
-"   Alt-F8            random scheme
+" Press key   shift - F8 random scheme
 " Set the list of color schemes used by the above (default is 'all'):
 "   :SetColors all              (all $VIMRUNTIME/colors/*.vim)
 "   :SetColors my               (names built into script)

@@ -24,3 +24,6 @@ map <C-PageDown> /^\s*def .*(.*):<cr>z<cr>:noh<cr>
 map <C-PageUp> 0?^\s*def .*(.*):<cr>z<cr>:noh<cr>
 
 
+" dontification
+nnoremap <Leader>d :%s/def test/def DONTtest/g<CR>
+nnoremap <Leader>D :%s/def DONTtest/def test/g<CR>
