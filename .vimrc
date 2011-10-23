@@ -47,7 +47,6 @@ let g:pyflakes_use_quickfix = 0
 " map F3 to search jump thru grep results from copen
 map <F3> :cnext<CR>
 
-
 " F1 is annoying
 noremap <F1> <Esc>
 
@@ -60,11 +59,24 @@ map <C-v> "+gP
 map <C-s> :w<CR>
 map! <C-s> <Esc>:w<CR>
 
+" move up/down by visible lines on long wrapped lines of text
+nnoremap k gk
+nnoremap j gj
+
 " map sudo-write-file to w!! in command line
 cmap w!! %!sudo tee > /dev/null %
 
 "remap jj to escape in insert mode.
 inoremap jj <Esc>
+
+" make Y yank to end of line (consistent with C and D)
+noremap Y y$
+
+" make Q do somethign useful - format para
+noremap Q gq}
+
+" omit intrusive 'press ENTER' (etc) status line messages
+set shortmess=atTWI
 
 " make tab completion for files/buffers act like bash
 set wildmenu
