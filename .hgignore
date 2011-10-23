@@ -241,3 +241,13 @@ zero.trf
 .nvidia-settings-rc
 .gnash
 .gtkrc-2.0-gnome-color-chooser
+00changelog.i
+branch
+dirstate
+hgrc
+requires
+undo.bookmarks
+undo.branch
+undo.desc
+undo.dirstate
+VirtualBox VMs

@@ -1,5 +1,5 @@
 source ~/.gvimrc
 set guifont=DejaVu\ Sans\ Mono:h9
 " increase/decrease font size with - and +
-nmap <silent> - :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) - 1)', '')<CR>:set guifont<CR>
-nmap <silent> = :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) + 1)', '')<CR>:set guifont<CR>
+nmap <silent> _ :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) - 1)', '')<CR>:set guifont<CR>
+nmap <silent> + :let &guifont = substitute(&guifont, ':h\(\d\+\)', '\=":h" . (submatch(1) + 1)', '')<CR>:set guifont<CR>
