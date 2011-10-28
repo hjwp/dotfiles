@@ -241,6 +241,9 @@ zero.trf
 .nvidia-settings-rc
 .gnash
 .gtkrc-2.0-gnome-color-chooser
+.speech-dispatcher
+.smbcredentials
+SiteDown_ForPutty.ppk
 00changelog.i
 .openarena
 branch
