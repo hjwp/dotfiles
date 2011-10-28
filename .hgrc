@@ -6,3 +6,5 @@ editor = vim
 default = https://hjwp@bitbucket.org/hjwp/vim
 default-push = https://hjwp@bitbucket.org/hjwp/vim
 
+[extensions]
+prompt = /usr/local/bin/prompt.py
