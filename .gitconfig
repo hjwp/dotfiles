@@ -1,3 +1,7 @@
+[user]
+    name = Harry
+    email = hjwp2@cantab.net
+
 [core]
     editor = vim
     pager = less
