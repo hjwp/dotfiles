@@ -242,13 +242,56 @@ set number
 " when joining lines, don't insert two spaces after punctuation
 set nojoinspaces
 
-" don't wrap long lines, but display them as wrapped.
-"set textwidth=0
-"set wrap
-" wrap at exactly char 80, not at space chars, etc.
-"set nolinebreak
-" no line wrapping
-set nowrap
+" display long lines as wrapped
+set wrap
+
+" wrap at exactly char 80, not at word breaks
+set nolinebreak
+" show an ellipsis at the start of wrapped lines
+set showbreak=…
+
+" discretely highlight lines which are longer than the specified width
+" only long lines are highlighted (making this less intrusive than colorcolumn)
+" width defaults to 80. pass 0 to turn off.
+function! s:HighlightLongLines(width)
+    let targetWidth = a:width != '' ? a:width : 80
+    if targetWidth > 0
+        exec 'match ColorColumn /\%' . (targetWidth + 1) . 'v/'
+    else
+        exec 'match'
+    endif
+endfunction
+
+command! -nargs=? HighlightLongLines call s:HighlightLongLines('<args>')
+
+" toggle the highlighting of long lines
+
+let s:highlight_long_lines = 0
+
+function! ToggleHighlightLongLines()
+    if s:highlight_long_lines == 0
+        HighlightLongLines
+        let s:highlight_long_lines = 1
+    else
+        HighlightLongLines 0
+        let s:highlight_long_lines = 0
+    endif
+endfunction
+
+noremap <leader>l :call ToggleHighlightLongLines()<cr>
+
+
+" toggle wrapped appearance of long lines
+function! ToggleWrap()
+    if &wrap == 0
+        set wrap
+    else
+        set nowrap
+    endif
+endfunction
+
+noremap <leader>w :call ToggleWrap()<cr>
+
 
 " allow cursor keys to go right off end of one line, onto start of next
 set whichwrap+=<,>,[,]
