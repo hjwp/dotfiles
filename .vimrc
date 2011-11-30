@@ -140,14 +140,14 @@ au! Syntax json source ~/.vim/syntax/json.vim
 if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window.
-  set lines=40 columns=100
+  set lines=50 columns=180
 else
   " This is console Vim.
   if exists("+lines")
-    set lines=40
+    set lines=25
   endif
   if exists("+columns")
-    set columns=100
+    set columns=80
   endif
 endif
 
@@ -262,12 +262,10 @@ function! s:HighlightLongLines(width)
     endif
 endfunction
 
-command! -nargs=? HighlightLongLines call s:HighlightLongLines('<args>')
 
 " toggle the highlighting of long lines
-
+command! -nargs=? HighlightLongLines call s:HighlightLongLines('<args>')
 let s:highlight_long_lines = 0
-
 function! ToggleHighlightLongLines()
     if s:highlight_long_lines == 0
         HighlightLongLines
@@ -277,7 +275,6 @@ function! ToggleHighlightLongLines()
         let s:highlight_long_lines = 0
     endif
 endfunction
-
 noremap <leader>l :call ToggleHighlightLongLines()<cr>
 
 
@@ -289,8 +286,22 @@ function! ToggleWrap()
         set nowrap
     endif
 endfunction
-
 noremap <leader>w :call ToggleWrap()<cr>
+
+
+" toggle relative line numbering
+let s:relative_numbering = 0
+function! ToggleNumbering()
+    if s:relative_numbering == 0
+        exec 'set relativenumber'
+        let s:relative_numbering = 1
+    else
+        exec 'set number'
+        let s:relative_numbering = 0
+    endif
+endfunction
+noremap <leader>r :call ToggleNumbering()<cr>
+
 
 
 " allow cursor keys to go right off end of one line, onto start of next
@@ -305,6 +316,7 @@ syntax on
 
 "make sure highlighting works all the way down long files
 autocmd BufEnter * :syntax sync fromstart
+
 " places to look for tags files:
 set tags=./tags,tags
 " recursively search file's parent dirs for tags file
@@ -348,13 +360,6 @@ nnoremap <Leader>t :FufTag<cr>
 " Change the color scheme from a list of color scheme names.
 " Adapted Version 2010-09-12 from http://vim.wikia.com/wiki/VimTip341
 " Press key   shift - F8 random scheme
-" Set the list of color schemes used by the above (default is 'all'):
-"   :SetColors all              (all $VIMRUNTIME/colors/*.vim)
-"   :SetColors my               (names built into script)
-"   :SetColors blue slate ron   (these schemes)
-"   :SetColors                  (display current scheme names)
-" Set the current color scheme based on time of day:
-"   :SetColors now
 if v:version < 700 || exists('loaded_setcolors') || &cp
   finish
 endif
