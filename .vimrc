@@ -1,8 +1,16 @@
 " must be first, changes behaviour of other settings
 set nocompatible
 
-" mouse and keyboard selections enter select mode, ctrl-q enters visual mode
+" use 'comma' prefix for multi-stroke keyboard mappings
+let mapleader = ","
+
+
+" mouse and keyboard selections enter select mode, 
+" ctrl-q enters visual block mode
 set selectmode=mouse,key
+
+" ctrl-q doesnt work in console vim, so use leader-q
+nnoremap <leader>q <C-Q>
 
 " right mouse button extends selection instead of context menu
 set mousemodel=extend
@@ -34,8 +42,6 @@ set hlsearch
 map <bs> :noh<CR>
 
 
-" use 'comma' prefix for multi-stroke keyboard mappings
-let mapleader = ","
 
 
 " set grep to be grep, better have cygwin installed & on the path!
@@ -310,6 +316,10 @@ set whichwrap+=<,>,[,]
 
 " enable automatic yanking to and pasting from the selection
 set clipboard+=unnamed
+
+" close buffer without closing window
+noremap <C-BS> :bp<cr>bd #<cr>
+
 
 " tags for syntax highlighting
 syntax on
