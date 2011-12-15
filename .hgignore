@@ -1,11 +1,5 @@
 syntax: glob
 */*.pyc
 *\*.pyc
-.vim-fuf-data
-.vim-fuf-data
-.vim/.netrwhist
-.vim/backups/*
-.vim\.netrwhist
-.vim\backups\*
-.vim\ftplugin\python\pyflakes\pyflakes\*.pyc
-.viminfo
+.netrwhist
+backups

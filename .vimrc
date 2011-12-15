@@ -54,7 +54,8 @@ let g:pyflakes_use_quickfix = 0
 map <F3> :cnext<CR>
 
 " F1 is annoying
-noremap <F1> <Esc>
+map <F1> <Esc>
+map! <F1> <Esc>
 
 " map cut & paste to what they bloody should be
 vnoremap <C-c> "+y
