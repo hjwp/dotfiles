@@ -330,11 +330,16 @@ set tags+=tags;/
 " generate tags for all files in the current dir (recursive on subdirs)
 "map <f12> :!start /min ctags -R --exclude=build .<cr>
 map <f12> :!ctags -R --exclude=build .<cr>
+map <Leader>c :!ctags -R --exclude=build .<cr>
 map <f11> :!pysmell .<cr>
 
 "autocompletion
-inoremap <c-space> <c-n>
-inoremap <c-s-space> <c-p>
+if has("gui_running")
+    inoremap <C-space> <C-n>
+    inoremap <C-S-space> <C-p>
+else
+    inoremap <Nul> <C-n>
+endif
 
 " files to hide in directory listings
 let g:netrw_list_hide='\.py[oc]$,\.svn/$,\.git/$,\.hg/$'
