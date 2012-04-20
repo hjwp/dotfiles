@@ -274,7 +274,7 @@ function! ToggleHighlightLongLines()
         let s:highlight_long_lines = 0
     endif
 endfunction
-noremap <leader>l :call ToggleHighlightLongLines()<cr>
+noremap <leader>L :call ToggleHighlightLongLines()<cr>
 
 
 " toggle wrapped appearance of long lines
@@ -330,7 +330,7 @@ set tags+=tags;/
 " generate tags for all files in the current dir (recursive on subdirs)
 "map <f12> :!start /min ctags -R --exclude=build .<cr>
 map <f12> :!ctags -R --exclude=build .<cr>
-map <Leader>c :!ctags -R --exclude=build .<cr>
+map <Leader>C :!ctags -R --exclude=build .<cr>
 map <f11> :!pysmell .<cr>
 
 "autocompletion
@@ -346,6 +346,12 @@ let g:netrw_list_hide='\.py[oc]$,\.svn/$,\.git/$,\.hg/$'
 
 " I don't like folded regions
 set nofoldenable
+
+" aliases for window switching
+noremap <Leader>l <C-w>l
+noremap <Leader>h <C-w>h
+noremap <Leader>k <C-w>k
+noremap <Leader>j <C-w>j
 
 
 " fuzzyfind plugin
@@ -409,5 +415,6 @@ function! NextColor(echo_color)
 endfunction
 
 nnoremap <S-F8> :call NextColor(1)<CR>
+nnoremap <Leader>c :call NextColor(1)<CR>
 call NextColor(0)
 
