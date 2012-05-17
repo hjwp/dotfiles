@@ -244,8 +244,8 @@ set nojoinspaces
 " display long lines as wrapped
 set wrap
 
-" wrap at exactly char 80, not at word breaks
-set nolinebreak
+" wrap at word breaks
+set linebreak
 " show an ellipsis at the start of wrapped lines
 set showbreak=…
 
