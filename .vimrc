@@ -354,22 +354,11 @@ noremap <Leader>k <C-w>k
 noremap <Leader>j <C-w>j
 
 
-" fuzzyfind plugin
-let s:extension = '\.bak|\.dll|\.exe|\.o|\.pyc|\.pyo|\.swp|\.swo'
-let s:dirname = 'build|deploy|dist|\.bzr|\.git|\.hg|\.svn|.+\.egg-info'
-
-let s:slash = '[/\\]'
-let s:startname = '(^|'.s:slash.')'
-let s:endname = '($|'.s:slash.')'
-
-let g:fuf_file_exclude = '\v'.'('.s:startname.'('.s:dirname.')'.s:endname.')|(('.s:extension.')$)'
-let g:fuf_dir_exclude = '\v'.s:startname.'('.s:dirname.')'.s:endname
-let g:fuf_enumeratingLimit = 60
-
-nnoremap <Leader>f :FufFile **/<cr>
-nnoremap <Leader>b :FufBuffer<cr>
-nnoremap <Leader>t :FufTag<cr>
-
+" CtrlP settings
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|.pyc$'
+noremap <Leader>f :CtrlP<CR>
+noremap <Leader>b :CtrlPBuffer<CR>
 
 " Change the color scheme from a list of color scheme names.
 " Adapted Version 2010-09-12 from http://vim.wikia.com/wiki/VimTip341
