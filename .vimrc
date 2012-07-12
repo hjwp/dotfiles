@@ -359,6 +359,7 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|.pyc$'
 noremap <Leader>f :CtrlP<CR>
 noremap <Leader>b :CtrlPBuffer<CR>
+noremap <Leader>p :CtrlPClearAllCaches<CR>
 
 " Change the color scheme from a list of color scheme names.
 " Adapted Version 2010-09-12 from http://vim.wikia.com/wiki/VimTip341
