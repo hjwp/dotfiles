@@ -5,6 +5,9 @@ setlocal shiftwidth=4
 setlocal expandtab
 setlocal tabstop=4
 
+" switch off fucking smartindent which breaks comments
+au! FileType python setl nosmartindent
+
 " add tags for python core and django, if available
 set tags+=$HOME/.vim/tags/python.ctags
 set tags+=$HOME/.vim/tags/django.ctags
