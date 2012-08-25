@@ -341,8 +341,12 @@ else
     inoremap <Nul> <C-n>
 endif
 
+"jump to definition (ctrl-] doesnt work in some consoles
+noremap <Leader>t <C-]>
+
 " files to hide in directory listings
 let g:netrw_list_hide='\.py[oc]$,\.svn/$,\.git/$,\.hg/$'
+set wildignore+=*.pyc
 
 " I don't like folded regions
 set nofoldenable
