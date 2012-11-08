@@ -341,6 +341,13 @@ else
     inoremap <Nul> <C-n>
 endif
 
+" switch on colourful brackets
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+
 "jump to definition (ctrl-] doesnt work in some consoles
 noremap <Leader>t <C-]>
 
