@@ -320,6 +320,9 @@ syntax on
 "make sure highlighting works all the way down long files
 autocmd BufEnter * :syntax sync fromstart
 
+" load pathogen
+call pathogen#infect() 
+
 " places to look for tags files:
 set tags=./tags,tags
 " recursively search file's parent dirs for tags file
