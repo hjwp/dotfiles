@@ -1,2 +1,3 @@
+*.pyc
 vim/backups
 vim/.netrwhist
