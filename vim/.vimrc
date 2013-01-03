@@ -193,6 +193,11 @@ set statusline+=%#warningmsg#
 set statusline+=%{StatuslineTabWarning()}
 set statusline+=%*
 
+"display a warning for any syntastic syntax errors
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
 " read-only
 set statusline+=%r
 set statusline+=%*
