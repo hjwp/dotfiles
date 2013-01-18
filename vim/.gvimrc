@@ -1,6 +1,11 @@
 set visualbell t_vb=
 set guioptions-=T
-set guifont=DejaVu\ Sans\ Mono\ 10
+
+if has('win32') || has('win64')
+    set guifont=DejaVu\ Sans\ Mono:h9
+else
+    set guifont=DejaVu\ Sans\ Mono\ 10
+endif
 
 " %1 and %2 used in .vimrc statusline are user-defined colors, defined here:
 hi User1 guifg=yellow guibg=black
