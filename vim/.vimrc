@@ -367,10 +367,10 @@ set wildignore+=*.pyc
 set nofoldenable
 
 " aliases for window switching
-noremap <Leader>l <C-w>l
-noremap <Leader>h <C-w>h
-noremap <Leader>k <C-w>k
-noremap <Leader>j <C-w>j
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-k> <C-w>k
+noremap <C-j> <C-w>j
 
 
 " CtrlP settings
