@@ -16,4 +16,8 @@
 
 [alias]
     hist = log --graph --oneline --decorate
-    st = status 
+    st = status
+    wdiff = diff --color-words
+
+[push]
+    default = current
