@@ -126,4 +126,4 @@ LIGHT_GRAY="\[\033[0;37m\]"
 NO_COLOUR="\[\033[0m\]"
 
 #PS1="$LIGHT_GRAY\$(date +%H:%M) \w$YELLOW \$(parse_git_branch)\n$LIGHT_GREEN\$ $NO_COLOUR"
-PS1="$PS1 $YELLOW(parse_git_branch)\n$LIGHT_GREEN\$ $NO_COLOUR"
+PS1="$PS1 $YELLOW $(parse_git_branch)\n$LIGHT_GREEN\$ $NO_COLOUR"
