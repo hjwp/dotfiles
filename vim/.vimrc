@@ -349,12 +349,15 @@ else
     inoremap <Nul> <C-n>
 endif
 
+" Jedi autocompleter
+let g:jedi#goto_command = "<leader>G"
+let g:jedi#use_tabs_not_buffers = 0
+
 " switch on colourful brackets
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
-
 
 "jump to definition (ctrl-] doesnt work in some consoles
 noremap <Leader>t <C-]>

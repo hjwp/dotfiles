@@ -1,5 +1,5 @@
 " autocompletion
-autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 setlocal shiftwidth=4
 setlocal expandtab
