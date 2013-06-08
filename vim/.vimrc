@@ -430,3 +430,4 @@ nnoremap <S-F8> :call NextColor(1)<CR>
 nnoremap <Leader>c :call NextColor(1)<CR>
 call NextColor(0)
 
+let g:syntastic_javascript_checkers=['jshint'] 
