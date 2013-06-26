@@ -113,6 +113,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# set terminal to 256 color if on display
+if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
+    export TERM=xterm-256color
+fi 
+
 # Show current git branch in prompt.
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
