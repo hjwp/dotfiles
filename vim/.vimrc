@@ -351,6 +351,7 @@ endif
 
 " Jedi autocompleter
 let g:jedi#goto_command = "<leader>G"
+let g:jedi#get_definition_command = "<leader>t"
 let g:jedi#use_tabs_not_buffers = 0
 
 " switch on colourful brackets
