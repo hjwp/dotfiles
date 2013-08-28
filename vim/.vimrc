@@ -353,6 +353,7 @@ endif
 let g:jedi#goto_command = "<leader>G"
 let g:jedi#get_definition_command = "<leader>t"
 let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#popup_select_first = 0 "counterintuitive, but improves type-flow
 
 " switch on colourful brackets
 au VimEnter * RainbowParenthesesToggle
