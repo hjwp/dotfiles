@@ -350,8 +350,9 @@ else
 endif
 
 " Jedi autocompleter
-let g:jedi#goto_command = "<leader>G"
-let g:jedi#get_definition_command = "<leader>t"
+let g:jedi#goto_assignments_command = "<leader>G"
+let g:jedi#goto_definitions_command = "<leader>t"
+
 let g:jedi#use_tabs_not_buffers = 0
 "autoselected option may be completed with enter...
 "alternatively, disable select-first to use ctrl+space to complete first
