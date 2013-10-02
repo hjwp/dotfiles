@@ -342,18 +342,18 @@ map <Leader>C :!ctags -R --exclude=build .<cr>
 map <f11> :!pysmell .<cr>
 
 "autocompletion
-if has("gui_running")
-    inoremap <C-space> <C-n>
-    inoremap <C-S-space> <C-p>
-else
-    inoremap <Nul> <C-n>
-endif
+"if has("gui_running")
+    "inoremap <C-space> <C-n>
+    "inoremap <C-S-space> <C-p>
+"else
+    "inoremap <Nul> <C-n>
+"endif
 
 " Jedi autocompleter
-let g:jedi#goto_assignments_command = "<leader>G"
-let g:jedi#goto_definitions_command = "<leader>t"
+"let g:jedi#goto_assignments_command = "<leader>G"
+"let g:jedi#goto_definitions_command = "<leader>t"
 
-let g:jedi#use_tabs_not_buffers = 0
+"let g:jedi#use_tabs_not_buffers = 0
 "autoselected option may be completed with enter...
 "alternatively, disable select-first to use ctrl+space to complete first
 "let g:jedi#popup_select_first = 0 
@@ -365,7 +365,16 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 "jump to definition (ctrl-] doesnt work in some consoles
-noremap <Leader>t <C-]>
+"noremap <Leader>t <C-]>
+
+"YouCompleteMe options, replace jedi-vim
+" jump to definition
+nnoremap <leader>t :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" close stupid preview window thing
+let g:ycm_autoclose_preview_window_after_completion=1
+" could also do set completeopt-=preview
+" to kill it completely..
+
 
 " files to hide in directory listings
 let g:netrw_list_hide='\.py[oc]$,\.svn/$,\.git/$,\.hg/$'
