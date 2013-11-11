@@ -16,3 +16,6 @@
 [submodule "vim/bundle/YouCompleteMe"]
 	path = vim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "vim/bundle/vim-asciidoc"]
+	path = vim/bundle/vim-asciidoc
+	url = git@github.com:hjwp/vim-asciidoc.git
