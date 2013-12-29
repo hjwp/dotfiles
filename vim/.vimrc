@@ -6,10 +6,10 @@ let mapleader = ","
 
 
 " mouse and keyboard selections enter select mode, 
-" ctrl-q enters visual block mode
 set selectmode=mouse,key
 
-" ctrl-q doesnt work in console vim, so use leader-q
+" ctrl-q doesnt work in console vim, so use leader-q 
+" to enter block visual mode
 nnoremap <leader>q <C-Q>
 
 " right mouse button extends selection instead of context menu
