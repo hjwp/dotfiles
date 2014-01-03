@@ -204,6 +204,7 @@ set statusline+=%*
 " use jslint for html
 let g:syntastic_html_checkers=['jslint', 'validator']
 let g:syntastic_html_jslint_args="--sloppy --browser --vars --"
+let g:syntastic_html_jshint_args="--extract=always"
 
 " read-only
 set statusline+=%r
