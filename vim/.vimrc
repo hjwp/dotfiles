@@ -166,6 +166,9 @@ set expandtab
 set laststatus=2
 
 
+" load pathogen
+call pathogen#infect()
+
 " =====STATUS LINE OF DEATH!!=====
 set statusline=
 " filename, relative to cwd
@@ -197,6 +200,9 @@ set statusline+=%*
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
+
+" use jslint for html
+let g:syntastic_html_checkers=['jslint']
 
 " read-only
 set statusline+=%r
@@ -325,8 +331,6 @@ syntax on
 "make sure highlighting works all the way down long files
 autocmd BufEnter * :syntax sync fromstart
 
-" load pathogen
-call pathogen#infect() 
 
 " places to look for tags files:
 set tags=./tags,tags
