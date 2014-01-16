@@ -201,11 +201,6 @@ set statusline+=%*
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
 
-" use jslint for html
-let g:syntastic_html_checkers=['jslint', 'validator']
-let g:syntastic_html_jslint_args="--sloppy --browser --vars --"
-let g:syntastic_html_jshint_args="--extract=always"
-
 " read-only
 set statusline+=%r
 set statusline+=%*
@@ -369,6 +364,18 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+
+" use jslint for html (requires my fork of syntastic)
+let g:syntastic_html_checkers=['jslint', 'validator']
+let g:syntastic_javascript_checkers=['jslint']
+let g:syntastic_html_jslint_args="--sloppy --browser --vars --"
+let g:syntastic_javascript_jslint_args="--sloppy --browser --vars --"
+" set up jshint as an option too (can remove this if i decide to drop jsl and
+" go back to trunk, since its now supported.)
+let g:syntastic_html_jshint_args="--extract=always"
+"switch off asciidoc checker, cos it takes too long.
+let g:syntastic_asciidoc_checkers=[]
 
 "jump to definition (ctrl-] doesnt work in some consoles
 "noremap <Leader>t <C-]>
