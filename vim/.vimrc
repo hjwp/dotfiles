@@ -388,6 +388,8 @@ let g:ycm_autoclose_preview_window_after_completion=1
 " could also do set completeopt-=preview
 " to kill it completely..
 
+" switch off ycm for asciidoc
+let g:ycm_filetype_blacklist = {'asciidoc': 0}
 
 " files to hide in directory listings
 let g:netrw_list_hide='\.py[oc]$,\.svn/$,\.git/$,\.hg/$'
