@@ -375,7 +375,7 @@ let g:syntastic_javascript_jslint_args="--sloppy --browser --vars --"
 " go back to trunk, since its now supported.)
 let g:syntastic_html_jshint_args="--extract=always"
 "switch off asciidoc checker, cos it takes too long.
-let g:syntastic_asciidoc_checkers=[]
+let g:syntastic_asciidoc_checkers=['']
 
 "jump to definition (ctrl-] doesnt work in some consoles
 "noremap <Leader>t <C-]>
