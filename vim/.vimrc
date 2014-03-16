@@ -426,13 +426,10 @@ let loaded_setcolors = 1
 let paths = split(globpath(&runtimepath, 'colors/*.vim'), "\n")
 let s:mycolors = map(paths, 'fnamemodify(v:val, ":t:r")')
 
-" Set next/previous/random (how = 1/-1/0) color from our list of colors.
+" Set random color from our list of colors.
 " The 'random' index is actually set from the current time in seconds.
 " Global (no 's:') so can easily call from command line.
 function! NextColor(echo_color)
-  if len(s:mycolors) == 0
-    call s:SetColors('all')
-  endif
   if exists('g:colors_name')
     let current = index(s:mycolors, g:colors_name)
   else
@@ -453,7 +450,7 @@ function! NextColor(echo_color)
     echo 'Error: colorscheme not found:' join(missing)
   endif
   if (a:echo_color)
-    echo g:colors_name
+    echo s:mycolors[current]
   endif
 endfunction
 
