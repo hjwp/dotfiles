@@ -148,3 +148,6 @@ then
     echo
 fi
 }
+
+source virtualenvwrapper.sh
+
