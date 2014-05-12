@@ -4,7 +4,7 @@ set guioptions-=T
 if has('win32') || has('win64')
     set guifont=DejaVu\ Sans\ Mono:h9
 else
-    set guifont=DejaVu\ Sans\ Mono\ 10
+    set guifont=Ubuntu\ Mono\ 11
 endif
 
 " %1 and %2 used in .vimrc statusline are user-defined colors, defined here:
