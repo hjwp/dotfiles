@@ -137,17 +137,18 @@ PS1="$PS1 $YELLOW \$(parse_git_branch)\n$LIGHT_GREEN\$ $NO_COLOUR"
 PATH=~/.local/bin:$PATH
 
 export PIP_DOWNLOAD_CACHE=~/.pip-download-cache
-
+source virtualenvwrapper.sh
 
 function fuck() {
-killall -9 $2;
-if [ $? == 0 ]
-then
-    echo
-    echo " (╯°□°）╯︵$(echo $2|flip &2>/dev/null)"
-    echo
-fi
+    killall -9 $2;
+    if [ $? == 0 ]
+    then
+        echo
+        echo " (╯°□°）╯︵$(echo $2|flip &2>/dev/null)"
+        echo
+    fi
 }
+
 SSHAGENT=/usr/bin/ssh-agent
 SSHAGENTARGS="-s -t 12h"
 if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ];

@@ -375,7 +375,7 @@ let g:syntastic_javascript_jslint_args="--sloppy --browser --vars --"
 " go back to trunk, since its now supported.)
 let g:syntastic_html_jshint_args="--extract=always"
 "switch off asciidoc checker, cos it takes too long.
-let g:syntastic_asciidoc_checkers=[]
+let g:syntastic_asciidoc_checkers=['']
 
 "jump to definition (ctrl-] doesnt work in some consoles
 "noremap <Leader>t <C-]>
@@ -389,7 +389,7 @@ let g:ycm_autoclose_preview_window_after_completion=1
 " to kill it completely..
 
 " switch off ycm for asciidoc
-let g:ycm_filetype_blacklist = {'asciidoc': 0}
+let g:ycm_filetype_blacklist = {'asciidoc': 0, 'text': 0}
 
 " files to hide in directory listings
 let g:netrw_list_hide='\.py[oc]$,\.svn/$,\.git/$,\.hg/$'
@@ -426,13 +426,10 @@ let loaded_setcolors = 1
 let paths = split(globpath(&runtimepath, 'colors/*.vim'), "\n")
 let s:mycolors = map(paths, 'fnamemodify(v:val, ":t:r")')
 
-" Set next/previous/random (how = 1/-1/0) color from our list of colors.
+" Set random color from our list of colors.
 " The 'random' index is actually set from the current time in seconds.
 " Global (no 's:') so can easily call from command line.
 function! NextColor(echo_color)
-  if len(s:mycolors) == 0
-    call s:SetColors('all')
-  endif
   if exists('g:colors_name')
     let current = index(s:mycolors, g:colors_name)
   else
@@ -453,7 +450,7 @@ function! NextColor(echo_color)
     echo 'Error: colorscheme not found:' join(missing)
   endif
   if (a:echo_color)
-    echo g:colors_name
+    echo s:mycolors[current]
   endif
 endfunction
 

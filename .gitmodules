@@ -12,7 +12,7 @@
 	url = https://github.com/hynek/vim-python-pep8-indent.git
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
+	url = https://github.com/hjwp/syntastic.git
 [submodule "vim/bundle/YouCompleteMe"]
 	path = vim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
@@ -22,3 +22,6 @@
 [submodule "vim/bundle/colorschemes"]
 	path = vim/bundle/colorschemes
 	url = git@github.com:flazz/vim-colorschemes.git
+[submodule "vim/bundle/tern_for_vim"]
+	path = vim/bundle/tern_for_vim
+	url = https://github.com/marijnh/tern_for_vim.git
