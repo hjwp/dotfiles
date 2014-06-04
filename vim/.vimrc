@@ -406,7 +406,7 @@ noremap <C-j> <C-w>j
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|.pyc$|virtualenv'
 " don't try to be too clever with working paths. 
-let g:ctrlp_working_path_mode = 'c'
+let g:ctrlp_working_path_mode = ''
 noremap <Leader>f :CtrlP<CR>
 noremap <Leader>b :CtrlPBuffer<CR>
 noremap <Leader>p :CtrlPClearAllCaches<CR>
