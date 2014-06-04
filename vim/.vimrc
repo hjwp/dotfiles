@@ -360,10 +360,7 @@ map <f11> :!pysmell .<cr>
 "let g:jedi#popup_select_first = 0 
 
 " switch on colourful brackets
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+let g:rainbow_active = 1
 
 
 " use jslint for html (requires my fork of syntastic)
