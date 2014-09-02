@@ -82,3 +82,6 @@ if [[ "$TERM" == "xterm" ]]; then
     export TERM=xterm-256color
 fi 
 
+# stop less from clearing screen on exit, with -X
+export LESS="-RX"
+
