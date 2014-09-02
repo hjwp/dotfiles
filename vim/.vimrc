@@ -141,7 +141,6 @@ endif " has("autocmd")
 au! BufRead,BufNewFile *.json setfiletype json
 au! Syntax json source ~/.vim/syntax/json.vim
 
-
 " window size
 if has("gui_running")
   " GUI is running or is about to start.
@@ -323,6 +322,9 @@ noremap <C-BS> :bp<cr>bd #<cr>
 
 " tags for syntax highlighting
 syntax on
+
+" allegedly faster regex engine for syntax stuff
+set regexpengine=1 
 
 "make sure highlighting works all the way down long files
 autocmd BufEnter * :syntax sync fromstart
