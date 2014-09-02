@@ -2,3 +2,4 @@ tags
 *.pyc
 vim/backups
 vim/.netrwhist
+vim/spell/*.spl
