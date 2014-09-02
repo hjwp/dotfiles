@@ -149,11 +149,16 @@ function fuck() {
     fi
 }
 
-SSHAGENT=/usr/bin/ssh-agent
-SSHAGENTARGS="-s -t 12h"
-if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ];
-then
-    eval `$SSHAGENT $SSHAGENTARGS`
-    trap "kill $SSH_AGENT_PID" 0
-fi
+SSH_SOCK_INFO_PATH="/tmp/"`hostname`"-ssh-auth-sock-location.txt"
+check-ssh-agent() {
+    [ -S "$SSH_AUTH_SOCK" ] && { ssh-add -l >& /dev/null || [ $? -ne 2 ]; } 
+}  
+# attempt to connect to a running agent 
+check-ssh-agent || export SSH_AUTH_SOCK="$(< $SSH_SOCK_INFO_PATH)" 
+# if agent.env data is invalid, start a new one 
+check-ssh-agent || {
+    eval "$(ssh-agent -s)" > /dev/null
+    echo "started new ssh agent on $SSH_AUTH_SOCK"
+    echo "$SSH_AUTH_SOCK" > $SSH_SOCK_INFO_PATH
+}
 
