@@ -28,3 +28,6 @@
 [submodule "vim/bundle/ctrlp.vim"]
 	path = vim/bundle/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim.git
+[submodule "vim/bundle/vim-markdown-tpope"]
+	path = vim/bundle/vim-markdown-tpope
+	url =  https://github.com/tpope/vim-markdown.git
