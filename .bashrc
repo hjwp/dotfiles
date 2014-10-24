@@ -136,6 +136,9 @@ PS1="$PS1 $YELLOW \$(parse_git_branch)\n$LIGHT_GREEN\$ $NO_COLOUR"
 #make sure ~/.local/bin is on path
 PATH=~/.local/bin:$PATH
 
+#make sure ~/.npm is on path for node binaries
+PATH=~/.npm:$PATH
+
 export PIP_DOWNLOAD_CACHE=~/.pip-download-cache
 source virtualenvwrapper.sh
 
