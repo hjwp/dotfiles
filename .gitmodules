@@ -31,3 +31,6 @@
 [submodule "vim/bundle/vim-markdown-tpope"]
 	path = vim/bundle/vim-markdown-tpope
 	url =  https://github.com/tpope/vim-markdown.git
+[submodule "vim/bundle/csapprox"]
+	path = vim/bundle/csapprox
+	url = https://github.com/godlygeek/csapprox
