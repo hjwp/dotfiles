@@ -17,6 +17,7 @@
 [alias]
     hist = log --graph --oneline --decorate
     st = status
+    co = checkout
     wdiff = diff --color-words
 
 [push]
