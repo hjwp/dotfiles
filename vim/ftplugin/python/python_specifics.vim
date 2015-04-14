@@ -18,5 +18,6 @@ map <C-PageUp> 0?^\s*def .*(.*):<cr>z<cr>:noh<cr>
 
 
 " dontification
-nnoremap <Leader>d :%s/def test/def DONTtest/g<CR>
-nnoremap <Leader>D :%s/def DONTtest/def test/g<CR>
+nnoremap <Leader>d ma:%s/def test/def DONTtest/g<CR>'a
+nnoremap <Leader>D ma:%s/def DONTtest/def test/g<CR>'a
+
