@@ -139,7 +139,6 @@ PATH=~/.local/bin:$PATH
 #make sure ~/.npm is on path for node binaries
 PATH=~/.npm:$PATH
 
-export PIP_DOWNLOAD_CACHE=~/.pip-download-cache
 source virtualenvwrapper.sh
 
 function fuck() {
