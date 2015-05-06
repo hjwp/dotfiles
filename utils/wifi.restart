@@ -1,0 +1,4 @@
+rfkill block wifi 
+sleep 3 
+rfkill unblock wifi
+tail -f /var/log/syslog | ccze
