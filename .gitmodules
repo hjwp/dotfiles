@@ -18,10 +18,10 @@
 	url = https://github.com/Valloric/YouCompleteMe.git
 [submodule "vim/bundle/vim-asciidoc"]
 	path = vim/bundle/vim-asciidoc
-	url = git@github.com:hjwp/vim-asciidoc.git
+	url = https://github.com/hjwp/vim-asciidoc.git
 [submodule "vim/bundle/colorschemes"]
 	path = vim/bundle/colorschemes
-	url = git@github.com:flazz/vim-colorschemes.git
+	url = https://github.com/flazz/vim-colorschemes.git
 [submodule "vim/bundle/tern_for_vim"]
 	path = vim/bundle/tern_for_vim
 	url = https://github.com/marijnh/tern_for_vim.git
