@@ -1,6 +1,6 @@
-neww -n Console "python ~/PythonAnywhere/vms/ssh_machine.py live console --n=1"
-splitw -v -p 50 -t 0 "python ~/PythonAnywhere/vms/ssh_machine.py live console --n=3"
-splitw -h -p 50 -t 0 "python ~/PythonAnywhere/vms/ssh_machine.py live console --n=2"
-splitw -h -p 50 -t 1 "python ~/PythonAnywhere/vms/ssh_machine.py live console --n=4"
+neww -n Console "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live console --n=1"
+splitw -v -p 50 -t 0 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live console --n=3"
+splitw -h -p 50 -t 0 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live console --n=2"
+splitw -h -p 50 -t 1 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live console --n=4"
 selectp -t 0
 setw synchronize-panes
