@@ -44,7 +44,7 @@ map <bs> :noh<CR>
 
 
 " set grep to be grep, better have cygwin installed & on the path!
-set grepprg=grep\ -n\ --exclude=\"*.pyc\"\ --exclude=tags\ --exclude-dir=domains\ --exclude-dir=.git\ --exclude-dir=.svn\ --exclude-dir=.hg
+set grepprg=grep\ -n\ --exclude=\"*.pyc\"\ --exclude=tags\ --exclude-dir=domains\ --exclude-dir=.git\ --exclude-dir=.svn\ --exclude-dir=.hg\ --exclude-dir=CACHE
 " grep for word under cursor
 noremap <Leader>g :silent grep -rw '<C-r><C-w>' .<CR>:copen<CR>
 " stop pyflakes from polluting the copen quickfix pane
