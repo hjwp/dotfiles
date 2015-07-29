@@ -51,7 +51,7 @@ ZSH_THEME="wild-cherry"
 plugins=(git virtualenvwrapper)
 
 # powerline
-. /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh
+. ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 source $ZSH/oh-my-zsh.sh
 
