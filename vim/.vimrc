@@ -366,7 +366,7 @@ let g:rainbow_active = 1
 " use python3 syntax checker
 let g:syntastic_python_python_exec = '/usr/bin/python3'
 
-" use jslint for html (requires my fork of syntastic)
+" use jslint for html (requires my fork of syntastic and jslint 0.1.4)
 let g:syntastic_html_checkers=['jslint', 'validator']
 let g:syntastic_javascript_checkers=['jslint']
 let g:syntastic_html_jslint_args="--sloppy --browser --vars --"
@@ -376,6 +376,7 @@ let g:syntastic_javascript_jslint_args="--sloppy --browser --vars --"
 let g:syntastic_html_jshint_args="--extract=always"
 "switch off asciidoc checker, cos it takes too long.
 let g:syntastic_asciidoc_checkers=['']
+
 
 "jump to definition (ctrl-] doesnt work in some consoles
 "noremap <Leader>t <C-]>
