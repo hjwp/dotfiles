@@ -363,6 +363,8 @@ map <f11> :!pysmell .<cr>
 " switch on colourful brackets
 let g:rainbow_active = 1
 
+" use python3 syntax checker
+let g:syntastic_python_python_exec = '/usr/bin/python3'
 
 " use jslint for html (requires my fork of syntastic)
 let g:syntastic_html_checkers=['jslint', 'validator']
