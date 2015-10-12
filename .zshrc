@@ -45,20 +45,21 @@ ZSH_THEME="wild-cherry"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=~/dotfiles/oh-my-zsh-custom
 
+export PATH="/home/harry/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git virtualenvwrapper)
 
 # powerline
-. ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+. ~/.local/lib/python3.4/site-packages/powerline/bindings/zsh/powerline.zsh
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
 
-export PATH="/home/harry/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
