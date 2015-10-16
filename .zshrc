@@ -53,7 +53,7 @@ export PATH="/home/harry/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/us
 plugins=(git virtualenvwrapper)
 
 # powerline
-. ~/.local/lib/python3.4/site-packages/powerline/bindings/zsh/powerline.zsh
+. ~/.local/lib/python3.?/site-packages/powerline/bindings/zsh/powerline.zsh
 
 source $ZSH/oh-my-zsh.sh
 
