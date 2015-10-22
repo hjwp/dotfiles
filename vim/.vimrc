@@ -367,6 +367,7 @@ let g:syntastic_asciidoc_checkers=['']
 let g:syntastic_always_populate_loc_list = 1
 " map F4 to search jump thru errors of lopen
 map <F4> :lnext<CR>
+" nb, syntastic may not find checkers installed in ~/.local
 
 
 " files to hide in directory listings
