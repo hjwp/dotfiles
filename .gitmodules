@@ -3,7 +3,7 @@
 	url = https://github.com/tpope/vim-pathogen.git
 [submodule "vim/bundle/jedi-vim"]
 	path = vim/bundle/jedi-vim
-	url = https://github.com/hjwp/jedi-vim 
+	url = https://github.com/davidhalter/jedi-vim.git
 [submodule "vim/bundle/nginx-vim-syntax"]
 	path = vim/bundle/nginx-vim-syntax
 	url = https://github.com/evanmiller/nginx-vim-syntax
@@ -13,9 +13,6 @@
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = https://github.com/hjwp/syntastic.git
-[submodule "vim/bundle/YouCompleteMe"]
-	path = vim/bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe.git
 [submodule "vim/bundle/vim-asciidoc"]
 	path = vim/bundle/vim-asciidoc
 	url = https://github.com/hjwp/vim-asciidoc.git

@@ -378,20 +378,6 @@ let g:syntastic_html_jshint_args="--extract=always"
 let g:syntastic_asciidoc_checkers=['']
 
 
-"jump to definition (ctrl-] doesnt work in some consoles
-"noremap <Leader>t <C-]>
-
-"YouCompleteMe options, replace jedi-vim
-" jump to definition
-nnoremap <leader>t :YcmCompleter GoToDefinitionElseDeclaration<CR>
-" close stupid preview window thing
-let g:ycm_autoclose_preview_window_after_completion=1
-" could also do set completeopt-=preview
-" to kill it completely..
-
-" switch off ycm for text markup formats
-let g:ycm_filetype_blacklist = {'asciidoc': 0, 'text': 0, 'markdown': 0, 'rst': 0}
-
 " files to hide in directory listings
 let g:netrw_list_hide='\.py[oc]$,\.svn/$,\.git/$,\.hg/$'
 set wildignore+=*.pyc
