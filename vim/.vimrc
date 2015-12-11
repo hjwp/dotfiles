@@ -343,22 +343,9 @@ map <f12> :!ctags -R --exclude=build .<cr>
 map <Leader>C :!ctags -R --exclude=build .<cr>
 map <f11> :!pysmell .<cr>
 
-"autocompletion
-"if has("gui_running")
-    "inoremap <C-space> <C-n>
-    "inoremap <C-S-space> <C-p>
-"else
-    "inoremap <Nul> <C-n>
-"endif
-
 " Jedi autocompleter
-"let g:jedi#goto_assignments_command = "<leader>G"
-"let g:jedi#goto_definitions_command = "<leader>t"
-
-"let g:jedi#use_tabs_not_buffers = 0
-"autoselected option may be completed with enter...
-"alternatively, disable select-first to use ctrl+space to complete first
-"let g:jedi#popup_select_first = 0 
+let g:jedi#goto_assignments_command = "<leader>a"  "default ,g conflicts with grep
+let g:jedi#goto_definitions_command = "<leader>t"  "default ,d conflicts with dontify
 
 " switch on colourful brackets
 let g:rainbow_active = 1
