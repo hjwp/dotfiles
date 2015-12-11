@@ -374,8 +374,12 @@ let g:syntastic_javascript_jslint_args="--sloppy --browser --vars --"
 " set up jshint as an option too (can remove this if i decide to drop jsl and
 " go back to trunk, since its now supported.)
 let g:syntastic_html_jshint_args="--extract=always"
-"switch off asciidoc checker, cos it takes too long.
+" switch off asciidoc checker, cos it takes too long.
 let g:syntastic_asciidoc_checkers=['']
+" use loclist to display errors
+let g:syntastic_always_populate_loc_list = 1
+" map F4 to search jump thru errors of lopen
+map <F4> :lnext<CR>
 
 
 " files to hide in directory listings
