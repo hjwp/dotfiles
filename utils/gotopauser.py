@@ -16,7 +16,9 @@ if '@' in main_clipboard and '@' not in selection_clipboard:
 else:
     query = selection_clipboard
 
-target = "https://www.pythonanywhere.com/admin/auth/user/?q={}".format(query)
+target1 = "https://www.pythonanywhere.com/admin/auth/user/?username={}".format(query)
+target2 = "https://www.pythonanywhere.com/admin/auth/user/?email={}".format(query)
 
-process = subprocess.Popen(['firefox', target])
-sys.exit(process.wait())
+process1 = subprocess.Popen(['firefox', target1])
+process2 = subprocess.Popen(['firefox', target2])
+sys.exit(process1.wait() + process2.wait())
