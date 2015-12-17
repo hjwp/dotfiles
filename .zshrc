@@ -74,7 +74,6 @@ export PATH="/home/harry/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/us
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 #
 #
-export PIP_DOWNLOAD_CACHE=~/.pip-download-cache
 
 # set terminal to 256 colors
 if [[ "$TERM" == "xterm" ]]; then
