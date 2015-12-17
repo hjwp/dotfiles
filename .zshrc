@@ -79,7 +79,6 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 #
 #
-export PIP_DOWNLOAD_CACHE=~/.pip-download-cache
 
 # set terminal to 256 colors
 if [[ "$TERM" == "xterm" ]]; then
