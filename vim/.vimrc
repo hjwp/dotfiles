@@ -301,6 +301,7 @@ function! ToggleNumbering()
         exec 'set relativenumber'
         let s:relative_numbering = 1
     else
+        exec 'set relativenumber!'
         exec 'set number'
         let s:relative_numbering = 0
     endif
