@@ -5,7 +5,8 @@ splitw -v -p 66 -t 0 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/
 splitw -v -p 50 -t 1 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=5"
 splitw -h -p 50 -t 0 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=2"
 splitw -h -p 50 -t 1 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=4"
-splitw -h -p 50 -t 2 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=6"
+splitw -h -p 66 -t 2 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=6"
+splitw -h -p 50 -t 5 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=7"
 selectp -t 0
 setw synchronize-panes
 

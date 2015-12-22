@@ -1,0 +1,6 @@
+neww -n House "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py dev housekeeping"
+neww -n Web "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py dev web --n=1"
+neww -n Console "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py dev console --n=1"
+neww -n Task "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py dev task"
+neww -n Load "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py dev loadbalancer"
+
