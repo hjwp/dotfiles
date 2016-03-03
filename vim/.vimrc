@@ -301,6 +301,7 @@ function! ToggleNumbering()
         exec 'set relativenumber'
         let s:relative_numbering = 1
     else
+        exec 'set relativenumber!'
         exec 'set number'
         let s:relative_numbering = 0
     endif
@@ -346,6 +347,7 @@ map <f11> :!pysmell .<cr>
 " Jedi autocompleter
 let g:jedi#goto_assignments_command = "<leader>a"  "default ,g conflicts with grep
 let g:jedi#goto_definitions_command = "<leader>t"  "default ,d conflicts with dontify
+let g:jedi#use_tabs_not_buffers = 0
 
 " switch on colourful brackets
 let g:rainbow_active = 1
