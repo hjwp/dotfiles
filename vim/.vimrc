@@ -356,13 +356,16 @@ let g:rainbow_active = 1
 let g:syntastic_python_python_exec = '/usr/bin/python3'
 
 " use jslint for html (requires my fork of syntastic and jslint 0.1.4)
-let g:syntastic_html_checkers=['jslint', 'validator']
+let g:syntastic_html_checkers=['jslint', 'tidy']
 let g:syntastic_javascript_checkers=['jslint']
 let g:syntastic_html_jslint_args="--sloppy --browser --vars --"
 let g:syntastic_javascript_jslint_args="--sloppy --browser --vars --"
 " set up jshint as an option too (can remove this if i decide to drop jsl and
 " go back to trunk, since its now supported.)
 let g:syntastic_html_jshint_args="--extract=always"
+" ignore empty element errors in html-tidy
+let g:syntastic_html_tidy_ignore_errors=['trimming empty', 'escaping malformed URI']
+
 " switch off asciidoc checker, cos it takes too long.
 let g:syntastic_asciidoc_checkers=['']
 " use loclist to display errors
