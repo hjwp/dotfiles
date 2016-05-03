@@ -356,8 +356,8 @@ let g:rainbow_active = 1
 let g:syntastic_python_python_exec = '/usr/bin/python3'
 
 " use jslint for html (requires my fork of syntastic and jslint 0.1.4)
-let g:syntastic_html_checkers=['jslint', 'tidy']
-let g:syntastic_javascript_checkers=['jslint']
+let g:syntastic_html_checkers=['jshint', 'tidy']
+let g:syntastic_javascript_checkers=['jshint']
 let g:syntastic_html_jslint_args="--sloppy --browser --vars --"
 let g:syntastic_javascript_jslint_args="--sloppy --browser --vars --"
 " set up jshint as an option too (can remove this if i decide to drop jsl and
