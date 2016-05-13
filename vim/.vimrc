@@ -348,6 +348,7 @@ map <f11> :!pysmell .<cr>
 let g:jedi#goto_assignments_command = "<leader>a"  "default ,g conflicts with grep
 let g:jedi#goto_command = "<leader>t"   "default ,d conflicts with dontify
 let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#smart_auto_mappings = 0  "do not autotype the import statement
 
 " switch on colourful brackets
 let g:rainbow_active = 1
