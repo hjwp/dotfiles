@@ -354,7 +354,7 @@ let g:jedi#smart_auto_mappings = 0  "do not autotype the import statement
 let g:rainbow_active = 1
 
 " use python3 syntax checker
-let g:syntastic_python_python_exec = '/usr/bin/python3'
+let g:syntastic_python_python_exec = 'python'
 
 " use jslint for html (requires my fork of syntastic and jslint 0.1.4)
 let g:syntastic_html_checkers=['jshint', 'tidy']
