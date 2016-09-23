@@ -3,3 +3,9 @@ set nocindent
 set indentexpr=
 set autoindent
 set smartindent
+
+" two spaces for js
+setlocal tabstop=2
+setlocal shiftwidth=2
+setlocal softtabstop=2
+
