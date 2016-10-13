@@ -5,6 +5,7 @@
     "browser"       : true,     // Web Browser (window, document, etc)
     "jquery"        : true,     // jQuery
     "qunit"         : true,     // QUnit
+    "jasmine"       : true,     // Jasmine
     "devel"         : true,     // console.log mostly 
     "globals"       : {}        // additional custom predefined global variables
 }
