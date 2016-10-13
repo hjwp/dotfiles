@@ -353,17 +353,13 @@ let g:jedi#smart_auto_mappings = 0  "do not autotype the import statement
 " switch on colourful brackets
 let g:rainbow_active = 1
 
-" use python3 syntax checker
-let g:syntastic_python_python_exec = 'python'
 
-" use jslint for html (requires my fork of syntastic and jslint 0.1.4)
+let g:syntastic_python_python_exec = 'python'
 let g:syntastic_html_checkers=['jshint', 'tidy']
+let g:syntastic_htmldjango_checkers=['jshint', 'tidy']
 let g:syntastic_javascript_checkers=['jshint']
-let g:syntastic_html_jslint_args="--sloppy --browser --vars --"
-let g:syntastic_javascript_jslint_args="--sloppy --browser --vars --"
-" set up jshint as an option too (can remove this if i decide to drop jsl and
-" go back to trunk, since its now supported.)
 let g:syntastic_html_jshint_args="--extract=always"
+
 " ignore empty element errors in html-tidy
 let g:syntastic_html_tidy_ignore_errors=['trimming empty', 'escaping malformed URI']
 
