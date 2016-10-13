@@ -29,3 +29,4 @@ setw synchronize-panes
 neww -n Load "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live loadbalancer"
 neww -n MySQL "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live console --n=3"
 neww -n Proxy "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live proxy"
+neww -n File "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live file"
