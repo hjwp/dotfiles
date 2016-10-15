@@ -357,7 +357,7 @@ let g:rainbow_active = 1
 let g:syntastic_python_python_exec = 'python'
 let g:syntastic_html_checkers=['jshint', 'tidy']
 let g:syntastic_htmldjango_checkers=['jshint', 'tidy']
-let g:syntastic_javascript_checkers=['jshint']
+let g:syntastic_javascript_checkers=['eslint']
 let g:syntastic_html_jshint_args="--extract=always"
 
 " ignore empty element errors in html-tidy
