@@ -374,7 +374,7 @@ map <F4> :lnext<CR>
 
 " files to hide in directory listings
 let g:netrw_list_hide='\.py[oc]$,\.svn/$,\.git/$,\.hg/$'
-set wildignore+=*.pyc
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.pyc,*/.idea/*,*/.DS_Store,*/virtualenv,*/node_modules/*
 
 " I don't like folded regions
 set nofoldenable
@@ -388,7 +388,6 @@ noremap <C-j> <C-w>j
 
 " CtrlP settings
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|.pyc$|virtualenv'
 " don't try to be too clever with working paths. 
 let g:ctrlp_working_path_mode = ''
 noremap <Leader>f :CtrlP<CR>
