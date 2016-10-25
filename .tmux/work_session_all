@@ -1,6 +1,6 @@
 neww -n House "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live housekeeping"
 
-neww -n Web "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=1"
+neww -n Webs1 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=1"
 splitw -v -p 75 -t 0 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=3"
 splitw -v -p 66 -t 1 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=5"
 splitw -v -p 50 -t 2 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=7"
@@ -8,6 +8,16 @@ splitw -h -p 50 -t 0 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/
 splitw -h -p 50 -t 1 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=4"
 splitw -h -p 50 -t 2 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=6"
 splitw -h -p 50 -t 3 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=8"
+selectp -t 0
+setw synchronize-panes
+
+neww -n Webs2 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=9"
+splitw -v -p 75 -t 0 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=11"
+splitw -v -p 66 -t 1 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=13"
+splitw -v -p 50 -t 2 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=15"
+splitw -h -p 50 -t 0 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=10"
+splitw -h -p 50 -t 1 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=12"
+splitw -h -p 50 -t 2 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live web --n=14"
 selectp -t 0
 setw synchronize-panes
 
@@ -27,6 +37,5 @@ selectp -t 0
 setw synchronize-panes
 
 neww -n Load "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live loadbalancer"
-neww -n MySQL "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live console --n=3"
 neww -n Proxy "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live proxy"
 neww -n File "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live file"
