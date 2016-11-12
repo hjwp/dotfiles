@@ -36,6 +36,11 @@ splitw -v -p 50 -t 0 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/
 selectp -t 0
 setw synchronize-panes
 
+neww -n File "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live file --n=1"
+splitw -v -p 50 -t 0 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live file --n=2"
+selectp -t 0
+setw synchronize-panes
+
 neww -n Load "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live loadbalancer"
 neww -n Proxy "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live proxy"
-neww -n File "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live file"
+
