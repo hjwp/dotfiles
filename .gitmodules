@@ -46,3 +46,6 @@
 [submodule "vim/bundle/vim-polyglot"]
 	path = vim/bundle/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot
+[submodule "vim/bundle/django-plus.vim"]
+	path = vim/bundle/django-plus.vim
+	url = https://github.com/tweekmonster/django-plus.vim.git
