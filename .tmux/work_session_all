@@ -29,8 +29,9 @@ selectp -t 0
 setw synchronize-panes
 
 neww -n Task "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live task --n=1"
-splitw -v -p 66 -t 0 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live task --n=2"
-splitw -v -p 50 -t 1 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live task --n=3"
+splitw -v -p 75 -t 0 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live task --n=2"
+splitw -v -p 66 -t 1 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live task --n=3"
+splitw -v -p 50 -t 2 "~/.virtualenvs/PythonAnywhere/bin/python ~/PythonAnywhere/vms/ssh_machine.py live task --n=4"
 selectp -t 0
 setw synchronize-panes
 
