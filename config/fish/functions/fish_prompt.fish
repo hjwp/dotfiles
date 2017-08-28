@@ -1,0 +1,1 @@
+/home/harry/.local/share/omf/themes/scorphish/fish_prompt.fish
