@@ -160,86 +160,12 @@ set softtabstop=4
 
 " convert all typed tabs to spaces
 set expandtab
+
 " always show status line
 set laststatus=2
-
 
 " load pathogen
 call pathogen#infect()
-
-" =====STATUS LINE OF DEATH!!=====
-set statusline=
-" filename, relative to cwd
-set statusline+=%f
-" separator
-set statusline+=\ 
-
-" modified flag
-set statusline+=%#wildmenu#
-set statusline+=%m
-set statusline+=%*
-
-"Display a warning if file encoding isnt utf-8
-set statusline+=%#question#
-set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
-set statusline+=%*
-
-"display a warning if fileformat isnt unix
-set statusline+=%#directory#
-set statusline+=%{&ff!='unix'?'['.&ff.']':''}
-set statusline+=%*
-
-"display a warning if files contains tab chars
-set statusline+=%#warningmsg#
-set statusline+=%{StatuslineTabWarning()}
-set statusline+=%*
-
-"display a warning for any syntastic syntax errors
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-" read-only
-set statusline+=%r
-set statusline+=%*
-
-" right-align
-set statusline+=%=
-
-" filetype
-set statusline+=%{strlen(&ft)?&ft:'none'}
-" separator
-set statusline+=\ 
-
-" current char
-set statusline+=%3b,0x%02B
-" separator
-set statusline+=\ 
-
-" column,
-set statusline+=%2c,
-" current line / lines in file
-set statusline+=%l/%L
-
-" always show status line
-set laststatus=2
-
-" return '[tabs]' if tab chars in file, or empty string
-function! StatuslineTabWarning()
-    if !exists("b:statusline_tab_warning")
-        let tabs = search('\t', 'nw') != 0
-
-        if tabs
-            let b:statusline_tab_warning = '[tabs]'
-        else
-            let b:statusline_tab_warning = ''
-        endif
-    endif
-    return b:statusline_tab_warning
-endfunction
-"recalculate the tab warning flag when idle and after writing
-autocmd cursorhold,bufwritepost * unlet! b:statusline_tab_warning
-
 
 " line numbers
 set number
@@ -330,47 +256,22 @@ set regexpengine=1
 "make sure highlighting works all the way down long files
 autocmd BufEnter * :syntax sync fromstart
 
-
-" places to look for tags files:
-set tags=./tags,tags
-" recursively search file's parent dirs for tags file
-" set tags+=./tags;/
-" recursively search cwd's parent dirs for tags file
-set tags+=tags;/
-
-" generate tags for all files in the current dir (recursive on subdirs)
-"map <f12> :!start /min ctags -R --exclude=build .<cr>
-map <f12> :!ctags -R --exclude=build .<cr>
-map <Leader>C :!ctags -R --exclude=build .<cr>
-map <f11> :!pysmell .<cr>
-
 " Jedi autocompleter
 let g:jedi#goto_assignments_command = "<leader>a"  "default ,g conflicts with grep
 let g:jedi#goto_command = "<leader>t"   "default ,d conflicts with dontify
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#smart_auto_mappings = 0  "do not autotype the import statement
+let g:jedi#popup_on_dot = 0
+
+" integrate ale to airline statusline
+let g:airline#extensions#ale#enabled = 1
+
 
 " switch on colourful brackets
 let g:rainbow_active = 1
 
-
-let g:syntastic_python_python_exec = 'python'
-let g:syntastic_html_checkers=['jshint', 'tidy']
-let g:syntastic_htmldjango_checkers=['jshint', 'tidy']
-let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_html_jshint_args="--extract=always"
-
-" ignore empty element errors in html-tidy
-let g:syntastic_html_tidy_ignore_errors=['trimming empty', 'escaping malformed URI']
-
-" switch off asciidoc checker, cos it takes too long.
-let g:syntastic_asciidoc_checkers=['']
-" use loclist to display errors
-let g:syntastic_always_populate_loc_list = 1
 " map F4 to search jump thru errors of lopen
 map <F4> :lnext<CR>
-" nb, syntastic may not find checkers installed in ~/.local
-
 
 " files to hide in directory listings
 let g:netrw_list_hide='\.py[oc]$,\.svn/$,\.git/$,\.hg/$'

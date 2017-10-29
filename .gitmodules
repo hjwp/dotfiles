@@ -10,9 +10,6 @@
 [submodule "vim/bundle/vim-python-pep8-indent"]
 	path = vim/bundle/vim-python-pep8-indent
 	url = https://github.com/hynek/vim-python-pep8-indent.git
-[submodule "vim/bundle/syntastic"]
-	path = vim/bundle/syntastic
-	url = https://github.com/hjwp/syntastic.git
 [submodule "vim/bundle/vim-asciidoc"]
 	path = vim/bundle/vim-asciidoc
 	url = https://github.com/hjwp/vim-asciidoc.git
@@ -49,3 +46,9 @@
 [submodule "vim/bundle/django-plus.vim"]
 	path = vim/bundle/django-plus.vim
 	url = https://github.com/tweekmonster/django-plus.vim.git
+[submodule "vim/vim-airline"]
+	path = vim/bundle/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
+[submodule "vim/bundle/ale"]
+	path = vim/bundle/ale
+	url = https://github.com/w0rp/ale
