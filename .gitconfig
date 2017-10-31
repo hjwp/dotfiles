@@ -20,6 +20,7 @@
     co = checkout
     wdiff = diff --color-words
     subs = submodule update --init --recursive
+    amend = commit -a --amend --no-edit
 
 [push]
     default = upstream
