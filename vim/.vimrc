@@ -265,6 +265,9 @@ let g:jedi#popup_on_dot = 0
 
 " kick off linting when going back to normal mode
 let g:ale_lint_on_text_changed = "normal"
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
 
 " integrate ale to airline statusline
 let g:airline#extensions#ale#enabled = 1
