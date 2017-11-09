@@ -3,3 +3,5 @@ tags
 vim/backups
 vim/.netrwhist
 vim/spell/*.spl
+config/fish/fish_history
+config/fish/fishd.skeletor
