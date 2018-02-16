@@ -15,7 +15,7 @@ query = selection_clipboard
 if ' ' in query:
     query = main_clipboard
 
-target = "https://www.pythonanywhere.com/user/{}/webapps/".format(query)
+target = "https://www.pythonanywhere.com/user/{}/".format(query)
 
 process = subprocess.Popen(['firefox', target])
 sys.exit(process.wait())
