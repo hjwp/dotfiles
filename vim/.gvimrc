@@ -1,5 +1,6 @@
 set visualbell t_vb=
-set guioptions-=T
+set guioptions-=T   " no toolbar
+set guioptions-=m   " no menubar
 
 if has('win32') || has('win64')
     set guifont=DejaVu\ Sans\ Mono:h9
