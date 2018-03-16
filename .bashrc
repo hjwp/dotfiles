@@ -139,6 +139,7 @@ PATH=~/.local/bin:$PATH
 #make sure ~/.npm is on path for node binaries
 PATH=~/.npm:$PATH
 
+VIRTUALENVWRAPPER_PYTHON=python3
 source virtualenvwrapper.sh
 
 function fuck() {
