@@ -5,4 +5,5 @@ set -q XDG_DATA_HOME
 
 # Load Oh My Fish configuration.
 # source $OMF_PATH/init.fish
-eval (python -m virtualfish auto_activation environment)
+## nb environment plugin needs unreleased version of virtualfish git+https://github.com/adambrenecki/virtualfish.git
+eval (python3 -m virtualfish auto_activation environment)
