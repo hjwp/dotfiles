@@ -21,6 +21,7 @@
     wdiff = diff --color-words
     subs = submodule update --init --recursive
     amend = commit -a --amend --no-edit
+    stwdiff = diff --staged -w
 
 [push]
     default = upstream
