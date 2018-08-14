@@ -185,7 +185,7 @@ set showbreak=…
 " only long lines are highlighted (making this less intrusive than colorcolumn)
 " width defaults to 80. pass 0 to turn off.
 function! s:HighlightLongLines(width)
-    let targetWidth = a:width != '' ? a:width : 80
+    let targetWidth = a:width != '' ? a:width : 99
     if targetWidth > 0
         exec 'match ColorColumn /\%' . (targetWidth + 1) . 'v/'
     else
