@@ -22,6 +22,7 @@
     subs = submodule update --init --recursive
     amend = commit -a --amend --no-edit
     stwdiff = diff --staged -w
+    fpush = push --force-with-lease
 
 [push]
     default = upstream
