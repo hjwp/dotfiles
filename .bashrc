@@ -165,3 +165,10 @@ check-ssh-agent || {
     echo "$SSH_AUTH_SOCK" > $SSH_SOCK_INFO_PATH
 }
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# added by travis gem
+[ -f /home/harry/.travis/travis.sh ] && source /home/harry/.travis/travis.sh
