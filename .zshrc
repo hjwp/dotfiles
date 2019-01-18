@@ -134,3 +134,6 @@ load-nvmrc
 
 # added by travis gem
 [ -f /home/harry/.travis/travis.sh ] && source /home/harry/.travis/travis.sh
+
+# otherwise pipenv's virtualenvs end up god-knows-where. sometimes it seems to forget where it put them.
+export PIPENV_VENV_IN_PROJECT=1
