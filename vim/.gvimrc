@@ -5,7 +5,7 @@ set guioptions-=m   " no menubar
 if has('win32') || has('win64')
     set guifont=DejaVu\ Sans\ Mono:h9
 else
-    set guifont=Monofur\ Regular\ 12
+    set guifont=Monofur\ Regular\ 16
 endif
 
 " %1 and %2 used in .vimrc statusline are user-defined colors, defined here:
