@@ -265,6 +265,9 @@ let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#smart_auto_mappings = 0  "do not autotype the import statement
 let g:jedi#popup_on_dot = 0
 
+" supertab to use (jedi) omnicompletion
+ let g:SuperTabDefaultCompletionType = "context"
+
 " tern js autocompleter thingie
 autocmd FileType javascript map <leader>t :TernDef<CR>
 
