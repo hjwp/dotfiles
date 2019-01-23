@@ -276,6 +276,7 @@ let g:ale_lint_on_text_changed = "normal"
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \}
+let g:ale_javascript_eslint_use_global = 1
 
 " integrate ale to airline statusline
 let g:airline#extensions#ale#enabled = 1
