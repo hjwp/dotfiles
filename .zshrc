@@ -1,6 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="/home/harry/.local/bin:/home/harry/.gem/ruby/2.5.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/home/harry/.pyenv/bin:/home/harry/.local/bin:/home/harry/.gem/ruby/2.5.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -61,9 +64,10 @@ ZSH_CUSTOM=~/dotfiles/oh-my-zsh-custom
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  virtualenvwrapper
   zsh-autosuggestions 
   dotenv
+  pyenv
+  virtualenvwrapper
 )
 
 source $ZSH/oh-my-zsh.sh
