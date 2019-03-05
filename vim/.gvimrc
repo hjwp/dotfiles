@@ -5,14 +5,8 @@ set guioptions-=m   " no menubar
 if has('win32') || has('win64')
     set guifont=DejaVu\ Sans\ Mono:h9
 else
-    set guifont=Monofur\ Regular\ 16
+    set guifont=Monofur\ Regular\ 15
 endif
-
-" %1 and %2 used in .vimrc statusline are user-defined colors, defined here:
-hi User1 guifg=yellow guibg=black
-hi User1 ctermfg=yellow ctermbg=black
-hi User2 guifg=#000000 guibg=#406080
-hi User2 ctermfg=grey 
 
 " increase/decrease font size with - and +
 function! FontSmaller()
