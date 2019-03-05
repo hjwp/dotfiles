@@ -309,6 +309,8 @@ let g:ctrlp_working_path_mode = ''
 noremap <Leader>f :CtrlP<CR>
 noremap <Leader>b :CtrlPBuffer<CR>
 noremap <Leader>p :CtrlPClearAllCaches<CR>
+" ignore locally rendered book files
+let g:ctrlp_custom_ignore = 'chapter_.*.html\|appendix_.*.html'
 
 " Change the color scheme from a list of color scheme names.
 " Adapted Version 2010-09-12 from http://vim.wikia.com/wiki/VimTip341
