@@ -356,3 +356,4 @@ nnoremap <S-F8> :call NextColor(1)<CR>
 nnoremap <Leader>c :call NextColor(1)<CR>
 call NextColor(0)
 
+nnoremap <A-s> :redir >> ~/dotfiles/vim/good-colorschemes.txt<CR>:colorscheme<CR>:redir END<CR>
