@@ -1,0 +1,4 @@
+[MESSAGES CONTROL]
+# Find available symbolic names in:
+# https://docs.pylint.org/features.html
+disable=missing-docstring, invalid-name, trailing-newlines
