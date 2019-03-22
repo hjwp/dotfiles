@@ -63,11 +63,13 @@ ZSH_CUSTOM=~/dotfiles/oh-my-zsh-custom
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
-  zsh-autosuggestions 
+  docker
+  docker-compose
   dotenv
+  git
   pyenv
   virtualenvwrapper
+  zsh-autosuggestions 
 )
 
 source $ZSH/oh-my-zsh.sh
