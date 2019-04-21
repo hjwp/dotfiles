@@ -9,7 +9,9 @@ carvedwoodcool
 cgpro
 clarity
 codeschool
+darkBlue
 darkZ
+darkeclipse
 darkeclipse
 duotone-darkspace
 earendel
@@ -35,9 +37,11 @@ kalisi
 kellys
 kib_darktango
 kkruby
+kolor
 lettuce
 lilac
 madeofcode
+maroloccio
 materialvim
 maui
 mushroom
