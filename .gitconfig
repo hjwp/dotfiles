@@ -23,6 +23,7 @@
     amend = commit -a --amend --no-edit
     stwdiff = diff --staged -w
     fpush = push --force-with-lease
+    irebase = rebase --interactive
 
 [push]
     default = upstream
