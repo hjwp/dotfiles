@@ -1,8 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="/home/harry/.pyenv/bin:/home/harry/.local/bin:/home/harry/.gem/ruby/2.5.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+export PATH="/home/harry/.local/bin:/home/harry/.gem/ruby/2.5.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 
 
 # Path to your oh-my-zsh installation.
@@ -67,7 +65,6 @@ plugins=(
   docker-compose
   dotenv
   git
-  pyenv
   virtualenvwrapper
   zsh-autosuggestions 
 )
