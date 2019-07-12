@@ -24,6 +24,7 @@
     stwdiff = diff --staged -w
     fpush = push --force-with-lease
     irebase = rebase --interactive
+    rcont = rebase --continue
 
 [push]
     default = upstream
