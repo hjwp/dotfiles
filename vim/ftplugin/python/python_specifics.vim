@@ -7,11 +7,6 @@ au! FileType python setl nosmartindent
 
 
 "automatically strip whitespace from line endings on save
-fun! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-endfun
 autocmd BufWritePre *.py normal :call TrimWhitespace()
 
 " go to next/prev class

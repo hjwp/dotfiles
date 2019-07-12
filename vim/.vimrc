@@ -357,3 +357,10 @@ nnoremap <Leader>c :call NextColor(1)<CR>
 call NextColor(0)
 
 nnoremap <A-s> :redir >> ~/dotfiles/vim/good-colorschemes.txt<CR>:colorscheme<CR>:redir END<CR>
+
+function! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+nnoremap <Leader>e :call TrimWhitespace()<CR>
