@@ -55,3 +55,6 @@
 [submodule "vim/bundle/vim-surround"]
 	path = vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule "vim/bundle/LanguageClient-neovim"]
+	path = vim/bundle/LanguageClient-neovim
+	url = https://github.com/autozimu/LanguageClient-neovim.git
