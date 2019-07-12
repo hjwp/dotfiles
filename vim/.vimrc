@@ -258,28 +258,19 @@ set regexpengine=1
 "make sure highlighting works all the way down long files
 autocmd BufEnter * :syntax sync fromstart
 
-" Jedi autocompleter
-let g:jedi#goto_assignments_command = "<leader>a"  "default ,g conflicts with grep
-let g:jedi#goto_command = "<leader>t"   "default ,d conflicts with dontify
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#smart_auto_mappings = 0  "do not autotype the import statement
-let g:jedi#popup_on_dot = 0
+" LanguageServer autocompletion etc config
 
-" supertab to use (jedi) omnicompletion
- let g:SuperTabDefaultCompletionType = "context"
+" Required for operations modifying multiple buffers like rename.
+set hidden
+let g:LanguageClient_serverCommands = {
+    \ 'python': ['~/dotfiles/vim/.python-language-server-virtualenv/bin/pyls'],
+    \ }
 
-" tern js autocompleter thingie
-autocmd FileType javascript map <leader>t :TernDef<CR>
-
-" kick off linting when going back to normal mode
-let g:ale_lint_on_text_changed = "normal"
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\}
-let g:ale_javascript_eslint_use_global = 1
-
-" integrate ale to airline statusline
-let g:airline#extensions#ale#enabled = 1
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 
 " switch on colourful brackets
