@@ -268,9 +268,15 @@ let g:LanguageClient_serverCommands = {
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
-" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> <leader>t :call LanguageClient#textDocument_definition()<CR>
 " nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+let g:LanguageClient_loggingLevel = 'INFO'
+let g:LanguageClient_loggingFile =  expand('~/.local/share/vim/LanguageClient.log')
+let g:LanguageClient_serverStderr = expand('~/.local/share/vim/LanguageServer.log')
+
+" tell supertab to try and be clever about what completion engine to use
+let g:SuperTabDefaultCompletionType = "context"
 
 
 " switch on colourful brackets
