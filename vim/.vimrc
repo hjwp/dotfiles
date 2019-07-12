@@ -275,8 +275,45 @@ let g:LanguageClient_loggingLevel = 'INFO'
 let g:LanguageClient_loggingFile =  expand('~/.local/share/vim/LanguageClient.log')
 let g:LanguageClient_serverStderr = expand('~/.local/share/vim/LanguageServer.log')
 
+" some config that's required to make the little warnings work apparently
+highlight ALEHint term=standout ctermfg=15 ctermbg=DarkYellow guifg=White guibg=DarkYellow
+highlight ALEInfo term=standout ctermfg=15 ctermbg=DarkGreen guifg=White guibg=DarkGreen
+highlight ALEWarning term=standout ctermfg=15 ctermbg=DarkMagenta guifg=White guibg=DarkMagenta
+highlight ALEError term=standout ctermfg=15 ctermbg=DarkRed guifg=White guibg=DarkRed
+let g:LanguageClient_diagnosticsDisplay = {
+    \ 1: {
+    \"name": "Error",
+    \"texthl": "ALEError",
+    \"signText": "✖",
+    \"signTexthl": "ALEErrorSign",
+    \"virtualTexthl": "Error",
+    \},
+    \2: {
+    \"name": "Warning",
+    \"texthl": "ALEWarning",
+    \"signText": "⚠",
+    \"signTexthl": "ALEWarning",
+    \"virtualTexthl": "Todo",
+    \},
+    \3: {
+    \"name": "Info",
+    \"texthl": "ALEInfo",
+    \"signText": "ℹ",
+    \"signTexthl": "ALEInfo",
+    \"virtualTexthl": "Todo",
+    \},
+    \4: {
+    \"name": "Hint",
+    \"texthl": "ALEHint",
+    \"signText": "➤",
+    \"signTexthl": "ALEHint",
+    \"virtualTexthl": "Todo",
+    \},
+    \}
+
 " tell supertab to try and be clever about what completion engine to use
 let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabClosePreviewOnPopupClose = 1
 
 
 " switch on colourful brackets
