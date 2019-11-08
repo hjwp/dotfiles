@@ -7,9 +7,6 @@
 [submodule "vim/bundle/vim-python-pep8-indent"]
 	path = vim/bundle/vim-python-pep8-indent
 	url = https://github.com/hynek/vim-python-pep8-indent.git
-[submodule "vim/bundle/vim-asciidoc"]
-	path = vim/bundle/vim-asciidoc
-	url = https://github.com/hjwp/vim-asciidoc.git
 [submodule "vim/bundle/colorschemes"]
 	path = vim/bundle/colorschemes
 	url = https://github.com/flazz/vim-colorschemes.git
