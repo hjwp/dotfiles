@@ -140,3 +140,17 @@ load-nvmrc
 
 # otherwise pipenv's virtualenvs end up god-knows-where. sometimes it seems to forget where it put them.
 export PIPENV_VENV_IN_PROJECT=1
+
+# for "fuck you firefox".  requires utils/flip
+function fuck() {
+  if [ ! $1 ]; then
+    echo "Usage: fuck you process_name"
+    exit
+  fi
+
+  if killall $2; then
+    echo
+    echo " (╯°□°）╯︵$(echo $2 | flip)"
+    echo
+  fi
+}
