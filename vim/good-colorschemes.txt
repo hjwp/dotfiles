@@ -1,3 +1,4 @@
+CandyPaper
 Chasing_Logic
 Dim
 DimSlateBG
@@ -18,6 +19,9 @@ colorsbox-steighties
 darkBlue
 darkZ
 darkeclipse
+default
+doorhinge
+duotone-darksea
 duotone-darkspace
 earendel
 ecostation
@@ -29,10 +33,14 @@ evolution
 feral
 flatcolor
 flattown
+forneus
+fx
 getafe
 gotham256
 greyblue
 herald
+heroku
+herokudoc
 hotpot
 hybrid
 industrial
@@ -67,8 +75,11 @@ sierra
 spacegray
 spring
 tango2
+tchaba
 tesla
 thornbird
 vilight
 woju
+wombat256mod
+yeller
 znake
