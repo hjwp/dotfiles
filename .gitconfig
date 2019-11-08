@@ -25,6 +25,7 @@
     fpush = push --force-with-lease
     irebase = rebase --interactive
     rcont = rebase --continue
+    ccont = cherry-pick --continue
 
 [push]
     default = upstream
