@@ -16,8 +16,6 @@ virtualenvs
 symlink
 admin
 app
-#ts
-Fts/!
 FTs
 Firefox
 unittest
@@ -27,7 +25,6 @@ tearDown
 assertIn assertEqual
 assertIn
 assertEqual
-#ssertTrue, assertFalse
 assertTrue, assertFalse/!
 assertTrue
 assertFalse
@@ -55,4 +52,9 @@ jQuery
 QUnit
 Systemd
 PythonAnywhere
-WSGI/!
+microservice
+MADE.com
+microservice
+microservices
+codebase
+entrypoint
