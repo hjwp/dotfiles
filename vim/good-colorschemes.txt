@@ -1,3 +1,4 @@
+Brogrammer
 CandyPaper
 Chasing_Logic
 Dim
@@ -6,8 +7,11 @@ GrayOrange
 Guardian
 MountainDew
 Tomorrow-Night
+abbott
+apprentice
 babymate256
 beekai
+behelit
 bluedrake
 candycode
 candyman
@@ -19,6 +23,7 @@ colorsbox-steighties
 darkBlue
 darkZ
 darkeclipse
+darkspectrum
 default
 doorhinge
 duotone-darksea
@@ -41,6 +46,7 @@ greyblue
 herald
 heroku
 herokudoc
+holokai
 hotpot
 hybrid
 industrial
@@ -64,6 +70,7 @@ mellow
 mushroom
 neonwave
 nerv-ous
+night
 nightflight2
 obsidian
 onedark
@@ -72,13 +79,16 @@ parsec
 pw
 railscasts
 sierra
+softblue
 spacegray
 spring
 tango2
 tchaba
 tesla
 thornbird
+two2tango
 vilight
+wellsokai
 woju
 wombat256mod
 yeller
