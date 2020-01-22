@@ -1,6 +1,7 @@
 " my own customisations for asciidoc
 
 " US spelling sigh
+setlocal spell
 setlocal spelllang=en_us
 
 "snippets for new book
