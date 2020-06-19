@@ -155,13 +155,15 @@ endif
 set fileformat=unix
 set encoding=utf-8
 
-" sane editing
+" python an general tabs
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+set expandtab " convert all typed tabs to spaces
 
-" convert all typed tabs to spaces
-set expandtab
+" some specific overrides
+autocmd FileType html setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType typescript setlocal shiftwidth=2 softtabstop=2 expandtab
 
 " always show status line
 set laststatus=2
@@ -247,7 +249,6 @@ set clipboard+=unnamed
 
 " close buffer without closing window
 noremap <C-BS> :bp<cr>bd #<cr>
-
 
 " tags for syntax highlighting
 syntax on
