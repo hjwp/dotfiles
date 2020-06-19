@@ -301,7 +301,7 @@ map <F4> :lnext<CR>
 
 " files to hide in directory listings
 let g:netrw_list_hide='\.py[oc]$,\.svn/$,\.git/$,\.hg/$'
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.pyc,*/.idea/*,*/.DS_Store,*/virtualenv,*/node_modules/*
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.pyc,*/.idea/*,*/.DS_Store,*/virtualenv,*/.venv,*/node_modules/*,
 
 " I don't like folded regions
 set nofoldenable
