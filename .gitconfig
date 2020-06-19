@@ -28,4 +28,4 @@
     ccont = cherry-pick --continue
 
 [push]
-    default = upstream
+    default = current
