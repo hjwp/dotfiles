@@ -274,14 +274,24 @@ autocmd FileType javascript map <leader>t :TernDef<CR>
 
 " kick off linting when going back to normal mode
 let g:ale_lint_on_text_changed = "normal"
-let g:ale_linters = {
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines'],
 \   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
+\   'python': ['black'],
 \}
-let g:ale_javascript_eslint_use_global = 1
+" let g:ale_javascript_eslint_use_global = 1
+" let g:ale_fix_on_save = 1
+
+noremap <F9> :ALEFix<CR>
 
 " integrate ale to airline statusline
 let g:airline#extensions#ale#enabled = 1
 
+" i like slightly longer lines
+let g:black_linelength = 99
+let g:ale_python_black_options='--line-length 99'
 
 " switch on colourful brackets
 let g:rainbow_active = 1
