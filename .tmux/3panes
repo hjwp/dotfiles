@@ -1,4 +1,4 @@
 set -g set-remain-on-exit on
-new -n tests "cd . && git ls-files | entr pytest tests/unit"
-split-window -v -p 10 "cd . && git ls-files | entr make mypy"
+new -n tests "cd . && export $(make get_toggles) && git ls-files | entr ./.venv/bin/pytest tests/unit"
+split-window -v -p 15 "cd . && git ls-files | entr make mypy"
 split-window -h "cd .  && git ls-files | entr make black"
