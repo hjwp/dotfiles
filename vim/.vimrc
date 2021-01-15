@@ -266,11 +266,22 @@ let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#smart_auto_mappings = 0  "do not autotype the import statement
 let g:jedi#popup_on_dot = 0
 
+" Ale autcomplete
+
+" this allows you to debug eg interactions with pyls
+" let g:ale_command_wrapper = '~/dotfiles/utils/ale-command-wrapper.sh'
+
+" if wanting to use pyls, this would put use ale autocomplete for omnifunc
+" set omnifunc=ale#completion#OmniFunc
+
 " supertab to use (jedi) omnicompletion
- let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabDefaultCompletionType = "context"
 
 " tern js autocompleter thingie
 autocmd FileType javascript map <leader>t :TernDef<CR>
+
+" pyls needs to be enabled explicitly
+" let g:ale_linters = {'python': ['pyls', 'mypy']}"
 
 " kick off linting when going back to normal mode
 let g:ale_lint_on_text_changed = "normal"
