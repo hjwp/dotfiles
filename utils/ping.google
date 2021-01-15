@@ -1,2 +1,7 @@
 #!/bin/sh
-ping 8.8.8.8
+while true;
+    do
+    date
+    ping -v -c4 8.8.8.8
+    sleep 0.5
+done;
