@@ -290,7 +290,7 @@ noremap <F9> :ALEFix<CR>
 let g:airline#extensions#ale#enabled = 1
 
 " i like slightly longer lines
-let g:black_linelength = 99
+let g:black_linelength = 89
 let g:ale_python_black_options='--line-length 99'
 
 " switch on colourful brackets
