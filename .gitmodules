@@ -67,3 +67,9 @@
 [submodule "vim/vim/bundle/black"]
 	path = vim/bundle/black
 	url = https://github.com/psf/black.git
+[submodule "vim/bundle/.vim/bundle/ropevim"]
+	path = vim/bundle/.vim/bundle/ropevim
+	url = https://github.com/python-rope/ropevim.git
+[submodule "vim/bundle/ropevim"]
+	path = vim/bundle/ropevim
+	url = https://github.com/python-rope/ropevim.git
