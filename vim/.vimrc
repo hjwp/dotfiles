@@ -300,9 +300,9 @@ noremap <F9> :ALEFix<CR>
 " integrate ale to airline statusline
 let g:airline#extensions#ale#enabled = 1
 
-" i like slightly longer lines
-let g:black_linelength = 89
-let g:ale_python_black_options='--line-length 99'
+" 86 is for the book
+let g:black_linelength = 86
+let g:ale_python_black_options='--line-length 86'
 
 " switch on colourful brackets
 let g:rainbow_active = 1
