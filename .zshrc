@@ -137,3 +137,7 @@ function fuck() {
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/nomad nomad
+
+export PATH="$HOME/.poetry/bin:$PATH"
+export POETRY_VIRTUALENVS_IN_PROJECT="true"
+if [ -e /home/harry/.nix-profile/etc/profile.d/nix.sh ]; then . /home/harry/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
