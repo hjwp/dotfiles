@@ -14,6 +14,7 @@ sudo apt install -y \
     git-lfs \
     gnupg-agent \
     jq \
+    firefox-geckodriver \
     fonts-noto-color-emoji \
     fonts-monofur \
     fonts-powerline \
@@ -40,6 +41,8 @@ sudo apt install -y \
     xvfb \
     zsh
 
+# book
+sudo gem install asciidoctor pygments.rb coderay
 
 # docker + signal
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
