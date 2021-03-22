@@ -99,6 +99,11 @@ set backupdir=~/.vim/backups//
 set directory=~/.vim/backups//
 set backup
 
+" enable backupcopy so parcel watcher works (Arrival)
+" https://parceljs.org/hmr.html#safe-write
+set backupcopy=yes
+
+
 " display cursor co-ords at all times
 set ruler
 set cursorline
@@ -278,10 +283,15 @@ let g:ale_command_wrapper = '~/dotfiles/utils/ale-command-wrapper.sh'
 let g:SuperTabDefaultCompletionType = "context"
 
 " tern js autocompleter thingie
-autocmd FileType javascript map <leader>t :TernDef<CR>
+autocmd FileType javascript noremap <leader>t :TernDef<CR>
+autocmd FileType elm noremap <leader>t :ALEGoToDefinition<CR>
 
-" pyls needs to be enabled explicitly
-" let g:ale_linters = {'python': ['pyls', 'mypy']}"
+" elm-make and language-server clash
+let g:ale_linters = {
+\   'elm': ['elm_ls'],
+\   'haskell': ['hls', 'stack_build', 'stack_ghc'],
+\}
+"   'python': ['pyls', 'mypy'], " pyls needs to be enabled explicitly
 
 " kick off linting when going back to normal mode
 let g:ale_lint_on_text_changed = "normal"
@@ -291,6 +301,7 @@ let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \   'typescript': ['eslint'],
 \   'python': ['black'],
+\   'elm': ['elm-format'],
 \}
 " let g:ale_javascript_eslint_use_global = 1
 " let g:ale_fix_on_save = 1
