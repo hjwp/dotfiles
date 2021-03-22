@@ -268,8 +268,8 @@ let g:jedi#popup_on_dot = 0
 
 " Ale autcomplete
 
-" this allows you to debug eg interactions with pyls
-" let g:ale_command_wrapper = '~/dotfiles/utils/ale-command-wrapper.sh'
+" this allows you to debug interactions with language servers
+let g:ale_command_wrapper = '~/dotfiles/utils/ale-command-wrapper.sh'
 
 " if wanting to use pyls, this would put use ale autocomplete for omnifunc
 " set omnifunc=ale#completion#OmniFunc

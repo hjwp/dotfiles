@@ -1,2 +1,4 @@
-#!/bin/sh
-tee "$1.in" | "$@" 2>"$1.err" | tee "$1.out"
+#!/bin/bash
+executable=$1
+outputfile=${executable////-}  # strip out /es if executable is full path
+tee "/tmp/$outputfile.in" | "$@" 2>"/tmp/$outputfile.err" | tee "/tmp/$outputfile.out"
