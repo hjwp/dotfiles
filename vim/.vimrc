@@ -274,7 +274,7 @@ let g:jedi#popup_on_dot = 0
 " Ale autcomplete
 
 " this allows you to debug interactions with language servers
-let g:ale_command_wrapper = '~/dotfiles/utils/ale-command-wrapper.sh'
+" let g:ale_command_wrapper = '~/dotfiles/utils/ale-command-wrapper.sh'
 
 " if wanting to use pyls, this would put use ale autocomplete for omnifunc
 " set omnifunc=ale#completion#OmniFunc
@@ -284,13 +284,19 @@ let g:SuperTabDefaultCompletionType = "context"
 
 " tern js autocompleter thingie
 autocmd FileType javascript noremap <leader>t :TernDef<CR>
-autocmd FileType elm noremap <leader>t :ALEGoToDefinition<CR>
+autocmd FileType elm noremap <leader>t :call CocActionAsync('jumpDefinition')<CR>
+autocmd FileType elm noremap <leader>h :call CocAction('doHover')<CR>
+autocmd FileType elm noremap <leader>d :call CocDiagnostics<CR>
+autocmd FileType haskell noremap <leader>t :ALEGoToDefinition<CR>
+autocmd FileType haskell noremap <leader>h :ALEHover<CR>
+autocmd FileType haskell noremap <leader>d :ALEDetail<CR>
 
-" elm-make and language-server clash
+" disable ale linting for elm
 let g:ale_linters = {
-\   'elm': ['elm_ls'],
-\   'haskell': ['hls', 'stack_build', 'stack_ghc'],
+\   'haskell': ['hls'],
+\   'elm': [],
 \}
+" \   'elm': ['elm_ls'],
 "   'python': ['pyls', 'mypy'], " pyls needs to be enabled explicitly
 
 " kick off linting when going back to normal mode
@@ -302,7 +308,9 @@ let g:ale_fixers = {
 \   'typescript': ['eslint'],
 \   'python': ['black'],
 \   'elm': ['elm-format'],
+\   'haskell': ['stylish-haskell'],
 \}
+
 " let g:ale_javascript_eslint_use_global = 1
 " let g:ale_fix_on_save = 1
 
