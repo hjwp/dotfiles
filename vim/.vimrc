@@ -190,35 +190,7 @@ set linebreak
 " show an ellipsis at the start of wrapped lines
 set showbreak=…
 
-" discretely highlight lines which are longer than the specified width
-" only long lines are highlighted (making this less intrusive than colorcolumn)
-" width defaults to 80. pass 0 to turn off.
-function! s:HighlightLongLines(width)
-    let targetWidth = a:width != '' ? a:width : 99
-    if targetWidth > 0
-        exec 'match ColorColumn /\%' . (targetWidth + 1) . 'v/'
-    else
-        exec 'match'
-    endif
-endfunction
-
-
-" toggle the highlighting of long lines
-command! -nargs=? HighlightLongLines call s:HighlightLongLines('<args>')
-let s:highlight_long_lines = 0
-function! ToggleHighlightLongLines()
-    if s:highlight_long_lines == 0
-        HighlightLongLines
-        let s:highlight_long_lines = 1
-    else
-        HighlightLongLines 0
-        let s:highlight_long_lines = 0
-    endif
-endfunction
-noremap <leader>L :call ToggleHighlightLongLines()<cr>
-
-
-" toggle wrapped appearance of long lines
+" toggle line wrapping with ,w
 function! ToggleWrap()
     if &wrap == 0
         set wrap
@@ -227,7 +199,6 @@ function! ToggleWrap()
     endif
 endfunction
 noremap <leader>w :call ToggleWrap()<cr>
-
 
 " toggle relative line numbering
 let s:relative_numbering = 0
@@ -242,7 +213,6 @@ function! ToggleNumbering()
     endif
 endfunction
 noremap <leader>r :call ToggleNumbering()<cr>
-
 
 
 " allow cursor keys to go right off end of one line, onto start of next

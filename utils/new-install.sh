@@ -8,7 +8,6 @@ sudo apt install -y \
     ccze \
     chromium-browser \
     curl \
-    dropbox \
     entr \
     git \
     git-lfs \
@@ -23,12 +22,8 @@ sudo apt install -y \
     haskell-stack \
     libpq-dev \
     oathtool \
-    openvpn \
-    python3-dev \
-    python3-pip \
-    python3.9 \
-    python3.9-dev \
-    python3.9-pip \
+    python3.9-full \
+    python3.10-full \
     ruby \
     software-properties-common
     tmux \
@@ -39,29 +34,43 @@ sudo apt install -y \
     vlc \
     xclip \
     xvfb \
-    zsh
+    zsh || true
 
 # book
 sudo gem install asciidoctor pygments.rb coderay
 
-# docker + signal
+# external repos
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository \
+sudo add-apt-repository -y \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
 
 wget -O- https://updates.signal.org/desktop/apt/keys.asc |  sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
+sudo add-apt-repository -y \
+    "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
+
+wget -O- https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub | sudo apt-key add -
+sudo wget -O /etc/apt/sources.list.d/openvpn3.list https://swupdate.openvpn.net/community/openvpn3/repos/openvpn3-focal.list
+
+sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 1C61A2656FB57B7E4DE0F4C1FC918B335044912E
+sudo add-apt-repository -y \
+    "deb https://linux.dropbox.com/ubuntu xenial main"
 
 sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io signal-desktop
+sudo apt-get install -y \
+    docker-ce docker-ce-cli containerd.io \
+    dropbox \
+    signal-desktop \
+    openvpn3
+
 sudo groupadd -f docker
 sudo usermod -aG docker harry
-#docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+# docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
 
-# virtualenvwrapper for zsh plugin
-python3 -m pip install --user virtualenvwrapper awscli
+# virtualenvwrapper for zsh plugin, black for vim
+python3 -m pip install --user virtualenvwrapper awscli black

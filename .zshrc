@@ -140,4 +140,10 @@ complete -o nospace -C /usr/bin/nomad nomad
 
 export PATH="$HOME/.poetry/bin:$PATH"
 export POETRY_VIRTUALENVS_IN_PROJECT="true"
+
 if [ -e /home/harry/.nix-profile/etc/profile.d/nix.sh ]; then . /home/harry/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
