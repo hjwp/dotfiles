@@ -1,0 +1,4 @@
+neww -n "M15Y local" "cd ~/arrival/aggregator && { git pull|| git fetch } && nix-shell"
+split-window -h "cd ~/arrival/project-service && { git pull || git fetch } && nix-shell"
+split-window -v "cd ~/arrival/red-models/evaluation-service && { git pull || git fetch } && nix-shell"
+split-window -t 0 -v "cd ~/arrival/ui && git pull && zsh"
