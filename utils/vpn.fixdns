@@ -1,0 +1,1 @@
+sudo cp /etc/resolv.conf.ovpn3bak /etc/resolv.conf
