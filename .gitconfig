@@ -44,3 +44,5 @@
 	insteadOf = https://git.core.arrival.co
 [init]
 	defaultBranch = main
+[blame]
+	ignoreRevsFile = .git-blame-ignore-revs
