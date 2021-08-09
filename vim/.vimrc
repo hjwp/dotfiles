@@ -4,10 +4,10 @@ set nocompatible
 " use 'comma' prefix for multi-stroke keyboard mappings
 let mapleader = ","
 
-" mouse and keyboard selections enter select mode, 
+" mouse and keyboard selections enter select mode,
 set selectmode=mouse,key
 
-" ctrl-q doesnt work in console vim, so use leader-q 
+" ctrl-q doesnt work in console vim, so use leader-q
 " to enter block visual mode
 nnoremap <leader>q <C-Q>
 
@@ -103,6 +103,9 @@ set backup
 " https://parceljs.org/hmr.html#safe-write
 set backupcopy=yes
 
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience (from coc.nvim)
+set updatetime=300
 
 " display cursor co-ords at all times
 set ruler
@@ -129,7 +132,7 @@ if has("autocmd")
     " 'cindent' is on in C files, etc.
     " Also load indent files, to automatically do language-dependent indenting.
     filetype plugin indent on
-    
+
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
     " (happens when dropping a file on gvim).
@@ -169,6 +172,7 @@ set expandtab " convert all typed tabs to spaces
 " some specific overrides
 autocmd FileType html setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType typescript setlocal shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType json setlocal shiftwidth=2 softtabstop=2 expandtab
 
 " always show status line
 set laststatus=2
@@ -229,7 +233,7 @@ noremap <C-BS> :bp<cr>bd #<cr>
 syntax on
 
 " allegedly faster regex engine for syntax stuff
-set regexpengine=1 
+set regexpengine=1
 
 "make sure highlighting works all the way down long files
 autocmd BufEnter * :syntax sync fromstart
@@ -251,17 +255,19 @@ let g:jedi#popup_on_dot = 0
 
 " supertab to use (jedi) omnicompletion
 let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 " tern js autocompleter thingie
 autocmd FileType javascript noremap <leader>t :TernDef<CR>
 autocmd FileType elm noremap <leader>t :call CocActionAsync('jumpDefinition')<CR>
 autocmd FileType elm noremap <leader>h :call CocAction('doHover')<CR>
-autocmd FileType elm noremap <leader>d :call CocDiagnostics<CR>
+autocmd FileType elm noremap <leader>d :CocDiagnostics<CR>
 autocmd FileType haskell noremap <leader>t :ALEGoToDefinition<CR>
 autocmd FileType haskell noremap <leader>h :ALEHover<CR>
 autocmd FileType haskell noremap <leader>d :ALEDetail<CR>
 
-" disable ale linting for elm
+
+" disable ale linting for elm (use coc)
 let g:ale_linters = {
 \   'haskell': ['hls'],
 \   'elm': [],
@@ -315,7 +321,7 @@ noremap <C-j> <C-w>j
 
 " CtrlP settings
 let g:ctrlp_map = '<c-p>'
-" don't try to be too clever with working paths. 
+" don't try to be too clever with working paths.
 let g:ctrlp_working_path_mode = ''
 noremap <Leader>f :CtrlP<CR>
 noremap <Leader>b :CtrlPBuffer<CR>

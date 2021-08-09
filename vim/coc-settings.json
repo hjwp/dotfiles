@@ -3,7 +3,14 @@
     "elmLS": {
       "command": "elm-language-server",
       "filetypes": ["elm"],
-      "rootPatterns": ["elm.json"]
+      "rootPatterns": ["elm.json"],
+      "trace": {"server": "verbose"},
+      "initializationOptions": {
+        "elmAnalyseTrigger": "never"
+      }
     }
-  }
+  },
+  "codeLens.enable": false,
+  "hover.previewMaxHeight": 30,
+  "suggest.timeout": 500
 }
