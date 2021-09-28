@@ -126,7 +126,6 @@ filetype plugin on
 filetype on
 
 if has("autocmd")
-
     " Enable file type detection.
     " Use the default filetype settings, so that mail gets 'tw' set to 72,
     " 'cindent' is on in C files, etc.
@@ -295,9 +294,8 @@ noremap <F9> :ALEFix<CR>
 " integrate ale to airline statusline
 let g:airline#extensions#ale#enabled = 1
 
-" 86 is for the book
 let g:black_linelength = 86
-let g:ale_python_black_options='--line-length 86'
+" let g:ale_python_black_options='--line-length 86'
 
 " switch on colourful brackets
 let g:rainbow_active = 1
