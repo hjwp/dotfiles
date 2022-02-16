@@ -1,1 +1,2 @@
-openvpn3 session-start --config ~/client.ovpn
+#openvpn3 session-start --config ~/client.ovpn
+sudo openvpn --config ~/client.ovpn
