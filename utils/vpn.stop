@@ -1,1 +1,1 @@
-openvpn3 session-manage --config ~/client.ovpn --disconnect
+openvpn3 sessions-list | grep Path | awk '{print $2}' | xargs -L1 openvpn3 session-manage --disconnect --path
