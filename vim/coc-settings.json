@@ -12,5 +12,6 @@
   },
   "codeLens.enable": false,
   "hover.previewMaxHeight": 30,
+  "suggest.autoTrigger": "never",
   "suggest.timeout": 500
 }

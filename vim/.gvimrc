@@ -5,7 +5,7 @@ set guioptions-=m   " no menubar
 if has('win32') || has('win64')
     set guifont=DejaVu\ Sans\ Mono:h9
 else
-    set guifont=Monofur\ Regular\ 15
+    set guifont=Monofur\ Regular\ 14
 endif
 
 " increase/decrease font size with - and +

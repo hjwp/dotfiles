@@ -40,8 +40,8 @@ set hlsearch
 " map key to dismiss search highlightedness
 map <bs> :noh<CR>
 
-
-
+" Give more space for displaying messages at the bottom of the screen
+set cmdheight=2
 
 " set grep to be grep, better have cygwin installed & on the path!
 set grepprg=grep\ -I\ -n\ --exclude=\"*.pyc\"\ --exclude=tags\ --exclude-dir=node_modules\ --exclude-dir=.git\ --exclude-dir=.svn\ --exclude-dir=.hg\ --exclude-dir=CACHE
@@ -296,6 +296,9 @@ let g:airline#extensions#ale#enabled = 1
 
 let g:black_linelength = 86
 " let g:ale_python_black_options='--line-length 86'
+
+" i hate editoconfig messing with textwidth
+let g:EditorConfig_disable_rules = ['max_line_length']
 
 " switch on colourful brackets
 let g:rainbow_active = 1
