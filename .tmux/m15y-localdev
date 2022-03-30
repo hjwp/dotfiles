@@ -1,4 +1,30 @@
-neww -n "M15Y local" "cd ~/arrival/aggregator && { git pull || git fetch } && nix-shell"
-split-window -h "cd ~/arrival/project-service && { git pull || git fetch } && nix-shell"
-split-window -v "cd ~/arrival/red-models/evaluation-service && { git pull || git fetch } && nix-shell"
-split-window -t 0 -v "cd ~/arrival/ui && { git pull || git fetch } && zsh"
+neww -n "M15Y local"
+# make 4 panes
+split-window -h
+split-window -v
+split-window -v -t 0
+
+# commands for each pane
+
+send-keys -t 0 "watch docker ps" Enter
+
+send-keys -t 1 "cd ~/arrival/red-models"  Enter \
+    "git stash" Enter \
+    "git co master" Enter \
+    "git subs" Enter \
+    "nix-shell --pure" Enter \
+    "cd evaluation-service" Enter \
+    "make run-against-local-s3" Enter
+
+send-keys -t 2 "cd ~/arrival/project-service" Enter \
+    "git stash" Enter \
+    "git co master" Enter \
+    "git subs" Enter \
+    "nix-shell --pure" Enter \
+    "make run-against-local-s3" Enter
+
+send-keys -t 3 "cd ~/arrival/ui" Enter \
+    "git stash" Enter \
+    "git co master" Enter \
+    "git subs" Enter \
+    "yarn start" Enter
