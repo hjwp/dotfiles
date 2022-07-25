@@ -11,6 +11,7 @@ send-keys -t 0 "watch docker ps" Enter
 send-keys -t 1 "cd ~/arrival/red-models"  Enter \
     "git stash" Enter \
     "git co master" Enter \
+    "git pull" Enter \
     "git subs" Enter \
     "nix-shell --pure" Enter \
     "cd evaluation-service" Enter \
@@ -19,6 +20,7 @@ send-keys -t 1 "cd ~/arrival/red-models"  Enter \
 send-keys -t 2 "cd ~/arrival/project-service" Enter \
     "git stash" Enter \
     "git co master" Enter \
+    "git pull" Enter \
     "git subs" Enter \
     "nix-shell --pure" Enter \
     "make run-against-local-s3" Enter
@@ -26,5 +28,6 @@ send-keys -t 2 "cd ~/arrival/project-service" Enter \
 send-keys -t 3 "cd ~/arrival/ui" Enter \
     "git stash" Enter \
     "git co master" Enter \
+    "git pull" Enter \
     "git subs" Enter \
     "yarn start" Enter
