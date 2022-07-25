@@ -2,10 +2,12 @@
 Brogrammer
 CandyPaper
 Chasing_Logic
+ChocolateLiquor
 Corn
 Dim
 DimGreenBG
 DimSlateBG
+Edo_sea
 GrayOrange
 Guardian
 MountainDew
@@ -19,12 +21,14 @@ apprentice
 babymate256
 base16-atelierdune
 base16-atelierestuary
+base16-atelierforest
 base16-atelierlakeside
 base16-atelierplateau
 beekai
 behelit
 bensday
 birds-of-paradise
+bluechia
 bluedrake
 cabin
 candycode
@@ -96,6 +100,7 @@ luna
 lxvc
 madeofcode
 maroloccio
+materialtheme
 materialvim
 maui
 mdark
@@ -104,6 +109,7 @@ meta5
 mushroom
 neonwave
 nerv-ous
+neverland2
 night
 nightflight2
 obsidian
@@ -119,11 +125,13 @@ sierra
 softblue
 spacegray
 spring
+symfony
 tango2
 tchaba
 termschool
 tesla
 thornbird
+triplejelly
 tropikos
 two2tango
 vanzan_color
