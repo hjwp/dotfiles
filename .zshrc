@@ -147,3 +147,9 @@ if [ -e /home/harry/.nix-profile/etc/profile.d/nix.sh ]; then . /home/harry/.nix
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
+
+# icat for kitty displays images
+alias icat="kitty +kitten icat"
+
+# source any aws env vars
+source ~/.aws/.session-env-vars
