@@ -27,7 +27,7 @@ send-keys -t 2 "cd ~/arrival/project-service" Enter \
 
 send-keys -t 3 "cd ~/arrival/ui" Enter \
     "git stash" Enter \
-    "git co master" Enter \
+    "git co main" Enter \
     "git pull" Enter \
     "git subs" Enter \
-    "yarn start" Enter
+    "npm start" Enter
