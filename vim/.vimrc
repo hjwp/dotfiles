@@ -150,14 +150,6 @@ endif " has("autocmd")
 au! BufRead,BufNewFile *.json setfiletype json
 au! Syntax json source ~/.vim/syntax/json.vim
 
-" window size
-if has("gui_running")
-  " GUI is running or is about to start.
-  " Maximize gvim window.
-  set lines=50 columns=180
-endif
-
-
 " sane text files
 set fileformat=unix
 set encoding=utf-8

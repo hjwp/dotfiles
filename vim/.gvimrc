@@ -8,6 +8,11 @@ else
     set guifont=Monofur\ Regular\ 14
 endif
 
+" GUI is running or is about to start.
+" Maximize gvim window.
+set lines=40 columns=180
+
+
 " increase/decrease font size with - and +
 function! FontSmaller()
     if has('win32') || has('win64') || has('mac')
