@@ -1,0 +1,16 @@
+{
+  "languageserver": {
+    "elmLS": {
+      "command": "elm-language-server",
+      "filetypes": ["elm"],
+      "rootPatterns": ["elm.json"],
+      "initializationOptions": {
+        "elmAnalyseTrigger": "never"
+      }
+    }
+  },
+  "codeLens.enable": true,
+  "hover.previewMaxHeight": 30,
+  "suggest.autoTrigger": "none",
+  "suggest.timeout": 500
+}
