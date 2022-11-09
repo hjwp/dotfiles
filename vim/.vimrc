@@ -266,10 +266,11 @@ autocmd FileType haskell noremap <leader>h :ALEHover<CR>
 autocmd FileType haskell noremap <leader>d :ALEDetail<CR>
 
 
-" disable ale linting for elm (use coc)
+" disable ale linting for elm and java (use coc)
 let g:ale_linters = {
 \   'haskell': ['hls'],
 \   'elm': [],
+\   'java': [],
 \}
 " \   'elm': ['elm_ls'],
 "   'python': ['pyls', 'mypy'], " pyls needs to be enabled explicitly
@@ -284,6 +285,7 @@ let g:ale_fixers = {
 \   'python': ['black'],
 \   'elm': ['elm-format'],
 \   'haskell': ['stylish-haskell'],
+\   'rust': ['rustfmt'],
 \}
 
 " let g:ale_javascript_eslint_use_global = 1
@@ -308,7 +310,7 @@ map <F4> :lnext<CR>
 
 " files to hide in directory listings
 let g:netrw_list_hide='\.py[oc]$,\.svn/$,\.git/$,\.hg/$'
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.pyc,*/.idea/*,*/.DS_Store,*/virtualenv,*/.venv,*/node_modules/*,
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.pyc,*/.idea/*,*/.DS_Store,*/virtualenv,*/.venv,*/node_modules/*,*.elmo,*.elmi,
 
 " I don't like folded regions
 set nofoldenable
