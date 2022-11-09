@@ -153,3 +153,5 @@ alias icat="kitty +kitten icat"
 
 # source any aws env vars
 source ~/.aws/.session-env-vars
+source "$HOME/.cargo/env"
+. "$HOME/.cargo/env"
