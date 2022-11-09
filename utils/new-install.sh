@@ -4,8 +4,10 @@ set -ex
 
 sudo apt install -y \
     ansible \
+    asciidoctor \
     amazon-ecr-credential-helper \
     ccze \
+    coderay \
     chromium-browser \
     curl \
     entr \
@@ -25,6 +27,7 @@ sudo apt install -y \
     python3.9-full \
     python3.10-full \
     ruby \
+    ruby-pygments.rb \
     software-properties-common
     tmux \
     tmate \
@@ -36,8 +39,9 @@ sudo apt install -y \
     xvfb \
     zsh || true
 
-# book
-sudo gem install asciidoctor pygments.rb coderay
+
+# markdownlint
+sudo gem install mdl
 
 # external repos
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
