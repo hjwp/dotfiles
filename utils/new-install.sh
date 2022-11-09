@@ -43,6 +43,9 @@ sudo apt install -y \
 # markdownlint
 sudo gem install mdl
 
+# todo (?) install rust+cargo
+# cargo install tree-sitter-cli
+
 # external repos
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository -y \
