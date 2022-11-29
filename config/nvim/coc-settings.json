@@ -12,5 +12,11 @@
   "codeLens.enable": true,
   "hover.previewMaxHeight": 30,
   "suggest.autoTrigger": "none",
-  "suggest.timeout": 500
+  "suggest.timeout": 500,
+  "python.formatting.provider": "black",
+  "python.linting.mypyEnabled": true,
+  // disable pyright type checking
+  "python.analysis.typeCheckingMode": "off",
+  "pyright.inlayHints.functionReturnTypes": false,
+  "pyright.inlayHints.variableTypes": false
 }

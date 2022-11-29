@@ -26,6 +26,7 @@ sudo apt install -y \
     oathtool \
     python3.9-full \
     python3.10-full \
+    ripgrep \
     ruby \
     ruby-pygments.rb \
     software-properties-common
