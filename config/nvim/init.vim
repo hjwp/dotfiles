@@ -18,6 +18,11 @@ Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 " not working at time of writing
 Plug 'kylechui/nvim-surround'
 
+
+" syntax-highlight Roc as markdown
+Plug 'kchmck/vim-coffee-script'
+autocmd BufNewFile,BufRead *.roc :setfiletype coffee
+
 " Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
 
@@ -58,6 +63,8 @@ set keymodel=startsel,stopsel
 " (use with arrow key selection above)
 vnoremap <C-c> "+y
 
+" trim whitespace
+nmap <Leader>e :%s/\s\+$//e<CR>
 
 " ,Q as alernative to ctrl+q i just got usd to it
 nnoremap <leader>q <C-Q>
@@ -106,8 +113,8 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>a  <Plug>(coc-codeaction-selected)<CR>
+nmap <leader>a  <Plug>(coc-codeaction-selected)<CR>
 
 " Remap keys for applying codeAction to the current buffer.
 " nmap <leader>ac  <Plug>(coc-codeaction)
@@ -123,3 +130,21 @@ noremap <F9> :call CocAction('format')<CR>
 
 " go to definition
 nmap <silent> <leader>t <Plug>(coc-definition)
+
+" Use K to show documentation in preview window
+" (eg show type of variable under cursor)
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" navigate diagnostics
+noremap <leader>d :CocDiagnostics<CR>
+noremap <F3> <Plug>(coc-diagnostic-next)
+" noremap <F4> <Plug>(coc-diagnostic-prev)
+

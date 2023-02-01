@@ -229,13 +229,6 @@ set regexpengine=1
 "make sure highlighting works all the way down long files
 autocmd BufEnter * :syntax sync fromstart
 
-" Jedi autocompleter
-let g:jedi#goto_assignments_command = "<leader>a"  "default ,g conflicts with grep
-let g:jedi#goto_command = "<leader>t"   "default ,d conflicts with dontify
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#smart_auto_mappings = 0  "do not autotype the import statement
-let g:jedi#popup_on_dot = 0
-
 " Ale autcomplete
 
 " this allows you to debug interactions with language servers
@@ -244,25 +237,15 @@ let g:jedi#popup_on_dot = 0
 " if wanting to use pyls, this would put use ale autocomplete for omnifunc
 " set omnifunc=ale#completion#OmniFunc
 
-" supertab to use (jedi) omnicompletion
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
+" common ale helpers
+noremap <leader>t :ALEGoToDefinition<CR>
+noremap <leader>h :ALEHover<CR>
+noremap <leader>d :ALEDetail<CR>
 
-" tern js autocompleter thingie
-autocmd FileType javascript noremap <leader>t :TernDef<CR>
-autocmd FileType elm noremap <leader>t :call CocActionAsync('jumpDefinition')<CR>
-autocmd FileType elm noremap <leader>h :call CocAction('doHover')<CR>
-autocmd FileType elm noremap <leader>d :CocDiagnostics<CR>
-autocmd FileType haskell noremap <leader>t :ALEGoToDefinition<CR>
-autocmd FileType haskell noremap <leader>h :ALEHover<CR>
-autocmd FileType haskell noremap <leader>d :ALEDetail<CR>
-
-
-" disable ale linting for elm and java (use coc)
+" disable ale linting for java (use coc)
 let g:ale_linters = {
 \   'haskell': ['hls'],
-\   'elm': [],
-\   'java': [],
+\   'elm': ['elm_ls'],
 \}
 " \   'elm': ['elm_ls'],
 "   'python': ['pyls', 'mypy'], " pyls needs to be enabled explicitly
