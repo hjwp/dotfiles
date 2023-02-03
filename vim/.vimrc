@@ -168,6 +168,10 @@ autocmd FileType json setlocal shiftwidth=2 softtabstop=2 expandtab
 " always show status line
 set laststatus=2
 
+" ale builtin completion, needs to be before pathogen
+" let g:ale_completion_enabled = 1
+" (use supertab instead)
+
 " load pathogen
 call pathogen#infect()
 
@@ -232,23 +236,35 @@ autocmd BufEnter * :syntax sync fromstart
 " Ale autcomplete
 
 " this allows you to debug interactions with language servers
-" let g:ale_command_wrapper = '~/dotfiles/utils/ale-command-wrapper.sh'
+let g:ale_command_wrapper = '~/dotfiles/utils/ale-command-wrapper.sh'
 
-" if wanting to use pyls, this would put use ale autocomplete for omnifunc
-" set omnifunc=ale#completion#OmniFunc
+" use ale autocomplete for omnifunc
+set omnifunc=ale#completion#OmniFunc
+
+" supertab 'context' means it tries to be smart about completing file paths
+let g:SuperTabDefaultCompletionType = "context"
+" set backup to be omnifunc above
+let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 
 " common ale helpers
 noremap <leader>t :ALEGoToDefinition<CR>
 noremap <leader>h :ALEHover<CR>
 noremap <leader>d :ALEDetail<CR>
+noremap <leader>a :ALECodeAction<CR>
 
-" disable ale linting for java (use coc)
+" not sure if we really need this tbh
 let g:ale_linters = {
 \   'haskell': ['hls'],
 \   'elm': ['elm_ls'],
+\   'python': ['pyright'],
 \}
-" \   'elm': ['elm_ls'],
-"   'python': ['pyls', 'mypy'], " pyls needs to be enabled explicitly
+
+" disable pyright's type checking (just use mypy)
+let g:ale_python_pyright_config = {
+  \ 'python': {
+  \   'analysis': {'typeCheckingMode': 'off'}
+  \ },
+  \}
 
 " kick off linting when going back to normal mode
 let g:ale_lint_on_text_changed = "normal"
@@ -262,9 +278,6 @@ let g:ale_fixers = {
 \   'haskell': ['stylish-haskell'],
 \   'rust': ['rustfmt'],
 \}
-
-" let g:ale_javascript_eslint_use_global = 1
-" let g:ale_fix_on_save = 1
 
 noremap <F9> :ALEFix<CR>
 
