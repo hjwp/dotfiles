@@ -233,56 +233,47 @@ set regexpengine=1
 "make sure highlighting works all the way down long files
 autocmd BufEnter * :syntax sync fromstart
 
-" Ale autcomplete
-
-" this allows you to debug interactions with language servers
-let g:ale_command_wrapper = '~/dotfiles/utils/ale-command-wrapper.sh'
-
-" use ale autocomplete for omnifunc
-set omnifunc=ale#completion#OmniFunc
-
 " supertab 'context' means it tries to be smart about completing file paths
 let g:SuperTabDefaultCompletionType = "context"
 " set backup to be omnifunc above
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 
 " common ale helpers
-noremap <leader>t :ALEGoToDefinition<CR>
-noremap <leader>h :ALEHover<CR>
-noremap <leader>d :ALEDetail<CR>
-noremap <leader>a :ALECodeAction<CR>
-
-" not sure if we really need this tbh
-let g:ale_linters = {
-\   'haskell': ['hls'],
-\   'elm': ['elm_ls'],
-\   'python': ['pyright'],
-\}
-
-" disable pyright's type checking (just use mypy)
-let g:ale_python_pyright_config = {
-  \ 'python': {
-  \   'analysis': {'typeCheckingMode': 'off'}
-  \ },
-  \}
-
-" kick off linting when going back to normal mode
-let g:ale_lint_on_text_changed = "normal"
-
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines'],
-\   'javascript': ['eslint'],
-\   'typescript': ['eslint'],
-\   'python': ['black'],
-\   'elm': ['elm-format'],
-\   'haskell': ['stylish-haskell'],
-\   'rust': ['rustfmt'],
-\}
-
-noremap <F9> :ALEFix<CR>
-
-" integrate ale to airline statusline
-let g:airline#extensions#ale#enabled = 1
+" noremap <leader>t :ALEGoToDefinition<CR>
+" noremap <leader>h :ALEHover<CR>
+" noremap <leader>d :ALEDetail<CR>
+" noremap <leader>a :ALECodeAction<CR>
+" 
+" " not sure if we really need this tbh
+" let g:ale_linters = {
+" \   'haskell': ['hls'],
+" \   'elm': ['elm_ls'],
+" \   'python': ['pyright'],
+" \}
+" 
+" " disable pyright's type checking (just use mypy)
+" let g:ale_python_pyright_config = {
+"   \ 'python': {
+"   \   'analysis': {'typeCheckingMode': 'off'}
+"   \ },
+"   \}
+let g:lsc_server_commands = {'python': 'pyright', 'elm': 'elm-language-server'}
+let g:lsc_auto_map = {
+    \ 'GoToDefinition': '<leader>t',
+    \ 'GoToDefinitionSplit': ['<C-W>]', '<C-W><C-]>'],
+    \ 'FindReferences': 'gr',
+    \ 'NextReference': '<C-n>',
+    \ 'PreviousReference': '<C-p>',
+    \ 'FindImplementations': 'gI',
+    \ 'FindCodeActions': '<leader>a',
+    \ 'Rename': 'gR',
+    \ 'ShowHover': v:true,
+    \ 'DocumentSymbol': 'go',
+    \ 'WorkspaceSymbol': 'gS',
+    \ 'SignatureHelp': 'gm',
+    \ 'Completion': 'omnifunc',
+    \}
+" noremap <F9> :ALEFix<CR>
 
 let g:black_linelength = 86
 " let g:ale_python_black_options='--line-length 86'
