@@ -1,4 +1,20 @@
 set -g set-remain-on-exit on
-new -n tests "cd . && export $(make get-toggles) && git ls-files | entr ./.venv/bin/pytest tests/unit"
-split-window -v -p 15 "cd . && git ls-files | entr make mypy"
-split-window -h "cd .  && git ls-files | entr make black"
+neww -n "tests etc"
+
+# make 3 panes
+split-window -v
+split-window -h
+
+# commands for each pane
+
+send-keys -t 0 \
+    "cd ." Enter \
+    "git ls-files | entr pytest --tb=short --failed-first -v tests" Enter
+
+send-keys -t 1 \
+    "cd ." Enter \
+    "git ls-files | entr mypy ." Enter
+
+send-keys -t 2 \
+    "cd ." Enter \
+    "git ls-files | entr black --check ." Enter
