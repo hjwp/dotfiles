@@ -257,23 +257,14 @@ let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 "   \   'analysis': {'typeCheckingMode': 'off'}
 "   \ },
 "   \}
-let g:lsc_server_commands = {'python': 'pyright-langserver --stdio', 'elm': 'elm-language-server'}
-let g:lsc_auto_map = {
-    \ 'GoToDefinition': '<leader>t',
-    \ 'GoToDefinitionSplit': ['<C-W>]', '<C-W><C-]>'],
-    \ 'FindReferences': 'gr',
-    \ 'NextReference': '<C-n>',
-    \ 'PreviousReference': '<C-p>',
-    \ 'FindImplementations': 'gI',
-    \ 'FindCodeActions': '<leader>a',
-    \ 'Rename': 'gR',
-    \ 'ShowHover': v:true,
-    \ 'DocumentSymbol': 'go',
-    \ 'WorkspaceSymbol': 'gS',
-    \ 'SignatureHelp': 'gm',
-    \ 'Completion': 'omnifunc',
-    \}
 " noremap <F9> :ALEFix<CR>
+"
+
+" vim-lsp config
+noremap <leader>t :lspDefinition<CR>
+noremap <leader>h :lspHover<CR>
+noremap <leader>d :lspDocumentDiagnostics<CR>
+noremap <leader>a :lspCodeAction<CR>
 
 let g:black_linelength = 86
 " let g:ale_python_black_options='--line-length 86'
