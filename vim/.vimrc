@@ -257,7 +257,7 @@ let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 "   \   'analysis': {'typeCheckingMode': 'off'}
 "   \ },
 "   \}
-let g:lsc_server_commands = {'python': 'pyright', 'elm': 'elm-language-server'}
+let g:lsc_server_commands = {'python': 'pyright-langserver --stdio', 'elm': 'elm-language-server'}
 let g:lsc_auto_map = {
     \ 'GoToDefinition': '<leader>t',
     \ 'GoToDefinitionSplit': ['<C-W>]', '<C-W><C-]>'],
