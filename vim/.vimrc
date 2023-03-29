@@ -199,21 +199,6 @@ function! ToggleWrap()
 endfunction
 noremap <leader>w :call ToggleWrap()<cr>
 
-" toggle relative line numbering
-let s:relative_numbering = 0
-function! ToggleNumbering()
-    if s:relative_numbering == 0
-        exec 'set relativenumber'
-        let s:relative_numbering = 1
-    else
-        exec 'set relativenumber!'
-        exec 'set number'
-        let s:relative_numbering = 0
-    endif
-endfunction
-noremap <leader>r :call ToggleNumbering()<cr>
-
-
 " allow cursor keys to go right off end of one line, onto start of next
 set whichwrap+=<,>,[,]
 
@@ -261,10 +246,12 @@ let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 "
 
 " vim-lsp config
-noremap <leader>t :lspDefinition<CR>
-noremap <leader>h :lspHover<CR>
-noremap <leader>d :lspDocumentDiagnostics<CR>
-noremap <leader>a :lspCodeAction<CR>
+noremap <leader>t :LspDefinition<CR>
+noremap <leader>h :LspHover<CR>
+noremap <leader>d :LspDocumentDiagnostics<CR>
+noremap <leader>a :LspCodeAction<CR>
+let g:lsp_diagnostics_virtual_text_enabled = 0  " virtual text overlays dont really work
+
 
 let g:black_linelength = 86
 " let g:ale_python_black_options='--line-length 86'
