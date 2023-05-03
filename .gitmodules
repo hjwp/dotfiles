@@ -10,9 +10,6 @@
 [submodule "vim/bundle/colorschemes"]
 	path = vim/bundle/colorschemes
 	url = https://github.com/flazz/vim-colorschemes.git
-[submodule "vim/bundle/tern_for_vim"]
-	path = vim/bundle/tern_for_vim
-	url = https://github.com/marijnh/tern_for_vim.git
 [submodule "vim/bundle/ctrlp.vim"]
 	path = vim/bundle/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim.git
@@ -21,7 +18,7 @@
 	url = https://github.com/godlygeek/csapprox
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
-	url = git://github.com/robbyrussell/oh-my-zsh.git
+	url = https://github.com/robbyrussell/oh-my-zsh.git
 [submodule "misc/zsh-wild-cherry-theme"]
 	path = misc/zsh-wild-cherry-theme
 	url = https://github.com/mashaal/wild-cherry
@@ -70,3 +67,9 @@
 [submodule "vim/bundle/editorconfig-vim"]
 	path = vim/bundle/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim
+[submodule "vim/bundle/rust.vim"]
+	path = vim/bundle/rust.vim
+	url = git@github.com:rust-lang/rust.vim.git
+[submodule "vim/pack/coc/start/coc.nvim"]
+	path = vim/pack/coc/start/coc.nvim
+	url = git@github.com:neoclide/coc.nvim.git
