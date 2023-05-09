@@ -118,9 +118,6 @@ export NVM_DIR="/home/harry/.nvm"
 # added by travis gem
 [ -f /home/harry/.travis/travis.sh ] && source /home/harry/.travis/travis.sh
 
-# otherwise pipenv's virtualenvs end up god-knows-where. sometimes it seems to forget where it put them.
-export PIPENV_VENV_IN_PROJECT=1
-
 # for "fuck you firefox".  requires utils/flip
 function fuck() {
   if [ ! $1 ]; then
@@ -151,7 +148,15 @@ eval "$(pyenv init --path)"
 # icat for kitty displays images
 alias icat="kitty +kitten icat"
 
+# load keychain (on wsl)
+if [ -e /mnt/c/Windows ]; then
+    keychain $HOME/.ssh/id_ed25519
+    source $HOME/.keychain/$HOST-sh
+fi
+
 # source any aws env vars
-source ~/.aws/.session-env-vars
-source "$HOME/.cargo/env"
-. "$HOME/.cargo/env"
+# source ~/.aws/.session-env-vars
+
+# rust
+# source "$HOME/.cargo/env"
+# . "$HOME/.cargo/env"

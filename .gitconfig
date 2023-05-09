@@ -48,3 +48,5 @@
 	ignoreRevsFile = .git-blame-ignore-revs
 [url "git@git.core.arrival.co:"]
 	insteadOf = https://git.core.arrival.co/
+[checkout]
+	defaultRemote = origin
