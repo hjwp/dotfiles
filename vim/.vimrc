@@ -237,43 +237,24 @@ set regexpengine=1
 "make sure highlighting works all the way down long files
 autocmd BufEnter * :syntax sync fromstart
 
-" Jedi autocompleter
-let g:jedi#goto_assignments_command = "<leader>a"  "default ,g conflicts with grep
-let g:jedi#goto_command = "<leader>t"   "default ,d conflicts with dontify
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#smart_auto_mappings = 0  "do not autotype the import statement
-let g:jedi#popup_on_dot = 0
-
-" Ale autcomplete
+" Ale linter
 
 " this allows you to debug interactions with language servers
 " let g:ale_command_wrapper = '~/dotfiles/utils/ale-command-wrapper.sh'
 
-" if wanting to use pyls, this would put use ale autocomplete for omnifunc
-" set omnifunc=ale#completion#OmniFunc
+" disable ale's lsp integration in favour of coc.
+let g:ale_disable_lsp = 1
 
-" supertab to use (jedi) omnicompletion
+" some coc shortcuts
+noremap <leader>t :call CocActionAsync('jumpDefinition')<CR>
+noremap <leader>h :call CocAction('doHover')<CR>
+
+" diagnostics should come from ALE
+" noremap <leader>d :CocDiagnostics<CR>
+
+" supertab to use omnicompletion
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
-
-" tern js autocompleter thingie
-autocmd FileType javascript noremap <leader>t :TernDef<CR>
-autocmd FileType elm noremap <leader>t :call CocActionAsync('jumpDefinition')<CR>
-autocmd FileType elm noremap <leader>h :call CocAction('doHover')<CR>
-autocmd FileType elm noremap <leader>d :CocDiagnostics<CR>
-autocmd FileType haskell noremap <leader>t :ALEGoToDefinition<CR>
-autocmd FileType haskell noremap <leader>h :ALEHover<CR>
-autocmd FileType haskell noremap <leader>d :ALEDetail<CR>
-
-
-" disable ale linting for elm and java (use coc)
-let g:ale_linters = {
-\   'haskell': ['hls'],
-\   'elm': [],
-\   'java': [],
-\}
-" \   'elm': ['elm_ls'],
-"   'python': ['pyls', 'mypy'], " pyls needs to be enabled explicitly
 
 " kick off linting when going back to normal mode
 let g:ale_lint_on_text_changed = "normal"

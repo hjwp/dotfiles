@@ -10,6 +10,7 @@
       }
     }
   },
+  "diagnostic.displayByAle": true,
   "codeLens.enable": false,
   "hover.previewMaxHeight": 30,
   "suggest.autoTrigger": "never",
