@@ -73,3 +73,6 @@
 [submodule "vim/pack/coc/start/coc.nvim"]
 	path = vim/pack/coc/start/coc.nvim
 	url = git@github.com:neoclide/coc.nvim.git
+[submodule "oh-my-zsh-custom/zsh-autosuggestions"]
+	path = oh-my-zsh-custom/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
