@@ -164,3 +164,9 @@ fi
 # rust
 # source "$HOME/.cargo/env"
 # . "$HOME/.cargo/env"
+
+
+# Vagrant on WSL
+export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
+export PATH="$PATH:/mnt/c/Windows/System32"
+export PATH="$PATH:/mnt/c/Windows/System32/WindowsPowershell/v1.0/".
