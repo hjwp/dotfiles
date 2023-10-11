@@ -143,6 +143,10 @@ if [ -e /home/harry/.nix-profile/etc/profile.d/nix.sh ]; then . /home/harry/.nix
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+
+# emacs binaries incl doom
+export PATH="$HOME/.config/emacs/bin:$PATH"
+
 eval "$(pyenv init --path)"
 
 # icat for kitty displays images
