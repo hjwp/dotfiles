@@ -60,6 +60,7 @@ flatcolor
 flattown
 flattr
 forneus
+fruity
 fx
 getafe
 gotham
@@ -115,6 +116,7 @@ OceanicNext
 onedark
 openbsd
 pacific
+paintbox
 parsec
 pw
 railscasts
