@@ -25,7 +25,7 @@
     subs = submodule update --init --recursive
     amend = commit -a --amend --no-edit
     stwdiff = diff --staged -w
-    fpush = push --force-with-lease
+    fpush = push --force-with-lease --force-if-includes
     irebase = rebase --interactive
     rcont = rebase --continue
     ccont = cherry-pick --continue
