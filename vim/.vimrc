@@ -236,7 +236,7 @@ autocmd BufEnter * :syntax sync fromstart
 " Ale autcomplete
 
 " this allows you to debug interactions with language servers
-let g:ale_command_wrapper = '~/dotfiles/utils/ale-command-wrapper.sh'
+" let g:ale_command_wrapper = '~/dotfiles/utils/ale-command-wrapper.sh'
 
 " use ale autocomplete for omnifunc
 set omnifunc=ale#completion#OmniFunc
@@ -246,6 +246,15 @@ let g:SuperTabDefaultCompletionType = "context"
 " set backup to be omnifunc above
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 
+" LSP configurations for vim-lsp
+if executable('pyright')
+    autocmd User lsp_setup call lsp#register_server({
+        \   'name': 'pyright',
+        \   'cmd': ['pyright-langserver'],
+        \   'allowlist': ['python'],
+        \ })
+endif
+
 " common ale helpers
 noremap <leader>t :ALEGoToDefinition<CR>
 noremap <leader>h :ALEHover<CR>
@@ -253,11 +262,12 @@ noremap <leader>d :ALEDetail<CR>
 noremap <leader>a :ALECodeAction<CR>
 
 " not sure if we really need this tbh
-let g:ale_linters = {
-\   'haskell': ['hls'],
-\   'elm': ['elm_ls'],
-\   'python': ['pyright'],
-\}
+" disabled bc in theory vim-lsc-ale will do it?
+" let g:ale_linters = {
+" \   'haskell': ['hls'],
+" \   'elm': ['elm_ls'],
+" \   'python': ['pyright'],
+" \}
 
 " disable pyright's type checking (just use mypy)
 let g:ale_python_pyright_config = {
