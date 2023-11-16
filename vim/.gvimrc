@@ -3,9 +3,9 @@ set guioptions-=T   " no toolbar
 set guioptions-=m   " no menubar
 
 if has('win32') || has('win64')
-    set guifont=DejaVu\ Sans\ Mono:h9
+    set guifont=monofur\ for\ Powerline:h12
 else
-    set guifont=Monofur\ Regular\ 14
+    set guifont=monofur\ for\ Powerline 14
 endif
 
 " GUI is running or is about to start.

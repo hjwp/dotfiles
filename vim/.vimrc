@@ -49,10 +49,10 @@ set grepprg=grep\ -I\ -n\ --exclude=\"*.pyc\"\ --exclude=tags\ --exclude-dir=nod
 " noremap <Leader>g :silent grep -rw '<C-r><C-w>' .<CR>:copen<CR>
 noremap <Leader>g :Ggrep '<C-r><C-w>'<CR>:copen<CR>
 
-" stop pyflakes from polluting the copen quickfix pane
-let g:pyflakes_use_quickfix = 0
 " map F3 to search jump thru grep results from copen
 map <F3> :cnext<CR>
+" map F4 to search jump thru errors of lopen
+map <F4> :lnext<CR>
 
 " F1 is annoying
 map <F1> <Esc>
@@ -66,10 +66,6 @@ map <C-v> "+gP
 " ctrl-s to save
 map <C-s> :w<CR>
 map! <C-s> <Esc>:w<CR>
-
-" move up/down by visible lines on long wrapped lines of text
-nnoremap k gk
-nnoremap j gj
 
 " map sudo-write-file to w!! in command line
 cmap w!! %!sudo tee > /dev/null %
@@ -149,6 +145,16 @@ endif " has("autocmd")
 "json...
 au! BufRead,BufNewFile *.json setfiletype json
 au! Syntax json source ~/.vim/syntax/json.vim
+
+" window size
+if has("gui_running")
+  " GUI is running or is about to start.
+  " Maximize gvim window.
+  set lines=50 columns=180
+endif
+
+" enable mouse in terminal too.  scrolling is nice.
+set mouse=n
 
 " sane text files
 set fileformat=unix
@@ -233,15 +239,19 @@ set regexpengine=1
 "make sure highlighting works all the way down long files
 autocmd BufEnter * :syntax sync fromstart
 
-" Ale autcomplete
+" Ale
 
 " this allows you to debug interactions with language servers
 " let g:ale_command_wrapper = '~/dotfiles/utils/ale-command-wrapper.sh'
 
 " use ale autocomplete for omnifunc
-set omnifunc=ale#completion#OmniFunc
-
+" set omnifunc=ale#completion#OmniFunc
 " supertab 'context' means it tries to be smart about completing file paths
+
+" disable ale's lsp integration in favour of coc.
+let g:ale_disable_lsp = 1
+
+" supertab to use omnicompletion
 let g:SuperTabDefaultCompletionType = "context"
 " set backup to be omnifunc above
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
@@ -255,19 +265,12 @@ if executable('pyright')
         \ })
 endif
 
-" common ale helpers
-noremap <leader>t :ALEGoToDefinition<CR>
-noremap <leader>h :ALEHover<CR>
-noremap <leader>d :ALEDetail<CR>
-noremap <leader>a :ALECodeAction<CR>
+" common ale helpers (disabled while working on lsp)
+" noremap <leader>t :ALEGoToDefinition<CR>
+" noremap <leader>h :ALEHover<CR>
+" noremap <leader>d :ALEDetail<CR>
+" noremap <leader>a :ALECodeAction<CR>
 
-" not sure if we really need this tbh
-" disabled bc in theory vim-lsc-ale will do it?
-" let g:ale_linters = {
-" \   'haskell': ['hls'],
-" \   'elm': ['elm_ls'],
-" \   'python': ['pyright'],
-" \}
 
 " disable pyright's type checking (just use mypy)
 let g:ale_python_pyright_config = {
@@ -281,9 +284,9 @@ let g:ale_lint_on_text_changed = "normal"
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines'],
-\   'javascript': ['eslint'],
-\   'typescript': ['eslint'],
-\   'python': ['black'],
+\   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\   'python': ['ruff', 'ruff_format', 'black'],
 \   'elm': ['elm-format'],
 \   'haskell': ['stylish-haskell'],
 \   'rust': ['rustfmt'],
@@ -303,14 +306,11 @@ let g:EditorConfig_disable_rules = ['max_line_length']
 " switch on colourful brackets
 let g:rainbow_active = 1
 
-" map F4 to search jump thru errors of lopen
-map <F4> :lnext<CR>
 
 " files to hide in directory listings
 let g:netrw_list_hide='\.py[oc]$,\.svn/$,\.git/$,\.hg/$'
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.pyc,*/.idea/*,*/.DS_Store,*/virtualenv,*/.venv,*/node_modules/*,*.elmo,*.elmi,
 
-" I don't like folded regions
 set nofoldenable
 
 " aliases for window switching
@@ -328,7 +328,8 @@ noremap <Leader>f :CtrlP<CR>
 noremap <Leader>b :CtrlPBuffer<CR>
 noremap <Leader>p :CtrlPClearAllCaches<CR>
 " ignore locally rendered book files
-let g:ctrlp_custom_ignore = 'chapter_.*.html\|appendix_.*.html'
+"" breaks finding templates oops
+" let g:ctrlp_custom_ignore = 'chapter_.*.html\|appendix_.*.html'
 
 " Change the color scheme from a list of color scheme names.
 " Adapted Version 2010-09-12 from http://vim.wikia.com/wiki/VimTip341
@@ -370,7 +371,6 @@ function! NextColor(echo_color)
   endif
 endfunction
 
-nnoremap <S-F8> :call NextColor(1)<CR>
 nnoremap <Leader>c :call NextColor(1)<CR>
 call NextColor(0)
 
