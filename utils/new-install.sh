@@ -29,6 +29,7 @@ sudo apt install -y \
     ripgrep \
     ruby \
     ruby-pygments.rb \
+    shellcheck \
     software-properties-common
     tmux \
     tmate \
@@ -38,6 +39,7 @@ sudo apt install -y \
     vlc \
     xclip \
     xvfb \
+    yamllint \
     zsh || true
 
 
