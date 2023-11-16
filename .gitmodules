@@ -64,3 +64,9 @@
 [submodule "vim/bundle/rust.vim"]
 	path = vim/bundle/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
+[submodule "vim/bundle/vim-lsp"]
+	path = vim/bundle/vim-lsp
+	url = https://github.com/prabirshrestha/vim-lsp
+[submodule "vim/bundle/vim-lsp-settings"]
+	path = vim/bundle/vim-lsp-settings
+	url = https://github.com/prabirshrestha/vim-lsp-settings
