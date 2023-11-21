@@ -166,8 +166,9 @@ fi
 # source ~/.aws/.session-env-vars
 
 # rust
-# source "$HOME/.cargo/env"
-# . "$HOME/.cargo/env"
+if [ -e "$HOME/.cargo/env" ]; then
+    source "$HOME/.cargo/env"
+fi
 
 
 # Vagrant on WSL
