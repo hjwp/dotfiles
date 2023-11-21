@@ -109,6 +109,11 @@ export LESS="-RX"
 # stop python from writing pycs.
 export PYTHONDONTWRITEBYTECODE=1
 
+# homebrew, macos only
+if [ -e /opt/homebrew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 
 # NVM
 export NVM_DIR="/home/harry/.nvm"
