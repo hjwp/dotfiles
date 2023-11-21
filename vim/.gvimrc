@@ -4,6 +4,8 @@ set guioptions-=m   " no menubar
 
 if has('win32') || has('win64')
     set guifont=monofur\ for\ Powerline:h12
+elseif has('macunix')
+    set guifont=Inconsolata\ for\ Powerline:h12
 else
     set guifont=monofur\ for\ Powerline 14
 endif
