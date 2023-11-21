@@ -122,9 +122,6 @@ export NVM_DIR="/home/harry/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# added by travis gem
-[ -f /home/harry/.travis/travis.sh ] && source /home/harry/.travis/travis.sh
-
 # for "fuck you firefox".  requires utils/flip
 function fuck() {
   if [ ! $1 ]; then
