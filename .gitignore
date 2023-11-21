@@ -7,3 +7,4 @@ config/fish/fish_history
 config/fish/fishd.skeletor
 vim/doc/tags-ja
 vim/black
+vim/undodir/
