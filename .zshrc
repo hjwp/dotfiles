@@ -9,7 +9,9 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="wild-cherry"
+
+# disabling in favour of starship.rs
+# ZSH_THEME="wild-cherry"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -65,7 +67,7 @@ plugins=(
   docker-compose
   dotenv
   git
-  virtualenvwrapper
+  # virtualenvwrapper
   zsh-autosuggestions 
 )
 
@@ -175,3 +177,7 @@ fi
 export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 export PATH="$PATH:/mnt/c/Windows/System32"
 export PATH="$PATH:/mnt/c/Windows/System32/WindowsPowershell/v1.0/".
+
+# starship.rs
+eval "$(starship init zsh)"
+
