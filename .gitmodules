@@ -52,9 +52,6 @@
 [submodule "vim/bundle/vim-surround"]
 	path = vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "vim/vim/bundle/black"]
-	path = vim/bundle/black
-	url = https://github.com/psf/black.git
 [submodule "vim/bundle/.vim/bundle/ropevim"]
 	path = vim/bundle/.vim/bundle/ropevim
 	url = https://github.com/python-rope/ropevim.git
