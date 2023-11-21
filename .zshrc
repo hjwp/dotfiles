@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="/home/harry/.local/bin:/home/harry/.gem/ruby/2.5.0/bin:/home/harry/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="$HOME/.local/bin:$HOME/.gem/ruby/2.5.0/bin:$HOME/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 
 
 # Path to your oh-my-zsh installation.
@@ -118,7 +118,7 @@ fi
 
 
 # NVM
-export NVM_DIR="/home/harry/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
@@ -142,7 +142,7 @@ complete -o nospace -C /usr/bin/nomad nomad
 export PATH="$HOME/.poetry/bin:$PATH"
 export POETRY_VIRTUALENVS_IN_PROJECT="true"
 
-if [ -e /home/harry/.nix-profile/etc/profile.d/nix.sh ]; then . /home/harry/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then . "$HOME/.nix-profile/etc/profile.d/nix.sh"; fi # added by Nix installer
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
