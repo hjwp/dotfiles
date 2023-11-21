@@ -1,4 +1,0 @@
-# pip3 install --user -r requirements.txt
-virtualenvwrapper
-powerline-status
-flake8
