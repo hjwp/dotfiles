@@ -26,9 +26,9 @@ vim.opt.incsearch = true
 
 -- helper fn for tab-completion
 local has_words_before = function()
-  unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+   unpack = unpack or table.unpack
+   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 -- lazy.nvim plugin manager
@@ -85,6 +85,11 @@ require("lazy").setup({
          -- Autocompletion
          {"hrsh7th/nvim-cmp"},
          {'hrsh7th/cmp-nvim-lsp'},
+         -- generic language server wrapper for normal linters
+         {
+            'creativenull/efmls-configs-nvim',
+            version = 'v1.x.x',
+         },
       },
       config = function ()
          local lsp_zero = require("lsp-zero")
@@ -125,18 +130,30 @@ require("lazy").setup({
                      fallback()
                   end
                end, { "i", "s" }),
-          })
+            })
+         })
 
-       })
-    end,
- },
- {
-    "folke/trouble.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function ()
-       vim.keymap.set("n", "<leader>d", function() require("trouble").toggle() end)
-    end
- },
+         -- efm (generic linter lsp wrapper) config
+         local languages = {
+            markdown = { require('efmls-configs.linters.markdownlint') },
+            python = { require('efmls-configs.linters.mypy')},
+         }
+         require('lspconfig').efm.setup({
+            filetypes = vim.tbl_keys(languages),
+            settings = {
+               rootMarkers = { '.git/' },
+               languages = languages,
+            },
+         })
+      end,
+   },
+   {
+      "folke/trouble.nvim",
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+      config = function ()
+         vim.keymap.set("n", "<leader>d", function() require("trouble").toggle() end)
+      end
+   },
 })
 
 vim.cmd.colorscheme("habamax")
