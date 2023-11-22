@@ -130,6 +130,13 @@ require("lazy").setup({
        })
     end,
  },
+ {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function ()
+       vim.keymap.set("n", "<leader>d", function() require("trouble").toggle() end)
+    end
+ },
 })
 
 vim.cmd.colorscheme("habamax")
