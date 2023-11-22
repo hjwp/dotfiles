@@ -2,23 +2,8 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH="$HOME/.local/bin:$HOME/.gem/ruby/2.5.0/bin:$HOME/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-
-# disabling in favour of starship.rs
-# ZSH_THEME="wild-cherry"
-
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -58,6 +43,38 @@ export ZSH=$HOME/.oh-my-zsh
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=~/dotfiles/oh-my-zsh-custom
 
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd automatically_activate_python_venv
+
+function automatically_activate_python_venv() {
+  if [[ -z $VIRTUAL_ENV ]] ; then
+    activate_venv
+  else
+    parentdir="$(dirname ${VIRTUAL_ENV})"
+    if [[ "$PWD"/ != "$parentdir"/* ]] ; then
+      deactivate
+      activate_venv
+    fi
+  fi
+}
+
+function activate_venv() {
+  local d n
+  d=$PWD
+
+  until false
+  do
+  if [[ -f $d/.venv/bin/activate ]] ; then
+    source $d/.venv/bin/activate
+    break
+  fi
+    d=${d%/*}
+    # d="$(dirname "$d")"
+    [[ $d = *\/* ]] || break
+  done
+}
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -68,7 +85,7 @@ plugins=(
   dotenv
   git
   # virtualenvwrapper
-  zsh-autosuggestions 
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -136,17 +153,22 @@ function fuck() {
   fi
 }
 
+
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/nomad nomad
+
+if [ -e /usr/bin/nomad ]; then
+    complete -o nospace -C /usr/bin/nomad nomad
+fi
 
 export PATH="$HOME/.poetry/bin:$PATH"
 export POETRY_VIRTUALENVS_IN_PROJECT="true"
 
 if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then . "$HOME/.nix-profile/etc/profile.d/nix.sh"; fi # added by Nix installer
 
-# pyenv
+
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+
 
 # emacs binaries incl doom
 export PATH="$HOME/.config/emacs/bin:$PATH"
@@ -176,6 +198,5 @@ export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 export PATH="$PATH:/mnt/c/Windows/System32"
 export PATH="$PATH:/mnt/c/Windows/System32/WindowsPowershell/v1.0/".
 
-# starship.rs
+# starship.rs prompt
 eval "$(starship init zsh)"
-
