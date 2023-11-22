@@ -17,6 +17,9 @@ vim.opt.smartindent = true
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
+-- no need for swapfiles
+vim.opt.swapfile = false
+
 -- highlight matching words as you search
 vim.opt.incsearch = true
 
