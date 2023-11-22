@@ -136,20 +136,23 @@ fi
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
+
 lazy_load_nvm() {
-  unset -f node nvm
+  unset -f node nvm npm
   [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 }
-
 node() {
   lazy_load_nvm
   node $@
 }
-
 nvm() {
   lazy_load_nvm
-  node $@
+  nvm $@
+}
+npm() {
+  lazy_load_nvm
+  npm $@
 }
 
 # for "fuck you firefox".  requires utils/flip
