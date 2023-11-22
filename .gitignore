@@ -9,3 +9,4 @@ vim/doc/tags-ja
 vim/black
 vim/undodir/
 config/nvim/lazy-lock.json
+config/karabiner/automatic_backups
