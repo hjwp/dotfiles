@@ -10,3 +10,4 @@ vim/black
 vim/undodir/
 config/nvim/lazy-lock.json
 config/karabiner/automatic_backups
+config/op/
