@@ -60,13 +60,13 @@ function automatically_activate_python_venv() {
 }
 
 function activate_venv() {
-  local d n
+  local d
   d=$PWD
 
   until false
   do
-  if [[ -f $d/.venv/bin/activate ]] ; then
-    source $d/.venv/bin/activate
+  if [[ -f "$d/.venv/bin/activate" ]] ; then
+    source "$d/.venv/bin/activate"
     break
   fi
     d=${d%/*}
@@ -88,7 +88,7 @@ plugins=(
   zsh-autosuggestions
 )
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
 
@@ -144,27 +144,27 @@ lazy_load_nvm() {
 }
 node() {
   lazy_load_nvm
-  node $@
+  node "$@"
 }
 nvm() {
   lazy_load_nvm
-  nvm $@
+  nvm "$@"
 }
 npm() {
   lazy_load_nvm
-  npm $@
+  npm "$@"
 }
 
 # for "fuck you firefox".  requires utils/flip
 function fuck() {
-  if [ ! $1 ]; then
+  if [ ! "$1" ]; then
     echo "Usage: fuck you process_name"
     exit
   fi
 
-  if killall $2; then
+  if killall "$2"; then
     echo
-    echo " (╯°□°）╯︵$(echo $2 | flip)"
+    echo " (╯°□°）╯︵$(echo "$2" | flip)"
     echo
   fi
 }
@@ -220,6 +220,8 @@ eval "$(starship init zsh)"
 # Known to work on zsh 5.0.x, probably works on later 4.x releases as well (as
 # it uses the older compctl completion system).
 
+
+#  -- invoke cli completions
 _complete_invoke() {
     # `words` contains the entire command string up til now (including
     # program name).
@@ -238,7 +240,6 @@ _complete_invoke() {
     # $collection_arg
     reply=( $(invoke ${=collection_arg} --complete -- ${words}) )
 }
-
 
 # Tell shell builtin to use the above for completing our given binary name(s).
 # * -K: use given function name to generate completions.
