@@ -249,5 +249,11 @@ _complete_invoke() {
 # * positional args: program names to complete for.
 compctl -K _complete_invoke + -f invoke inv
 
-# vim: set ft=sh :
 
+# -- commit to nvim!
+#
+alias vim="nvim"
+alias vi="nvim"
+alias oldvim="vim"
+alias vimdiff='nvim -d'
+export EDITOR=nvim
