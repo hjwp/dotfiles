@@ -132,8 +132,14 @@ require("lazy").setup({
             end)
             lsp_zero.setup()
 
-            local cmp = require("cmp")
+            -- diagnostic icons in gujtter
+            local signs = { Error = "‼️", Warn = "⚠️", Hint = "💡", Info = "ℹ️" }
+            for type, icon in pairs(signs) do
+                local hl = "DiagnosticSign" .. type
+                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+            end
 
+            local cmp = require("cmp")
             cmp.setup({
                 completion = {
                     autocomplete = false -- otherwise autocomplete triggers on every keystroke
