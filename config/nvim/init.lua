@@ -30,6 +30,9 @@ vim.opt.clipboard = "unnamedplus"
 -- termguicoors makes true-color themes work in iterm2
 vim.opt.termguicolors = true
 
+-- Give more space for displaying messages at the bottom of the screen
+vim.opt.cmdheight = 2
+
 
 -- helper fn for tab-completion
 local has_words_before = function()
@@ -52,22 +55,15 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local all_schemes = {
-    "desert",
-    "tokyonight",
-    "catppuccin",
-    "everforest",
-    "melange",
-    "habermax",
-    "lunarperche",
-}
 
 require("lazy").setup({
     -- colour schemes
     { "folke/tokyonight.nvim" },
     { "catppuccin/nvim" },
     { "sainnhe/everforest" },
+    { "sainnhe/sonokai" },
     { "savq/melange-nvim" },
+    { "EdenEast/nightfox.nvim" },
 
     -- fuzzy finder
     {
@@ -191,15 +187,16 @@ require("lazy").setup({
 })
 
 -- Initialize the random number generator
-math.randomseed( os.time() )
+math.randomseed(os.time())
 math.random(); math.random(); math.random()
 
 
+local all_schemes = vim.fn.getcompletion("", "color")
 local random_colorscheme = function()
-    return all_schemes[ math.random( #all_schemes ) ]
+    return all_schemes[math.random(#all_schemes)]
 end
 
-vim.cmd.colorscheme( random_colorscheme() )
+vim.cmd.colorscheme(random_colorscheme())
 
 
 
@@ -207,7 +204,7 @@ vim.cmd.colorscheme( random_colorscheme() )
 
 -- random scheme
 vim.keymap.set("n", "<leader>c", function()
-    local cs =  random_colorscheme()
+    local cs = random_colorscheme()
     vim.cmd.colorscheme(cs)
     print(cs)
 end)
