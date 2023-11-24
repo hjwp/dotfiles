@@ -252,8 +252,8 @@ compctl -K _complete_invoke + -f invoke inv
 
 # -- commit to nvim!
 #
-alias vim="nvim"
-alias vi="nvim"
-alias oldvim="vim"
-alias vimdiff='nvim -d'
+alias vim=nvim
+alias vi=nvim
+alias oldvim=/usr/bin/vim
+alias vimdiff=nvim -d
 export EDITOR=nvim
