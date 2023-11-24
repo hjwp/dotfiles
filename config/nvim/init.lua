@@ -129,6 +129,11 @@ require("lazy").setup({
             })
             lsp_zero.on_attach(function(_, bufnr)
                 lsp_zero.default_keymaps({ buffer = bufnr })
+                local ts_builtin = require("telescope.builtin")
+                vim.keymap.set('n', 'gr', ts_builtin.lsp_references, { buffer = bufnr })
+                vim.keymap.set("n", "<CR>", vim.lsp.buf.format)
+                vim.keymap.set("n", "<leader>n", vim.lsp.buf.rename)
+                vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action)
             end)
             lsp_zero.setup()
 
@@ -190,6 +195,31 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>d", function() require("trouble").toggle() end)
         end
     },
+    -- refactoring
+    {
+        "ThePrimeagen/refactoring.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require("refactoring").setup()
+            vim.keymap.set("x", "<leader>re", ":Refactor extract ")
+            vim.keymap.set("x", "<leader>rf", ":Refactor extract_to_file ")
+            vim.keymap.set("x", "<leader>rv", ":Refactor extract_var ")
+            vim.keymap.set({ "n", "x" }, "<leader>ri", ":Refactor inline_var")
+            vim.keymap.set("n", "<leader>rI", ":Refactor inline_func")
+            vim.keymap.set("n", "<leader>rb", ":Refactor extract_block")
+            vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
+            vim.keymap.set(
+                { "n", "x" },
+                "<leader>rr",
+                function() require('refactoring').select_refactor() end
+            )
+            -- <leader>r is also defined earlier for rename, it does not need this extra plugin
+        end,
+    },
+
 })
 
 -- Initialize the random number generator
@@ -217,6 +247,7 @@ end)
 
 -- trim whitespace
 vim.keymap.set("n", "<Leader>e", ":%s/\\s\\+$//e<CR>")
+
 
 -- aliases for window switching
 vim.keymap.set("n", "<C-l>", "<C-w>l")
