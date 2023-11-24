@@ -21,10 +21,15 @@ vim.opt.swapfile = false
 -- search
 vim.opt.incsearch = true  -- highlight matching words as you search
 vim.opt.ignorecase = true -- case-insenstive search...
-vim.opt.smartcase = true  -- ... unless there's mixed case
+vim.opt.smartcase = true  -- ... unless there"s mixed case
 
 -- share clipbloard with system
 vim.opt.clipboard = "unnamedplus"
+
+
+-- termguicoors makes true-color themes work in iterm2
+vim.opt.termguicolors = true
+
 
 -- helper fn for tab-completion
 local has_words_before = function()
@@ -47,10 +52,22 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local all_schemes = {
+    "desert",
+    "tokyonight",
+    "catppuccin",
+    "everforest",
+    "melange",
+    "habermax",
+    "lunarperche",
+}
+
 require("lazy").setup({
     -- colour schemes
-    {"folke/tokyonight.nvim"},
-    {'catppuccin/nvim'},
+    { "folke/tokyonight.nvim" },
+    { "catppuccin/nvim" },
+    { "sainnhe/everforest" },
+    { "savq/melange-nvim" },
 
     -- fuzzy finder
     {
@@ -91,11 +108,11 @@ require("lazy").setup({
             { "williamboman/mason-lspconfig.nvim" },
             -- Autocompletion
             { "hrsh7th/nvim-cmp" },
-            { 'hrsh7th/cmp-nvim-lsp' },
+            { "hrsh7th/cmp-nvim-lsp" },
             -- generic language server wrapper for normal linters
             {
-                'creativenull/efmls-configs-nvim',
-                version = 'v1.x.x',
+                "creativenull/efmls-configs-nvim",
+                version = "v1.x.x",
             },
         },
         config = function()
@@ -106,7 +123,7 @@ require("lazy").setup({
                 handlers = {
                     lsp_zero.default_setup,
                     lua_ls = function()
-                        require('lspconfig').lua_ls.setup({
+                        require("lspconfig").lua_ls.setup({
                             settings = {
                                 Lua = { diagnostics = { globals = { "vim" } }, },
                             }
@@ -119,7 +136,7 @@ require("lazy").setup({
             end)
             lsp_zero.setup()
 
-            local cmp = require('cmp')
+            local cmp = require("cmp")
 
             cmp.setup({
                 completion = {
@@ -151,13 +168,13 @@ require("lazy").setup({
 
             -- efm (generic linter lsp wrapper) config
             local languages = {
-                markdown = { require('efmls-configs.linters.markdownlint') },
-                python = { require('efmls-configs.linters.mypy') },
+                markdown = { require("efmls-configs.linters.markdownlint") },
+                python = { require("efmls-configs.linters.mypy") },
             }
-            require('lspconfig').efm.setup({
+            require("lspconfig").efm.setup({
                 filetypes = vim.tbl_keys(languages),
                 settings = {
-                    rootMarkers = { '.git/' },
+                    rootMarkers = { ".git/" },
                     languages = languages,
                 },
             })
@@ -173,11 +190,27 @@ require("lazy").setup({
     },
 })
 
-vim.cmd.colorscheme("habamax")
+-- Initialize the random number generator
+math.randomseed( os.time() )
+math.random(); math.random(); math.random()
+
+
+local random_colorscheme = function()
+    return all_schemes[ math.random( #all_schemes ) ]
+end
+
+vim.cmd.colorscheme( random_colorscheme() )
+
 
 
 ------- GENERAL KEYMAPS -----
-vim.keymap.set("n", "N", "Nzzzv")
+
+-- random scheme
+vim.keymap.set("n", "<leader>c", function()
+    local cs =  random_colorscheme()
+    vim.cmd.colorscheme(cs)
+    print(cs)
+end)
 
 -- trim whitespace
 vim.keymap.set("n", "<Leader>e", ":%s/\\s\\+$//e<CR>")
@@ -188,6 +221,11 @@ vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 
+-- un-highlight search results
+vim.keymap.set("n", "<leader-s>", vim.cmd.nohlsearch)
+
+-- close window
+vim.keymap.set("n", "<BS>", vim.cmd.bdelete)
 
 if vim.g.neovide then
     vim.o.guifont = "Lekton Nerd Font:h14"
