@@ -4,12 +4,21 @@ vim.opt.nu = true     -- line numbers on
 
 vim.g.mapleader = "," -- mapleader has to be before lazy so mappings are correct
 
--- sane tabs
+-- sane tabs.  4 by default, 2 for some types
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"markdown", "asciidoc", "html", "javascript"},
+  callback = function(_)
+    vim.opt_local.tabstop = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.shiftwidth = 2
+  end
+})
 
 -- infinite undo
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
