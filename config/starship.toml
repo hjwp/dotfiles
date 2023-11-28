@@ -3,4 +3,3 @@ pyenv_version_name = false
 
 [git_status]
 disabled = true  # it's slow
-
