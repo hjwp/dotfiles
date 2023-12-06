@@ -139,9 +139,6 @@ PATH=~/.local/bin:$PATH
 #make sure ~/.npm is on path for node binaries
 PATH=~/.npm:$PATH
 
-VIRTUALENVWRAPPER_PYTHON=python3
-source virtualenvwrapper.sh
-
 function fuck() {
     killall -9 $2;
     if [ $? == 0 ]
@@ -152,7 +149,7 @@ function fuck() {
     fi
 }
 
-SSH_SOCK_INFO_PATH="/tmp/"`hostname`"-ssh-auth-sock-location.txt"
+SSH_SOCK_INFO_PATH="/tmp/$(hostname)-ssh-auth-sock-location.txt"
 check-ssh-agent() {
     [ -S "$SSH_AUTH_SOCK" ] && { ssh-add -l >& /dev/null || [ $? -ne 2 ]; } 
 }  
@@ -172,3 +169,9 @@ export NVM_DIR="$HOME/.nvm"
 
 # added by travis gem
 [ -f /home/harry/.travis/travis.sh ] && source /home/harry/.travis/travis.sh
+
+# postgres.app on macos
+if [ -e /Applications/Postgres.app ]; then
+    export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
+fi
+. "$HOME/.cargo/env"
