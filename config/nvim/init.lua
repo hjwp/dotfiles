@@ -12,12 +12,12 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = {"markdown", "asciidoc", "html", "javascript"},
-  callback = function(_)
-    vim.opt_local.tabstop = 2
-    vim.opt_local.softtabstop = 2
-    vim.opt_local.shiftwidth = 2
-  end
+    pattern = { "markdown", "asciidoc", "html", "javascript" },
+    callback = function(_)
+        vim.opt_local.tabstop = 2
+        vim.opt_local.softtabstop = 2
+        vim.opt_local.shiftwidth = 2
+    end
 })
 
 -- infinite undo
