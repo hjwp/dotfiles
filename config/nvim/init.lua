@@ -308,9 +308,29 @@ vim.keymap.set("n", "<leader-s>", vim.cmd.nohlsearch)
 -- close window
 vim.keymap.set("n", "<BS>", vim.cmd.bdelete)
 
+
+local GUIFONT =  "Lekton Nerd Font"
+
+local current_guifont_size = function ()
+    return tonumber(string.match(vim.o.guifont, ".+:h(%d+)"))
+end
+local embiggen_font = function()
+    local new_size = ":h" .. (current_guifont_size() + 2)
+    vim.opt.guifont = { GUIFONT, new_size }
+end
+local smallize_font = function()
+    local new_size = ":h" .. (current_guifont_size() - 2)
+    vim.opt.guifont = { GUIFONT, new_size }
+end
+
 if vim.g.neovide then
-    vim.o.guifont = "Lekton Nerd Font:h14"
+    vim.opt.guifont = { GUIFONT, ":h14" }
+    vim.keymap.set('n', '<D-=>', embiggen_font, { noremap = true, silent = true })
+    vim.keymap.set('n', '<D-->', smallize_font, { noremap = true, silent = true })
+
     vim.g.neovide_cursor_animation_length = 0.03
     vim.g.neovide_cursor_animate_in_insert_mode = false
     vim.g.neovide_cursor_vfx_mode = "pixiedust"
+    vim.g.remember_window_size = true
+
 end
