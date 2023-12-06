@@ -32,9 +32,20 @@ vim.opt.incsearch = true  -- highlight matching words as you search
 vim.opt.ignorecase = true -- case-insenstive search...
 vim.opt.smartcase = true  -- ... unless there"s mixed case
 
+-- COPY/PASTE SETTINGS
+
 -- share clipbloard with system
 vim.opt.clipboard = "unnamedplus"
 
+-- otherwise neovide breaks cmd+c/v
+vim.g.neovide_input_use_logo = 1
+--
+
+vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('!', '<D-v>', '<CR>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<D-v>', '<CR>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<D-v>', '<CR>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<D-c>', '"+y<CR>', { noremap = true, silent = true })
 
 -- termguicoors makes true-color themes work in iterm2
 vim.opt.termguicolors = true
