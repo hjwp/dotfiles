@@ -154,6 +154,7 @@ require("lazy").setup({
                 vim.keymap.set("n", "<CR>", vim.lsp.buf.format)
                 vim.keymap.set("n", "<leader>n", vim.lsp.buf.rename)
                 vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action)
+                vim.keymap.set("n", "<leader>t", vim.lsp.buf.definition)
             end)
             lsp_zero.setup()
 
