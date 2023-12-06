@@ -2,9 +2,6 @@
     name = Harry
     email = hjwp2@cantab.net
 
-[includeIf "gitdir:~/arrival/"]
-    path = ~/dotfiles/.arrival.gitconfig
-
 [core]
     editor = vim
     pager = less
@@ -34,19 +31,18 @@
     default = current
 [pull]
 	rebase = false
+
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 
-[url "ssh://git@git.core.arrival.co:"]
-	insteadOf = https://git.core.arrival.co
 [init]
 	defaultBranch = main
+
 [blame]
 	ignoreRevsFile = .git-blame-ignore-revs
-[url "git@git.core.arrival.co:"]
-	insteadOf = https://git.core.arrival.co/
+
 [checkout]
 	defaultRemote = origin
