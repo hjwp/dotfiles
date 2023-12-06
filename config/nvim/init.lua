@@ -240,7 +240,33 @@ require("lazy").setup({
             -- <leader>r is also defined earlier for rename, it does not need this extra plugin
         end,
     },
+    -- our Microsoft AI friend...
+    {
+        "github/copilot.vim",
+        config = function()
+            -- disable by default
+            -- vim.g.copilot_filetypes = {["*"] = false}
 
+            -- Tab already used in cmp setup above
+            vim.g.copilot_no_tab_map = true
+
+            -- Request suggestions manually
+            -- (NB MacOS users, turn off default ctrl+space keybinding!)
+            -- vim.keymap.set('i', '<C-Space>', 'copilot#Suggest()', {
+            --     expr = true,
+            --     replace_keycodes = false,
+            -- })
+
+            -- Accept current suggestion
+            vim.keymap.set('i', '<C-Enter>', 'copilot#Accept("")', {
+                expr = true,
+                replace_keycodes = false
+            })
+        end,
+    },
+    -- coffeescript isnt built-in
+    -- (using this for roc)
+    { "kchmck/vim-coffee-script" },
 })
 
 -- Initialize the random number generator
