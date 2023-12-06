@@ -134,26 +134,6 @@ if [ -e /opt/homebrew ]; then
 fi
 
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-
-lazy_load_nvm() {
-  unset -f node nvm npm
-  [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-}
-node() {
-  lazy_load_nvm
-  node "$@"
-}
-nvm() {
-  lazy_load_nvm
-  nvm "$@"
-}
-npm() {
-  lazy_load_nvm
-  npm "$@"
-}
 
 # for "fuck you firefox".  requires utils/flip
 function fuck() {
@@ -210,18 +190,20 @@ fi
 
 
 # Vagrant on WSL
-export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
-export PATH="$PATH:/mnt/c/Windows/System32"
-export PATH="$PATH:/mnt/c/Windows/System32/WindowsPowershell/v1.0/".
+#
+if [ -e /mnt/c/Windows ]; then
+    export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
+    export PATH="$PATH:/mnt/c/Windows/System32"
+    export PATH="$PATH:/mnt/c/Windows/System32/WindowsPowershell/v1.0/".
+fi
 
 # starship.rs prompt
 eval "$(starship init zsh)"
+
+
 # Invoke tab-completion script to be sourced with the Z shell.
 # Known to work on zsh 5.0.x, probably works on later 4.x releases as well (as
 # it uses the older compctl completion system).
-
-
-#  -- invoke cli completions
 _complete_invoke() {
     # `words` contains the entire command string up til now (including
     # program name).
@@ -249,6 +231,10 @@ _complete_invoke() {
 # * positional args: program names to complete for.
 compctl -K _complete_invoke + -f invoke inv
 
+# postgres.app on macos
+if [ -e /Applications/Postgres.app ]; then
+    export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
+fi
 
 # -- commit to nvim!
 #
@@ -257,3 +243,8 @@ alias vi=nvim
 alias oldvim=/usr/bin/vim
 alias vimdiff=nvim -d
 export EDITOR=nvim
+export LLVM_SYS_160_PREFIX=$(brew --prefix llvm@16)
+
+# fnm
+export PATH="/Users/harry.percival/Library/Application Support/fnm:$PATH"
+eval "`fnm env`"
