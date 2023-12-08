@@ -312,15 +312,15 @@ vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 
 -- un-highlight search results
-vim.keymap.set("n", "<leader-s>", vim.cmd.nohlsearch)
+vim.keymap.set("n", "<BS>", vim.cmd.nohlsearch)
 
 -- close window
-vim.keymap.set("n", "<BS>", vim.cmd.bdelete)
+vim.keymap.set("n", "<C-BS>", vim.cmd.bdelete)
 
 
-local GUIFONT =  "Lekton Nerd Font"
+local GUIFONT = "Lekton Nerd Font"
 
-local current_guifont_size = function ()
+local current_guifont_size = function()
     return tonumber(string.match(vim.o.guifont, ".+:h(%d+)"))
 end
 local embiggen_font = function()
@@ -341,5 +341,4 @@ if vim.g.neovide then
     vim.g.neovide_cursor_animate_in_insert_mode = false
     vim.g.neovide_cursor_vfx_mode = "pixiedust"
     vim.g.remember_window_size = true
-
 end
