@@ -59,6 +59,9 @@ vim.opt.termguicolors = true
 -- Give more space for displaying messages at the bottom of the screen
 vim.opt.cmdheight = 2
 
+-- shortcut for visual block mode, helpful on non-macs.
+vim.api.nvim_set_keymap("n", "<Leader-q>", "<C-v>", { noremap = true, silent = true })
+
 
 -- helper fn for tab-completion
 local has_words_before = function()
