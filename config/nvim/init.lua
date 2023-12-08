@@ -39,13 +39,19 @@ vim.opt.clipboard = "unnamedplus"
 
 -- otherwise neovide breaks cmd+c/v
 vim.g.neovide_input_use_logo = 1
---
 
-vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('!', '<D-v>', '<CR>+', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('t', '<D-v>', '<CR>+', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<D-v>', '<CR>+', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<D-c>', '"+y<CR>', { noremap = true, silent = true })
+-- cmd+c in visual mode, yank to special + buffer (= system clipboard)
+vim.api.nvim_set_keymap("v", "<D-c>", '"+y', { noremap = true, silent = true })
+-- cmd+v in all applicable modes where the + buffer can be p'd
+vim.api.nvim_set_keymap("", "<D-v>", '"+p', { noremap = true, silent = true })
+-- cmd-v in insert and command mode, uses ctrl+r, whatever that is.
+vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+-- cmd-v in the builtin terminal
+vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+-- cmd-v in visual mode (?)
+vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+
+
 
 -- termguicoors makes true-color themes work in iterm2
 vim.opt.termguicolors = true
