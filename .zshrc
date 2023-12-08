@@ -246,5 +246,7 @@ export EDITOR=nvim
 export LLVM_SYS_160_PREFIX=$(brew --prefix llvm@16)
 
 # fnm
-export PATH="/Users/harry.percival/Library/Application Support/fnm:$PATH"
-eval "`fnm env`"
+if [ -e "/Users/harry.percival/Library/Application Support/fnm" ]; then
+    export PATH="/Users/harry.percival/Library/Application Support/fnm:$PATH"
+    eval "`fnm env`"
+fi
