@@ -128,6 +128,9 @@ export LESS="-RX"
 # stop python from writing pycs.
 export PYTHONDONTWRITEBYTECODE=1
 
+# prevents accidental corruption of system python(s)
+export PIP_REQUIRE_VIRTUALENV=true
+
 # homebrew, macos only
 if [ -e /opt/homebrew ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
