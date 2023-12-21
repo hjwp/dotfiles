@@ -47,6 +47,8 @@ ZSH_CUSTOM=~/dotfiles/oh-my-zsh-custom
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd automatically_activate_python_venv
 
+# from https://stackoverflow.com/a/63955939/366221
+# replacement for ohmyzah "virtualenvwrapper" plugin which was flakey
 function automatically_activate_python_venv() {
   if [[ -z $VIRTUAL_ENV ]] ; then
     activate_venv
@@ -84,7 +86,6 @@ plugins=(
   docker-compose
   dotenv
   git
-  # virtualenvwrapper
   zsh-autosuggestions
 )
 
