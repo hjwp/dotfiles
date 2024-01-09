@@ -46,3 +46,6 @@
 
 [checkout]
 	defaultRemote = origin
+
+[url "ssh://git@github.com/octoenergy/"]
+    insteadOf = https://github.com/octoenergy/
