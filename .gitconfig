@@ -4,7 +4,14 @@
 
 [core]
     editor = vim
-    pager = less
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 
 [color]
     diff = auto
@@ -18,6 +25,8 @@
     hist = log --graph --oneline --decorate
     st = status
     co = checkout
+    bbranch = !git --no-pager branch --sort=committerdate --format='%(color:yellow)%(refname:short) %(color:green)%(committerdate:relative) %(color:blue)[%(authorname)]' --color=always
+    rreflog = reflog --format='%C(yellow)%h%C(reset) %gs %C(green)%ar%C(reset) %C(blue)[%an]%C(reset)'
     wdiff = diff --color-words
     subs = submodule update --init --recursive
     amend = commit -a --amend --no-edit
@@ -26,6 +35,7 @@
     irebase = rebase --interactive
     rcont = rebase --continue
     ccont = cherry-pick --continue
+	praise = blame
 
 [push]
     default = current
@@ -49,3 +59,20 @@
 
 [url "ssh://git@github.com/octoenergy/"]
     insteadOf = https://github.com/octoenergy/
+
+[fetch]
+	prune = true
+
+[merge]
+	conflictStyle = zdiff3
+
+[diff]
+	algorithm = histogram
+	submodule = log
+    colorMoved = default
+
+[commit]
+	verbose = true
+
+[status]
+	submoduleSummary = true
