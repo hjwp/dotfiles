@@ -27,6 +27,18 @@ vim.opt.undofile = true
 -- swapfiles cause more pain than they prevent.... i think?
 vim.opt.swapfile = false
 
+
+-- auto-reload files that have changed on disk
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+    command = "if mode() != 'c' | checktime | endif",
+    pattern = { "*" },
+})
+vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
+    command = 'echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None',
+    pattern = { "*" },
+})
+
 -- search
 vim.opt.incsearch = true  -- highlight matching words as you search
 vim.opt.ignorecase = true -- case-insenstive search...
