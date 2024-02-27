@@ -72,7 +72,7 @@ vim.opt.termguicolors = true
 vim.opt.cmdheight = 2
 
 -- shortcut for visual block mode, helpful on non-macs.
-vim.api.nvim_set_keymap("n", "<Leader-q>", "<C-v>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>q", "<C-v>", { noremap = true, silent = true })
 
 
 -- helper fn for tab-completion
