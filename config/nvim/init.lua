@@ -312,8 +312,13 @@ require("lazy").setup({
             --     replace_keycodes = false,
             -- })
 
-            -- Accept current suggestion
+            -- Accept current suggestion with ctrl+enter
             vim.keymap.set('i', '<C-Enter>', 'copilot#Accept("")', {
+                expr = true,
+                replace_keycodes = false
+            })
+            -- Ctrl+e is what i use in zsh so it's in muscle memory
+            vim.keymap.set('i', '<C-e>', 'copilot#Accept("")', {
                 expr = true,
                 replace_keycodes = false
             })
