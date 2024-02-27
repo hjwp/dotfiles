@@ -195,7 +195,7 @@ require("lazy").setup({
                 lsp_zero.default_keymaps({ buffer = bufnr })
                 local ts_builtin = require("telescope.builtin")
                 vim.keymap.set('n', 'gr', ts_builtin.lsp_references, { buffer = bufnr })
-                vim.keymap.set("n", "<CR>", vim.lsp.buf.format)
+                vim.keymap.set("n", "<S-CR>", vim.lsp.buf.format)
                 vim.keymap.set("n", "<leader>n", vim.lsp.buf.rename)
                 vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action)
                 vim.keymap.set("n", "<leader>t", vim.lsp.buf.definition)
