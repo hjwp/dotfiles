@@ -1,5 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH="$HOME/.local/bin:$HOME/.gem/ruby/2.5.0/bin:$HOME/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 
 # Path to your oh-my-zsh installation.
@@ -254,3 +252,7 @@ if [ -e "/Users/harry.percival/Library/Application Support/fnm" ]; then
     export PATH="/Users/harry.percival/Library/Application Support/fnm:$PATH"
     eval "`fnm env`"
 fi
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+export PIPX_HOME="$HOME/.local/pipx"
