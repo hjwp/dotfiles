@@ -74,6 +74,8 @@ vim.opt.cmdheight = 2
 -- shortcut for visual block mode, helpful on non-macs.
 vim.api.nvim_set_keymap("n", "<Leader>q", "<C-v>", { noremap = true, silent = true })
 
+-- jj to escape insert mode
+vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = true, silent = true })
 
 -- helper fn for tab-completion
 local has_words_before = function()
