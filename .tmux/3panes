@@ -8,13 +8,13 @@ split-window -h
 # commands for each pane
 
 send-keys -t 0 \
-    "cd ." Enter \
-    "git ls-files | entr pytest --tb=short --failed-first -v tests" Enter
+    "source .venv/bin/activate" Enter \
+    "git ls-files | grep \\.py | entr sh -c 'git diff --relative --name-only origin/master | xargs time ./hooks/invoke-xargs.sh localdev.multi-pytest'" Enter
 
 send-keys -t 1 \
-    "cd ." Enter \
-    "git ls-files | entr mypy ." Enter
+    "source .venv/bin/activate" Enter \
+    "git ls-files | grep \\.py | entr sh -c 'git diff --relative --name-only origin/master | inv run-python-type-checker-daemon'" Enter
 
 send-keys -t 2 \
-    "cd ." Enter \
-    "git ls-files | entr black --check ." Enter
+    "source .venv/bin/activate" Enter \
+    "git ls-files | entr env SKIP=pytest,dmypy pre-commit run" Enter
