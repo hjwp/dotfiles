@@ -263,7 +263,9 @@ require("lazy").setup({
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
-            vim.keymap.set("n", "<leader>d", function() require("trouble").toggle() end)
+            vim.keymap.set("n", "<leader>d", function()
+                require("trouble").toggle("document_diagnostics")
+            end)
         end
     },
     -- refactoring
@@ -287,7 +289,7 @@ require("lazy").setup({
                 "<leader>rr",
                 function() require('refactoring').select_refactor() end
             )
-            -- <leader>r is also defined earlier for rename, it does not need this extra plugin
+            -- <leader>n is also defined earlier for rename, it does not need this extra plugin
         end,
     },
     -- our Microsoft AI friend...
@@ -295,7 +297,7 @@ require("lazy").setup({
         "github/copilot.vim",
         config = function()
             -- explicitly point at v18 of node incase we've activated an older version.
-            vim.g.copilot_node_command = {"fnm", "exec", "--using=v18", "node"}
+            vim.g.copilot_node_command = { "fnm", "exec", "--using=v18", "node" }
 
             -- Tab already used in cmp setup above
             vim.g.copilot_no_tab_map = true
