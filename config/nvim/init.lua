@@ -135,6 +135,27 @@ require("lazy").setup({
             }
         end
     },
+    {
+        "numToStr/Comment.nvim",
+        opts = {},
+        lazy = false,
+        config = function()
+            require("Comment").setup()
+            -- Toggle current line (linewise) using C-/
+            local api = require("Comment.api")
+            vim.keymap.set('n', '<D-/>', api.toggle.linewise.current)
+            vim.keymap.set('v', '<D-/>', api.toggle.linewise.current)
+        end
+    },
+    -- surround motions
+    {
+        "kylechui/nvim-surround",
+        version = "*", -- for stability; omit to use `main` branch for the latest features
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({})
+        end
+    },
 
     -- MONSTER LSP CONFIG BLOCK
     {
