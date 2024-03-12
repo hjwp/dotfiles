@@ -168,11 +168,14 @@ require("lazy").setup({
             -- Autocompletion
             { "hrsh7th/nvim-cmp" },
             { "hrsh7th/cmp-nvim-lsp" },
+            { "PaterJason/cmp-conjure" },
+
             -- generic language server wrapper for normal linters
             {
                 "creativenull/efmls-configs-nvim",
                 version = "v1.x.x",
             },
+
         },
         config = function()
             local lsp_zero = require("lsp-zero")
@@ -210,10 +213,17 @@ require("lazy").setup({
             end
 
             local cmp = require("cmp")
+
             cmp.setup({
                 completion = {
                     autocomplete = false -- otherwise autocomplete triggers on every keystroke
                 },
+                sources = cmp.config.sources({
+                    { name = 'nvim_lsp' },
+                    { name = 'conjure' },
+                }, {
+                    { name = 'buffer' },
+                }),
                 mapping = cmp.mapping.preset.insert({
                     -- try to make tab-completion work.
                     -- from https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#super-tab-like-mapping
@@ -292,6 +302,20 @@ require("lazy").setup({
             -- <leader>n is also defined earlier for rename, it does not need this extra plugin
         end,
     },
+
+    -- repl integration for lips/scheme (but also maybe python??)
+    {
+        "Olical/conjure",
+        config = function()
+            -- default mapping for this is K but i use that for lsp reveal type
+            vim.g["conjure#mapping#doc_word"] = "gk"
+            require("conjure.main").main()
+            require("conjure.mapping")["on-filetype"]()
+            -- this should be Shift-E but keybindings aren't loading by default for some reason
+            vim.keymap.set("v", "<space>e", ":ConjureEvalVisual<CR>")
+        end,
+    },
+
     -- our Microsoft AI friend...
     {
         "github/copilot.vim",
