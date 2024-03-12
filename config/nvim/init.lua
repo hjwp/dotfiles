@@ -54,15 +54,14 @@ vim.g.neovide_input_use_logo = 1
 
 -- cmd+c in visual mode, yank to special + buffer (= system clipboard)
 vim.api.nvim_set_keymap("v", "<D-c>", '"+y', { noremap = true, silent = true })
--- cmd+v in all applicable modes where the + buffer can be p'd
-vim.api.nvim_set_keymap("", "<D-v>", '"+p', { noremap = true, silent = true })
--- cmd-v in insert and command mode, uses ctrl+r, whatever that is.
-vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
--- cmd-v in the builtin terminal
-vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
--- cmd-v in visual mode (?)
-vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 
+-- cmd+v in all applicable modes pastes the special + buffer, via vim api
+vim.keymap.set(
+    { 'n', 'v', 's', 'x', 'o', 'i', 'l', 'c', 't' },
+    '<D-v>',
+    function() vim.api.nvim_paste(vim.fn.getreg('+'), true, -1) end,
+    { noremap = true, silent = true }
+)
 
 
 -- termguicoors makes true-color themes work in iterm2
