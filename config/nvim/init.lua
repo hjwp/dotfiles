@@ -198,6 +198,7 @@ require("lazy").setup({
                 vim.keymap.set("n", "<leader>n", vim.lsp.buf.rename)
                 vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action)
                 vim.keymap.set("n", "<leader>t", vim.lsp.buf.definition)
+                vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
             end)
             lsp_zero.setup()
 
@@ -351,6 +352,11 @@ vim.keymap.set("n", "<leader>c", function()
     print(cs)
 end)
 
+-- open some common files
+vim.keymap.set("n", "<space>c", ":e $MYVIMRC<CR>")
+vim.keymap.set("n", "<space>t", ":e ~/Documents/todos-work.md<CR>")
+vim.keymap.set("n", "<space>d", ":e ~/Documents/diary.md<CR>")
+
 -- trim whitespace
 vim.keymap.set("n", "<Leader>e", ":%s/\\s\\+$//e<CR>")
 
@@ -364,8 +370,9 @@ vim.keymap.set("n", "<C-j>", "<C-w>j")
 -- un-highlight search results
 vim.keymap.set("n", "<BS>", vim.cmd.nohlsearch)
 
--- close window
-vim.keymap.set("n", "<C-BS>", vim.cmd.bdelete)
+-- hide diagnostics
+-- TODO: does not work in terminal vim
+vim.keymap.set("n", "<D-BS>", vim.diagnostic.hide)
 
 
 local GUIFONT = "Lekton Nerd Font"
