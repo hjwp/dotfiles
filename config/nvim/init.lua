@@ -247,7 +247,7 @@ require("lazy").setup({
                     require("efmls-configs.linters.markdownlint"),
                     require('efmls-configs.formatters.prettier'),
                 },
-                python = { require("efmls-configs.linters.mypy") },
+                -- python = { require("efmls-configs.linters.mypy") },
             })
             require("lspconfig").efm.setup({
                 filetypes = vim.tbl_keys(languages),
@@ -327,6 +327,8 @@ require("lazy").setup({
     -- coffeescript isnt built-in
     -- (using this for roc)
     { "kchmck/vim-coffee-script" },
+
+    -- { "habamax/vim-asciidoctor" },  -- tried this but it's worse than builtin
 })
 
 -- Initialize the random number generator
