@@ -35,44 +35,44 @@
     irebase = rebase --interactive
     rcont = rebase --continue
     ccont = cherry-pick --continue
-	praise = blame
+    praise = blame
 
 [push]
     default = current
 [pull]
-	rebase = false
+    rebase = false
 
 [filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [blame]
-	ignoreRevsFile = .git-blame-ignore-revs
+    ignoreRevsFile = .git-blame-ignore-revs
 
 [checkout]
-	defaultRemote = origin
+    defaultRemote = origin
 
 [url "ssh://git@github.com/octoenergy/"]
     insteadOf = https://github.com/octoenergy/
 
 [fetch]
-	prune = true
+    prune = true
 
 [merge]
-	conflictStyle = zdiff3
+    conflictStyle = zdiff3
 
 [diff]
-	algorithm = histogram
-	submodule = log
+    algorithm = histogram
+    submodule = log
     colorMoved = default
 
 [commit]
-	verbose = true
+    verbose = true
 
 [status]
-	submoduleSummary = true
+    submoduleSummary = true
