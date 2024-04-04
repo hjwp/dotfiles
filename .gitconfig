@@ -65,14 +65,15 @@
 
 [merge]
     conflictStyle = zdiff3
+	tool = nvimdiff
 
 [diff]
     algorithm = histogram
-    submodule = log
+    submodule = diff
     colorMoved = default
 
 [commit]
     verbose = true
 
 [status]
-    submoduleSummary = true
+    submoduleSummary = false  # too verbose for book
