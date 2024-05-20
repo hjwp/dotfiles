@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/bin/bash
+
+# catch ctrl+c and exit rather than just moving on to next step of while loop
+trap exit SIGINT
+
 while true;
     do
     date

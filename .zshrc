@@ -233,6 +233,9 @@ _complete_invoke() {
 # * positional args: program names to complete for.
 compctl -K _complete_invoke + -f invoke inv
 
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --zsh)"
+
 # postgres.app on macos
 if [ -e /Applications/Postgres.app ]; then
     export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"

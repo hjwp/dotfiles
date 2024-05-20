@@ -25,6 +25,7 @@
     hist = log --graph --oneline --decorate
     st = status
     co = checkout
+    sw = switch
     bbranch = !git --no-pager branch --sort=committerdate --format='%(color:yellow)%(refname:short) %(color:green)%(committerdate:relative) %(color:blue)[%(authorname)]' --color=always
     rreflog = reflog --format='%C(yellow)%h%C(reset) %gs %C(green)%ar%C(reset) %C(blue)[%an]%C(reset)'
     wdiff = diff --color-words
