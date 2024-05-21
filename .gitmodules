@@ -1,18 +1,6 @@
 [submodule "vim/vim-pathogen"]
 	path = vim/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
-[submodule "vim/bundle/vim-python-pep8-indent"]
-	path = vim/bundle/vim-python-pep8-indent
-	url = https://github.com/hynek/vim-python-pep8-indent.git
-[submodule "vim/bundle/colorschemes"]
-	path = vim/bundle/colorschemes
-	url = https://github.com/flazz/vim-colorschemes.git
-[submodule "vim/bundle/ctrlp.vim"]
-	path = vim/bundle/ctrlp.vim
-	url = https://github.com/kien/ctrlp.vim.git
-[submodule "vim/bundle/csapprox"]
-	path = vim/bundle/csapprox
-	url = https://github.com/godlygeek/csapprox
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
@@ -22,51 +10,9 @@
 [submodule "misc/powerline"]
 	path = misc/powerline
 	url = https://github.com/powerline/powerline
-[submodule "vim/bundle/vim-polyglot"]
-	path = vim/bundle/vim-polyglot
-	url = https://github.com/sheerun/vim-polyglot
-[submodule "vim/bundle/django-plus.vim"]
-	path = vim/bundle/django-plus.vim
-	url = https://github.com/tweekmonster/django-plus.vim.git
-[submodule "vim/vim-airline"]
-	path = vim/bundle/vim-airline
-	url = https://github.com/vim-airline/vim-airline.git
-[submodule "vim/bundle/ale"]
-	path = vim/bundle/ale
-	url = https://github.com/hjwp/ale
-[submodule "vim/bundle/vim-virtualenv"]
-	path = vim/bundle/vim-virtualenv
-	url = https://github.com/jmcantrell/vim-virtualenv/
-[submodule "vim/bundle/vim-markdown"]
-	path = vim/bundle/vim-markdown
-	url = https://github.com/plasticboy/vim-markdown
-[submodule "vim/bundle/vim-markdown-toc"]
-	path = vim/bundle/vim-markdown-toc
-	url = https://github.com/mzlogin/vim-markdown-toc
-[submodule "vim/bundle/vim-fugitive"]
-	path = vim/bundle/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
-[submodule "vim/bundle/requirements.txt.vim"]
-	path = vim/bundle/requirements.txt.vim
-	url = https://github.com/raimon49/requirements.txt.vim.git
-[submodule "vim/bundle/vim-surround"]
-	path = vim/bundle/vim-surround
-	url = https://github.com/tpope/vim-surround.git
 [submodule "vim/bundle/.vim/bundle/ropevim"]
 	path = vim/bundle/.vim/bundle/ropevim
 	url = https://github.com/python-rope/ropevim.git
-[submodule "vim/bundle/editorconfig-vim"]
-	path = vim/bundle/editorconfig-vim
-	url = https://github.com/editorconfig/editorconfig-vim
-[submodule "vim/bundle/rust.vim"]
-	path = vim/bundle/rust.vim
-	url = https://github.com/rust-lang/rust.vim.git
-[submodule "vim/bundle/vim-lsp"]
-	path = vim/bundle/vim-lsp
-	url = https://github.com/prabirshrestha/vim-lsp
-[submodule "vim/bundle/vim-lsp-settings"]
-	path = vim/bundle/vim-lsp-settings
-	url = https://github.com/prabirshrestha/vim-lsp-settings
 [submodule "oh-my-zsh-custom/zsh-autosuggestions"]
 	path = oh-my-zsh-custom/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
