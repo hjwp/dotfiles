@@ -59,7 +59,7 @@
     defaultRemote = origin
 
 [url "ssh://git@github.com/octoenergy/"]
-    insteadOf = https://github.com/octoenergy/
+	insteadof = https://github.com/octoenergy/
 
 [fetch]
     prune = true
