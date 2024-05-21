@@ -46,7 +46,7 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd automatically_activate_python_venv
 
 # from https://stackoverflow.com/a/63955939/366221
-# replacement for ohmyzah "virtualenvwrapper" plugin which was flakey
+# replacement for ohmyzh "virtualenvwrapper" plugin which was flakey
 function automatically_activate_python_venv() {
   if [[ -z $VIRTUAL_ENV ]] ; then
     activate_venv
@@ -251,9 +251,8 @@ export EDITOR=nvim
 export LLVM_SYS_160_PREFIX=$(brew --prefix llvm@16)
 
 # fnm
-if [ -e "/Users/harry.percival/Library/Application Support/fnm" ]; then
-    export PATH="/Users/harry.percival/Library/Application Support/fnm:$PATH"
-    eval "`fnm env`"
+if [ -x "$(command -v fnm)" ]; then
+    eval "$(fnm env --use-on-cd)"
 fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
