@@ -75,6 +75,12 @@ vim.keymap.set(
 )
 
 
+-- COMMAND MODE
+-- make ctrl+a go to beginning of line like you expect
+vim.keymap.set("c", "<C-a>", "<Home>")
+-- and ctrl+p = previous command
+-- vim.keymap.set("c", "<C-p>", "<Up>")  (actually maybe this is default??)
+
 -- termguicoors makes true-color themes work in iterm2
 vim.opt.termguicolors = true
 
