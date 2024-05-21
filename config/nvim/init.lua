@@ -311,9 +311,11 @@ require("lazy").setup({
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
-            vim.keymap.set("n", "<leader>d", function()
+            vim.keymap.set("n", "<leader>D", function()
                 require("trouble").toggle("document_diagnostics")
             end)
+            -- lowercase d for normal single diagnostic floating window
+            vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
         end
     },
 
