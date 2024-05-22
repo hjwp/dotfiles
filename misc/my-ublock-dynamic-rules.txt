@@ -35,12 +35,16 @@ no-scripting: www.oreilly.com false
 no-scripting: www.raycast.com false
 no-scripting: www.reddit.com false
 no-scripting: www.rememberthemilk.com false
+no-scripting: www.riverplacegrouppractice.co.uk false
 no-scripting: kraken-tech.sentry.io false
 no-scripting: app.shareforce.net false
 no-scripting: signal.org false
 no-scripting: soundcloud.com false
+no-scripting: accounts.spotify.com false
+no-scripting: open.spotify.com false
 no-scripting: stackoverflow.com false
 no-scripting: twitter.com false
+no-scripting: riverplacegrouppractice.webgp.com false
 no-scripting: web.whatsapp.com false
 no-scripting: x.com false
 no-scripting: www.youtube.com false
