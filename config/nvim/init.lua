@@ -382,8 +382,9 @@ require("lazy").setup({
     {
         "github/copilot.vim",
         config = function()
+            -- no longer needed since kraken moved to v80.
             -- explicitly point at v18 of node incase we've activated an older version.
-            vim.g.copilot_node_command = { "fnm", "exec", "--using=v18", "node" }
+            -- vim.g.copilot_node_command = { "fnm", "exec", "--using=v18", "node" }
 
             -- Tab already used in cmp setup above
             vim.g.copilot_no_tab_map = true
