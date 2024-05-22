@@ -1,0 +1,54 @@
+no-csp-reports: * true
+no-large-media: behind-the-scene false
+no-scripting: * true
+no-scripting: octoenergy.1password.com false
+no-scripting: start.1password.com false
+no-scripting: app.asana.com false
+no-scripting: blank.about-scheme false
+no-scripting: circleci.com false
+no-scripting: app.circleci.com false
+no-scripting: codekata.com false
+no-scripting: app.datadoghq.eu false
+no-scripting: www.dropbox.com false
+no-scripting: web.edapp.com false
+no-scripting: www.facebook.com false
+no-scripting: github.com false
+no-scripting: www.goodreads.com false
+no-scripting: accounts.google.com false
+no-scripting: calendar.google.com false
+no-scripting: mail.google.com false
+no-scripting: meet.google.com false
+no-scripting: sites.google.com false
+no-scripting: www.google.com false
+no-scripting: octopusenergy.knowledgeowl.com false
+no-scripting: auth.kolide.com false
+no-scripting: docs.kraken.guide false
+no-scripting: www.meetup.com false
+no-scripting: miro.com false
+no-scripting: www.onlinebanking.natwest.com false
+no-scripting: www.natwest.com false
+no-scripting: www.notion.so false
+no-scripting: octopus.energy false
+no-scripting: octoenergy.okta.com false
+no-scripting: learning.oreilly.com false
+no-scripting: www.oreilly.com false
+no-scripting: www.raycast.com false
+no-scripting: www.reddit.com false
+no-scripting: www.rememberthemilk.com false
+no-scripting: kraken-tech.sentry.io false
+no-scripting: app.shareforce.net false
+no-scripting: signal.org false
+no-scripting: soundcloud.com false
+no-scripting: stackoverflow.com false
+no-scripting: twitter.com false
+no-scripting: web.whatsapp.com false
+no-scripting: x.com false
+no-scripting: www.youtube.com false
+no-scripting: octoenergy.zoom.us false
+behind-the-scene * * noop
+behind-the-scene * 1p-script noop
+behind-the-scene * 3p noop
+behind-the-scene * 3p-frame noop
+behind-the-scene * 3p-script noop
+behind-the-scene * image noop
+behind-the-scene * inline-script noop
