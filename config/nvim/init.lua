@@ -420,6 +420,8 @@ require("lazy").setup({
     -- { "habamax/vim-asciidoctor" },  -- tried this but it's worse than builtin
 })
 
+-- COLOURRRRSSS ---
+
 -- Initialize the random number generator
 math.randomseed(os.time())
 math.random(); math.random(); math.random()
@@ -496,3 +498,9 @@ if vim.g.neovide then
     vim.g.neovide_cursor_vfx_mode = "pixiedust"
     vim.g.remember_window_size = true
 end
+
+
+--  MISC --
+--
+vim.g.node_host_prog = 'fnm exec node'
+
