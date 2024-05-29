@@ -7,7 +7,12 @@ vim.o.spelllang = "en_gb"
 vim.cmd('iab <buffer> cmdg [subs="specialcharacters,quotes"]<Enter>----<Enter>$ *git')
 vim.cmd('iab <buffer> srcp <Enter>[role="sourcecode"]<Enter>.lists.tests.py (ch04l004)<Enter>====<Enter>[source,python]<Enter>----<Enter>----<Enter>====<Enter><Up><Up>')
 
---
+vim.keymap.set("v", "<F9>",  ":!black -q -<CR>")
+vim.keymap.set("n", "<F10>", "s/'/\"/g<CR>")
+vim.keymap.set("n", "<F8>",  ":s/)))/)))\\r/g<CR><BS>")
+vim.keymap.set("n", "<F7>",  ":s/.home.harry.dropbox.\\+superlists/...goat-book/<CR>")
+vim.keymap.set("n", "<F6>",  ":s/.home.harry.\\+.venv.\\+site-packages/.../<CR>")
+
 --
 -- "snippets for new book
 -- "iab <buffer> srcp <Enter>[[id_here]]<Enter>.Listing title<Enter>====<Enter>[source,python]<Enter>----<Enter>----<Enter>====<Enter><Up><Up>
@@ -19,11 +24,6 @@ vim.cmd('iab <buffer> srcp <Enter>[role="sourcecode"]<Enter>.lists.tests.py (ch0
 -- iab <buffer> cmdg [subs="specialcharacters,quotes"]<Enter>----<Enter>$ *git
 -- iab <buffer> cmdt [subs="specialcharacters,macros"]<Enter>----<Enter>$ pass:quotes[*python3 manage.py test lists*]
 --
--- vnoremap <F9> :!black -q -<CR>
--- noremap <F10> :s/'/"/g<CR>
--- noremap <F8> :s/)))/)))\r/g<CR>
--- noremap <F7> :s/.home.harry.dropbox.\+superlists/...goat-book/<CR>
--- noremap <F6> :s/.home.harry.\+.venv.\+site-packages/.../<CR>
 --
 --
 -- " snippets for tddwp

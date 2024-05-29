@@ -4,6 +4,11 @@ vim.opt.nu = true     -- line numbers on
 
 vim.g.mapleader = "," -- mapleader has to be before lazy so mappings are correct
 
+
+-- other globals
+vim.g.node_host_prog = 'fnm exec node'
+
+
 -- sane tabs.  4 by default, 2 for some types
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -499,8 +504,4 @@ if vim.g.neovide then
     vim.g.remember_window_size = true
 end
 
-
---  MISC --
---
-vim.g.node_host_prog = 'fnm exec node'
 
