@@ -9,9 +9,9 @@ brew install \
     gh \
     git-delta \
     jq \
+    tmux \
     watchexec \ 
 
 
-fnm install v14
 fnm install v18
-
+fnm install v20
