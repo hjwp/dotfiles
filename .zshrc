@@ -3,6 +3,12 @@ export PATH="$HOME/.local/bin:$HOME/.gem/ruby/2.5.0/bin:$HOME/go/bin:/usr/local/
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+# homebrew, macos only
+if [ -e /opt/homebrew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -130,11 +136,6 @@ export PYTHONDONTWRITEBYTECODE=1
 # prevents accidental corruption of system python(s)
 export PIP_REQUIRE_VIRTUALENV=true
 
-# homebrew, macos only
-if [ -e /opt/homebrew ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
 
 
 # for "fuck you firefox".  requires utils/flip
@@ -164,14 +165,13 @@ export POETRY_VIRTUALENVS_IN_PROJECT="true"
 if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then . "$HOME/.nix-profile/etc/profile.d/nix.sh"; fi # added by Nix installer
 
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 
 # emacs binaries incl doom
 export PATH="$HOME/.config/emacs/bin:$PATH"
 
-eval "$(pyenv init --path)"
 
 # icat for kitty displays images
 alias icat="kitty +kitten icat"
@@ -258,8 +258,6 @@ fi
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 export PIPX_HOME="$HOME/.local/pipx"
-eval "$(/opt/homebrew/bin/brew shellenv)"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+
 
 export PATH="/Applications/Postgres.app/Contents/Versions/15/bin:$PATH"
