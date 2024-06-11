@@ -8,7 +8,6 @@ if [ -e /opt/homebrew ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -153,16 +152,21 @@ function fuck() {
 }
 
 
-autoload -U +X bashcompinit && bashcompinit
+# experiment with disabling this bc it's slow
+# autoload -U +X bashcompinit && bashcompinit
 
 if [ -e /usr/bin/nomad ]; then
     complete -o nospace -C /usr/bin/nomad nomad
 fi
 
-export PATH="$HOME/.poetry/bin:$PATH"
-export POETRY_VIRTUALENVS_IN_PROJECT="true"
+if [ -e ~/.poertry/bin ]; then
+    export PATH="$HOME/.poetry/bin:$PATH"
+    export POETRY_VIRTUALENVS_IN_PROJECT="true"
+fi
 
-if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then . "$HOME/.nix-profile/etc/profile.d/nix.sh"; fi # added by Nix installer
+if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then 
+    . "$HOME/.nix-profile/etc/profile.d/nix.sh";
+fi # added by Nix installer
 
 
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
@@ -170,7 +174,9 @@ eval "$(pyenv init -)"
 
 
 # emacs binaries incl doom
-export PATH="$HOME/.config/emacs/bin:$PATH"
+if [ -e ~/.config/emacs/bin ]; then
+    export PATH="$HOME/.config/emacs/bin:$PATH"
+fi
 
 
 # icat for kitty displays images
@@ -239,6 +245,7 @@ eval "$(fzf --zsh)"
 # postgres.app on macos
 if [ -e /Applications/Postgres.app ]; then
     export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
+    export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/15/bin"
 fi
 
 # -- commit to nvim!
@@ -260,4 +267,3 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 export PIPX_HOME="$HOME/.local/pipx"
 
 
-export PATH="/Applications/Postgres.app/Contents/Versions/15/bin:$PATH"
