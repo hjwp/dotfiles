@@ -20,6 +20,7 @@ no-scripting: www.citroen.co.uk false
 no-scripting: codekata.com false
 no-scripting: app.datadoghq.eu false
 no-scripting: deliveroo.co.uk false
+no-scripting: docs.djangoproject.com false
 no-scripting: octopus.doc-works.co.uk false
 no-scripting: doodle.com false
 no-scripting: www.dropbox.com false
@@ -43,6 +44,8 @@ no-scripting: sites.google.com false
 no-scripting: www.google.com false
 no-scripting: www.gstatic.com false
 no-scripting: hachyderm.io false
+no-scripting: app.hibob.com false
+no-scripting: www.hubspot.com false
 no-scripting: jasmine.github.io false
 no-scripting: keap.app false
 no-scripting: octopusenergy.knowledgeowl.com false
@@ -51,6 +54,7 @@ no-scripting: conventions.kraken.guide false
 no-scripting: docs.kraken.guide false
 no-scripting: versions.kraken.tech false
 no-scripting: leanpub.com false
+no-scripting: www.linkedin.com false
 no-scripting: mastodon.social false
 no-scripting: www.meetup.com false
 no-scripting: miro.com false
@@ -62,6 +66,7 @@ no-scripting: nextdoor.co.uk false
 no-scripting: calendar.notion.so false
 no-scripting: www.notion.so false
 no-scripting: octopus.energy false
+no-scripting: octopusev.com false
 no-scripting: octoenergy.at.okta.com false
 no-scripting: octoenergy.okta.com false
 no-scripting: aportal.oreilly.com false
@@ -88,6 +93,8 @@ no-scripting: stackoverflow.com false
 no-scripting: www.thetrainline.com false
 no-scripting: twitter.com false
 no-scripting: code.visualstudio.com false
+no-scripting: www.volkswagen-vans.co.uk false
+no-scripting: www.volkswagen.co.uk false
 no-scripting: riverplacegrouppractice.webgp.com false
 no-scripting: web.whatsapp.com false
 no-scripting: x.com false
