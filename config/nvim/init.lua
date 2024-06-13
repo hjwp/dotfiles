@@ -491,7 +491,7 @@ vim.keymap.set("n", "<D-BS>", vim.diagnostic.hide)
 vim.keymap.set("n", "<space>f", function() vim.fn.setreg("+", vim.fn.expand('%')) end)
 
 -- go to github for file
-vim.keymap.set("n", "<space>gh", ":GBrowse<Enter>")
+vim.keymap.set("n", "<space>gh", ":.GBrowse<Enter>")
 
 vim.api.nvim_buf_get_name(0)
 local GUIFONT = "Lekton Nerd Font"
