@@ -4,11 +4,13 @@ set -ex
 
 brew install \
     efm-langserver \
+    fd \  # finder, goes with ripgrep
     fnm \
     font-lekton-nerd-font \
     gh \
     git-delta \
     jq \
+    ripgrep \
     tmux \
     watchexec \ 
 
