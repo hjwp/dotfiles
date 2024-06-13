@@ -128,6 +128,9 @@ require("lazy").setup({
     { "sainnhe/sonokai" },
     { "savq/melange-nvim" },
     { "EdenEast/nightfox.nvim" },
+    { "ellisonleao/gruvbox.nvim" },
+    { "phha/zenburn.nvim" },
+    { "rebelot/kanagawa.nvim" },
 
     -- fuzzy finder
     {
