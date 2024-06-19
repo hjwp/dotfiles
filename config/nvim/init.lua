@@ -343,6 +343,7 @@ require("lazy").setup({
                     languages = languages,
                 },
             })
+            -- this isn't really working. or only occasionally. remove?
             require("fidget").setup()
         end,
     },
@@ -351,9 +352,9 @@ require("lazy").setup({
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
-            vim.keymap.set("n", "<leader>D", function()
-                require("trouble").toggle("document_diagnostics")
-            end)
+            require("trouble").setup()
+            vim.keymap.set("n", "<leader>D", ":Trouble diagnostics toggle focus=true filter.buf=0<CR>")
+                -- require("trouble").toggle("diagnostics", { filter = { buf = 0 } })
             -- lowercase d for normal single diagnostic floating window
             vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
         end
@@ -538,5 +539,3 @@ if vim.g.neovide then
     vim.g.neovide_cursor_vfx_mode = "pixiedust"
     vim.g.remember_window_size = true
 end
-
-
