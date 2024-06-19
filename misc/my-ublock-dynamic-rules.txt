@@ -11,6 +11,7 @@ no-scripting: web.archive.org false
 no-scripting: app.asana.com false
 no-scripting: askubuntu.com false
 no-scripting: b3ta.com false
+no-scripting: bandcamp.com false
 no-scripting: 3.basecamp.com false
 no-scripting: www.bbc.co.uk false
 no-scripting: blank.about-scheme false
@@ -53,12 +54,14 @@ no-scripting: auth.kolide.com false
 no-scripting: conventions.kraken.guide false
 no-scripting: docs.kraken.guide false
 no-scripting: versions.kraken.tech false
+no-scripting: int.trends.ktl-services.prod-eks.ktl.net false
 no-scripting: leanpub.com false
 no-scripting: www.linkedin.com false
 no-scripting: mastodon.social false
 no-scripting: www.meetup.com false
 no-scripting: miro.com false
 no-scripting: www.mixcloud.com false
+no-scripting: www.mozilla.org false
 no-scripting: www.nationalrail.co.uk false
 no-scripting: www.onlinebanking.natwest.com false
 no-scripting: www.natwest.com false
@@ -75,6 +78,7 @@ no-scripting: www.oreilly.com false
 no-scripting: uk.hive.papercut.com false
 no-scripting: uk.pocket.papercut.com false
 no-scripting: pypi.org false
+no-scripting: pytest-django.readthedocs.io false
 no-scripting: www.raycast.com false
 no-scripting: www.reddit.com false
 no-scripting: www.rememberthemilk.com false
@@ -90,8 +94,10 @@ no-scripting: soundcloud.com false
 no-scripting: accounts.spotify.com false
 no-scripting: open.spotify.com false
 no-scripting: stackoverflow.com false
+no-scripting: techzero.io false
 no-scripting: www.thetrainline.com false
 no-scripting: twitter.com false
+no-scripting: octopus.typeform.com false
 no-scripting: code.visualstudio.com false
 no-scripting: www.volkswagen-vans.co.uk false
 no-scripting: www.volkswagen.co.uk false
