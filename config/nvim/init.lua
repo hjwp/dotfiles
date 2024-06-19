@@ -241,6 +241,23 @@ require("lazy").setup({
                             }
                         })
                     end,
+                    pyright = function()
+                        require("lspconfig").pyright.setup({
+                            settings = {
+                                python = {
+                                    analysis = {
+                                        typeCheckingMode = "standard",
+                                        diagnosticSeverityOverrides = {
+                                            reportAttributeAccessIssue = "none",
+                                        }
+                                    },
+                                    venvPath = ".",
+                                    venv = ".venv",
+                                },
+
+                            },
+                        })
+                    end,
                 },
             })
             lsp_zero.on_attach(function(_, bufnr)
