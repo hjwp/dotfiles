@@ -10,7 +10,7 @@ vim.cmd('iab <buffer> srcp <Enter>[role="sourcecode"]<Enter>.lists.tests.py (ch0
 vim.keymap.set("v", "<F9>",  ":!black -q -<CR>")
 vim.keymap.set("n", "<F10>", "s/'/\"/g<CR>")
 vim.keymap.set("n", "<F8>",  ":s/)))/)))\\r/g<CR><BS>")
-vim.keymap.set("n", "<F7>",  ":s/.home.harry.dropbox.\\+superlists/...goat-book/<CR>")
+vim.keymap.set("n", "<F7>",  ":s:\\/\\(Users\\|home\\).\\+harry.\\+workspace.\\+superlists\\/:...goat-book/:<CR>")
 vim.keymap.set("n", "<F6>",  ":s/.home.harry.\\+.venv.\\+site-packages/.../<CR>")
 
 --
