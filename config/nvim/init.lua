@@ -323,16 +323,19 @@ require("lazy").setup({
             })
 
             -- efm (generic linter lsp wrapper) config
-            --
-            --
-            local languages = require('efmls-configs.defaults').languages()
-            languages = vim.tbl_extend('force', languages, {
+
+            -- local languages = require('efmls-configs.defaults').languages()
+            -- languages = vim.tbl_extend('force', languages, {
+
+            -- specify only the languages we definitely want to lint via efm
+            local languages = {
                 markdown = {
                     require("efmls-configs.linters.markdownlint"),
                     require('efmls-configs.formatters.prettier'),
                 },
+                -- disable mypy for now.
                 -- python = { require("efmls-configs.linters.mypy") },
-            })
+            }
             require("lspconfig").efm.setup({
                 filetypes = vim.tbl_keys(languages),
                 settings = {
