@@ -253,7 +253,7 @@ fi
 alias vim=nvim
 alias vi=nvim
 alias oldvim=/usr/bin/vim
-alias vimdiff=nvim -d
+alias vimdiff='nvim -d'
 export EDITOR=nvim
 export LLVM_SYS_160_PREFIX=$(brew --prefix llvm@16)
 
@@ -265,5 +265,3 @@ fi
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 export PIPX_HOME="$HOME/.local/pipx"
-
-
