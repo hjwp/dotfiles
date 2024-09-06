@@ -136,6 +136,10 @@ export PYTHONDONTWRITEBYTECODE=1
 export PIP_REQUIRE_VIRTUALENV=true
 
 
+if [ -e ~/.colima ]; then
+    # colima-based docker
+    export DOCKER_HOST=unix:///$HOME/.colima/default/docker.sock
+fi
 
 # for "fuck you firefox".  requires utils/flip
 function fuck() {
