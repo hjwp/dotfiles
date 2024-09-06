@@ -37,6 +37,8 @@
     rcont = rebase --continue
     ccont = cherry-pick --continue
     praise = blame
+    fetchthis = "!git fetch origin $(git rev-parse --abbrev-ref HEAD)"
+    pullthis = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
 
 [push]
     default = current
