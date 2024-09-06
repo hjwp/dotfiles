@@ -137,14 +137,21 @@ require("lazy").setup({
     {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.4",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "smartpde/telescope-recent-files",
+        },
         config = function()
+            local telescope = require("telescope")
             local builtin = require("telescope.builtin")
+            telescope.load_extension("recent_files")
             vim.keymap.set("n", "<leader>f", builtin.find_files, {})
             vim.keymap.set("n", "<leader>b", builtin.buffers, {})
             vim.keymap.set("n", "<leader>g", builtin.grep_string, {})
             vim.keymap.set("n", "<leader>G", builtin.live_grep, {})
             vim.keymap.set("n", "<space>tr", builtin.resume, {})
+            vim.keymap.set("n", "<space>tr", builtin.resume, {})
+            vim.keymap.set("n", "<space>r", telescope.extensions.recent_files.pick, {})
         end
     },
 
@@ -355,7 +362,7 @@ require("lazy").setup({
         config = function()
             require("trouble").setup()
             vim.keymap.set("n", "<leader>D", ":Trouble diagnostics toggle focus=true filter.buf=0<CR>")
-                -- require("trouble").toggle("diagnostics", { filter = { buf = 0 } })
+            -- require("trouble").toggle("diagnostics", { filter = { buf = 0 } })
             -- lowercase d for normal single diagnostic floating window
             vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
         end
