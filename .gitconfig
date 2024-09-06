@@ -82,3 +82,5 @@
     submoduleSummary = false  # too verbose for book
 [rerere]
 	enabled = true
+[log]
+	date = iso
