@@ -277,6 +277,13 @@ require("lazy").setup({
                 vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action)
                 vim.keymap.set("n", "<leader>t", vim.lsp.buf.definition)
                 vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
+                vim.keymap.set("n", "<leader>l", ":LspStop<CR>:LspStart<CR>:LspRestart<CR>")
+                vim.keymap.set("n", "<C-Enter>", function()
+                    vim.lsp.buf.code_action({
+                        context = { only = { "source.organizeImports" } },
+                        apply = true,
+                    })
+                end)
             end)
             lsp_zero.setup()
 
