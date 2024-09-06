@@ -131,7 +131,8 @@ require("lazy").setup({
     { "ellisonleao/gruvbox.nvim" },
     { "phha/zenburn.nvim" },
     { "rebelot/kanagawa.nvim" },
-
+    { "rose-pine/neovim",        name = "rose-pine" },
+    { "neanias/everforest-nvim" },
     -- fuzzy finder
     {
         "nvim-telescope/telescope.nvim",
