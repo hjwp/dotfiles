@@ -12,7 +12,9 @@ no-scripting: web.archive.org false
 no-scripting: app.asana.com false
 no-scripting: askubuntu.com false
 no-scripting: b3ta.com false
+no-scripting: bacheconsulting.com false
 no-scripting: bandcamp.com false
+no-scripting: bangface.com false
 no-scripting: 3.basecamp.com false
 no-scripting: www.bbc.co.uk false
 no-scripting: www.better.org.uk false
@@ -51,6 +53,7 @@ no-scripting: getbootstrap.com false
 no-scripting: github.com false
 no-scripting: github.dev false
 no-scripting: gitlab.com false
+no-scripting: images.app.goo.gl false
 no-scripting: maps.app.goo.gl false
 no-scripting: www.goodreads.com false
 no-scripting: accounts.google.com false
@@ -96,6 +99,8 @@ no-scripting: nodejs.org false
 no-scripting: calendar.notion.so false
 no-scripting: www.notion.so false
 no-scripting: www.obeythetestinggoat.com false
+no-scripting: accounts.ocado.com false
+no-scripting: www.ocado.com false
 no-scripting: octopus.energy false
 no-scripting: grafana.eks.octopus.engineering false
 no-scripting: octopusev.com false
