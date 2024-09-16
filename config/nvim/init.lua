@@ -145,11 +145,13 @@ require("lazy").setup({
         dependencies = {
             "nvim-lua/plenary.nvim",
             "smartpde/telescope-recent-files",
+            "debugloop/telescope-undo.nvim",
         },
         config = function()
             local telescope = require("telescope")
             local builtin = require("telescope.builtin")
             telescope.load_extension("recent_files")
+            telescope.load_extension("undo")
             vim.keymap.set("n", "<leader>f", builtin.find_files, {})
             vim.keymap.set("n", "<leader>b", builtin.buffers, {})
             vim.keymap.set("n", "<leader>g", builtin.grep_string, {})
@@ -157,6 +159,7 @@ require("lazy").setup({
             vim.keymap.set("n", "<space>tr", builtin.resume, {})
             vim.keymap.set("n", "<space>tr", builtin.resume, {})
             vim.keymap.set("n", "<space>r", telescope.extensions.recent_files.pick, {})
+            vim.keymap.set("n", "<leader>u", telescope.extensions.undo.undo, {})
         end
     },
 
