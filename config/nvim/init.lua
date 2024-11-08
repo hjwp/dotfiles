@@ -383,6 +383,34 @@ require("lazy").setup({
         end
     },
 
+    -- custom filtering for diagnostics
+    {
+        "m-gail/diagnostic_manipulation.nvim",
+        init = function()
+            require("diagnostic_manipulation").setup {
+                blacklist = {
+                    function(diagnostic)
+                        local ignores = {
+                            ".objects.",
+                            ".market_supply_agreements.",
+                            ".supply_points.all",
+                            ".supply_points.filter",
+                        }
+                        if string.find(diagnostic.source, "pyright") then -- pyright or basedpyright
+                            for _, code in ipairs(ignores) do
+                                if string.find(diagnostic.message, code) then
+                                    return true
+                                end
+                            end
+                        end
+                        return false
+                    end
+                },
+                whitelist = {
+                }
+            }
+        end
+    },
     -- refactoring
     {
         "ThePrimeagen/refactoring.nvim",
