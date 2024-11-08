@@ -16,8 +16,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 -- stops vim auto-inserting newlines at char 80 in insert mode
--- vim.opt.textwidth = 0
-vim.cmd("set textwidth=0")
+vim.opt.formatoptions:remove("t")
 
 
 vim.api.nvim_create_autocmd("FileType", {
