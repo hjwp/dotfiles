@@ -73,14 +73,14 @@ vim.opt.clipboard = "unnamedplus"
 vim.g.neovide_input_use_logo = 1
 
 -- cmd+c in visual mode, yank to special + buffer (= system clipboard)
-vim.api.nvim_set_keymap("v", "<D-c>", '"+y', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<D-c>", '"+y', { noremap = true, silent = true, desc = "copy into system clipboard" })
 
 -- cmd+v in all applicable modes pastes the special + buffer, via vim api
 vim.keymap.set(
     { 'n', 'v', 's', 'x', 'o', 'i', 'l', 'c', 't' },
     '<D-v>',
     function() vim.api.nvim_paste(vim.fn.getreg('+'), true, -1) end,
-    { noremap = true, silent = true }
+    { noremap = true, silent = true, desc = "paste from system clipboard" }
 )
 
 
@@ -97,7 +97,7 @@ vim.opt.termguicolors = true
 vim.opt.cmdheight = 2
 
 -- shortcut for visual block mode, helpful on non-macs.
-vim.api.nvim_set_keymap("n", "<Leader>q", "<C-v>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>q", "<C-v>", { noremap = true, silent = true, desc = "enter visual block mode" })
 
 -- jj to escape insert mode
 vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = true, silent = true })
@@ -151,14 +151,19 @@ require("lazy").setup({
             local builtin = require("telescope.builtin")
             telescope.load_extension("recent_files")
             telescope.load_extension("undo")
-            vim.keymap.set("n", "<leader>f", builtin.find_files, {})
-            vim.keymap.set("n", "<leader>b", builtin.buffers, {})
-            vim.keymap.set("n", "<leader>g", builtin.grep_string, {})
-            vim.keymap.set("n", "<leader>G", builtin.live_grep, {})
-            vim.keymap.set("n", "<space>tr", builtin.resume, {})
-            vim.keymap.set("n", "<space>tr", builtin.resume, {})
-            vim.keymap.set("n", "<space>r", telescope.extensions.recent_files.pick, {})
-            vim.keymap.set("n", "<leader>u", telescope.extensions.undo.undo, {})
+            vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "telescope fuzzy file finder" })
+            vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "telescope fuzzy buffers" })
+            -- find string under cursor
+            vim.keymap.set("n", "<leader>g", builtin.grep_string, { desc = "telescope grep string under cursor" })
+            -- find in files
+            vim.keymap.set("n", "<leader>G", builtin.live_grep, { desc = "telescope grep free text all files" })
+            -- find in open buffers
+            vim.keymap.set("n", "<leader>o", function()
+                builtin.live_grep({ grep_open_files = true })
+            end, { desc = "telescope grep open buffers" })
+            vim.keymap.set("n", "<space>tr", builtin.resume, { desc = "telescope resume last thing" })
+            vim.keymap.set("n", "<space>r", telescope.extensions.recent_files.pick, { desc = "telescope recent files" })
+            vim.keymap.set("n", "<leader>u", telescope.extensions.undo.undo, { desc = "telescope infinite undo" })
         end
     },
 
@@ -181,6 +186,47 @@ require("lazy").setup({
     -- Git API
     { "tpope/vim-fugitive" },
     { "tpope/vim-rhubarb" }, -- adds github stuff
+    -- inline decorations and better git blame
+    {
+        "lewis6991/gitsigns.nvim",
+        config = function()
+            local gitsigns = require('gitsigns')
+            gitsigns.setup {
+                current_line_blame = true,
+                current_line_blame_opts = {
+                    virt_text_pos = 'right_align', -- 'eol' | 'overlay' | 'right_align'
+                    delay = 1000,
+                },
+                -- nb, at one point this mappings config seems to be causing problems with the on_attach in lsp_zero
+                on_attach = function(bufnr)
+                    local function map(mode, l, r, opts)
+                        opts = opts or {}
+                        opts.buffer = bufnr
+                        vim.keymap.set(mode, l, r, opts)
+                    end
+                    map('n', '<leader>hs', gitsigns.stage_hunk, { desc = "git stage hunk" })
+                    map('n', '<leader>hr', gitsigns.reset_hunk, { desc = "git reset hunk" })
+                    map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end,
+                        { desc = "git stage hunk" }
+                    )
+                    map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end,
+                        { desc = "git reset hunk" }
+                    )
+                    map('n', '<leader>hS', gitsigns.stage_buffer, { desc = "git stage buffer" })
+                    map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = "undo git stage hunk" })
+                    map('n', '<leader>hR', gitsigns.reset_buffer, { desc = "git reset buffer" })
+                    map('n', '<leader>hp', gitsigns.preview_hunk, { desc = "git preview hunk" })
+                    map('n', '<leader>htb', gitsigns.toggle_current_line_blame, { desc = "toggle git blame" })
+                    map('n', '<leader>hb', function() gitsigns.blame_line { full = true } end,
+                        { desc = "git blame line" }
+                    )
+                    map('n', '<leader>hd', gitsigns.diffthis, { desc = "git diff this" })
+                    map('n', '<leader>hD', function() gitsigns.diffthis('~') end, { desc = "git diff this (cached?)" })
+                    map('n', '<leader>htd', gitsigns.toggle_deleted, { desc = "toggle git deleted" })
+                end
+            }
+        end,
+    },
 
     -- multi-language comment-toggling
     {
@@ -191,8 +237,9 @@ require("lazy").setup({
             require("Comment").setup()
             -- Toggle current line (linewise) using C-/
             local api = require("Comment.api")
-            vim.keymap.set('n', '<D-/>', api.toggle.linewise.current)
-            vim.keymap.set('v', '<D-/>', api.toggle.linewise.current)
+            vim.keymap.set('n', 'gc', api.toggle.linewise.current, { desc = "toggle comment line" })
+            vim.keymap.set('n', '<D-/>', api.toggle.linewise.current, { desc = "toggle comment line" })
+            vim.keymap.set('v', '<D-/>', api.toggle.linewise.current, { desc = "toggle comment line" })
         end
     },
     {
@@ -214,7 +261,7 @@ require("lazy").setup({
         version = "*", -- for stability; omit to use `main` branch for the latest features
         event = "VeryLazy",
         config = function()
-            require("nvim-surround").setup({})
+            require("nvim-surround").setup()
         end
     },
 
@@ -278,19 +325,23 @@ require("lazy").setup({
             lsp_zero.on_attach(function(_, bufnr)
                 lsp_zero.default_keymaps({ buffer = bufnr })
                 local ts_builtin = require("telescope.builtin")
-                vim.keymap.set('n', 'gr', ts_builtin.lsp_references, { buffer = bufnr })
-                vim.keymap.set("n", "<S-Enter>", vim.lsp.buf.format)
-                vim.keymap.set("n", "<leader>n", vim.lsp.buf.rename)
-                vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action)
-                vim.keymap.set("n", "<leader>t", vim.lsp.buf.definition)
-                vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
-                vim.keymap.set("n", "<leader>l", ":LspStop<CR>:LspStart<CR>:LspRestart<CR>")
+                vim.keymap.set('n', 'gr', ts_builtin.lsp_references,
+                    { buffer = bufnr, desc = "lsp go to references (telescope)" })
+                vim.keymap.set("n", "<S-Enter>", vim.lsp.buf.format, { desc = "autoformat" })
+                vim.keymap.set("n", "<leader>n", vim.lsp.buf.rename, { desc = "lsp refactor - rename" })
+                vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, { desc = "lsp open code actions" })
+                vim.keymap.set("n", "<leader>t", vim.lsp.buf.definition, { desc = "go to definition" })
+                vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "lsp go to type definition" })
+                vim.keymap.set("n", "<leader>l", ":LspStop<CR>:LspStart<CR>:LspRestart<CR>",
+                    { desc = "lsp hard restart" })
                 vim.keymap.set("n", "<C-Enter>", function()
-                    vim.lsp.buf.code_action({
-                        context = { only = { "source.organizeImports" } },
-                        apply = true,
-                    })
-                end)
+                        vim.lsp.buf.code_action({
+                            context = { only = { "source.organizeImports" } },
+                            apply = true,
+                        })
+                    end,
+                    { desc = "lsp organize imports" }
+                )
             end)
             lsp_zero.setup()
 
@@ -390,11 +441,17 @@ require("lazy").setup({
                 blacklist = {
                     function(diagnostic)
                         local ignores = {
-                            ".objects.",
-                            ".market_supply_agreements.",
-                            ".supply_points.all",
-                            ".supply_points.filter",
+                            "objects",
+                            "market_supply_agreements", -- class SupplyPoint
+                            "supply_points",
+                            "supply_periods",
+                            "steps",
+                            "audit.events",
+                            "unrevoked",
                         }
+                        if not diagnostic.source then
+                            return false
+                        end
                         if string.find(diagnostic.source, "pyright") then -- pyright or basedpyright
                             for _, code in ipairs(ignores) do
                                 if string.find(diagnostic.message, code) then
