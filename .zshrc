@@ -247,6 +247,10 @@ _complete_invoke() {
 # * -f: when function generates no results, use filenames.
 # * positional args: program names to complete for.
 compctl -K _complete_invoke + -f invoke inv
+#
+# fpath+=~/.zfunc; autoload -Uz compinit; compinit
+#
+# zstyle ':completion:*' menu select
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
