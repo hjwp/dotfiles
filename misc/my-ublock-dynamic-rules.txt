@@ -16,6 +16,7 @@ no-scripting: calendar.app.google false
 no-scripting: music.apple.com false
 no-scripting: archive.is false
 no-scripting: web.archive.org false
+no-scripting: archive.ph false
 no-scripting: secure4.arcot.com false
 no-scripting: app.asana.com false
 no-scripting: askubuntu.com false
@@ -60,6 +61,7 @@ no-scripting: accounts.ebay.co.uk false
 no-scripting: pay.ebay.co.uk false
 no-scripting: signin.ebay.co.uk false
 no-scripting: www.ebay.co.uk false
+no-scripting: myaccount.economist.com false
 no-scripting: web.edapp.com false
 no-scripting: www.enterpriseintegrationpatterns.com false
 no-scripting: www.etsy.com false
@@ -97,6 +99,7 @@ no-scripting: hachyderm.io false
 no-scripting: app.hibob.com false
 no-scripting: www.hubspot.com false
 no-scripting: grid.iamkate.com false
+no-scripting: igorrr.com false
 no-scripting: app.impact.com false
 no-scripting: www.indiegogo.com false
 no-scripting: jasmine.github.io false
@@ -120,6 +123,7 @@ no-scripting: www.legoland.co.uk false
 no-scripting: hire.lever.co false
 no-scripting: app.link.com false
 no-scripting: www.linkedin.com false
+no-scripting: www.livenation.co.uk false
 no-scripting: access.login.nhs.uk false
 no-scripting: mastodon.social false
 no-scripting: www.meetup.com false
