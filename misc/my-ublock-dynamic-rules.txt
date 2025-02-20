@@ -32,6 +32,7 @@ no-scripting: www.better.org.uk false
 no-scripting: blank.about-scheme false
 no-scripting: www.british-gymnastics.org false
 no-scripting: centinelapi.cardinalcommerce.com false
+no-scripting: cideronline.com false
 no-scripting: www.cideronline.com false
 no-scripting: circleci.com false
 no-scripting: app.circleci.com false
@@ -74,9 +75,14 @@ no-scripting: flown.com false
 no-scripting: forms.gle false
 no-scripting: fosstodon.org false
 no-scripting: www.freddiesflowers.com false
+no-scripting: admin.gandi.net false
+no-scripting: id.gandi.net false
+no-scripting: shop.gandi.net false
 no-scripting: getbootstrap.com false
 no-scripting: github.com false
 no-scripting: github.dev false
+no-scripting: api.gitkraken.com false
+no-scripting: www.gitkraken.com false
 no-scripting: gitlab.com false
 no-scripting: images.app.goo.gl false
 no-scripting: maps.app.goo.gl false
@@ -87,6 +93,7 @@ no-scripting: accounts.google.com false
 no-scripting: calendar.google.com false
 no-scripting: docs.google.com false
 no-scripting: drive.google.com false
+no-scripting: gemini.google.com false
 no-scripting: mail.google.com false
 no-scripting: meet.google.com false
 no-scripting: pay.google.com false
@@ -154,6 +161,7 @@ no-scripting: octopus.energy false
 no-scripting: grafana.eks.octopus.engineering false
 no-scripting: lightdash.ktl.octopus.engineering false
 no-scripting: octopusev.com false
+no-scripting: krakentech.at.okta.com false
 no-scripting: octoenergy.at.okta.com false
 no-scripting: krakentech.okta.com false
 no-scripting: octoenergy.okta.com false
