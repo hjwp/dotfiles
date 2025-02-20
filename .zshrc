@@ -122,6 +122,11 @@ source "$ZSH/oh-my-zsh.sh"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# kraken-core watch test 
+alias watch-test="watchexec --no-process-group inv localdev.pytest"
+
+#
 #
 # powerline
 # . ~/.local/lib/python3.?/site-packages/powerline/bindings/zsh/powerline.zsh
