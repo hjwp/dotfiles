@@ -59,16 +59,17 @@
 
 [checkout]
     defaultRemote = origin
+    workers = 0
 
 [url "ssh://git@github.com/octoenergy/"]
-	insteadof = https://github.com/octoenergy/
+    insteadof = https://github.com/octoenergy/
 
 [fetch]
     prune = true
 
 [merge]
     conflictStyle = zdiff3
-	tool = nvimdiff
+    tool = nvimdiff
 
 [diff]
     algorithm = histogram
@@ -81,6 +82,6 @@
 [status]
     submoduleSummary = false  # too verbose for book
 [rerere]
-	enabled = true
+    enabled = true
 [log]
-	date = iso
+    date = iso
