@@ -6,6 +6,8 @@ no-scripting: octoenergy.1password.com false
 no-scripting: share.1password.com false
 no-scripting: start.1password.com false
 no-scripting: launchpad.37signals.com false
+no-scripting: www.aa.net.uk false
+no-scripting: addcal.co false
 no-scripting: www.afterbabel.com false
 no-scripting: www.amazon.co.uk false
 no-scripting: author.amazon.com false
@@ -32,6 +34,7 @@ no-scripting: www.better.org.uk false
 no-scripting: blank.about-scheme false
 no-scripting: www.british-gymnastics.org false
 no-scripting: centinelapi.cardinalcommerce.com false
+no-scripting: authentication-devices.checkout.com false
 no-scripting: cideronline.com false
 no-scripting: www.cideronline.com false
 no-scripting: circleci.com false
@@ -59,9 +62,11 @@ no-scripting: hub.docker.com false
 no-scripting: doodle.com false
 no-scripting: www.dropbox.com false
 no-scripting: accounts.ebay.co.uk false
+no-scripting: cart.ebay.co.uk false
 no-scripting: pay.ebay.co.uk false
 no-scripting: signin.ebay.co.uk false
 no-scripting: www.ebay.co.uk false
+no-scripting: signin.ebay.com false
 no-scripting: myaccount.economist.com false
 no-scripting: web.edapp.com false
 no-scripting: www.enterpriseintegrationpatterns.com false
@@ -91,6 +96,7 @@ no-scripting: support.good-kraken.systems false
 no-scripting: www.goodreads.com false
 no-scripting: accounts.google.com false
 no-scripting: calendar.google.com false
+no-scripting: contacts.google.com false
 no-scripting: docs.google.com false
 no-scripting: drive.google.com false
 no-scripting: gemini.google.com false
@@ -101,12 +107,16 @@ no-scripting: sites.google.com false
 no-scripting: support.google.com false
 no-scripting: www.google.com false
 no-scripting: gotocph.com false
+no-scripting: assistant.grandvalira.com false
+no-scripting: www.grandvalira.com false
 no-scripting: www.gstatic.com false
 no-scripting: hachyderm.io false
 no-scripting: app.hibob.com false
 no-scripting: www.hubspot.com false
 no-scripting: grid.iamkate.com false
 no-scripting: igorrr.com false
+no-scripting: www.ikea.com false
+no-scripting: www.imdb.com false
 no-scripting: app.impact.com false
 no-scripting: www.indiegogo.com false
 no-scripting: jasmine.github.io false
@@ -117,6 +127,7 @@ no-scripting: kissthehippo.com false
 no-scripting: octopusenergy.knowledgeowl.com false
 no-scripting: app.kolide.com false
 no-scripting: auth.kolide.com false
+no-scripting: kraken-codebase-app.vercel.app false
 no-scripting: kraken-management-tools.vercel.app false
 no-scripting: conventions.kraken.guide false
 no-scripting: docs.kraken.guide false
@@ -161,6 +172,7 @@ no-scripting: octopus.energy false
 no-scripting: grafana.eks.octopus.engineering false
 no-scripting: lightdash.ktl.octopus.engineering false
 no-scripting: octopusev.com false
+no-scripting: auth.officevibe.com false
 no-scripting: krakentech.at.okta.com false
 no-scripting: octoenergy.at.okta.com false
 no-scripting: krakentech.okta.com false
@@ -194,10 +206,16 @@ no-scripting: www.riverplacegrouppractice.co.uk false
 no-scripting: www.roastandpost.com false
 no-scripting: renewables-map.robinhawkes.com false
 no-scripting: www.royalmail.com false
+no-scripting: www.rsa3dsauth.co.uk false
+no-scripting: sammancoaching.org false
+no-scripting: science-gifts.co.uk false
+no-scripting: sddconf.com false
 no-scripting: songkick.seetickets.com false
 no-scripting: kraken-tech.sentry.io false
 no-scripting: app.shareforce.net false
 no-scripting: shop.app false
+no-scripting: www.sigmajs.org false
+no-scripting: signal.me false
 no-scripting: signal.org false
 no-scripting: office-web-sncf-a.sips-services.com false
 no-scripting: skylark.coffee false
@@ -237,6 +255,7 @@ no-scripting: web.whatsapp.com false
 no-scripting: account.which.co.uk false
 no-scripting: signup.which.co.uk false
 no-scripting: www.which.co.uk false
+no-scripting: login.workleap.com false
 no-scripting: activities.officevibe.workleap.com false
 no-scripting: www.pythonanywhere.com false
 no-scripting: x.com false
@@ -249,6 +268,7 @@ no-scripting: my.zipcar.com false
 no-scripting: kraken-tech.zoom.us false
 no-scripting: octoenergy.zoom.us false
 no-scripting: ucl.zoom.us false
+no-scripting: us02web.zoom.us false
 no-scripting: us06web.zoom.us false
 no-scripting: config.zscaler.com false
 no-scripting: help.zscaler.com false
