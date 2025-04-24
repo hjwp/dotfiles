@@ -145,18 +145,22 @@ require("lazy").setup({
             "nvim-lua/plenary.nvim",
             "smartpde/telescope-recent-files",
             "debugloop/telescope-undo.nvim",
+            "nvim-telescope/telescope-live-grep-args.nvim",
         },
         config = function()
             local telescope = require("telescope")
             local builtin = require("telescope.builtin")
             telescope.load_extension("recent_files")
             telescope.load_extension("undo")
+            telescope.load_extension("live_grep_args")
+
             vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "telescope fuzzy file finder" })
             vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "telescope fuzzy buffers" })
             -- find string under cursor
             vim.keymap.set("n", "<leader>g", builtin.grep_string, { desc = "telescope grep string under cursor" })
             -- find in files
-            vim.keymap.set("n", "<leader>G", builtin.live_grep, { desc = "telescope grep free text all files" })
+            vim.keymap.set("n", "<leader>G", telescope.extensions.live_grep_args.live_grep_args,
+                { desc = "telescope grep free text all files, with rg args" })
             -- find in open buffers
             vim.keymap.set("n", "<leader>o", function()
                 builtin.live_grep({ grep_open_files = true })
