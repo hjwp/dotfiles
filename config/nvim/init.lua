@@ -322,13 +322,13 @@ require("lazy").setup({
             require("mason").setup()
             require("mason-lspconfig").setup({
                 ensure_installed = {
-                    "bash-language-server",
-                    "curlylint",  -- django+jinja templates
-                    "lua-ls", -- lua-language-server
+                    "bashls",
+                    -- "curlylint",  -- django+jinja templates
+                    "lua_ls", -- lua-language-server
                     "pyright",
-                    "prettier",
+                    -- "prettier",
                     "ruff",
-                    "shellcheck",
+                    -- "shellcheck",
                     "ts_ls",  -- typescript-language-server
                 },
                 handlers = {
