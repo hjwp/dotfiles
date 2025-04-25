@@ -178,10 +178,6 @@ if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
 fi # added by Nix installer
 
 
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-
 # emacs binaries incl doom
 if [ -e ~/.config/emacs/bin ]; then
     export PATH="$HOME/.config/emacs/bin:$PATH"
