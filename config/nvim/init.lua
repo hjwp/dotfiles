@@ -321,7 +321,16 @@ require("lazy").setup({
             local lsp_zero = require("lsp-zero")
             require("mason").setup()
             require("mason-lspconfig").setup({
-                ensure_installed = {},
+                ensure_installed = {
+                    "bash-language-server",
+                    "curlylint",  -- django+jinja templates
+                    "lua-ls", -- lua-language-server
+                    "pyright",
+                    "prettier",
+                    "ruff",
+                    "shellcheck",
+                    "ts_ls",  -- typescript-language-server
+                },
                 handlers = {
                     lsp_zero.default_setup,
                     lua_ls = function()
@@ -374,7 +383,7 @@ require("lazy").setup({
             lsp_zero.setup()
 
             -- diagnostic icons in gujtter
-            local signs = { Error = "‼️", Warn = "⚠️", Hint = "💡", Info = "ℹ️" }
+            local signs = { Error = "‼️", Warn = "⚠️", Hint = "💡", Info = "ℹ️" }
             for type, icon in pairs(signs) do
                 local hl = "DiagnosticSign" .. type
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
