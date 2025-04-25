@@ -15,6 +15,19 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
+		<key>0x2f-0x100000-0x2c</key>
+		<dict>
+			<key>Action</key>
+			<integer>13</integer>
+			<key>Apply Mode</key>
+			<integer>0</integer>
+			<key>Escaping</key>
+			<integer>2</integer>
+			<key>Text</key>
+			<string></string>
+			<key>Version</key>
+			<integer>2</integer>
+		</dict>
 		<key>0x9-0x40000</key>
 		<dict>
 			<key>Action</key>
@@ -124,6 +137,10 @@
 	<true/>
 	<key>LeftOption</key>
 	<integer>2</integer>
+	<key>NeverWarnAboutShortLivedSessions_E172A310-BFD2-44BA-A964-35620501B3BF</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_E172A310-BFD2-44BA-A964-35620501B3BF_selection</key>
+	<integer>0</integer>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -2072,6 +2089,14 @@
 			<string>kNextWindowPointerAction</string>
 		</dict>
 	</dict>
+	<key>Print In Black And White</key>
+	<true/>
+	<key>ReportHorizontalScrollEvents</key>
+	<true/>
+	<key>ShowFullScreenTabBar</key>
+	<false/>
+	<key>Size Changes Affect Profile</key>
+	<false/>
 	<key>SoundForEsc</key>
 	<false/>
 	<key>TabStyleWithAutomaticOption</key>
