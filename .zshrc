@@ -253,7 +253,7 @@ compctl -K _complete_invoke + -f invoke inv
 # zstyle ':completion:*' menu select
 
 # Set up fzf key bindings and fuzzy completion
-eval "$(fzf --zsh)"
+# eval "$(fzf --zsh)"
 
 # postgres.app on macos
 if [ -e /Applications/Postgres.app ]; then
