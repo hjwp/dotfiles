@@ -1,0 +1,29 @@
+{
+    "strict": [
+        "src/octoenergy/domain/lifecycle",
+        // "src/octoenergy/application/usecases/lifecycle",
+        "src/octoenergy/application/usecases/workflows"
+    ],
+    "exclude": [
+        "*/node_modules/*",
+        "semgrep",
+    ],
+    // basedpyright overdoes this
+    "reportPrivateLocalImportUsage": "none",
+    // too many of these to be useful
+    "reportAny": "none",
+    // too many django models, so this is just never gonna work
+    "reportUnknownMemberType": "none",
+    "reportUnknownArgumentType": "none",
+    // not interesting
+    "reportUnusedCallResult": "none",
+    "reportExplicitAny": "none",
+    "executionEnvironments": [
+        {
+            "root": "src/tests",
+            // in tests there's too much untyped stuff
+            "reportUnknownArgumentType": "none",
+            "reportUnknownVariableType": "none",
+        },
+    ],
+}
