@@ -603,6 +603,18 @@ require("lazy").setup({
             })
         end,
     },
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        build = "make tiktoken",
+        opts = {
+            mappings = {
+                reset = {
+                  normal = '<space>lll>',
+                  insert = '<space>lll>',
+                },
+            },
+        },
+    },
     -- coffeescript isnt built-in
     -- (using this for roc)
     { "kchmck/vim-coffee-script" },
