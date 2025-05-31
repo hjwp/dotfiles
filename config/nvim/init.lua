@@ -557,8 +557,9 @@ require("lazy").setup({
 
             require("conjure.main").main()
             require("conjure.mapping")["on-filetype"]()
-            -- this should be Shift-E but keybindings aren't loading by default for some reason
+            -- nb default keybindings are using <localleader> which is \
             vim.keymap.set("v", "<space>e", ":ConjureEvalVisual<CR>")
+            vim.keymap.set("n", "<space>e", ":ConjureEvalCurrentForm<CR>")
         end,
     },
     -- more lisp editing stuff. this is beta
