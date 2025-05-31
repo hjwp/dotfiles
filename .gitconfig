@@ -54,9 +54,6 @@
 [init]
     defaultBranch = main
 
-[blame]
-    ignoreRevsFile = .git-blame-ignore-revs
-
 [checkout]
     defaultRemote = origin
     workers = 0
