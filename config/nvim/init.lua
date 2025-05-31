@@ -222,7 +222,7 @@ require("lazy").setup({
                 current_line_blame = true,
                 current_line_blame_opts = {
                     ignore_whitespace = true,
-                    virt_text_pos = 'right_align', -- 'eol' | 'overlay' | 'right_align'
+                    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
                     delay = 1000,
                 },
                 -- nb, at one point this mappings config seems to be causing problems with the on_attach in lsp_zero
@@ -329,7 +329,7 @@ require("lazy").setup({
                     -- "prettier",
                     "ruff",
                     -- "shellcheck",
-                    "ts_ls",  -- typescript-language-server
+                    "ts_ls", -- typescript-language-server
                 },
                 handlers = {
                     lsp_zero.default_setup,
