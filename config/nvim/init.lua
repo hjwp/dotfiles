@@ -379,6 +379,11 @@ require("lazy").setup({
                     end,
                     { desc = "lsp organize imports" }
                 )
+                vim.keymap.set("n", "<Leader><Enter>", function()
+                        vim.fn.system("ruff check --fix %")
+                    end,
+                    { desc = "shell out to ruff fix current file" }
+                )
             end)
             lsp_zero.setup()
 
