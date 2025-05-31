@@ -202,7 +202,7 @@ mounts:
     writable: false
   - location: /private/var/folders
     writable: true
-  - location: /tmp/superlists-emails
+  - location: /tmp
     writable: true
 
 # Specify a custom disk image for the virtual machine.
