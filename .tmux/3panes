@@ -2,19 +2,20 @@ set -g set-remain-on-exit on
 neww -n "tests etc"
 
 # make 3 panes
-split-window -v
+split-window -v -l 25%
 split-window -h
 
 # commands for each pane
 
 send-keys -t 0 \
-    "source .venv/bin/activate" Enter \
-    "git ls-files | grep \\.py | entr sh -c 'git diff --relative --name-only origin/master | xargs time ./hooks/invoke-xargs.sh localdev.multi-pytest'" Enter
+    "source .venv/bin/activate" Enter
+    # "watchexec pytest ." Enter \
+    # "git ls-files | grep \\.py | entr sh -c 'git diff --relative --name-only origin/master | xargs time ./hooks/invoke-xargs.sh localdev.multi-pytest'"
 
 send-keys -t 1 \
     "source .venv/bin/activate" Enter \
-    "git ls-files | grep \\.py | entr sh -c 'git diff --relative --name-only origin/master | inv run-python-type-checker-daemon'" Enter
+    "watchexec pytest ." Enter
 
 send-keys -t 2 \
     "source .venv/bin/activate" Enter \
-    "git ls-files | entr env SKIP=pytest,dmypy pre-commit run" Enter
+    "watchexec mypy ." Enter
