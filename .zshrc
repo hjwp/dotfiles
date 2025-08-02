@@ -1,4 +1,4 @@
-export PATH="$HOME/.local/bin:$HOME/.gem/ruby/2.5.0/bin:$HOME/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="$HOME/.gem/ruby/2.5.0/bin:$HOME/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -274,3 +274,13 @@ fi
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 export PIPX_HOME="$HOME/.local/pipx"
+
+# mob.sh for ensemble programming
+alias ensemble="mob"
+# export MOB_TIMER_URL="https://timer.mob.sh/"
+# export MOB_TIMER_ROOM="kraken"
+export MOB_TIMER="4"
+export MOB_OPEN_COMMAND="vim %s"
+
+# make sure ~/.local/bin is first in the path
+export PATH="$HOME/.local/bin:$PATH"
