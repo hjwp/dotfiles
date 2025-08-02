@@ -334,6 +334,7 @@ require("lazy").setup({
                 },
                 handlers = {
                     lsp_zero.default_setup,
+
                     lua_ls = function()
                         require("lspconfig").lua_ls.setup({
                             settings = {
@@ -341,12 +342,13 @@ require("lazy").setup({
                             }
                         })
                     end,
+
                     pyright = function()
                         require("lspconfig").pyright.setup({
                             settings = {
                                 python = {
                                     analysis = {
-                                        typeCheckingMode = "standard",
+                                        typeCheckingMode = "strict",
                                         diagnosticSeverityOverrides = {
                                             reportAttributeAccessIssue = "none",
                                         }
