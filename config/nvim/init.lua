@@ -463,6 +463,7 @@ require("lazy").setup({
             })
             -- this isn't really working. or only occasionally. remove?
             require("fidget").setup()
+            require("lspconfig").racket_langserver.setup {}
         end,
     },
     -- nice diagnostics view thing
@@ -561,8 +562,12 @@ require("lazy").setup({
             require("conjure.main").main()
             require("conjure.mapping")["on-filetype"]()
             -- nb default keybindings are using <localleader> which is \
-            vim.keymap.set("v", "<space>e", ":ConjureEvalVisual<CR>")
-            vim.keymap.set("n", "<space>e", ":ConjureEvalCurrentForm<CR>")
+            vim.keymap.set("v", "<space>e", ":ConjureEvalVisual<CR>",
+                { desc = "eval visual selection" })
+            vim.keymap.set("n", "<space>e", ":ConjureEvalCurrentForm<CR>",
+                { desc = "eval current form" })
+            vim.keymap.set("n", "<localleader>t", ":ConjureRktStop<CR>:ConjureRktStart<CR>",
+                { desc = "restart racket repl" })
         end,
     },
     -- more lisp editing stuff. this is beta
@@ -572,6 +577,8 @@ require("lazy").setup({
             require("nvim-paredit").setup()
         end
     },
+    -- rainbow parens
+    { "hiphish/rainbow-delimiters.nvim" },
     -- our Microsoft AI friend...
     {
         "github/copilot.vim",
