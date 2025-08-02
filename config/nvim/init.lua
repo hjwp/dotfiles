@@ -368,6 +368,7 @@ require("lazy").setup({
                 vim.keymap.set('n', 'gr', ts_builtin.lsp_references,
                     { buffer = bufnr, desc = "lsp go to references (telescope)" })
                 vim.keymap.set("n", "<S-Enter>", vim.lsp.buf.format, { desc = "autoformat" })
+                vim.keymap.set("n", "<space><Enter>", vim.lsp.buf.format, { desc = "autoformat" })
                 vim.keymap.set("n", "<leader>n", vim.lsp.buf.rename, { desc = "lsp refactor - rename" })
                 vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, { desc = "lsp open code actions" })
                 vim.keymap.set("n", "<leader>t", vim.lsp.buf.definition, { desc = "go to definition" })
@@ -375,6 +376,14 @@ require("lazy").setup({
                 vim.keymap.set("n", "<leader>l", ":LspStop<CR>:LspStart<CR>:LspRestart<CR>",
                     { desc = "lsp hard restart" })
                 vim.keymap.set("n", "<C-Enter>", function()
+                        vim.lsp.buf.code_action({
+                            context = { only = { "source.organizeImports" } },
+                            apply = true,
+                        })
+                    end,
+                    { desc = "lsp organize imports" }
+                )
+                vim.keymap.set("n", "<space>i", function()
                         vim.lsp.buf.code_action({
                             context = { only = { "source.organizeImports" } },
                             apply = true,
