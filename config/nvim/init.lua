@@ -599,10 +599,10 @@ require("lazy").setup({
             -- Tab already used in cmp setup above
             vim.g.copilot_no_tab_map = true
 
-            -- disable for sicp, enable for the rest of the world
+            -- disable everything for now
             vim.g.copilot_filetypes = {
-                ["racket"] = false,
-                ["*"] = true,
+                -- ["racket"] = false,
+                ["*"] = false,
             }
 
             -- (NB on MacOS, need to turn off default ctrl+space keybinding)
@@ -629,8 +629,8 @@ require("lazy").setup({
         opts = {
             mappings = {
                 reset = {
-                  normal = '<space>lll>',
-                  insert = '<space>lll>',
+                    normal = '<space>lll>',
+                    insert = '<space>lll>',
                 },
             },
         },
