@@ -290,6 +290,7 @@ require("lazy").setup({
         event = "VeryLazy",
         config = function()
             require("nvim-surround").setup()
+            vim.keymap.set('n', 'ss', "ysiw", { desc = "surround word in something" })
         end
     },
 
