@@ -11,6 +11,8 @@ no-scripting: addcal.co false
 no-scripting: acrobat.adobe.com false
 no-scripting: auth.services.adobe.com false
 no-scripting: www.afterbabel.com false
+no-scripting: www.airbnb.co.uk false
+no-scripting: www.airportia.com false
 no-scripting: www.amazon.co.uk false
 no-scripting: author.amazon.com false
 no-scripting: www.amazon.com false
@@ -78,6 +80,7 @@ no-scripting: pay.ebay.co.uk false
 no-scripting: signin.ebay.co.uk false
 no-scripting: www.ebay.co.uk false
 no-scripting: signin.ebay.com false
+no-scripting: www.ebooks.com false
 no-scripting: myaccount.economist.com false
 no-scripting: web.edapp.com false
 no-scripting: www.enterpriseintegrationpatterns.com false
@@ -191,6 +194,7 @@ no-scripting: octopus.energy false
 no-scripting: grafana.eks.octopus.engineering false
 no-scripting: lightdash.ktl.octopus.engineering false
 no-scripting: octopusev.com false
+no-scripting: app.octopusmoney.com false
 no-scripting: auth.officevibe.com false
 no-scripting: krakentech.at.okta.com false
 no-scripting: octoenergy.at.okta.com false
@@ -276,6 +280,7 @@ no-scripting: octopus.typeform.com false
 no-scripting: unionchapel.org.uk false
 no-scripting: www.vegesaurs.com false
 no-scripting: vehicleenquiry.service.gov.uk false
+no-scripting: vimeo.com false
 no-scripting: code.visualstudio.com false
 no-scripting: www.volkswagen-vans.co.uk false
 no-scripting: www.volkswagen.co.uk false
