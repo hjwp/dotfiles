@@ -669,9 +669,9 @@ end)
 
 -- open some common files
 vim.keymap.set("n", "<space>c", ":e $MYVIMRC<CR>")
-vim.keymap.set("n", "<space>t", ":e ~/Documents/todos-work.md<CR>")
-vim.keymap.set("n", "<space>h", ":e ~/Documents/todos-home.md<CR>")
-vim.keymap.set("n", "<space>d", ":e ~/Documents/diary.md<CR>")
+vim.keymap.set("n", "<space>t", ":e ~/Dropbox/todos-work.md<CR>")
+vim.keymap.set("n", "<space>h", ":e ~/Dropbox/todos-home.md<CR>")
+vim.keymap.set("n", "<space>d", ":e ~/Dropbox/diary.md<CR>")
 
 -- trim whitespace
 vim.keymap.set("n", "<Leader>e", ":%s/\\s\\+$//e<CR>")
