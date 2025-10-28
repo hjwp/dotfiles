@@ -13,6 +13,7 @@ no-scripting: auth.services.adobe.com false
 no-scripting: www.afterbabel.com false
 no-scripting: www.airbnb.co.uk false
 no-scripting: www.airportia.com false
+no-scripting: apx-security.amazon.co.uk false
 no-scripting: www.amazon.co.uk false
 no-scripting: author.amazon.com false
 no-scripting: www.amazon.com false
@@ -133,6 +134,8 @@ no-scripting: app.hibob.com false
 no-scripting: www.hubspot.com false
 no-scripting: grid.iamkate.com false
 no-scripting: igorrr.com false
+no-scripting: secure.ii.co.uk false
+no-scripting: www.ii.co.uk false
 no-scripting: www.ikea.com false
 no-scripting: www.imdb.com false
 no-scripting: app.impact.com false
@@ -162,6 +165,7 @@ no-scripting: app.link.com false
 no-scripting: www.linkedin.com false
 no-scripting: www.livenation.co.uk false
 no-scripting: access.login.nhs.uk false
+no-scripting: mankindprojectuki.org false
 no-scripting: mastodon.social false
 no-scripting: www.meetup.com false
 no-scripting: teams.microsoft.com false
@@ -228,6 +232,7 @@ no-scripting: www.raycast.com false
 no-scripting: www.digitalbanking.rbs.co.uk false
 no-scripting: www.reddit.com false
 no-scripting: www.rememberthemilk.com false
+no-scripting: www.rentprofile.co false
 no-scripting: www.researchgate.net false
 no-scripting: www.riverplacegrouppractice.co.uk false
 no-scripting: www.roastandpost.com false
@@ -260,6 +265,7 @@ no-scripting: open.spotify.com false
 no-scripting: stackexchange.com false
 no-scripting: apple.stackexchange.com false
 no-scripting: stackoverflow.com false
+no-scripting: stan.store false
 no-scripting: checkout.stripe.com false
 no-scripting: islington.tarantoportal.com false
 no-scripting: techzero.io false
@@ -276,6 +282,7 @@ no-scripting: irishculturalcentre.ticketsolve.com false
 no-scripting: www.tiktok.com false
 no-scripting: www.twitch.tv false
 no-scripting: twitter.com false
+no-scripting: play.ty.dev false
 no-scripting: octopus.typeform.com false
 no-scripting: unionchapel.org.uk false
 no-scripting: www.vegesaurs.com false
@@ -293,6 +300,7 @@ no-scripting: www.which.co.uk false
 no-scripting: wizardzines.com false
 no-scripting: login.workleap.com false
 no-scripting: activities.officevibe.workleap.com false
+no-scripting: secure.worldpay.com false
 no-scripting: www.pythonanywhere.com false
 no-scripting: x.com false
 no-scripting: help.yahoo.com false
