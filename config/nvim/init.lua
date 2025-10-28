@@ -20,7 +20,7 @@ vim.opt.formatoptions:remove("t")
 
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "markdown", "asciidoc", "html", "htmldjango", "javascript" },
+    pattern = { "markdown", "asciidoc", "html", "htmldjango", "javascript", "json" },
     callback = function(_)
         vim.opt_local.tabstop = 2
         vim.opt_local.softtabstop = 2
@@ -550,23 +550,24 @@ require("lazy").setup({
     -- repl integration for lips/scheme (but also maybe python??)
     {
         "Olical/conjure",
-        config = function()
+        ft = { "clojure",
+            "clojure",
+            "fennel",
+            "janet",
+            "hy",
+            "julia",
+            "racket",
+            "scheme",
+            "lua",
+            "lisp",
+            -- "python",
+            "rust",
+            "sql",
+        },
+        -- etc
+        init = function()
             -- default mapping for this is K but i use that for lsp reveal type
             vim.g["conjure#mapping#doc_word"] = "gk"
-            vim.g["conjure#filetypes"] = {
-                "clojure",
-                "fennel",
-                "janet",
-                "hy",
-                "julia",
-                "racket",
-                "scheme",
-                "lua",
-                "lisp",
-                -- "python",
-                "rust",
-                "sql",
-            }
 
             require("conjure.main").main()
             require("conjure.mapping")["on-filetype"]()
