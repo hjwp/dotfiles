@@ -6,7 +6,7 @@ vim.g.mapleader = "," -- mapleader has to be before lazy so mappings are correct
 
 
 -- other globals
-vim.g.node_host_prog = 'fnm exec node'
+vim.g.node_host_prog = 'fnm exec --using=default node '
 
 
 -- sane tabs.  4 by default, 2 for some types
@@ -328,6 +328,7 @@ require("lazy").setup({
                     "lua_ls", -- lua-language-server
                     "pyright",
                     -- "prettier",
+                    "racket_langserver",
                     "ruff",
                     -- "shellcheck",
                     "ts_ls", -- typescript-language-server
@@ -336,7 +337,7 @@ require("lazy").setup({
                     lsp_zero.default_setup,
 
                     lua_ls = function()
-                        require("lspconfig").lua_ls.setup({
+                        vim.lsp.config.lua_ls.setup({
                             settings = {
                                 Lua = { diagnostics = { globals = { "vim" } }, },
                             }
@@ -344,7 +345,7 @@ require("lazy").setup({
                     end,
 
                     pyright = function()
-                        require("lspconfig").pyright.setup({
+                        vim.lsp.config.pyright.setup({
                             settings = {
                                 python = {
                                     analysis = {
@@ -455,6 +456,7 @@ require("lazy").setup({
             -- languages = vim.tbl_extend('force', languages, {
 
             -- specify only the languages we definitely want to lint via efm
+            require('efmls-configs.defaults')
             local languages = {
                 markdown = {
                     require("efmls-configs.linters.markdownlint"),
@@ -463,7 +465,7 @@ require("lazy").setup({
                 -- disable mypy for now.
                 -- python = { require("efmls-configs.linters.mypy") },
             }
-            require("lspconfig").efm.setup({
+            vim.lsp.config("efm", {
                 filetypes = vim.tbl_keys(languages),
                 settings = {
                     rootMarkers = { ".git/" },
@@ -472,7 +474,7 @@ require("lazy").setup({
             })
             -- this isn't really working. or only occasionally. remove?
             require("fidget").setup()
-            require("lspconfig").racket_langserver.setup {}
+            -- vim.lsp.config.racket_langserver.setup {}
         end,
     },
     -- nice diagnostics view thing
