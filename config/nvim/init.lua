@@ -7,6 +7,7 @@ vim.g.mapleader = "," -- mapleader has to be before lazy so mappings are correct
 
 -- other globals
 vim.g.node_host_prog = 'fnm exec --using=default node '
+vim.g.copilot_node_command = 'fnm exec --using=default node '
 
 
 -- sane tabs.  4 by default, 2 for some types
@@ -25,6 +26,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.tabstop = 2
         vim.opt_local.softtabstop = 2
         vim.opt_local.shiftwidth = 2
+        vim.opt_local.spell = true
     end
 })
 
@@ -328,7 +330,7 @@ require("lazy").setup({
                     "lua_ls", -- lua-language-server
                     "pyright",
                     -- "prettier",
-                    "racket_langserver",
+                    -- "racket_langserver",
                     "ruff",
                     -- "shellcheck",
                     "ts_ls", -- typescript-language-server

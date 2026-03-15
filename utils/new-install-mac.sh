@@ -5,7 +5,6 @@ brew install \
     efm-langserver \
     fd \
     fnm \
-    font-lekton-nerd-font \
     gh \
     git-delta \
     jq \
@@ -15,6 +14,7 @@ brew install \
     tmux \
     watchexec \ 
 
+# font-lekton-nerd-font \
 # fd=finder, goes with ripgrep
 
 fnm install v18
