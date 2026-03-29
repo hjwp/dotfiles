@@ -16,10 +16,12 @@ no-scripting: www.airportia.com false
 no-scripting: apx-security.amazon.co.uk false
 no-scripting: www.amazon.co.uk false
 no-scripting: author.amazon.com false
+no-scripting: music.amazon.com false
 no-scripting: www.amazon.com false
 no-scripting: safekey-3.americanexpress.com false
 no-scripting: safekey3uplifthydra.americanexpress.com false
 no-scripting: calendar.app.google false
+no-scripting: apps.apple.com false
 no-scripting: music.apple.com false
 no-scripting: podcasts.apple.com false
 no-scripting: tv.apple.com false
@@ -29,6 +31,7 @@ no-scripting: web.archive.org false
 no-scripting: archive.ph false
 no-scripting: secure4.arcot.com false
 no-scripting: secure7.arcot.com false
+no-scripting: 360.eu.articulate.com false
 no-scripting: app.asana.com false
 no-scripting: askubuntu.com false
 no-scripting: www.avantiwestcoast.co.uk false
@@ -88,6 +91,7 @@ no-scripting: html.duckduckgo.com false
 no-scripting: live.dvla-web-chat.service.gov.uk false
 no-scripting: www.easyjet.com false
 no-scripting: accounts.ebay.co.uk false
+no-scripting: accountsettings.ebay.co.uk false
 no-scripting: cart.ebay.co.uk false
 no-scripting: pay.ebay.co.uk false
 no-scripting: signin.ebay.co.uk false
@@ -106,6 +110,7 @@ no-scripting: excalidraw.com false
 no-scripting: www.executeprogram.com false
 no-scripting: www.facebook.com false
 no-scripting: feverup.com false
+no-scripting: www.figma.com false
 no-scripting: flown.com false
 no-scripting: forms.gle false
 no-scripting: fosstodon.org false
@@ -166,6 +171,7 @@ no-scripting: www.kayak.co.uk false
 no-scripting: keap.app false
 no-scripting: kissthehippo.com false
 no-scripting: octopusenergy.knowledgeowl.com false
+no-scripting: www.kobkun.co.uk false
 no-scripting: app.kolide.com false
 no-scripting: auth.kolide.com false
 no-scripting: kraken-codebase-app.vercel.app false
@@ -176,6 +182,7 @@ no-scripting: aquarium.kraken.tech false
 no-scripting: versions.kraken.tech false
 no-scripting: int.trends.ktl-services.prod-eks.ktl.net false
 no-scripting: trends.ktl.net false
+no-scripting: www.lamarjolaine-chocolaterie.com false
 no-scripting: leanpub.com false
 no-scripting: kraken.learnster.com false
 no-scripting: www.legoland.co.uk false
@@ -239,6 +246,7 @@ no-scripting: uk.hive.papercut.com false
 no-scripting: uk.pocket.papercut.com false
 no-scripting: www.paramountplus.com false
 no-scripting: www.patreon.com false
+no-scripting: webpayment.payline.com false
 no-scripting: www.payment.digital false
 no-scripting: checkout.paypal.com false
 no-scripting: www.paypal.com false
@@ -349,6 +357,7 @@ no-scripting: kraken-tech.zoom.us false
 no-scripting: octoenergy.zoom.us false
 no-scripting: ucl.zoom.us false
 no-scripting: us02web.zoom.us false
+no-scripting: us04web.zoom.us false
 no-scripting: us06web.zoom.us false
 no-scripting: config.zscaler.com false
 no-scripting: help.zscaler.com false
