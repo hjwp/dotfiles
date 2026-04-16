@@ -12,6 +12,7 @@ no-scripting: acrobat.adobe.com false
 no-scripting: auth.services.adobe.com false
 no-scripting: www.afterbabel.com false
 no-scripting: www.airbnb.co.uk false
+no-scripting: www.airbnb.fr false
 no-scripting: www.airportia.com false
 no-scripting: apx-security.amazon.co.uk false
 no-scripting: www.amazon.co.uk false
@@ -35,6 +36,8 @@ no-scripting: 360.eu.articulate.com false
 no-scripting: app.asana.com false
 no-scripting: askubuntu.com false
 no-scripting: www.avantiwestcoast.co.uk false
+no-scripting: q.axs.co.uk false
+no-scripting: tickets-uk.axs.com false
 no-scripting: b3ta.com false
 no-scripting: bacheconsulting.com false
 no-scripting: bandcamp.com false
@@ -56,6 +59,7 @@ no-scripting: www.british-gymnastics.org false
 no-scripting: calendly.com false
 no-scripting: centinelapi.cardinalcommerce.com false
 no-scripting: authentication-devices.checkout.com false
+no-scripting: www.childcare.co.uk false
 no-scripting: cideronline.com false
 no-scripting: www.cideronline.com false
 no-scripting: leapcommunity.circle.so false
@@ -85,6 +89,9 @@ no-scripting: disqus.com false
 no-scripting: docs.djangoproject.com false
 no-scripting: octopus.doc-works.co.uk false
 no-scripting: hub.docker.com false
+no-scripting: apps.docusign.com false
+no-scripting: eu.docusign.net false
+no-scripting: www.domex-uk.co.uk false
 no-scripting: doodle.com false
 no-scripting: www.dropbox.com false
 no-scripting: html.duckduckgo.com false
@@ -102,10 +109,13 @@ no-scripting: myaccount.economist.com false
 no-scripting: web.edapp.com false
 no-scripting: gate.emerchantpay.net false
 no-scripting: wpf.emerchantpay.net false
+no-scripting: emojipedia.org false
 no-scripting: www.enterpriseintegrationpatterns.com false
 no-scripting: payments.epdq.co.uk false
 no-scripting: www.etsy.com false
 no-scripting: www.eurostar.com false
+no-scripting: www.eventbrite.co.uk false
+no-scripting: www.eventbrite.com false
 no-scripting: excalidraw.com false
 no-scripting: www.executeprogram.com false
 no-scripting: www.facebook.com false
@@ -131,13 +141,16 @@ no-scripting: support.good-kraken.systems false
 no-scripting: www.goodreads.com false
 no-scripting: accounts.google.com false
 no-scripting: calendar.google.com false
+no-scripting: cloud.google.com false
 no-scripting: contacts.google.com false
 no-scripting: docs.google.com false
 no-scripting: drive.google.com false
+no-scripting: gds.google.com false
 no-scripting: gemini.google.com false
 no-scripting: mail.google.com false
 no-scripting: meet.google.com false
 no-scripting: pay.google.com false
+no-scripting: policies.google.com false
 no-scripting: sites.google.com false
 no-scripting: support.google.com false
 no-scripting: www.google.com false
@@ -196,6 +209,7 @@ no-scripting: mankindprojectuki.org false
 no-scripting: mastodon.social false
 no-scripting: www.meetup.com false
 no-scripting: teams.microsoft.com false
+no-scripting: www.miele.co.uk false
 no-scripting: www.mindfulchef.com false
 no-scripting: miro.com false
 no-scripting: www.mixcloud.com false
@@ -245,9 +259,11 @@ no-scripting: www.oreilly.com false
 no-scripting: uk.hive.papercut.com false
 no-scripting: uk.pocket.papercut.com false
 no-scripting: www.paramountplus.com false
+no-scripting: www.passport.service.gov.uk false
 no-scripting: www.patreon.com false
 no-scripting: webpayment.payline.com false
 no-scripting: www.payment.digital false
+no-scripting: card.payments.service.gov.uk false
 no-scripting: checkout.paypal.com false
 no-scripting: www.paypal.com false
 no-scripting: app.pleo.io false
