@@ -677,6 +677,7 @@ vim.keymap.set("n", "<space>c", ":e $MYVIMRC<CR>")
 vim.keymap.set("n", "<space>t", ":e ~/Dropbox/todos-work.md<CR>")
 vim.keymap.set("n", "<space>h", ":e ~/Dropbox/todos-home.md<CR>")
 vim.keymap.set("n", "<space>d", ":e ~/Dropbox/diary.md<CR>")
+vim.keymap.set("n", "<space>f", ":e ~/Dropbox/feelings-diary.md<CR>")
 
 -- trim whitespace
 vim.keymap.set("n", "<Leader>e", ":%s/\\s\\+$//e<CR>")
@@ -696,7 +697,7 @@ vim.keymap.set("n", "<BS>", vim.cmd.nohlsearch)
 vim.keymap.set("n", "<D-BS>", vim.diagnostic.hide)
 
 -- copy current file path to clipboard
-vim.keymap.set("n", "<space>f", function() vim.fn.setreg("+", vim.fn.expand('%')) end)
+vim.keymap.set("n", "<space>p", function() vim.fn.setreg("+", vim.fn.expand('%')) end)
 
 -- go to github for file
 vim.keymap.set("n", "<space>gh", ":.GBrowse<Enter>")
