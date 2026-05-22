@@ -1,0 +1,18 @@
+{
+  "claude-plugins-official": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/claude-plugins-official"
+    },
+    "installLocation": "/Users/harry.percival/.claude/plugins/marketplaces/claude-plugins-official",
+    "lastUpdated": "2026-05-22T14:33:26.903Z"
+  },
+  "kraken-claude-plugins": {
+    "source": {
+      "source": "file",
+      "path": "/Users/harry.percival/workspace/kraken-claude-plugins/marketplace.json"
+    },
+    "installLocation": "/Users/harry.percival/workspace/kraken-claude-plugins",
+    "lastUpdated": "2026-05-22T14:30:37.358Z"
+  }
+}

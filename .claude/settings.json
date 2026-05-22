@@ -1,0 +1,34 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://litellm.kraken.tech",
+    "ENABLE_TOOL_SEARCH": "auto",
+    "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS": "1"
+  },
+  "attribution": {
+    "commit": "Assistant-model: Claude Code",
+    "pr": ""
+  },
+  "permissions": {
+    "deny": [
+      "WebFetch(domain:*)",
+      "WebSearch"
+    ]
+  },
+  "model": "opusplan",
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/harry.percival/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "pyright-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "kraken-claude-plugins-local": {
+      "source": {
+        "source": "file",
+        "path": "/Users/harry.percival/workspace/kraken-claude-plugins/marketplace.json"
+      }
+    }
+  },
+  "theme": "auto"
+}
