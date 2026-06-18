@@ -284,3 +284,13 @@ export MOB_OPEN_COMMAND="vim %s"
 
 # make sure ~/.local/bin is first in the path
 export PATH="$HOME/.local/bin:$PATH"
+
+# litellm-claude-setup-start
+with1pass() {
+  local cmd="$1"
+  shift
+  local key
+  key=$(op read "op://Employee/LiteLLM API Key/credential") || { echo "Failed to fetch API key from 1Password" >&2; return 1; }
+  ANTHROPIC_API_KEY="$key" LITELLM_API_KEY="$key" "$cmd" "$@"
+}
+# litellm-claude-setup-end

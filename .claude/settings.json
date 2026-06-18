@@ -20,7 +20,9 @@
     "command": "bash /Users/harry.percival/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
-    "pyright-lsp@claude-plugins-official": true
+    "pyright-lsp@claude-plugins-official": true,
+    "test-planner@kraken-claude-plugins": true,
+    "coding-conventions@kraken-claude-plugins": true
   },
   "extraKnownMarketplaces": {
     "kraken-claude-plugins-local": {
