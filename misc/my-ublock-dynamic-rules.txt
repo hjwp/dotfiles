@@ -39,6 +39,7 @@ no-scripting: mydivorcedoula.as.me false
 no-scripting: app.asana.com false
 no-scripting: askubuntu.com false
 no-scripting: atis.life false
+no-scripting: cortexapp.auth0.com false
 no-scripting: www.avantiwestcoast.co.uk false
 no-scripting: q.axs.co.uk false
 no-scripting: tickets-uk.axs.com false
@@ -138,6 +139,7 @@ no-scripting: admin.gandi.net false
 no-scripting: id.gandi.net false
 no-scripting: shop.gandi.net false
 no-scripting: getbootstrap.com false
+no-scripting: app.getcortexapp.com false
 no-scripting: app.getdx.com false
 no-scripting: github.com false
 no-scripting: github.dev false
@@ -247,6 +249,7 @@ no-scripting: paye.netsgroup.com false
 no-scripting: www.networkrail.co.uk false
 no-scripting: nextdoor.co.uk false
 no-scripting: nodejs.org false
+no-scripting: app.notion.com false
 no-scripting: calendar.notion.so false
 no-scripting: www.notion.so false
 no-scripting: novaramedia.com false
