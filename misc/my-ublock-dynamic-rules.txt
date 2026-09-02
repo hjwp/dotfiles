@@ -7,6 +7,7 @@ no-scripting: share.1password.com false
 no-scripting: start.1password.com false
 no-scripting: launchpad.37signals.com false
 no-scripting: www.aa.net.uk false
+no-scripting: accurx.nhs.uk false
 no-scripting: addcal.co false
 no-scripting: acrobat.adobe.com false
 no-scripting: auth.services.adobe.com false
@@ -121,6 +122,7 @@ no-scripting: gate.emerchantpay.net false
 no-scripting: wpf.emerchantpay.net false
 no-scripting: emojipedia.org false
 no-scripting: www.enterpriseintegrationpatterns.com false
+no-scripting: www.epa.vic.gov.au false
 no-scripting: payments.epdq.co.uk false
 no-scripting: www.etsy.com false
 no-scripting: www.eurostar.com false
@@ -244,6 +246,7 @@ no-scripting: onlinebanking.nationwide.co.uk false
 no-scripting: www.nationwide.co.uk false
 no-scripting: www.onlinebanking.natwest.com false
 no-scripting: www.natwest.com false
+no-scripting: app.navan.com false
 no-scripting: www.netflix.com false
 no-scripting: paye.netsgroup.com false
 no-scripting: www.networkrail.co.uk false
@@ -290,12 +293,15 @@ no-scripting: www.paypal.com false
 no-scripting: app.pleo.io false
 no-scripting: www.postoffice.co.uk false
 no-scripting: pretalx.com false
+no-scripting: princecharlescinema.com false
 no-scripting: methodurl.psp-solutions.com false
 no-scripting: us.pycon.org false
 no-scripting: pypi.org false
 no-scripting: pytest-django.readthedocs.io false
 no-scripting: discuss.python.org false
 no-scripting: www.rac.co.uk false
+no-scripting: app.ramp.com false
+no-scripting: sso.ramp.com false
 no-scripting: raskrasil.com false
 no-scripting: ravecoffee.co.uk false
 no-scripting: www.raycast.com false
@@ -394,6 +400,8 @@ no-scripting: web.whatsapp.com false
 no-scripting: account.which.co.uk false
 no-scripting: signup.which.co.uk false
 no-scripting: www.which.co.uk false
+no-scripting: www.whittington.nhs.uk false
+no-scripting: wifi.sncf false
 no-scripting: wizardzines.com false
 no-scripting: login.workleap.com false
 no-scripting: activities.officevibe.workleap.com false
