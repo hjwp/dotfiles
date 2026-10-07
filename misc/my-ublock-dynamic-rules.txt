@@ -17,6 +17,8 @@ no-scripting: www.airbnb.fr false
 no-scripting: www.airportia.com false
 no-scripting: apx-security.amazon.co.uk false
 no-scripting: www.amazon.co.uk false
+no-scripting: affiliate-program.amazon.com false
+no-scripting: www.amazon.com.au false
 no-scripting: author.amazon.com false
 no-scripting: music.amazon.com false
 no-scripting: www.amazon.com false
@@ -60,8 +62,10 @@ no-scripting: bookings.better.org.uk false
 no-scripting: myaccount.better.org.uk false
 no-scripting: www.better.org.uk false
 no-scripting: donate.biggive.org false
+no-scripting: blackwells.co.uk false
 no-scripting: blank.about-scheme false
 no-scripting: www.booking.com false
+no-scripting: uk.bookshop.org false
 no-scripting: www.british-gymnastics.org false
 no-scripting: calendly.com false
 no-scripting: centinelapi.cardinalcommerce.com false
@@ -143,6 +147,7 @@ no-scripting: shop.gandi.net false
 no-scripting: getbootstrap.com false
 no-scripting: app.getcortexapp.com false
 no-scripting: app.getdx.com false
+no-scripting: www.gimp.org false
 no-scripting: github.com false
 no-scripting: github.dev false
 no-scripting: api.gitkraken.com false
@@ -163,6 +168,7 @@ no-scripting: gds.google.com false
 no-scripting: gemini.google.com false
 no-scripting: mail.google.com false
 no-scripting: meet.google.com false
+no-scripting: myaccount.google.com false
 no-scripting: pay.google.com false
 no-scripting: policies.google.com false
 no-scripting: sites.google.com false
@@ -172,6 +178,7 @@ no-scripting: gotocph.com false
 no-scripting: assistant.grandvalira.com false
 no-scripting: www.grandvalira.com false
 no-scripting: www.gstatic.com false
+no-scripting: meaningcrisis.gumroad.com false
 no-scripting: payment.gwr.com false
 no-scripting: tickets.gwr.com false
 no-scripting: www.gwr.com false
@@ -211,12 +218,14 @@ no-scripting: docs.kraken.guide false
 no-scripting: aquarium.kraken.tech false
 no-scripting: latitude.kraken.tech false
 no-scripting: versions.kraken.tech false
+no-scripting: www.kraken.tech false
 no-scripting: int.trends.ktl-services.prod-eks.ktl.net false
 no-scripting: trends.ktl.net false
 no-scripting: www.lamarjolaine-chocolaterie.com false
 no-scripting: www.laurafisherperformance.com false
 no-scripting: leanpub.com false
 no-scripting: kraken.learnster.com false
+no-scripting: www.lego.com false
 no-scripting: www.legoland.co.uk false
 no-scripting: hire.lever.co false
 no-scripting: app.link.com false
@@ -231,6 +240,8 @@ no-scripting: teams.microsoft.com false
 no-scripting: www.miele.co.uk false
 no-scripting: www.mindfulchef.com false
 no-scripting: miro.com false
+no-scripting: mitpress.mit.edu false
+no-scripting: mitpressbookstore.mit.edu false
 no-scripting: www.mixcloud.com false
 no-scripting: mkp-epit.org false
 no-scripting: monidentifiant.sncf false
@@ -265,6 +276,7 @@ no-scripting: grafana.eks.octopus.engineering false
 no-scripting: lightdash.ktl.octopus.engineering false
 no-scripting: octopusev.com false
 no-scripting: app.octopusmoney.com false
+no-scripting: podcast.oddly-influenced.dev false
 no-scripting: auth.officevibe.com false
 no-scripting: secure.ogone.com false
 no-scripting: krakentech.at.okta.com false
@@ -291,6 +303,8 @@ no-scripting: card.payments.service.gov.uk false
 no-scripting: checkout.paypal.com false
 no-scripting: www.paypal.com false
 no-scripting: app.pleo.io false
+no-scripting: ms.podbean.com false
+no-scripting: www.podmasters.co.uk false
 no-scripting: www.postoffice.co.uk false
 no-scripting: pretalx.com false
 no-scripting: princecharlescinema.com false
@@ -317,6 +331,7 @@ no-scripting: rosscider.com false
 no-scripting: www.royalmail.com false
 no-scripting: www.rsa3dsauth.co.uk false
 no-scripting: sammancoaching.org false
+no-scripting: account.savills.com false
 no-scripting: science-gifts.co.uk false
 no-scripting: www.buytickets.scotrail.co.uk false
 no-scripting: www.scotrail.co.uk false
@@ -386,6 +401,7 @@ no-scripting: riders.uber.com false
 no-scripting: mycare.uclh.nhs.uk false
 no-scripting: www.ucpa.co.uk false
 no-scripting: unionchapel.org.uk false
+no-scripting: console.vantage.sh false
 no-scripting: www.vegesaurs.com false
 no-scripting: vehicleenquiry.service.gov.uk false
 no-scripting: vimeo.com false
