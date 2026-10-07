@@ -173,45 +173,15 @@ require("lazy").setup({
         end
     },
 
-    -- fancy syntax highlighter thingie
-    {
-        "nvim-treesitter/nvim-treesitter",
-        dependencies = {
-            'cathaysia/tree-sitter-asciidoc'
-        },
-        config = function()
-            require("nvim-treesitter.configs").setup {
-                ensure_installed = {
-                    "c", "lua", "vim", "vimdoc", "query", "python"
-                },
-                auto_install = true,
-                sync_install = false,
-                highlight = { enable = true },
-                indent = { enable = true },
-            }
-            -- manually register 3rd-party asciidoc parser
-            local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-            parser_config.asciidoc = {
-                install_info = {
-                    url = 'https://github.com/cathaysia/tree-sitter-asciidoc.git',
-                    files = { 'tree-sitter-asciidoc/src/parser.c', 'tree-sitter-asciidoc/src/scanner.c' },
-                    branch = 'master',
-                    generate_requires_npm = false,
-                    requires_generate_from_grammar = false,
-                },
-            }
-            parser_config.asciidoc_inline = {
-                install_info = {
-                    url = 'https://github.com/cathaysia/tree-sitter-asciidoc.git',
-                    files = { 'tree-sitter-asciidoc_inline/src/parser.c', 'tree-sitter-asciidoc_inline/src/scanner.c' },
-                    branch = 'master',
-                    generate_requires_npm = false,
-                    requires_generate_from_grammar = false,
-                },
-            }
-        end
-    },
-
+    -- -- fancy syntax highlighter thingie
+    -- {
+    --     "nvim-treesitter/nvim-treesitter",
+    --     config = function()
+    --         require("nvim-treesitter").install({
+    --             "c", "lua", "vim", "vimdoc", "query", "python"
+    --         })
+    --     end,
+    -- },
     -- Git API
     { "tpope/vim-fugitive" },
     { "tpope/vim-rhubarb" }, -- adds github stuff
@@ -531,8 +501,9 @@ require("lazy").setup({
         "ThePrimeagen/refactoring.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
+            "lewis6991/async.nvim", -- only required for Neovim <0.13
         },
+        lazy = false,
         config = function()
             require("refactoring").setup()
             vim.keymap.set("x", "<leader>re", ":Refactor extract ")
@@ -644,7 +615,6 @@ require("lazy").setup({
     -- (using this for roc)
     { "kchmck/vim-coffee-script" },
 
-    -- { "habamax/vim-asciidoctor" },  -- tried this but it's worse than builtin
 })
 
 -- COLOURRRRSSS ---
